@@ -1,0 +1,15 @@
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Gradle
+/build/
+/gradle
+/.gradle
+/.idea
+gradlew
+gradlew.bat
+
+# Compiled Classes
+*.class
