@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Soysambu GIS</title>
 
-    <!-- Bootstrap core stylesheet -->
+    <!-- Bootstrap core and Datepicker stylesheets -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- Bootstrap, JQuery and Popper JS libraries -->
+    <link rel="stylesheet" href="css/bootstrap-datepicker3.min.css">
+    <!-- Bootstrap, Datepicker, JQuery, Popper and FontAwesome libraries -->
     <script src="js/lib/jquery-3.3.1.min.js"></script>
     <script src="js/lib/bootstrap.min.js"></script>
+    <script src="js/lib/bootstrap-datepicker.min.js"></script>
     <script src="js/lib/popper.min.js"></script>
+    <script src="js/lib/fontawesome.min.js"></script>
+    <!-- JQuery Input Validator -->
+    <script src="js/lib/jquery.validate.min.js"></script>
 </head>
 
 <body>
@@ -28,30 +33,51 @@
         </div>
 
         <div class="col-sm-4">
-
+            <!-- Navigation tabs for switching between adding records and viewing statistics -->
             <ul class="nav nav-tabs nav-justified">
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#addrecord">Add Record</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#statistics">View Statistics</a>
+                    <a class="nav-link disabled" data-toggle="tab" href="#statistics">View Statistics</a>
                 </li>
             </ul>
 
+            <!-- Navigation tabs' contents -->
             <div class="tab-content">
                 <div class="tab-pane container active" id="addrecord">
                     <br>
-                    <p>Add records here</p>
+                    <!-- Form for adding new records to the database -->
+                    <form>
+                        <!-- Date input using bootstrap datepicker -->
+                        <div class="form-group">
+                            <label for="date">Date:</label>
+                            <div id="datepicker" class="input-group date" data-provide="datepicker">
+                                <!-- Date input field -->
+                                <div class="input-group date">
+                                    <input id="date" type="text" class="form-control">
+                                    <!-- Calender button to view datepicker -->
+                                    <div class="input-group-addon">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-warning" type="button"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
                 </div>
+
                 <div class="tab-pane container fade" id="statistics">
                     <br>
-                    <p>View statistics here</p>
                 </div>
             </div>
 
-            
         </div>
 
-
+        <!-- External Input Validation -->
+        <script src="js/input.validation.js"></script>
 </body>
 </html>
