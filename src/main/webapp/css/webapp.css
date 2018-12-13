@@ -1,0 +1,17 @@
+/* Header navigation bar */
+.navbar {
+    overflow: hidden;
+    border: none;
+    padding: 0px;
+}
+.nav-item a{
+    text-align: center;
+    padding: 14px 16px;
+    border-bottom: 4px solid transparent;
+}
+.nav-item > a:active, a:hover{
+    border-bottom: 4px solid darkorange;
+}
+.nav-link.active  {
+    border-bottom: 4px solid darkorange;
+}
