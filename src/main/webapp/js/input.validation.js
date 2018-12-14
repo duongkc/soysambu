@@ -3,13 +3,14 @@ $(document).ready(function () {
     // Initiate datepicker plugin for date input.
     $('#datepicker').datepicker({
         format: 'yyyy/mm/dd',
+        endDate: '0d',
         todayHighlight: true,
         autoclose: true,
         showOnFocus: false
     });
 
     // Set current date as default value for date field.
-    $('#datepicker').datepicker('update', new Date());
+    $('#datepicker').datepicker('setDate', 'now');
 
     // Set current time as default value for time field.
     // Function to add a zero when hours/minutes are in single digits.

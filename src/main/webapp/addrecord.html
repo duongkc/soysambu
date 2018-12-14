@@ -1,90 +1,103 @@
 <!-- Sighting input -->
-<div class="col-sm-3 shadow">
-    <!-- Date input using bootstrap datepicker -->
-    <div class="form-group">
-        <label for="date">Date:</label>
-        <div id="datepicker" class="input-group date" data-provide="datepicker">
-            <!-- Date input field -->
-            <div class="input-group date">
-                <input id="date" type="text" class="form-control">
-                <!-- Calender button to view datepicker -->
-                <div class="input-group-addon">
-                    <div class="input-group-append">
-                        <button class="btn btn-calandar" type="button"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+<div class="col-lg-4">
+    <!-- Navigation tabs for switching between organism groups -->
+    <ul class="nav nav-tabs nav-justified ">
+        <li class="nav-item active">
+            <a class="nav-link active" data-toggle="tab">Sighting</a>
+        </li>
+    </ul>
+
+    <!-- Navigation tabs' contents -->
+    <div class="tab-content shadow bg-white">
+        <!-- Giraffe Tab -->
+        <div class="tab-pane container active">
+            <!-- Date input using bootstrap datepicker -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <div id="datepicker" class="input-group date" data-provide="datepicker">
+                        <!-- Date input field -->
+                        <div class="input-group date">
+                            <input id="date" type="text" class="form-control">
+                            <!-- Calender button to view datepicker -->
+                            <div class="input-group-addon">
+                                <div class="input-group-append">
+                                    <button class="btn btn-calandar" type="button"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coordinate input fields -->
+            <div class="form-row">
+                <div class = "col-sm-6">
+                    <div class="form-group">
+                        <label for="x-coord">X-coordinate:</label>
+                        <input id="x-coord" type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class = "col-sm-6">
+                    <div class="form-group">
+                        <label for="y-coord">Y-coordinate:</label>
+                        <input id="y-coord" type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather and Habitat input fields -->
+            <div class="form-row">
+                <div class = "col-sm-6">
+                    <div class="form-group">
+                        <label for="weather">Weather:</label>
+                        <select id="weather" class="custom-select">
+                            <option value="Sunny" selected>Sunny</option>
+                            <option value="Cloudy">Cloudy</option>
+                            <option value="Partly Cloudy">Partly Cloudy</option>
+                            <option value="Rainy">Rainy</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class = "col-sm-6">
+                    <div class="form-group">
+                        <label for="habitat">Habitat:</label>
+                        <select id="habitat" class="custom-select">
+                            <option value="Acacia Mix" selected>Acacia Mix</option>
+                            <option value="Acacia Woodland">Acacia Woodland</option>
+                            <option value="Grassland">Grassland</option>
+                            <option value="Lakeshore">Lakeshore</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Time input field -->
+            <div class="form-row">
+                <div class = "col-sm-6">
+                    <div class="form-group">
+                        <label for="time">Time:</label>
+                        <input id="time" type="text" class="form-control">
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Coordinate input fields -->
-    <div class="form-row">
-        <div class = "col">
-            <div class="form-group">
-                <label for="x-coord">X-coordinate:</label>
-                <input id="x-coord" type="text" class="form-control">
-            </div>
-        </div>
-
-        <div class = "col">
-            <div class="form-group">
-                <label for="y-coord">Y-coordinate:</label>
-                <input id="y-coord" type="text" class="form-control">
-            </div>
-        </div>
-    </div>
-
-    <!-- Weather and Habitat input fields -->
-    <div class="form-row">
-        <div class = "col">
-            <div class="form-group">
-                <label for="weather">Weather:</label>
-                <select id="weather" class="custom-select">
-                    <option value="Sunny" selected>Sunny</option>
-                    <option value="Cloudy">Cloudy</option>
-                    <option value="Partly Cloudy">Partly Cloudy</option>
-                    <option value="Rainy">Rainy</option>
-                </select>
-            </div>
-        </div>
-
-        <div class = "col">
-            <div class="form-group">
-                <label for="habitat">Habitat:</label>
-                <select id="habitat" class="custom-select">
-                    <option value="Acacia Mix" selected>Acacia Mix</option>
-                    <option value="Acacia Woodland">Acacia Woodland</option>
-                    <option value="Grassland">Grassland</option>
-                    <option value="Lakeshore">Lakeshore</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <!-- Time input field -->
-    <div class="form-row">
-        <div class = "col">
-            <div class="form-group">
-                <label for="time">Time:</label>
-                <input id="time" type="text" class="form-control">
-            </div>
-        </div>
-
-        <div class = "col"></div>
-    </div>
 </div>
 
 <!-- Animal group input -->
-<div class="col-sm-9">
+<div class="col-lg-8">
     <!-- Navigation tabs for switching between organism groups -->
-    <ul class="nav nav-tabs nav-justified">
+    <ul class="nav nav-tabs nav-justified ">
         <li class="nav-item active">
-            <a class="nav-link" data-toggle="tab">Giraffes</a>
+            <a class="nav-link active" id="tab-giraffe" data-toggle="tab">Giraffes</a>
         </li>
     </ul>
 
     <!-- Navigation tabs' contents -->
-    <div class="tab-content shadow p-4 mb-4 bg-white">
+    <div class="tab-content shadow bg-white">
         <!-- Giraffe Tab -->
         <div class="tab-pane container active" id="giraffes">
             <!-- Activity -->
@@ -211,7 +224,7 @@
                     <p class="giraffe-counter"><i>Total no. giraffes in group: </i><i id="giraffe-count-total">0</i></p>
                 </div>
                 <div class="col-sm-4">
-                    <button class="btn btn-submit float-right" type="button"><i class="fas fa-angle-right"></i> Submit Record</button>
+                    <button class="btn btn-submit float-right" type="button" disabled><i class="fas fa-angle-right"></i> Submit Record</button>
                 </div>
             </div>
         </div>

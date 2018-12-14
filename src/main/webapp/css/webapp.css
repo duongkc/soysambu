@@ -13,7 +13,7 @@
 .carousel-item:nth-child(2) {
     /* Header background image */
     background: url(../assets/img/add_record_header_2.jpg);
-    background-position:55% 60%;
+    background-position:55% 57.5%;
     background-size:cover;
     /* Text makeup */
     color: white;
@@ -76,4 +76,7 @@
     padding-top: 10px;
     text-align: left;
     color: #808080;
+}
+.tab-content {
+    margin-right: 0px;
 }
