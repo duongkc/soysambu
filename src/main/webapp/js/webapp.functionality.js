@@ -36,4 +36,18 @@ $(document).ready( function() {
             });
         });
     });
+
+    /* --- Load View Records page when navigated to using AJAX. --- */
+    $('#nav-viewrecords').click(function() {
+        // If already on the Add Record page, don't continue.
+        if($('#nav-viewrecords').hasClass('active')) return false;
+
+        // Fadeout current content page.
+        $('#content').fadeOut(175, function () {
+            // Empty content div; Load viewrecords.html and fade into content div.
+            $('#content').empty().load("viewrecords.html", function() {
+                $(this).fadeIn(175);
+            });
+        });
+    });
 });
