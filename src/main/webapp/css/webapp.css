@@ -1,3 +1,8 @@
+/* Header carousel */
+.carousel-item > h1, p {
+    text-align: center;
+}
+
 /* Header navigation bar */
 .navbar {
     overflow: hidden;
@@ -6,12 +11,24 @@
 }
 .nav-item a{
     text-align: center;
-    padding: 14px 16px;
-    border-bottom: 4px solid transparent;
+    padding: 10px 16px;
 }
-.nav-item > a:active, a:hover{
-    border-bottom: 4px solid darkorange;
+.nav-item:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 4px;
+    background: #ffc107;
+    transition: width .3s;
 }
-.nav-link.active  {
-    border-bottom: 4px solid darkorange;
+.nav-item:hover:after {
+    width: 100%;
+}
+.nav-item.active:after {
+    width: 100%;
+}
+
+/* Giraffe group form */
+.giraffe-count {
+    text-align: right;
 }

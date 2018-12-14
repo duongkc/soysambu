@@ -1,108 +1,212 @@
-<div class="col-sm-8">
+<!-- Sighting input -->
+<div class="col-sm-3">
+    <!-- Date input using bootstrap datepicker -->
+    <div class="form-group">
+        <label for="date">Date:</label>
+        <div id="datepicker" class="input-group date" data-provide="datepicker">
+            <!-- Date input field -->
+            <div class="input-group date">
+                <input id="date" type="text" class="form-control">
+                <!-- Calender button to view datepicker -->
+                <div class="input-group-addon">
+                    <div class="input-group-append">
+                        <button class="btn btn-warning" type="button"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coordinate input fields -->
+    <div class="form-row">
+        <div class = "col">
+            <div class="form-group">
+                <label for="x-coord">X-coordinate:</label>
+                <input id="x-coord" type="text" class="form-control">
+            </div>
+        </div>
+
+        <div class = "col">
+            <div class="form-group">
+                <label for="y-coord">Y-coordinate:</label>
+                <input id="y-coord" type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+
+    <!-- Weather and Habitat input fields -->
+    <div class="form-row">
+        <div class = "col">
+            <div class="form-group">
+                <label for="weather">Weather:</label>
+                <select id="weather" class="custom-select">
+                    <option value="Sunny" selected>Sunny</option>
+                    <option value="Cloudy">Cloudy</option>
+                    <option value="Partly Cloudy">Partly Cloudy</option>
+                    <option value="Rainy">Rainy</option>
+                </select>
+            </div>
+        </div>
+
+        <div class = "col">
+            <div class="form-group">
+                <label for="habitat">Habitat:</label>
+                <select id="habitat" class="custom-select">
+                    <option value="Acacia Mix" selected>Acacia Mix</option>
+                    <option value="Acacia Woodland">Acacia Woodland</option>
+                    <option value="Grassland">Grassland</option>
+                    <option value="Lakeshore">Lakeshore</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Time input field -->
+    <div class="form-row">
+        <div class = "col">
+            <div class="form-group">
+                <label for="time">Time:</label>
+                <input id="time" type="text" class="form-control">
+            </div>
+        </div>
+
+        <div class = "col"></div>
+    </div>
 </div>
 
-<div class="col-sm-4">
-    <!-- Navigation tabs for switching between adding records and viewing statistics -->
+<!-- Animal group input -->
+<div class="col-sm-9">
+    <!-- Navigation tabs for switching between organism groups -->
     <ul class="nav nav-tabs nav-justified">
-        <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#addrecord">Add Record</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" data-toggle="tab" href="#statistics">View Statistics</a>
+        <li class="nav-item active">
+            <a class="nav-link" data-toggle="tab">Giraffes</a>
         </li>
     </ul>
 
     <!-- Navigation tabs' contents -->
     <div class="tab-content shadow p-4 mb-4 bg-white">
-        <div class="tab-pane container active" id="addrecord">
-            <br>
-            <!-- Form for adding new records to the database -->
-            <form>
-                <!-- Date input using bootstrap datepicker -->
-                <div class="form-group">
-                    <label for="date">Date:</label>
-                    <div id="datepicker" class="input-group date" data-provide="datepicker">
-                        <!-- Date input field -->
-                        <div class="input-group date">
-                            <input id="date" type="text" class="form-control">
-                            <!-- Calender button to view datepicker -->
-                            <div class="input-group-addon">
-                                <div class="input-group-append">
-                                    <button class="btn btn-warning" type="button"><i class="fa fa-calendar" aria-hidden="true"></i></button>
-                                </div>
+        <!-- Giraffe Tab -->
+        <div class="tab-pane container active" id="giraffes">
+            <!-- Activity -->
+            <div class="form-row">
+                <div class = "col">
+                    <div class="form-group">
+                        <label for="activity">Activity:</label>
+                        <select id="activity" class="custom-select">
+                            <option value="Feeding" selected>Feeding</option>
+                            <option value="Walking">Walking</option>
+                            <option value="Standing">Standing</option>
+                            <option value="Lying">Lying</option>
+                            <option value="Fighting">Fighting</option>
+                            <option value="Scratching">Scratching</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Giraffe Counts -->
+            <div class="form-row">
+                <!-- Adult Males -->
+                <div class = "col-xs-2 col-lg-3">
+                    <div class="form-group">
+                        <label for="count-ma">Adult Males:</label>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <button class="btn btn- btn-number" disabled type="button" data-type="minus" data-field="count-ma"><i class="fas fa-minus"></i></button>
+                            </div>
+                            <input id="count-ma" name="count-ma" type="text" class="form-control giraffe-count" value="0" min="0" max="100">
+                            <div class="input-group-append">
+                                <button class="btn btn- btn-number" type="button" data-type="plus" data-field="count-ma"><i class="fas fa-plus"></i></button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Coordinate input fields -->
-                <div class="form-row">
-                    <div class = "col">
-                        <div class="form-group">
-                            <label for="x-coord">X-coordinate:</label>
-                            <input id="x-coord" type="text" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class = "col">
-                        <div class="form-group">
-                            <label for="y-coord">Y-coordinate:</label>
-                            <input id="y-coord" type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Coordinate input fields -->
-                <div class="form-row">
-                    <div class = "col">
-                        <div class="form-group">
-                            <label for="weather">Weather:</label>
-                            <select id="weather" class="custom-select">
-                                <option value="Sunny" selected>Sunny</option>
-                                <option value="Cloudy">Cloudy</option>
-                                <option value="Partly Cloudy">Partly Cloudy</option>
-                                <option value="Rainy">Rainy</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class = "col">
-                        <div class="form-group">
-                            <label for="habitat">Habitat:</label>
-                            <select id="habitat" class="custom-select">
-                                <option value="Acacia Mix" selected>Acacia Mix</option>
-                                <option value="Acacia Woodland">Acacia Woodland</option>
-                                <option value="Grassland">Grassland</option>
-                                <option value="Lakeshore">Lakeshore</option>
-                            </select>
+                <!-- Sub-adult Males -->
+                <div class = "col-xs-2 col-lg-3">
+                    <div class="form-group">
+                        <label for="count-ms">Sub-adult Males:</label>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <button class="btn btn- btn-number" disabled type="button" data-type="minus" data-field="count-ms"><i class="fas fa-minus"></i></button>
+                            </div>
+                            <input id="count-ms" name="count-ms" type="text" class="form-control giraffe-count" value="0" min="0" max="100">
+                            <div class="input-group-append">
+                                <button class="btn btn- btn-number" type="button" data-type="plus" data-field="count-ms"><i class="fas fa-plus"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Time input field -->
-                <div class="form-row">
-                    <div class = "col">
-                        <div class="form-group">
-                            <label for="time">Time:</label>
-                            <input id="time" type="text" class="form-control">
+                <!-- Adult Females -->
+                <div class = "col-xs-2 col-lg-3">
+                    <div class="form-group">
+                        <label for="count-fa">Adult Females:</label>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <button class="btn btn- btn-number" disabled type="button" data-type="minus" data-field="count-fa"><i class="fas fa-minus"></i></button>
+                            </div>
+                            <input id="count-fa" name="count-fa" type="text" class="form-control giraffe-count" value="0" min="0" max="100">
+                            <div class="input-group-append">
+                                <button class="btn btn- btn-number" type="button" data-type="plus" data-field="count-fa"><i class="fas fa-plus"></i></button>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class = "col">
-                        <div class="form-group"></div>
+                <!-- Sub-adult Females -->
+                <div class = "col-xs-2 col-lg-3">
+                    <div class="form-group">
+                        <label for="count-fs">Sub-adult Females:</label>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <button class="btn btn- btn-number" disabled type="button" data-type="minus" data-field="count-fs"><i class="fas fa-minus"></i></button>
+                            </div>
+                            <input id="count-fs" name="count-fs" type="text" class="form-control giraffe-count" value="0" min="0" max="100">
+                            <div class="input-group-append">
+                                <button class="btn btn- btn-number" type="button" data-type="plus" data-field="count-fs"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <!-- Juvenile -->
+                <div class = "col-xs-2 col-lg-3">
+                    <div class="form-group">
+                        <label for="count-ju">Juveniles:</label>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <button class="btn btn- btn-number" disabled type="button" data-type="minus" data-field="count-ju"><i class="fas fa-minus"></i></button>
+                            </div>
+                            <input id="count-ju" name="count-ju" type="text" class="form-control giraffe-count" value="0" min="0" max="100">
+                            <div class="input-group-append">
+                                <button class="btn btn- btn-number" type="button" data-type="plus" data-field="count-ju"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-row">
+                <!-- Unidentified -->
+                <div class = "col-xs-2 col-lg-3">
+                    <div class="form-group">
+                        <label for="count-un">Unidentified:</label>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <button class="btn btn- btn-number" disabled type="button" data-type="minus" data-field="count-un"><i class="fas fa-minus"></i></button>
+                            </div>
+                            <input id="count-un" name="count-un" type="text" class="form-control giraffe-count" value="0" min="0" max="100">
+                            <div class="input-group-append">
+                                <button class="btn btn- btn-number" type="button" data-type="plus" data-field="count-un"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </div>
-
-        <div class="tab-pane container fade" id="statistics">
-            <br>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- External Input Validation -->
+<!-- Custom Javascript Input Validation -->
 <script src="js/input.validation.js"></script>
