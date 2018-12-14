@@ -5,7 +5,7 @@ $(document).ready( function() {
         var from = $('.nav-item.active').index();
         var to = $(e.relatedTarget).index();
         // Remove active class from previous nav item and add to clicked nav item.
-        $('.nav-item').removeClass('active');
+        $('.nav-item').eq(from).removeClass('active');
         $('.nav-item').eq(to).addClass('active');
     });
 

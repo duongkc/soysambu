@@ -17,7 +17,7 @@
     display: block;
     width: 0;
     height: 4px;
-    background: #f9ca24;
+    background: #f5cd79;
     transition: width .3s;
 }
 .nav-item:hover:after {
@@ -29,10 +29,10 @@
 
 /* Sighting / General form */
 .btn-calandar {
-    background-color: #f9ca24;
+    background-color: #f5cd79;
 }
 .btn-submit {
-    background-color: #badc58;
+    background-color: #f5cd79;
 }
 
 /* Giraffe group form */
