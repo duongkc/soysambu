@@ -1,5 +1,5 @@
 <!-- Sighting input -->
-<div class="col-sm-3">
+<div class="col-sm-3 shadow">
     <!-- Date input using bootstrap datepicker -->
     <div class="form-group">
         <label for="date">Date:</label>
@@ -10,7 +10,7 @@
                 <!-- Calender button to view datepicker -->
                 <div class="input-group-addon">
                     <div class="input-group-append">
-                        <button class="btn btn-warning" type="button"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                        <button class="btn btn-calandar" type="button"><i class="fa fa-calendar" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
@@ -202,6 +202,16 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Giraffe counter and Submit Record button -->
+            <div class="form-row">
+                <div class="col-sm-8">
+                    <p class="giraffe-counter"><i>Total no. giraffes in group: </i><i id="giraffe-count-total">0</i></p>
+                </div>
+                <div class="col-sm-4">
+                    <button class="btn btn-submit float-right" type="button"><i class="fas fa-angle-right"></i> Submit Record</button>
                 </div>
             </div>
         </div>

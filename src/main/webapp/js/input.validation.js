@@ -23,6 +23,7 @@ $(document).ready(function () {
 
 
     /* --- Giraffe Input Fields --- */
+    // Update total number of giraffes, by summing all giraffe count fields.
     // Giraffe count buttons (-+).
     $('.btn-number').click(function(e){
         // Get button's corresponding input field and button type (-+).
@@ -56,6 +57,7 @@ $(document).ready(function () {
             $(".btn-number[data-type='plus'][data-field='" + name + "']").attr('disabled', false);
             $(".btn-number[data-type='minus'][data-field='" + name + "']").attr('disabled', true);
             $(this).val(0);
+            updateGiraffeTotal();
             return;
         }
 
@@ -80,5 +82,16 @@ $(document).ready(function () {
             $(".btn-number[data-type='plus'][data-field='" + name + "']").attr('disabled', true);
             $(this).val(100);
         }
+
+        updateGiraffeTotal();
     });
+
+    function updateGiraffeTotal() {
+        var sum = 0;
+        $(".giraffe-count").each(function(){
+            sum += +$(this).val();
+        });
+        $('#giraffe-count-total').empty();
+        $('#giraffe-count-total').append(sum);
+    };
 });

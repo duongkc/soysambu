@@ -18,7 +18,7 @@
     display: block;
     width: 0;
     height: 4px;
-    background: #ffc107;
+    background: #f9ca24;
     transition: width .3s;
 }
 .nav-item:hover:after {
@@ -31,4 +31,14 @@
 /* Giraffe group form */
 .giraffe-count {
     text-align: right;
+}
+.giraffe-counter {
+    padding-top: 10px;
+    text-align: left;
+}
+.btn-submit {
+    background-color: #badc58;
+}
+.btn-calandar {
+    background-color: #f9ca24;
 }
