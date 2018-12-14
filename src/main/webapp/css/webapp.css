@@ -1,9 +1,29 @@
-/* Header carousel */
-.carousel-item > h1, p {
+/* --- Header carousel ---*/
+.carousel-item {
+    height: 140px;
     text-align: center;
 }
+.carousel-item h1 {
+    padding-top: 30px;
+}
+/* GIS */
+.carousel-item:nth-child(1) {
+}
+/* Add Record */
+.carousel-item:nth-child(2) {
+    /* Header background image */
+    background: url(../assets/img/add_record_header_2.jpg);
+    background-position:55% 60%;
+    background-size:cover;
+    /* Text makeup */
+    color: white;
+    text-shadow: -1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;
+}
+/* View Records */
+.carousel-item:nth-child(3) {
+}
 
-/* Header navigation bar */
+/* --- Navigation Bars --- */
 .navbar {
     overflow: hidden;
     border: none;
@@ -17,7 +37,6 @@
     display: block;
     width: 0;
     height: 4px;
-    background: #f5cd79;
     transition: width .3s;
 }
 .nav-item:hover:after {
@@ -26,16 +45,30 @@
 .nav-item.active:after {
     width: 100%;
 }
+/* Header navigation bar */
+.navbar-nav .nav-item:nth-child(1):after {
+    background: #f3a683;
+}
+.navbar-nav .nav-item:nth-child(2):after {
+    background: #f7d794;
+}
+.navbar-nav .nav-item:nth-child(3):after {
+    background: #786fa6;
+}
+/* Tab navigation bars */
+.nav-tabs .nav-item:after {
+    background: #f7d794;
+}
 
-/* Sighting / General form */
+/* --- Sighting / General form ---*/
 .btn-calandar {
-    background-color: #f5cd79;
+    background-color: #f7d794;
 }
 .btn-submit {
-    background-color: #f5cd79;
+    background-color: #f7d794;
 }
 
-/* Giraffe group form */
+/* --- Giraffe group form ---*/
 .giraffe-count {
     text-align: right;
 }
