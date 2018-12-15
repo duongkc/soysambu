@@ -1,6 +1,5 @@
-drop table if exists Animal_Sighting;
+drop table if exists Giraffe_List;
 drop table if exists Giraffe;
-drop table if exists Animal;
 drop table if exists temp;
 drop table if exists Sighting;
 drop table if exists Giraffe_Group;
@@ -37,13 +36,13 @@ create table Giraffe (
     primary key (giraffe_id)
 );
 
-create table Animal_Sighting (
-    id int auto_increment not null unique,
-    giraffe_id int,
-    sighting_id int,
-    primary key (id),
-    foreign key (giraffe_id) references Giraffe(giraffe_id),
-    foreign key (sighting_id) references Sighting(sighting_id)
+create table Giraffe_List (
+  id int auto_increment not null unique,
+  giraffe_id int not null,
+  giraffe_group_id int not null,
+  primary key (id),
+  foreign key (giraffe_id) references Giraffe(giraffe_id),
+  foreign key (giraffe_group_id) references Giraffe_Group(group_id)
 );
 
 create table temp (
@@ -65,14 +64,19 @@ create table temp (
     primary key(id)
 );
 
-load data local infile '/homes/idvansanten/soysambu-conservancy-gis/data/Giraffe Survey Database October 2018.txt' into table temp
+load data local infile 'C:/Users/Ilse/soysambu-conservancy-gis/data/Giraffe Survey Database October 2018.txt'
+into table temp
 fields terminated by '\t'
 enclosed by '"'
 lines terminated by '\n'
 ignore 2 lines
-(date, xcoord, ycoord, time, weather, habitat_type, activity, total_group, male_a, male_sa, female_a, female_sa, juvenile, unidentified);
+(date, xcoord, ycoord, time, weather, habitat_type, activity, total_group,
+ male_a, male_sa, female_a, female_sa, juvenile, unidentified);
 
-insert into Sighting (date, time, xcoord, ycoord, weather, habitat_type) SELECT date, time, xcoord, ycoord, weather, habitat_type from temp;
-insert into Giraffe_Group (count, activity, male_a_count, male_sa_count, female_a_count, female_sa_count, juvenile_count, unidentified_count) SELECT total_group, activity, male_a, male_sa, female_a, female_sa, juvenile, unidentified from temp;
+insert into Sighting (date, time, xcoord, ycoord, weather, habitat_type)
+SELECT date, time, xcoord, ycoord, weather, habitat_type from temp;
+insert into Giraffe_Group (count, activity, male_a_count, male_sa_count,
+                           female_a_count, female_sa_count, juvenile_count, unidentified_count)
+SELECT total_group, activity, male_a, male_sa, female_a, female_sa, juvenile, unidentified from temp;
 
 
