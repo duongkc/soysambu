@@ -6,7 +6,7 @@ body {
     display: flex;
     flex-flow: column;
 }
-.container {
+.content {
     margin-top: 30px;
     margin-bottom: 15px;
 }
