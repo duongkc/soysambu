@@ -1,3 +1,16 @@
+/* --- Global Webpage Styling --- */
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-flow: column;
+}
+.container {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
 /* --- Header carousel ---*/
 .carousel-item {
     height: 140px;
@@ -28,6 +41,8 @@
     overflow: hidden;
     border: none;
     padding: 0px;
+    background: #2d3436;
+
 }
 .nav-item a{
     text-align: center;
@@ -64,8 +79,8 @@
 /* Change input field focus color to match color scheme */
 .addrecord-form .form-control:focus, .addrecord-form .custom-select:focus,
 .addrecord-form .btn:focus{
-    border-color: #f7d794 !important;
-    box-shadow: 0 0 5px rgba(247, 215, 148, 1) !important;
+    border-color: #f5cd79 !important;
+    box-shadow: 0 0 5px rgba(245, 205, 121, 1) !important;
 }
 /* Sighting Tab */
 .btn-addrecord {
@@ -87,4 +102,13 @@
     padding-top: 10px;
     text-align: left;
     color: #808080;
+}
+/* --- Footer --- */
+footer {
+    margin-top: auto;
+    padding-top: 15px;
+    background: #2d3436;
+    text-align:center;
+    font-size: 12px;
+    color: #969a9b;
 }
