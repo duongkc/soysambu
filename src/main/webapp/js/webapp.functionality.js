@@ -1,4 +1,7 @@
 $(document).ready( function() {
+    /* --- Enable tooltips ---*/
+    $('[data-toggle="tooltip"]').tooltip();
+
     // Function to make navbar adjust carousel header on navigation.
     $('#carousel-header').on('slide.bs.carousel', function(e) {
         // Get indexes of current and clicked nav items.
@@ -19,6 +22,7 @@ $(document).ready( function() {
             // Empty content div; Load gis.html and fade into content div.
             $('#content').empty().load("gis.html", function() {
                 $(this).fadeIn(175);
+                $('[data-toggle="tooltip"]').tooltip();
             });
         });
     });
@@ -33,6 +37,7 @@ $(document).ready( function() {
             // Empty content div; Load addrecord.html and fade into content div.
             $('#content').empty().load("addrecord.html", function() {
                 $(this).fadeIn(175);
+                $('[data-toggle="tooltip"]').tooltip();
             });
         });
     });
@@ -47,6 +52,7 @@ $(document).ready( function() {
             // Empty content div; Load viewrecords.html and fade into content div.
             $('#content').empty().load("viewrecords.html", function() {
                 $(this).fadeIn(175);
+                $('[data-toggle="tooltip"]').tooltip();
             });
         });
     });

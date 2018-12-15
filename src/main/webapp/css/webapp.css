@@ -61,10 +61,7 @@
 }
 
 /* --- Sighting / General form ---*/
-.btn-calandar {
-    background-color: #f7d794;
-}
-.btn-submit {
+.btn-addrecord {
     background-color: #f7d794;
 }
 
@@ -77,6 +74,11 @@
     text-align: left;
     color: #808080;
 }
-.tab-content {
-    margin-right: 0px;
+.tab-pane {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.btn-coords {
+    margin-top: 32px;
+    background-color: #f7d794;
 }

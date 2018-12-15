@@ -8,25 +8,30 @@ $(document).ready(function () {
         autoclose: true,
         showOnFocus: false
     });
-
     // Set current date as default value for date field.
     $('#datepicker').datepicker('setDate', 'now');
 
     // Set current time as default value for time field.
+    $('#time').val(getTime())
+    // Set current time when settime button is pressed.
+    $('#settime').click(function () {
+        $('#time').val(getTime())
+    });
+
+    function getTime() {
+        var date = new Date($.now());
+        var time = addZero(date.getHours()) + ":" + addZero(date.getMinutes());
+        return time;
+    };
     // Function to add a zero when hours/minutes are in single digits.
     function addZero(time) {
         if (time < 10) { time = "0" + time; }
         return time;
-    }
-    var date = new Date($.now());
-    var time = addZero(date.getHours()) + ":" + addZero(date.getMinutes());
-    $('#time').val(time)
-
+    };
 
     /* --- Giraffe Input Fields --- */
-    // Update total number of giraffes, by summing all giraffe count fields.
     // Giraffe count buttons (-+).
-    $('.btn-number').click(function(e){
+    $('.btn-number').click(function(){
         // Get button's corresponding input field and button type (-+).
         var dataField = $(this).attr('data-field');
         var type      = $(this).attr('data-type');
@@ -87,6 +92,7 @@ $(document).ready(function () {
         updateGiraffeTotal();
     });
 
+    // Update total number of giraffes, by summing all giraffe count fields.
     function updateGiraffeTotal() {
         var sum = 0;
         $(".giraffe-count").each(function(){
