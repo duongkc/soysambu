@@ -60,19 +60,16 @@
     background: #f7d794;
 }
 
-/* --- Sighting / General form ---*/
+/* --- Add Record Page --- */
+/* Change input field focus color to match color scheme */
+.addrecord-form .form-control:focus, .addrecord-form .custom-select:focus,
+.addrecord-form .btn:focus{
+    border-color: #f7d794 !important;
+    box-shadow: 0 0 5px rgba(247, 215, 148, 1) !important;
+}
+/* Sighting Tab */
 .btn-addrecord {
     background-color: #f7d794;
-}
-
-/* --- Giraffe group form ---*/
-.giraffe-count {
-    text-align: right;
-}
-.giraffe-counter {
-    padding-top: 10px;
-    text-align: left;
-    color: #808080;
 }
 .tab-pane {
     padding-top: 10px;
@@ -81,4 +78,13 @@
 .btn-coords {
     margin-top: 32px;
     background-color: #f7d794;
+}
+/* Giraffe Tab */
+.giraffe-count {
+    text-align: right;
+}
+.giraffe-counter {
+    padding-top: 10px;
+    text-align: left;
+    color: #808080;
 }
