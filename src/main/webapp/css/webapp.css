@@ -8,7 +8,10 @@ body {
 }
 .content {
     margin-top: 30px;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
+}
+.container-fluid {
+    padding: 0px;
 }
 
 /* --- Header carousel ---*/
@@ -38,7 +41,6 @@ body {
 
 /* --- Navigation Bars --- */
 .navbar {
-    overflow: hidden;
     border: none;
     padding: 0px;
     background: #2d3436;
@@ -48,6 +50,7 @@ body {
     text-align: center;
 }
 .nav-item:after {
+    overflow: visible;
     content: '';
     display: block;
     width: 0;
