@@ -1,273 +1,284 @@
-<!-- Sighting input -->
-<div class="addrecord-form col-lg-4">
-    <!-- Single navigation tab for sighting, mostly for consistent aesthetics -->
-    <ul class="nav nav-tabs nav-justified ">
-        <li class="nav-item active">
-            <a class="nav-link active" data-toggle="tab">Sighting</a>
-        </li>
-    </ul>
+<div class="row">
+    <!-- Sighting input -->
+    <div class="addrecord-form col-lg-4 top-buffer">
+        <!-- Single navigation tab for sighting, mostly for consistent aesthetics -->
+        <ul class="nav nav-tabs nav-justified ">
+            <li class="nav-item active">
+                <a class="nav-link active" data-toggle="tab">Sighting</a>
+            </li>
+        </ul>
 
-    <!-- Tab contents -->
-    <div class="tab-content shadow bg-white">
-        <div class="tab-pane container active">
-            <!-- Date input using bootstrap datepicker -->
-            <div class="form-row">
-                <div class="col-8 form-group">
-                    <label for="date">Date:</label>
-                    <!-- Date input field -->
-                    <div id="datepicker" class="input-group date" data-provide="datepicker">
-                        <input id="date" type="text" class="form-control" autocomplete="off" placeholder="YYYY/MM/DD">
-                        <!-- Calender button to view datepicker -->
-                        <div class="input-group-addon input-group-append">
-                            <button class="btn btn-addrecord" type="button"
-                                    data-toggle="tooltip" title="Open calandar">
-                                <i class="fa fa-calendar" aria-hidden="true"></i></button>
+        <!-- Tab contents -->
+        <div class="tab-content shadow bg-white">
+            <div class="tab-pane container active">
+                <form id="form-sighting">
+                    <!-- Date input using bootstrap datepicker -->
+                    <div class="form-row">
+                        <div class="col-8 form-group">
+                            <label for="date">Date:
+                                <span data-toggle="tooltip" title="Date of sighting in year-month-day format">
+                                    <i class="fas fa-question-circle"></i>
+                                </span>
+                            </label>
+                            <!-- Date input field -->
+                            <div id="datepicker" class="input-group date" data-provide="datepicker">
+                                <input id="date" name="date" type="text" class="form-control" autocomplete="off" placeholder="YYYY/MM/DD">
+                                <!-- Calender button to view datepicker -->
+                                <div class="input-group-addon input-group-append">
+                                    <button class="btn btn-addrecord" type="button"
+                                            data-toggle="tooltip" title="Open calandar">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Coordinate input fields -->
-            <div class="form-row">
-                <div class="col-5 form-group">
-                    <label for="x-coord">X-coordinate:</label>
-                    <input id="x-coord" type="text" autocomplete="off" class="form-control">
-                </div>
-                <div class="col-5 form-group">
-                    <label for="y-coord">Y-coordinate:</label>
-                    <input id="y-coord" type="text" autocomplete="off" class="form-control">
-                </div>
-                <div class="col-2 form-group">
-                    <button class="btn btn-coords" type="button" disabled
-                            data-toggle="tooltip" title="Request coordinates of your current location">
-                        <i class="fas fa-location-arrow"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Weather and Habitat input fields -->
-            <div class="form-row">
-                <div class=" col-sm-6 form-group">
-                    <label for="weather">Weather:</label>
-                    <select id="weather" class="custom-select">
-                        <option value="Sunny" selected>Sunny</option>
-                        <option value="Cloudy">Cloudy</option>
-                        <option value="Partly Cloudy">Partly Cloudy</option>
-                        <option value="Rainy">Rainy</option>
-                    </select>
-                </div>
-                <div class="col-sm-6 form-group">
-                    <label for="habitat">Habitat:
-                        <span data-toggle="tooltip" title="Environment of the organism group's location">
-                            <i class="fas fa-question-circle"></i>
-                        </span>
-                    </label>
-                    <select id="habitat" class="custom-select">
-                        <option value="Acacia Mix" selected>Acacia Mix</option>
-                        <option value="Acacia Woodland">Acacia Woodland</option>
-                        <option value="Grassland">Grassland</option>
-                        <option value="Lakeshore">Lakeshore</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Time input field -->
-            <div class="form-row">
-                <div class="col-sm-6 form-group">
-                    <label for="time">Time:</label>
-                    <div class="input-group">
-                        <input id="time" type="text" class="form-control" autocomplete="off" placeholder="HH:mm">
-                        <div class="input-group-append">
-                            <button id="settime" class="btn btn-addrecord" type="button"
-                                    data-toggle="tooltip" title="Set to current time">
-                                <i class="fas fa-clock"></i>
+                    <!-- Coordinate input fields -->
+                    <div class="form-row">
+                        <div class="col-5 form-group">
+                            <label for="x-coord">X-coordinate:</label>
+                            <input id="x-coord" type="text" autocomplete="off" class="form-control">
+                        </div>
+                        <div class="col-5 form-group">
+                            <label for="y-coord">Y-coordinate:</label>
+                            <input id="y-coord" type="text" autocomplete="off" class="form-control">
+                        </div>
+                        <div class="col-2 form-group">
+                            <button class="btn btn-coords" type="button" disabled
+                                    data-toggle="tooltip" title="Request coordinates of your current location">
+                                <i class="fas fa-location-arrow"></i>
                             </button>
                         </div>
                     </div>
-                </div>
+
+                    <!-- Weather and Habitat input fields -->
+                    <div class="form-row">
+                        <div class=" col-sm-6 form-group">
+                            <label for="weather">Weather:</label>
+                            <select id="weather" class="custom-select">
+                                <option value="Sunny" selected>Sunny</option>
+                                <option value="Cloudy">Cloudy</option>
+                                <option value="Partly Cloudy">Partly Cloudy</option>
+                                <option value="Rainy">Rainy</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="habitat">Habitat:
+                                <span data-toggle="tooltip" title="Environment of the organism group's location">
+                                    <i class="fas fa-question-circle"></i>
+                                </span>
+                            </label>
+                            <select id="habitat" class="custom-select">
+                                <option value="Acacia Mix" selected>Acacia Mix</option>
+                                <option value="Acacia Woodland">Acacia Woodland</option>
+                                <option value="Grassland">Grassland</option>
+                                <option value="Lakeshore">Lakeshore</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Time input field -->
+                    <div class="form-row">
+                        <div class="col-sm-6 form-group">
+                            <label for="time">Time:</label>
+                            <div class="input-group">
+                                <input id="time" name="time" type="text" class="form-control" autocomplete="off" placeholder="HH:mm">
+                                <div class="input-group-append">
+                                    <button id="settime" class="btn btn-addrecord" type="button"
+                                            data-toggle="tooltip" title="Set to current time">
+                                        <i class="fas fa-clock"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Animal group input -->
-<div class="addrecord-form col-lg-8">
-    <!-- Navigation tabs for switching between organism groups -->
-    <ul class="nav nav-tabs nav-justified ">
-        <li class="nav-item active">
-            <a class="nav-link active" id="tab-giraffe" data-toggle="tab">Giraffes</a>
-        </li>
-    </ul>
+    <!-- Animal group input -->
+    <div class="addrecord-form col-lg-8 top-buffer">
+        <!-- Navigation tabs for switching between organism groups -->
+        <ul class="nav nav-tabs nav-justified ">
+            <li class="nav-item active">
+                <a class="nav-link active" id="tab-giraffe" data-toggle="tab">Giraffes</a>
+            </li>
+        </ul>
 
-    <!-- Tab contents -->
-    <div class="tab-content shadow bg-white">
-        <!-- Giraffe Tab -->
-        <div class="tab-pane container active" id="giraffes">
-            <!-- Activity -->
-            <div class="form-row">
-                <div class="col form-group">
-                    <label for="activity">Activity:
-                        <span data-toggle="tooltip" title="Average activity of the giraffe group
-                              (i.e. what most of the giraffes in the group are doing)">
-                            <i class="fas fa-question-circle"></i>
-                        </span>
-                    </label>
-                    <select id="activity" class="custom-select">
-                        <option value="Feeding" selected>Feeding</option>
-                        <option value="Walking">Walking</option>
-                        <option value="Standing">Standing</option>
-                        <option value="Lying">Lying</option>
-                        <option value="Fighting">Fighting</option>
-                        <option value="Scratching">Scratching</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Giraffe Counts -->
-            <div class="form-row">
-                <!-- Adult Males -->
-                <div class = "col-xs-2 col-lg-3 form-group">
-                    <label for="count-ma">Adult Males:</label>
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-number" disabled type="button"
-                                    data-type="minus" data-field="count-ma">
-                                <i class="fas fa-minus"></i>
-                            </button>
+        <!-- Tab contents -->
+        <div class="tab-content shadow bg-white">
+            <!-- Giraffe Tab -->
+            <div class="tab-pane container active" id="giraffes">
+                <!-- Activity -->
+                <form id="form-giraffes">
+                    <div class="form-row">
+                        <div class="col form-group">
+                            <label for="activity">Activity:
+                                <span data-toggle="tooltip" title="Average activity of the giraffe group
+                                (i.e. what most of the giraffes in the group are doing)">
+                                    <i class="fas fa-question-circle"></i>
+                                </span>
+                            </label>
+                            <select id="activity" class="custom-select">
+                                <option value="Feeding" selected>Feeding</option>
+                                <option value="Walking">Walking</option>
+                                <option value="Standing">Standing</option>
+                                <option value="Lying">Lying</option>
+                                <option value="Fighting">Fighting</option>
+                                <option value="Scratching">Scratching</option>
+                            </select>
                         </div>
-                        <input id="count-ma" name="count-ma" type="text" class="form-control giraffe-count"
-                               autocomplete="off" value="0" min="0" max="100">
-                        <div class="input-group-append">
-                            <button class="btn btn-number" type="button"
-                                    data-type="plus" data-field="count-ma">
-                                <i class="fas fa-plus"></i>
+                    </div>
+
+                    <!-- Giraffe Counts -->
+                    <div class="form-row">
+                        <!-- Adult Males -->
+                        <div class = "col-xs-2 col-lg-3 form-group">
+                            <label for="count-ma">Adult Males:</label>
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-plusmin" disabled type="button"
+                                            data-type="minus" data-field="count-ma">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                                <input id="count-ma" name="count-ma" type="text" class="form-control giraffe-count"
+                                       autocomplete="off" value="0" min="0" max="100">
+                                <div class="input-group-append">
+                                    <button class="btn btn-plusmin" type="button"
+                                            data-type="plus" data-field="count-ma">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sub-adult Males -->
+                        <div class = "col-xs-2 col-lg-3 form-group">
+                            <label for="count-ms">Sub-adult Males:</label>
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-plusmin" disabled type="button"
+                                            data-type="minus" data-field="count-ms">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                                <input id="count-ms" name="count-ms" type="text" class="form-control giraffe-count"
+                                       autocomplete="off" value="0" min="0" max="100">
+                                <div class="input-group-append">
+                                    <button class="btn btn-plusmin" type="button"
+                                            data-type="plus" data-field="count-ms">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Adult Females -->
+                        <div class = "col-xs-2 col-lg-3 form-group">
+                            <label for="count-fa">Adult Females:</label>
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-plusmin" disabled type="button"
+                                            data-type="minus" data-field="count-fa">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                                <input id="count-fa" name="count-fa" type="text" class="form-control giraffe-count"
+                                       autocomplete="off" value="0" min="0" max="100">
+                                <div class="input-group-append">
+                                    <button class="btn btn-plusmin" type="button"
+                                            data-type="plus" data-field="count-fa">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sub-adult Females -->
+                        <div class = "col-xs-2 col-lg-3 form-group">
+                            <label for="count-fs">Sub-adult Females:</label>
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-plusmin" disabled type="button"
+                                            data-type="minus" data-field="count-fs">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                                <input id="count-fs" name="count-fs" type="text" class="form-control giraffe-count"
+                                       autocomplete="off" value="0" min="0" max="100">
+                                <div class="input-group-append">
+                                    <button class="btn btn-plusmin" type="button"
+                                            data-type="plus" data-field="count-fs">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <!-- Juvenile -->
+                        <div class = "col-xs-2 col-lg-3 form-group">
+                            <label for="count-ju">Juveniles:</label>
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-plusmin" disabled type="button"
+                                            data-type="minus" data-field="count-ju">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                                <input id="count-ju" name="count-ju" type="text" class="form-control giraffe-count"
+                                       autocomplete="off" value="0" min="0" max="100">
+                                <div class="input-group-append">
+                                    <button class="btn btn-plusmin" type="button"
+                                            data-type="plus" data-field="count-ju">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Unidentified -->
+                        <div class = "col-xs-2 col-lg-3 form-group">
+                            <label for="count-un">Unidentified:</label>
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-plusmin" disabled type="button"
+                                            data-type="minus" data-field="count-un">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                                <input id="count-un" name="count-un" type="text" class="form-control giraffe-count"
+                                       autocomplete="off" value="0" min="0" max="100">
+                                <div class="input-group-append">
+                                    <button class="btn btn-plusmin" type="button"
+                                            data-type="plus" data-field="count-un">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Giraffe counter and Submit Record button -->
+                    <div class="form-row">
+                        <div class="col-sm-8">
+                            <p class="giraffe-counter"><i>Total no. giraffes in group: </i><i id="giraffe-count-total">0</i></p>
+                        </div>
+                        <div class="col-sm-4">
+                            <button class="btn btn-addrecord float-right" type="button" disabled>
+                                <i class="fas fa-angle-right"></i> Submit Record
                             </button>
                         </div>
                     </div>
-                </div>
-
-                <!-- Sub-adult Males -->
-                <div class = "col-xs-2 col-lg-3 form-group">
-                    <label for="count-ms">Sub-adult Males:</label>
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-number" disabled type="button"
-                                    data-type="minus" data-field="count-ms">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        </div>
-                        <input id="count-ms" name="count-ms" type="text" class="form-control giraffe-count"
-                               autocomplete="off" value="0" min="0" max="100">
-                        <div class="input-group-append">
-                            <button class="btn btn-number" type="button"
-                                    data-type="plus" data-field="count-ms">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Adult Females -->
-                <div class = "col-xs-2 col-lg-3 form-group">
-                    <label for="count-fa">Adult Females:</label>
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-number" disabled type="button"
-                                    data-type="minus" data-field="count-fa">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        </div>
-                        <input id="count-fa" name="count-fa" type="text" class="form-control giraffe-count"
-                               autocomplete="off" value="0" min="0" max="100">
-                        <div class="input-group-append">
-                            <button class="btn btn-number" type="button"
-                                    data-type="plus" data-field="count-fa">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sub-adult Females -->
-                <div class = "col-xs-2 col-lg-3 form-group">
-                    <label for="count-fs">Sub-adult Females:</label>
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-number" disabled type="button"
-                                    data-type="minus" data-field="count-fs">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        </div>
-                        <input id="count-fs" name="count-fs" type="text" class="form-control giraffe-count"
-                               autocomplete="off" value="0" min="0" max="100">
-                        <div class="input-group-append">
-                            <button class="btn btn-number" type="button"
-                                    data-type="plus" data-field="count-fs">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <!-- Juvenile -->
-                <div class = "col-xs-2 col-lg-3 form-group">
-                    <label for="count-ju">Juveniles:</label>
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-number" disabled type="button"
-                                    data-type="minus" data-field="count-ju">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        </div>
-                        <input id="count-ju" name="count-ju" type="text" class="form-control giraffe-count"
-                               autocomplete="off" value="0" min="0" max="100">
-                        <div class="input-group-append">
-                            <button class="btn btn-number" type="button"
-                                    data-type="plus" data-field="count-ju">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Unidentified -->
-                <div class = "col-xs-2 col-lg-3 form-group">
-                    <label for="count-un">Unidentified:</label>
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-number" disabled type="button"
-                                    data-type="minus" data-field="count-un">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        </div>
-                        <input id="count-un" name="count-un" type="text" class="form-control giraffe-count"
-                               autocomplete="off" value="0" min="0" max="100">
-                        <div class="input-group-append">
-                            <button class="btn btn-number" type="button"
-                                    data-type="plus" data-field="count-un">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Giraffe counter and Submit Record button -->
-            <div class="form-row">
-                <div class="col-sm-8">
-                    <p class="giraffe-counter"><i>Total no. giraffes in group: </i><i id="giraffe-count-total">0</i></p>
-                </div>
-                <div class="col-sm-4">
-                    <button class="btn btn-addrecord float-right" type="button" disabled>
-                        <i class="fas fa-angle-right"></i> Submit Record
-                    </button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Custom Javascript Input Validation -->
-<script src="js/input.validation.js"></script>
+<script src="js/input-validation.js"></script>

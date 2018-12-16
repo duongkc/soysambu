@@ -6,8 +6,10 @@ body {
     display: flex;
     flex-flow: column;
 }
-.content {
+.top-buffer {
     margin-top: 30px;
+}
+.bottom-buffer {
     margin-bottom: 30px;
 }
 .container-fluid {
@@ -78,20 +80,17 @@ body {
     background: #f7d794;
 }
 
-/* --- Add Record Page --- */
+/* --- Forms --- */
+/* Add Record Form */
 /* Change input field focus color to match color scheme */
 .addrecord-form .form-control:focus, .addrecord-form .custom-select:focus,
-.addrecord-form .btn:focus{
-    border-color: #f5cd79 !important;
-    box-shadow: 0 0 5px rgba(245, 205, 121, 1) !important;
+.addrecord-form .btn:focus {
+    border-color: #f5cd79;
+    box-shadow: 0 0 5px rgba(245, 205, 121, 1);
 }
 /* Sighting Tab */
 .btn-addrecord {
     background-color: #f7d794;
-}
-.tab-pane {
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 .btn-coords {
     margin-top: 32px;
@@ -106,6 +105,23 @@ body {
     text-align: left;
     color: #808080;
 }
+.btn-plusmin {
+    border: 1px solid #e0e0e0;
+}
+/* Errors */
+.error {
+    font-size: smaller;
+    color: #c44569;
+}
+/* Override usual border and focus color when field contains error */
+.has-error .form-control, .has-error .btn{
+    border: 1px solid #c44569 !important;
+}
+.has-error .form-control:focus, .has-error .btn:focus {
+    border: 1px solid #c44569 !important;
+    box-shadow: 0 0 5px rgba(196, 69, 105, 1) !important;
+}
+
 /* --- Footer --- */
 footer {
     margin-top: auto;
