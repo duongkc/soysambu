@@ -155,7 +155,7 @@ $(document).ready(function () {
 
     /* JQuery Validator Plugin */
     // Change message of the valid date rule.
-    $.validator.messages.required = 'Please enter a valid date in year-month-day format, e.g. 2018-06-17';
+    $.validator.messages.date = 'Please enter a valid date in year-month-day format, e.g. 2018-06-17';
     // Add rule to only allow dates following ISO-8601 standards.
     $.validator.addMethod('dateFormat',
         function(value) {
