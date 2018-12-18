@@ -52,7 +52,6 @@ $(document).ready(function () {
 
             $(this).val(0);
             updateOrganismTotal();
-            return;
         }
 
         // Check if current value is a float, if so round down to an integer.
@@ -69,7 +68,7 @@ $(document).ready(function () {
             $(".btn-plusmin[data-type='minus'][data-field='" + name + "']").attr('disabled', false);
         } else if (currentVal <= minValue) {
             $(".btn-plusmin[data-type='minus'][data-field='" + name + "']").attr('disabled', true);
-            $(this).val(0);
+            $(this).val(minValue);
         }
 
         // Check if max value rule is followed, if not set value to max value,  disable max button.
@@ -77,7 +76,7 @@ $(document).ready(function () {
             $(".btn-plusmin[data-type='plus'][data-field='" + name + "']").attr('disabled', false);
         } else if (currentVal >= maxValue) {
             $(".btn-plusmin[data-type='plus'][data-field='" + name + "']").attr('disabled', true);
-            $(this).val(100);
+            $(this).val(maxValue);
         }
 
         // Update total giraffe count.
@@ -247,11 +246,15 @@ $(document).ready(function () {
         forceparse: true,
         todayHighlight: true,
         autoclose: true,
-        showOnFocus: false
+        showOnFocus: false,
+        todayBtn: "linked"
     });
     // Set current date as default value for date field.
     $('#datepicker').datepicker('setDate', 'now');
-
+    // Hide tooltip when calendar is opened.
+    $('#calendar').click( function () {
+        $(this).tooltip('hide')
+    });
     /* Time input */
     // Set current time as default value for time field.
     setTime();

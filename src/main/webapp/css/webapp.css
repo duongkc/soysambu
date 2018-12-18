@@ -89,13 +89,16 @@ form {
     display: flex;
     flex-wrap: wrap;
 }
-
+.label-tip {
+    font-size: 12px;
+    color: #808080;
+}
 /* Add Record Form */
 /* Change input field focus color to match color scheme */
 .addrecord-form .form-control:focus, .addrecord-form .custom-select:focus,
 .addrecord-form .btn:focus {
     border-color: #f5cd79;
-    box-shadow: 0 0 5px rgba(245, 205, 121, 1);
+    box-shadow: 0 0 4px 1px rgba(245, 205, 121, 1);
 }
 .organism-counter {
     padding-top: 10px;
@@ -129,7 +132,7 @@ form {
 }
 .has-error .form-control:focus, .has-error .btn:focus {
     border: 1px solid #c44569 !important;
-    box-shadow: 0 0 5px rgba(196, 69, 105, 1) !important;
+    box-shadow: 0 0 4px 1px rgba(196, 69, 105, 1) !important;
 }
 
 /* --- Footer --- */
