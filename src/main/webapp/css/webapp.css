@@ -79,14 +79,28 @@ body {
 .nav-tabs .nav-item:after {
     background: #f7d794;
 }
+.tab-pane {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 
 /* --- Forms --- */
+form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 /* Add Record Form */
 /* Change input field focus color to match color scheme */
 .addrecord-form .form-control:focus, .addrecord-form .custom-select:focus,
 .addrecord-form .btn:focus {
     border-color: #f5cd79;
     box-shadow: 0 0 5px rgba(245, 205, 121, 1);
+}
+.organism-counter {
+    padding-top: 10px;
+    text-align: left;
+    color: #808080;
 }
 /* Sighting Tab */
 .btn-addrecord {
@@ -100,16 +114,12 @@ body {
 .giraffe-count {
     text-align: right;
 }
-.giraffe-counter {
-    padding-top: 10px;
-    text-align: left;
-    color: #808080;
-}
 .btn-plusmin {
     border: 1px solid #e0e0e0;
 }
 /* Errors */
 .error {
+    opacity: 0%;
     font-size: smaller;
     color: #c44569;
 }

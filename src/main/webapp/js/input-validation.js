@@ -1,9 +1,12 @@
 $(document).ready(function () {
     /* Function to get the current time in HH:mm format. */
-    function getTime() {
+    function setTime() {
         var date = new Date($.now());
         var time = addZero(date.getHours()) + ":" + addZero(date.getMinutes());
-        return time;
+
+        $('#time').val(time);
+        // Check validation with JQuery validator after time is converted.
+        $('#time').valid();
     };
 
     /* Function to add a zero when hours/minutes are in single digits when acquired through JS. */
@@ -18,6 +21,7 @@ $(document).ready(function () {
         var dataField = $(this).attr('data-field');
         var type      = $(this).attr('data-type');
         var input = $("input[name='"+dataField+"']");
+        // Get current val of inout field.
         var currentVal = parseInt(input.val());
 
         // Add or subtract 1 for min or max buttons respectively.
@@ -35,7 +39,10 @@ $(document).ready(function () {
     /* Function to validate giraffe counters. */
     function validateGiraffeCount() {
         var name = $(this).attr('name');
-        var currentVal = Number($(this).val());
+        // Converts counter's value to a number, also removes whitespace.
+        var currentVal = Number($(this).val().replace(/\s+/g, ''));
+        // Remove whitespace from input field.
+        $(this).val(currentVal);
 
         // Check if previously parsed currentVal returns NaN, if so set input field value to 0.
         if (isNaN(currentVal) || !isFinite(currentVal)) {
@@ -44,7 +51,7 @@ $(document).ready(function () {
             $(".btn-plusmin[data-type='minus'][data-field='" + name + "']").attr('disabled', true);
 
             $(this).val(0);
-            updateGiraffeTotal();
+            updateOrganismTotal();
             return;
         }
 
@@ -73,28 +80,31 @@ $(document).ready(function () {
             $(this).val(100);
         }
 
-        updateGiraffeTotal();
+        // Update total giraffe count.
+        updateOrganismTotal();
     };
 
     /* Function to update total number of giraffes, by summing all giraffe count fields. */
-    function updateGiraffeTotal() {
+    function updateOrganismTotal() {
         var sum = 0;
         $(".giraffe-count").each(function(){
             sum += +$(this).val();
         });
-        $('#giraffe-count-total').empty();
-        $('#giraffe-count-total').append(sum);
+        $('#count-total').empty();
+        $('#count-total').append(sum);
     };
 
-    /* Function to convert yyyy-m-d date formatting to yyyy-mm-dd */
+    /* Function to convert (yyyy-m-d date formatting to yyyy-mm-dd) (yyyy/mm/dd formatting to yyyy-mm-dd) */
     function convertDate() {
-        var d = $(this).val().split('-');
+        // Regex will match either '-' or '/'.
+        var d = $(this).val().split(/[-\/]/);
 
         if (d.length == 3 && !d.some(isNaN)) {
             var year = d[0];
             var month = d[1];
             var day = d[2];
 
+            // Add zero if month or day is in the single digits.
             if (month.length < 2 && month != 0) month = '0' + month;
             if (day.length < 2 && day != 0) day = '0' + day;
 
@@ -102,8 +112,8 @@ $(document).ready(function () {
             $(this).val(d);
         }
 
-        // Check validation after date is converted.
-        $('#form-sighting').valid();
+        // Check validation with JQuery validator after date is converted.
+        $('#date').valid();
     };
 
     /* Function that converts HHmm time formatting to HH:mm */
@@ -119,32 +129,6 @@ $(document).ready(function () {
     }
 
 
-    /* ----- INITIALIZATION ----- */
-    /* Datepicker */
-    $('#datepicker').datepicker({
-        format: 'yyyy-mm-dd',
-        endDate: '0d',
-        forceparse: true,
-        todayHighlight: true,
-        autoclose: true,
-        showOnFocus: false
-    });
-    // Set current date as default value for date field.
-    $('#datepicker').datepicker('setDate', 'now');
-
-    /* Time input */
-    // Set current time as default value for time field.
-    $('#time').val(getTime());
-    // Set current time when settime button is pressed.
-    $('#settime').click(function () {
-        $('#time').val(getTime())
-    });
-
-    /* Giraffe count buttons (-+) */
-    // Update giraffe count field.
-    $('.btn-plusmin').click(updateGiraffeCount);
-
-
     /* ----- VALIDATION ----- */
     // Validate change in giraffe count field, assists user when invalid values are given.
     $('.giraffe-count').change(validateGiraffeCount);
@@ -152,17 +136,22 @@ $(document).ready(function () {
     $('#date').change(convertDate);
     // Convert manual time input, Hhmm will be converted to HH:mm.
     $('#time').focusout(convertTime);
+    // Validate giraffe counters when -+ buttons are pressed.
+    $('.giraffe-count').change(function () {
+        $('#form-addrecord').valid();
+    });
 
     /* JQuery Validator Plugin */
+    /* Sighting form validation */
     // Change message of the valid date rule.
     $.validator.messages.date = 'Please enter a valid date in year-month-day format, e.g. 2018-06-17';
     // Add rule to only allow dates following ISO-8601 standards.
     $.validator.addMethod('dateFormat',
         function(value) {
             // yyyy-mm-dd or yyyy-m-d
-            const re = /^\d{4}-\d{1,2}-\d{1,2}$/;
+            const re = /^\d{4}[-\/]\d{1,2}[-\/]\d{1,2}$/;
             return re.test(value);
-        },'Date must be given in a year-month-day format, e.g. 2018-06-17'
+        },'Please enter a valid date in year-month-day format, e.g. 2018-06-17'
     );
     // Add rule to only allow military (24h) time.
     $.validator.addMethod('timeFormat',
@@ -172,9 +161,26 @@ $(document).ready(function () {
             return re.test(value);
         },'Time must be given in military time (24h), e.g. 15:20'
     );
+    // Add rule to only allow organism groups with more than 1 animal.
+    $.validator.addMethod('minGroupSize',
+        function(value, element) {
+            var sum = 0;
+            var elementDataType = $(element).attr("data-type");
 
-    // Initiate validating form-sighting form.
-    $('#form-sighting').validate({
+            // For every input element with data-type of the same type of the given element,
+            // add input element's value to sum of all elements of its type.
+            $('input[data-type="' + elementDataType + '"').each( function () {
+                    sum += $(this).val();
+                }
+            );
+
+            return (sum > 0);
+        }
+    );
+
+    // Initiate validating add-record form.
+    validator = $('#form-addrecord').validate({
+        onkeyup: false,
         rules: {
             date: {
                 required: true,
@@ -196,9 +202,63 @@ $(document).ready(function () {
             formGroup = $(element.closest('.form-group'));
             formGroup.removeClass('has-error');
         },
-        // Place error after form row containing input field.
         errorPlacement: function(error, element) {
-            error.insertAfter(element.parents('.form-row'));
+            if (element.attr("data-type") == "count") {
+                // Place errors before total organism counter.
+                error.insertBefore($('.organism-counter').parents('.form-row'));
+            } else {
+                // Place error after form row containing input field.
+                error.insertAfter(element.parents('.form-row'));
+            }
         }
-    })
+    });
+
+    // Add rules for giraffe tab validation.
+    if ($('#giraffes').hasClass('active')) {
+        // For every counter add them to the giraffes group and add minGroupSize validation rule.
+        $('.giraffe-count').each(function () {
+            var name = $(this).attr('name');
+            validator.groups[name] = 'giraffes';
+
+            $('#' + name).rules('add', {
+                minGroupSize: true,
+                messages: {
+                    minGroupSize: "Giraffe group sightings should contain at least 1 giraffe"
+                }
+            });
+        });
+    }
+
+    // On key-release, clicks and focus-out events check the entire form.
+    // If valid enable the submit button, when invalid disable the submit button.
+    $('#form-addrecord').on('keyup click blur', function() {
+        if (validator.checkForm()) {
+            $('#submit').prop('disabled', false);
+        } else {
+            $('#submit').prop('disabled', true);
+        }
+    });
+
+    /* ----- INITIALIZATION ----- */
+    /* Datepicker */
+    $('#datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        endDate: '0d',
+        forceparse: true,
+        todayHighlight: true,
+        autoclose: true,
+        showOnFocus: false
+    });
+    // Set current date as default value for date field.
+    $('#datepicker').datepicker('setDate', 'now');
+
+    /* Time input */
+    // Set current time as default value for time field.
+    setTime();
+    // Set current time when settime button is pressed.
+    $('#settime').click(setTime);
+
+    /* Giraffe count buttons (-+) */
+    // Update giraffe count field.
+    $('.btn-plusmin').click(updateGiraffeCount);
 });

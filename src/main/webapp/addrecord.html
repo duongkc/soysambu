@@ -1,17 +1,17 @@
 <div class="row">
-    <!-- Sighting input -->
-    <div class="addrecord-form col-lg-4 top-buffer">
-        <!-- Single navigation tab for sighting, mostly for consistent aesthetics -->
-        <ul class="nav nav-tabs nav-justified ">
-            <li class="nav-item active">
-                <a class="nav-link active" data-toggle="tab">Sighting</a>
-            </li>
-        </ul>
+    <form id="form-addrecord">
+        <!-- Sighting input -->
+        <div class="addrecord-form col-lg-4 top-buffer">
+            <!-- Single navigation tab for sighting, mostly for consistent aesthetics -->
+            <ul class="nav nav-tabs nav-justified ">
+                <li class="nav-item active">
+                    <a class="nav-link active" data-toggle="tab">Sighting</a>
+                </li>
+            </ul>
 
-        <!-- Tab contents -->
-        <div class="tab-content shadow bg-white">
-            <div class="tab-pane container active">
-                <form id="form-sighting">
+            <!-- Tab contents -->
+            <div class="tab-content shadow bg-white">
+                <div class="tab-pane container active">
                     <!-- Date input using bootstrap datepicker -->
                     <div class="form-row">
                         <div class="col-8 form-group">
@@ -93,26 +93,24 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Animal group input -->
-    <div class="addrecord-form col-lg-8 top-buffer">
-        <!-- Navigation tabs for switching between organism groups -->
-        <ul class="nav nav-tabs nav-justified ">
-            <li class="nav-item active">
-                <a class="nav-link active" id="tab-giraffe" data-toggle="tab">Giraffes</a>
-            </li>
-        </ul>
+        <!-- Animal group input -->
+        <div class="addrecord-form col-lg-8 top-buffer">
+            <!-- Navigation tabs for switching between organism groups -->
+            <ul class="nav nav-tabs nav-justified ">
+                <li class="nav-item active">
+                    <a class="nav-link active" id="tab-giraffe" data-toggle="tab">Rothschild's giraffes</a>
+                </li>
+            </ul>
 
-        <!-- Tab contents -->
-        <div class="tab-content shadow bg-white">
-            <!-- Giraffe Tab -->
-            <div class="tab-pane container active" id="giraffes">
-                <!-- Activity -->
-                <form id="form-giraffes">
+            <!-- Tab contents -->
+            <div class="tab-content shadow bg-white">
+                <!-- Giraffe Tab -->
+                <div class="tab-pane container active" id="giraffes">
+                    <!-- Activity -->
                     <div class="form-row">
                         <div class="col form-group">
                             <label for="activity">Activity:
@@ -145,7 +143,7 @@
                                     </button>
                                 </div>
                                 <input id="count-ma" name="count-ma" type="text" class="form-control giraffe-count"
-                                       autocomplete="off" value="0" min="0" max="100">
+                                       autocomplete="off" data-type="count" value="0" min="0" max="100">
                                 <div class="input-group-append">
                                     <button class="btn btn-plusmin" type="button"
                                             data-type="plus" data-field="count-ma">
@@ -166,7 +164,7 @@
                                     </button>
                                 </div>
                                 <input id="count-ms" name="count-ms" type="text" class="form-control giraffe-count"
-                                       autocomplete="off" value="0" min="0" max="100">
+                                       autocomplete="off" data-type="count" value="0" min="0" max="100">
                                 <div class="input-group-append">
                                     <button class="btn btn-plusmin" type="button"
                                             data-type="plus" data-field="count-ms">
@@ -187,7 +185,7 @@
                                     </button>
                                 </div>
                                 <input id="count-fa" name="count-fa" type="text" class="form-control giraffe-count"
-                                       autocomplete="off" value="0" min="0" max="100">
+                                       autocomplete="off" data-type="count" value="0" min="0" max="100">
                                 <div class="input-group-append">
                                     <button class="btn btn-plusmin" type="button"
                                             data-type="plus" data-field="count-fa">
@@ -208,7 +206,7 @@
                                     </button>
                                 </div>
                                 <input id="count-fs" name="count-fs" type="text" class="form-control giraffe-count"
-                                       autocomplete="off" value="0" min="0" max="100">
+                                       autocomplete="off" data-type="count" value="0" min="0" max="100">
                                 <div class="input-group-append">
                                     <button class="btn btn-plusmin" type="button"
                                             data-type="plus" data-field="count-fs">
@@ -231,7 +229,7 @@
                                     </button>
                                 </div>
                                 <input id="count-ju" name="count-ju" type="text" class="form-control giraffe-count"
-                                       autocomplete="off" value="0" min="0" max="100">
+                                       autocomplete="off" data-type="count" value="0" min="0" max="100">
                                 <div class="input-group-append">
                                     <button class="btn btn-plusmin" type="button"
                                             data-type="plus" data-field="count-ju">
@@ -252,7 +250,7 @@
                                     </button>
                                 </div>
                                 <input id="count-un" name="count-un" type="text" class="form-control giraffe-count"
-                                       autocomplete="off" value="0" min="0" max="100">
+                                       autocomplete="off" data-type="count" value="0" min="0" max="100">
                                 <div class="input-group-append">
                                     <button class="btn btn-plusmin" type="button"
                                             data-type="plus" data-field="count-un">
@@ -266,18 +264,18 @@
                     <!-- Giraffe counter and Submit Record button -->
                     <div class="form-row">
                         <div class="col-sm-8">
-                            <p class="giraffe-counter"><i>Total no. giraffes in group: </i><i id="giraffe-count-total">0</i></p>
+                            <p class="organism-counter"><i>Total no. organisms in group: </i><i id="count-total">0</i></p>
                         </div>
                         <div class="col-sm-4">
-                            <button class="btn btn-addrecord float-right" type="button" disabled>
+                            <button id="submit" class="btn btn-addrecord float-right" type="button" disabled>
                                 <i class="fas fa-angle-right"></i> Submit Record
                             </button>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 
 <!-- Custom Javascript Input Validation -->
