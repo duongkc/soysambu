@@ -30,7 +30,7 @@ body {
 /* Add Record */
 .carousel-item:nth-child(2) {
     /* Header background image */
-    background: url(../assets/img/add_record_header_2.jpg);
+    background: url(../assets/img/add_record_header.jpg);
     background-position:55% 57.5%;
     background-size:cover;
     /* Text makeup */
