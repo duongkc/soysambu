@@ -15,17 +15,13 @@
                     <!-- Date input using bootstrap datepicker -->
                     <div class="form-row">
                         <div class="col-8 form-group">
-                            <label for="date">Date:
-                                <span data-toggle="tooltip" title="Date of sighting in year-month-day format">
-                                    <i class="fas fa-question-circle"></i>
-                                </span>
-                            </label>
+                            <label for="date">Date: <span class="label-tip">(yyyy-mm-dd)</span></label>
                             <!-- Date input field -->
                             <div id="datepicker" class="input-group date" data-provide="datepicker">
-                                <input id="date" name="date" type="text" class="form-control" autocomplete="off" placeholder="YYYY-MM-DD">
+                                <input id="date" name="date" type="text" class="form-control" autocomplete="off">
                                 <!-- Calender button to view datepicker -->
                                 <div class="input-group-addon input-group-append">
-                                    <button class="btn btn-addrecord" type="button"
+                                    <button id = "calendar" class="btn btn-addrecord" type="button"
                                             data-toggle="tooltip" title="Open calandar">
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                     </button>
@@ -81,9 +77,9 @@
                     <!-- Time input field -->
                     <div class="form-row">
                         <div class="col-sm-6 form-group">
-                            <label for="time">Time:</label>
-                            <div class="input-group">
-                                <input id="time" name="time" type="text" class="form-control" autocomplete="off" placeholder="HH:mm">
+                            <label for="time">Time: <span class="label-tip">(hh:mm)</span></label>
+                                <div class="input-group">
+                                <input id="time" name="time" type="text" class="form-control" autocomplete="off">
                                 <div class="input-group-append">
                                     <button id="settime" class="btn btn-addrecord" type="button"
                                             data-toggle="tooltip" title="Set to current time">
@@ -143,7 +139,7 @@
                                     </button>
                                 </div>
                                 <input id="count-ma" name="count-ma" type="text" class="form-control giraffe-count"
-                                       autocomplete="off" data-type="count" value="0" min="0" max="100">
+                                       autocomplete="off" data-type="count" value="0" min="0" max="50">
                                 <div class="input-group-append">
                                     <button class="btn btn-plusmin" type="button"
                                             data-type="plus" data-field="count-ma">
@@ -164,7 +160,7 @@
                                     </button>
                                 </div>
                                 <input id="count-ms" name="count-ms" type="text" class="form-control giraffe-count"
-                                       autocomplete="off" data-type="count" value="0" min="0" max="100">
+                                       autocomplete="off" data-type="count" value="0" min="0" max="50">
                                 <div class="input-group-append">
                                     <button class="btn btn-plusmin" type="button"
                                             data-type="plus" data-field="count-ms">
@@ -185,7 +181,7 @@
                                     </button>
                                 </div>
                                 <input id="count-fa" name="count-fa" type="text" class="form-control giraffe-count"
-                                       autocomplete="off" data-type="count" value="0" min="0" max="100">
+                                       autocomplete="off" data-type="count" value="0" min="0" max="50">
                                 <div class="input-group-append">
                                     <button class="btn btn-plusmin" type="button"
                                             data-type="plus" data-field="count-fa">
@@ -206,7 +202,7 @@
                                     </button>
                                 </div>
                                 <input id="count-fs" name="count-fs" type="text" class="form-control giraffe-count"
-                                       autocomplete="off" data-type="count" value="0" min="0" max="100">
+                                       autocomplete="off" data-type="count" value="0" min="0" max="50">
                                 <div class="input-group-append">
                                     <button class="btn btn-plusmin" type="button"
                                             data-type="plus" data-field="count-fs">
@@ -229,7 +225,7 @@
                                     </button>
                                 </div>
                                 <input id="count-ju" name="count-ju" type="text" class="form-control giraffe-count"
-                                       autocomplete="off" data-type="count" value="0" min="0" max="100">
+                                       autocomplete="off" data-type="count" value="0" min="0" max="50">
                                 <div class="input-group-append">
                                     <button class="btn btn-plusmin" type="button"
                                             data-type="plus" data-field="count-ju">
@@ -250,7 +246,7 @@
                                     </button>
                                 </div>
                                 <input id="count-un" name="count-un" type="text" class="form-control giraffe-count"
-                                       autocomplete="off" data-type="count" value="0" min="0" max="100">
+                                       autocomplete="off" data-type="count" value="0" min="0" max="50">
                                 <div class="input-group-append">
                                     <button class="btn btn-plusmin" type="button"
                                             data-type="plus" data-field="count-un">
