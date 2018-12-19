@@ -19,10 +19,9 @@ $(document).ready( function() {
     $('#nav-gis').click(function() {
         // If already on the GIS page, don't continue.
         if($('#nav-gis').hasClass('active')) return false;
-
         // Fadeout current content page.
-        $('#content, #footer').fadeOut(175, function () {
-
+        $('#content, #footer').fadeOut(175).promise().done(function () {
+            $('#map').fadeIn(175)
         });
     });
 
@@ -32,7 +31,7 @@ $(document).ready( function() {
         if($('#nav-addrecord').hasClass('active')) return false;
 
         // Fadeout current content page.
-        $('#content').fadeOut(175).promise().done(function () {
+        $('#content, #map').fadeOut(175).promise().done(function () {
             // Empty content div; Load addrecord.html and fade into content div.
             $('#content').empty().load("addrecord.html", showContent);
         });
@@ -44,7 +43,7 @@ $(document).ready( function() {
         if($('#nav-viewrecords').hasClass('active')) return false;
 
         // Fadeout current content page.
-        $('#content').fadeOut(175).promise().done(function () {
+        $('#content, #map').fadeOut(175).promise().done(function () {
             // Empty content div; Load viewrecords.html and fade into content div.
             $('#content').empty().load("viewrecords.html", showContent);
         });
