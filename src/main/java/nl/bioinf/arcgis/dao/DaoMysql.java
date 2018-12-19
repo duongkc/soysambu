@@ -117,11 +117,11 @@ public class DaoMysql implements ArcGISDao {
     }
 
     public void prepareStatements() throws SQLException {
-        String fetchGiraffeGroups = "SELECT * from Giraffe_Group";
+        String fetchGiraffeGroups = "SELECT * from Giraffe_Group WHERE activity = 'FEEDING'";
         PreparedStatement ps_giraffe_groups = connection.prepareStatement(fetchGiraffeGroups);
         this.preparedStatements.put(GET_GIRAFFE_GROUPS, ps_giraffe_groups);
 
-        String fetchSightings = "SELECT * from Sighting";
+        String fetchSightings = "SELECT * from Sighting WHERE weather = 'SUNNY'";
         PreparedStatement ps_sightings = connection.prepareStatement(fetchSightings);
         this.preparedStatements.put(GET_SIGHTINGS, ps_sightings);
 
@@ -179,6 +179,11 @@ public class DaoMysql implements ArcGISDao {
             float ycoord = Float.valueOf(rs.getString("ycoord"));
 
             //TO DO: add check if it's an enum || null || empty, else throw exception
+            /*for inserts:
+                - check if inserted values are correct
+                - ONLY create objects during fetching? or create when submitted?
+                - do objects get deleted after? what to do during multiple fetchings without overwriting old list of fetchings?
+                - */
             if(rs.getString("weather") != null && !rs.getString("weather").isEmpty()) {
                 weather = Weather.valueOf(rs.getString("weather"));
             } else {
