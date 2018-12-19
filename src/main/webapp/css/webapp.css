@@ -1,6 +1,9 @@
 /* --- Global Webpage Styling --- */
 html, body {
     height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 body {
     display: flex;
@@ -35,7 +38,7 @@ body {
     background-size:cover;
     /* Text makeup */
     color: white;
-    text-shadow: -1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;
+    text-shadow: 0px 0px 5px grey;
 }
 /* View Records */
 .carousel-item:nth-child(3) {
@@ -67,13 +70,13 @@ body {
 }
 /* Header navigation bar */
 .navbar-nav .nav-item:nth-child(1):after {
-    background: #f3a683;
+    background: #f8a5c2;
 }
 .navbar-nav .nav-item:nth-child(2):after {
     background: #f7d794;
 }
 .navbar-nav .nav-item:nth-child(3):after {
-    background: #786fa6;
+    background: #778beb;
 }
 /* Tab navigation bars */
 .nav-tabs .nav-item:after {

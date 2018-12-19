@@ -13,3 +13,6 @@ gradlew.bat
 
 # Compiled Classes
 *.class
+
+#Tomcat
+*.iml

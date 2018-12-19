@@ -7,13 +7,13 @@ $(document).ready(function () {
         $('#time').val(time);
         // Check validation with JQuery validator after time is converted.
         $('#time').valid();
-    };
+    }
 
     /* Function to add a zero when hours/minutes are in single digits when acquired through JS. */
     function addZero(time) {
         if (time < 10) { time = "0" + time; }
         return time;
-    };
+    }
 
     /* Function to change giraffe counter after input from corresponding - + buttons. */
     function updateGiraffeCount(){
@@ -34,7 +34,7 @@ $(document).ready(function () {
                 input.val(currentVal + 1).change();
             }
         }
-    };
+    }
 
     /* Function to validate giraffe counters. */
     function validateGiraffeCount() {
@@ -91,7 +91,7 @@ $(document).ready(function () {
         });
         $('#count-total').empty();
         $('#count-total').append(sum);
-    };
+    }
 
     /* Function to convert (yyyy-m-d date formatting to yyyy-mm-dd) (yyyy/mm/dd formatting to yyyy-mm-dd) */
     function convertDate() {
@@ -113,7 +113,7 @@ $(document).ready(function () {
 
         // Check validation with JQuery validator after date is converted.
         $('#date').valid();
-    };
+    }
 
     /* Function that converts HHmm time formatting to HH:mm */
     function convertTime () {

@@ -1,8 +1,11 @@
 $(document).ready( function() {
-    /* --- Enable tooltips ---*/
-    $('[data-toggle="tooltip"]').tooltip();
+    // Function to fade in content div and footer and enable tooltips.
+    function showContent() {
+        $('#content, #footer').fadeIn(175);
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
-    // Function to make navbar adjust carousel header on navigation.
+    /*M ake navbar adjust carousel header on navigation. */
     $('#carousel-header').on('slide.bs.carousel', function(e) {
         // Get indexes of current and clicked nav items.
         var from = $('.nav-item.active').index();
@@ -18,12 +21,8 @@ $(document).ready( function() {
         if($('#nav-gis').hasClass('active')) return false;
 
         // Fadeout current content page.
-        $('#content').fadeOut(175, function () {
-            // Empty content div; Load gis.html and fade into content div.
-            $('#content').empty().load("gis.html", function() {
-                $(this).fadeIn(175);
-                $('[data-toggle="tooltip"]').tooltip();
-            });
+        $('#content, #footer').fadeOut(175, function () {
+
         });
     });
 
@@ -33,12 +32,9 @@ $(document).ready( function() {
         if($('#nav-addrecord').hasClass('active')) return false;
 
         // Fadeout current content page.
-        $('#content').fadeOut(175, function () {
+        $('#content').fadeOut(175).promise().done(function () {
             // Empty content div; Load addrecord.html and fade into content div.
-            $('#content').empty().load("addrecord.html", function() {
-                $(this).fadeIn(175);
-                $('[data-toggle="tooltip"]').tooltip();
-            });
+            $('#content').empty().load("addrecord.html", showContent);
         });
     });
 
@@ -48,12 +44,9 @@ $(document).ready( function() {
         if($('#nav-viewrecords').hasClass('active')) return false;
 
         // Fadeout current content page.
-        $('#content').fadeOut(175, function () {
+        $('#content').fadeOut(175).promise().done(function () {
             // Empty content div; Load viewrecords.html and fade into content div.
-            $('#content').empty().load("viewrecords.html", function() {
-                $(this).fadeIn(175);
-                $('[data-toggle="tooltip"]').tooltip();
-            });
+            $('#content').empty().load("viewrecords.html", showContent);
         });
     });
 });

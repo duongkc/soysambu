@@ -30,7 +30,7 @@
         </div>
         <div class="carousel-item">
             <h1>Add Record</h1>
-            <p>Add a new organism sighting to the Soysambu database</p>
+            <p class="d-none d-sm-block">Add a new organism sighting to the Soysambu database</p>
         </div>
         <div class="carousel-item">
             <h1>View Records</h1>
@@ -41,7 +41,7 @@
 
 <!-- Navbar, not visible on mobile / smaller screens -->
 <div class="container-fluid">
-    <nav class="navbar d-none d-sm-flex navbar-expand navbar-dark justify-content-center">
+    <nav class="navbar navbar-expand navbar-dark justify-content-center">
         <ul class="navbar-nav">
             <li class="nav-item active" id="nav-gis" data-target="#carousel-header" data-slide-to="0">
                 <a class="nav-link">GIS</a>
@@ -57,12 +57,9 @@
 </div>
 
 <!-- Start of page contents -->
-<div class="content">
-    <div class="container bottom-buffer" id="content">
-    </div>
-</div>
+<div id="content" class="container bottom-buffer"></div>
 
-<footer class="footer ">
+<footer id="footer" class="footer ">
     <p>Soysambu Conservancy GIS WebApp - <i>by Niels van der Vegt & Ilse van Santen</i></p>
 </footer>
 
