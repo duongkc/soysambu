@@ -18,7 +18,7 @@ public class DaoMysqlTest {
         try {
             dao.connect();
             dao.fetchGiraffeGroups();
-            //System.out.println(dao.fetchSightings());
+            dao.fetchSightings();
         } catch (DatabaseException e) {
             e.printStackTrace();
         } catch (SQLException e) {

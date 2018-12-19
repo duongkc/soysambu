@@ -4,5 +4,6 @@ public enum Weather {
     CLOUDY,
     PARTLY_CLOUDY,
     SUNNY,
-    RAINY;
+    RAINY,
+    UNKNOWN
 }

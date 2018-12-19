@@ -4,5 +4,6 @@ public enum HabitatType {
     ACACIA_MIX,
     ACACIA_WOODLAND,
     GRASSLAND,
-    LAKESHORE;
+    LAKESHORE,
+    UNKNOWN
 }

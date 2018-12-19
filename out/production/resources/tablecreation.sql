@@ -11,7 +11,7 @@ create table Sighting (
     xcoord float not null,
     ycoord float not null,
     weather enum ('CLOUDY', 'PARTLY CLOUDY', 'SUNNY', 'RAINY'),
-    habitat_type enum ('ACACIA MIX', 'ACACIA WOODLAND', 'GRASSLAND', 'LAKESHORE'),
+    habitat_type enum ('ACACIA_MIX', 'ACACIA_WOODLAND', 'GRASSLAND', 'LAKESHORE'),
     primary key (sighting_id)
 );
 
@@ -52,7 +52,7 @@ create table temp (
     ycoord float,
     time time,
     weather enum ('CLOUDY', 'PARTLY CLOUDY', 'SUNNY', 'RAINY'),
-    habitat_type enum ('ACACIA MIX', 'ACACIA WOODLAND', 'GRASSLAND', 'LAKESHORE'),
+    habitat_type enum ('ACACIA_MIX', 'ACACIA_WOODLAND', 'GRASSLAND', 'LAKESHORE'),
     activity enum ('FEEDING', 'WALKING', 'STANDING', 'RESTING', 'FIGHTING', 'SCRATCHING', 'SOCIALIZING'),
     total_group int,
     male_a int,
@@ -67,7 +67,6 @@ create table temp (
 load data local infile 'C:/Users/Ilse/soysambu-conservancy-gis/data/Giraffe Survey Database October 2018.txt'
 into table temp
 fields terminated by '\t'
-enclosed by '"'
 lines terminated by '\n'
 ignore 2 lines
 (date, xcoord, ycoord, time, weather, habitat_type, activity, total_group,

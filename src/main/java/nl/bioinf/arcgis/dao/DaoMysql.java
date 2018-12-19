@@ -147,12 +147,11 @@ public class DaoMysql implements ArcGISDao {
         while (rs.next()) {
             int group_id = Integer.parseInt(rs.getString("group_id"));
             int count = Integer.parseInt(rs.getString("count"));
-            try {
+            if(rs.getString("activity") != null && !rs.getString("activity").isEmpty()) {
                 activity = Activity.valueOf(rs.getString("activity"));
-            } catch (IllegalArgumentException e) {
-                System.out.println("Illegal enum..." + rs.getString("activity"));
+            } else {
+                activity = Activity.UNKNOWN;
             }
-            System.out.println(Activity.valueOf(rs.getString("activity")));
             int male_adult = Integer.parseInt(rs.getString("male_a_count"));
             int male_subadult = Integer.parseInt(rs.getString("male_sa_count"));
             int female_adult = Integer.parseInt(rs.getString("female_a_count"));
@@ -170,16 +169,30 @@ public class DaoMysql implements ArcGISDao {
     public List<Sighting> fetchSightings() throws SQLException {
         PreparedStatement ps = this.preparedStatements.get(GET_SIGHTINGS);
         ResultSet rs = ps.executeQuery();
+        Weather weather;
+        HabitatType habitatType;
         while (rs.next()) {
             int id = Integer.parseInt(rs.getString("sighting_id"));
             Date date = Date.valueOf(rs.getString("date"));
             String time = rs.getString("time");
             float xcoord = Float.valueOf(rs.getString("xcoord"));
             float ycoord = Float.valueOf(rs.getString("ycoord"));
-            Weather weather = Weather.valueOf(rs.getString("weather"));
-            HabitatType habitatType = HabitatType.valueOf(rs.getString("habitat_type"));
+
+            //TO DO: add check if it's an enum || null || empty, else throw exception
+            if(rs.getString("weather") != null && !rs.getString("weather").isEmpty()) {
+                weather = Weather.valueOf(rs.getString("weather"));
+            } else {
+                weather = Weather.UNKNOWN;
+            }
+
+            if(rs.getString("habitat_type") != null && !rs.getString("habitat_type").isEmpty()) {
+                habitatType = HabitatType.valueOf(rs.getString("habitat_type"));
+            } else {
+                habitatType = HabitatType.UNKNOWN;
+            }
 
             Sighting sighting = new Sighting(id, date, time, xcoord, ycoord, weather, habitatType);
+            System.out.println(sighting.toString());
             sightingList.add(sighting);
         }
         return sightingList;

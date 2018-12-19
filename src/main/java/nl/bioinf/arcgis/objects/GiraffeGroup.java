@@ -52,6 +52,6 @@ public class GiraffeGroup {
                 "female_adult= " + female_adult + ", " +
                 "female_subadult= " + female_subadult + ", " +
                 "juvenile= " + juvenile + ", " +
-                "unidentified= " + unidentified + ", }";
+                "unidentified= " + unidentified + "}";
     }
 }

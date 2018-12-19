@@ -40,13 +40,13 @@ public class Sighting {
     @Override
     public String toString() {
         return "Sighting {" +
-                "id= " + id + "\'" +
-                "date= " + date + "\'" +
-                "time= " + time + "\'" +
-                "xcoord= " + xcoord + "\'" +
-                "ycoord= " + ycoord + "\'" +
-                "weather= " + weather + "\'" +
-                "habitat type= " + habitatType;
+                "id= " + id + ", " +
+                "date= " + date + ", " +
+                "time= " + time + ", " +
+                "xcoord= " + xcoord + ", " +
+                "ycoord= " + ycoord + ", " +
+                "weather= " + weather + ", " +
+                "habitat type= " + habitatType + "}";
     }
 
 }
