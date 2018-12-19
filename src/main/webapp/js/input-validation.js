@@ -4,9 +4,8 @@ $(document).ready(function () {
         var date = new Date($.now());
         var time = addZero(date.getHours()) + ":" + addZero(date.getMinutes());
 
-        $('#time').val(time);
-        // Check validation with JQuery validator after time is converted.
-        $('#time').valid();
+        // Set new time value; Check validation with JQuery validator after time is converted.
+        $('#time').val(time).valid();
     }
 
     /* Function to add a zero when hours/minutes are in single digits when acquired through JS. */
@@ -81,7 +80,9 @@ $(document).ready(function () {
 
         // Update total giraffe count.
         updateOrganismTotal();
-    };
+        // Let updated count be validated by JQuery Validator
+        $('#form-addrecord').valid();
+    }
 
     /* Function to update total number of giraffes, by summing all giraffe count fields. */
     function updateOrganismTotal() {
@@ -89,8 +90,7 @@ $(document).ready(function () {
         $(".giraffe-count").each(function(){
             sum += +$(this).val();
         });
-        $('#count-total').empty();
-        $('#count-total').append(sum);
+        $('#count-total').empty().append(sum);
     }
 
     /* Function to convert (yyyy-m-d date formatting to yyyy-mm-dd) (yyyy/mm/dd formatting to yyyy-mm-dd) */
@@ -107,7 +107,7 @@ $(document).ready(function () {
             if (month.length < 2 && month != 0) month = '0' + month;
             if (day.length < 2 && day != 0) day = '0' + day;
 
-            d = year + '-' + month +  '-' + day
+            d = year + '-' + month +  '-' + day;
             $(this).val(d);
         }
 
@@ -117,7 +117,7 @@ $(document).ready(function () {
 
     /* Function that converts HHmm time formatting to HH:mm */
     function convertTime () {
-        var time = $(this).val()
+        var time = $(this).val();
 
         if (time.length == 4 && !isNaN(time)) {
             var hours = time.slice(0,2);
@@ -135,10 +135,6 @@ $(document).ready(function () {
     $('#date').change(convertDate);
     // Convert manual time input, Hhmm will be converted to HH:mm.
     $('#time').focusout(convertTime);
-    // Validate giraffe counters when -+ buttons are pressed.
-    $('.giraffe-count').change(function () {
-        $('#form-addrecord').valid();
-    });
 
     /* JQuery Validator Plugin */
     /* Sighting form validation */

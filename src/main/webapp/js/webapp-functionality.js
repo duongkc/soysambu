@@ -5,7 +5,7 @@ $(document).ready( function() {
         $('[data-toggle="tooltip"]').tooltip();
     }
 
-    /*M ake navbar adjust carousel header on navigation. */
+    /* --- Make navbar adjust carousel header on navigation. --- */
     $('#carousel-header').on('slide.bs.carousel', function(e) {
         // Get indexes of current and clicked nav items.
         var from = $('.nav-item.active').index();

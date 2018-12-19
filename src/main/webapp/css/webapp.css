@@ -29,6 +29,9 @@ body {
 }
 /* GIS */
 .carousel-item:nth-child(1) {
+    background: url(../assets/img/gis_header.jpg);
+    background-position:50% 60%;
+    background-size:cover;
 }
 /* Add Record */
 .carousel-item:nth-child(2) {
@@ -70,13 +73,13 @@ body {
 }
 /* Header navigation bar */
 .navbar-nav .nav-item:nth-child(1):after {
-    background: #f8a5c2;
+    background: #ffb8b8;
 }
 .navbar-nav .nav-item:nth-child(2):after {
     background: #f7d794;
 }
 .navbar-nav .nav-item:nth-child(3):after {
-    background: #778beb;
+    background: #778ca3;
 }
 /* Tab navigation bars */
 .nav-tabs .nav-item:after {
@@ -140,6 +143,7 @@ form {
 
 /* --- Footer --- */
 footer {
+    display:none;
     margin-top: auto;
     padding-top: 15px;
     background: #2d3436;
