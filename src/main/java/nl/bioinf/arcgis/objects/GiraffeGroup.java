@@ -44,14 +44,14 @@ public class GiraffeGroup {
     @Override
     public String toString() {
         return "Giraffe Group {" +
-                "id= " + id + "\'" +
-                "count= " + count + "\'" +
-                "activitity= " +  activity + "\'" +
-                "male_adult= " + male_adult + "\'" +
-                "male_subadult= " + male_subadult + "\'" +
-                "female_adult= " + female_adult + "\'" +
-                "female_subadult= " + female_subadult + "\'" +
-                "juvenile= " + juvenile + "\'" +
-                "unidentified= " + unidentified + "\'";
+                "id= " + id + ", " +
+                "count= " + count + ", " +
+                "activitity= " +  activity + ", " +
+                "male_adult= " + male_adult + ", " +
+                "male_subadult= " + male_subadult + ", " +
+                "female_adult= " + female_adult + ", " +
+                "female_subadult= " + female_subadult + ", " +
+                "juvenile= " + juvenile + ", " +
+                "unidentified= " + unidentified + ", }";
     }
 }

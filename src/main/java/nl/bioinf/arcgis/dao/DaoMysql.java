@@ -1,5 +1,9 @@
 package nl.bioinf.arcgis.dao;
 
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import nl.bioinf.arcgis.objects.*;
 
 import java.sql.*;
@@ -7,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public class DaoMysql implements ArcGISDao {
     public static final String GET_GIRAFFE_GROUPS = "get_giraffe_groups";
@@ -18,21 +23,100 @@ public class DaoMysql implements ArcGISDao {
     private List<GiraffeGroup> giraffeGroupList = new ArrayList<>();
     private List<Sighting> sightingList = new ArrayList<>();
 
+    static int lport;
+    static String rhost;
+    static int rport;
+
+    /*singleton pattern*/
+    private static DaoMysql uniqueInstance;
+
+    /**
+     * singleton pattern
+     */
+    private DaoMysql() {}
+
+    /**
+     * singleton pattern
+     */
+    public static DaoMysql getInstance() {
+        //lazy
+        if (uniqueInstance == null) {
+            uniqueInstance = new DaoMysql();
+        }
+        return uniqueInstance;
+    }
+
     @Override
     public void connect() throws DatabaseException {
+//        String user = "idvansanten";
+//        String host = "bioinf.nl";
+//        String pass = "7hOu2Eq~";
+//        String dbUser = "idvansanten";
+//        String dbPass = "OzrEhjrL";
+//        String dbUrl = "jdbc:mysql://mordor.bin:3306/Idvansanten";
+//        int port = 4222;
+//        lport = 4222;
+//        rport = 3306;
+//        Session session = null;
         try {
+//            JSch jsch = new JSch();
+//            session = jsch.getSession(user, host, port);
+//            rhost = "mysql.bin";
+//            session.setPassword(pass);
+//            session.setConfig("StrictHostKeyChecking", "no");
+//            session.connect();
+//            session.setPortForwardingL(lport, host, 4222);
+//            System.out.println("Establishing connection...");
+
             Class.forName("com.mysql.jdbc.Driver");
-            String dbUrl = "jdbc:mysql://mysql.bin/Idvansanten";
-            connection = DriverManager.getConnection(dbUrl,"idvansanten","OzrEhjrL");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/arcgis", "root", "");
+
             System.out.println("Connecting...");
-        } catch (ClassNotFoundException | SQLException e) {
+
+            /*System.out.println("1");
+            MysqlDataSource dataSource = new MysqlDataSource();
+            System.out.println("2");
+            dataSource.setServerName("mysql.bin");
+            System.out.println("3");
+            dataSource.setPortNumber(3306);
+            System.out.println("4");
+            dataSource.setUser("idvansanten");
+            System.out.println("5");
+            dataSource.setPassword("OzrEhjrL");
+            System.out.println("6");
+            dataSource.setAllowMultiQueries(true);
+            System.out.println("7");
+            dataSource.setDatabaseName("Idvansanten");
+            System.out.println("8");
+            System.out.println(dataSource.getUrl());
+            System.out.println("8.5");
+            Connection c = dataSource.getConnection();*/
+
+            //System.out.println(c);
+
+            prepareStatements();
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             throw new DatabaseException("Something is wrong with the database, see cause Exception",
                     e.getCause());
         }
+//        } finally {
+//            try {
+//                if(connection != null && !connection.isClosed()){
+//                    System.out.println("Closing Database Connection");
+//                    connection.close();
+//                }
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+////            if (session != null && session.isConnected()) {
+////                System.out.println("Closing SSH Connection");
+////                session.disconnect();
+////            }
+//        }
     }
 
-    public void PrepareStatements() throws SQLException {
+    public void prepareStatements() throws SQLException {
         String fetchGiraffeGroups = "SELECT * from Giraffe_Group";
         PreparedStatement ps_giraffe_groups = connection.prepareStatement(fetchGiraffeGroups);
         this.preparedStatements.put(GET_GIRAFFE_GROUPS, ps_giraffe_groups);
@@ -42,22 +126,42 @@ public class DaoMysql implements ArcGISDao {
         this.preparedStatements.put(GET_SIGHTINGS, ps_sightings);
 
     }
+    public Activity activityCheck(ResultSet rs) throws SQLException {
+        Activity activity = null;
+        for (Activity a : Activity.values()) {
+            if (a.name().equals(rs.getString("activity"))) {
+                System.out.println("Activity found");
+                activity = Activity.valueOf(rs.getString("activity"));
+            } else {
+                System.out.println("Activity not found");
+                activity = Activity.UNKNOWN;
+            }
+        }
+        return activity;
+    }
 
     public List<GiraffeGroup> fetchGiraffeGroups() throws SQLException {
         PreparedStatement ps = this.preparedStatements.get(GET_GIRAFFE_GROUPS);
         ResultSet rs = ps.executeQuery();
+        Activity activity = null;
         while (rs.next()) {
             int group_id = Integer.parseInt(rs.getString("group_id"));
             int count = Integer.parseInt(rs.getString("count"));
-            Activity activity = Activity.valueOf(rs.getString("activity"));
+            try {
+                activity = Activity.valueOf(rs.getString("activity"));
+            } catch (IllegalArgumentException e) {
+                System.out.println("Illegal enum..." + rs.getString("activity"));
+            }
+            System.out.println(Activity.valueOf(rs.getString("activity")));
             int male_adult = Integer.parseInt(rs.getString("male_a_count"));
             int male_subadult = Integer.parseInt(rs.getString("male_sa_count"));
             int female_adult = Integer.parseInt(rs.getString("female_a_count"));
             int female_subadult = Integer.parseInt(rs.getString("female_sa_count"));
             int juvenile = Integer.parseInt(rs.getString("juvenile_count"));
-            int unidentified = Integer.parseInt(rs.getString("unidentified"));
+            int unidentified = Integer.parseInt(rs.getString("unidentified_count"));
 
             GiraffeGroup giraffeGroup = new GiraffeGroup(group_id, count, activity, male_adult, male_subadult, female_adult, female_subadult, juvenile, unidentified);
+            System.out.println(giraffeGroup.toString());
             giraffeGroupList.add(giraffeGroup);
         }
         return giraffeGroupList;

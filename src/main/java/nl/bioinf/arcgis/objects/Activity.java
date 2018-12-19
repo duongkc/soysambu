@@ -7,5 +7,6 @@ public enum Activity {
     RESTING,
     FIGHTING,
     SCRATCHING,
-    SOCIALIZING;
+    SOCIALIZING,
+    UNKNOWN
 }
