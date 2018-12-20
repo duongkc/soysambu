@@ -1,24 +1,18 @@
 $(document).ready( function() {
     /* Header responsiveness to screen size */
     // Initial header set depending on screen size.
-    window.innerWidth < 750 ? $("#carousel-header").hide() : $("#mobile-header").hide();
+    if (window.innerWidth < 750) { $("#carousel-header").hide(); }
 
     // Remove bootstrap's hidden styling on the headers.
     // From here on this is handled by JS through the checkWidth function.
     $('#gis-header').removeClass('d-none d-sm-block');
-    $('#mobile-header').removeClass('d-block d-sm-none');
 
     // Shows the appropriate header for screen size.
     function checkWidth() {
         if (window.innerWidth < 750 && $('#gis-header').hasClass('active')) {
-            $("#carousel-header").slideUp(function () {
-                    $("#mobile-header").slideDown()
-                }
-            );
+            $("#carousel-header").slideUp()
         } else {
-            $("#mobile-header").slideUp(function() {
-                $("#carousel-header").slideDown()
-            });
+            $("#carousel-header").slideDown()
         }
     }
 
@@ -28,10 +22,8 @@ $(document).ready( function() {
 
     // Function to fade in content div and footer and enable tooltips.
     function showContent() {
-        $("#mobile-header").slideUp(function() {
-            $('#carousel-header').slideDown(function() {
-                $('#content, #footer').fadeIn(175, queu = false);
-            })
+        $('#carousel-header').slideDown(function() {
+            $('#content, #footer').fadeIn(175, queu = false);
         });
         $('[data-toggle="tooltip"]').tooltip();
     }
@@ -50,11 +42,12 @@ $(document).ready( function() {
     $('#nav-gis').click(function() {
         // If already on the GIS page, don't continue.
         if($('#nav-gis').hasClass('active')) return false;
+
         // Fadeout current content page.
         $('#content, #footer').fadeOut(175, function () {
             // Slide up carousel header when on small screen.
+            if (window.innerWidth < 750) { $("#carousel-header").slideUp() }
             $('#map').fadeIn(175);
-            checkWidth()
         });
     });
 

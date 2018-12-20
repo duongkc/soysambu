@@ -2,9 +2,10 @@ $(document).ready(function () {
     require([
         "esri/Map",
         "esri/views/MapView"
-    ], function (Map, MapView) {
+    ], function (Map, MapView, UI) {
         var map = new Map({
-            basemap: "topo"
+            basemap: "topo",
+            sliderOrientation: "top-right"
         });
 
         var view = new MapView({
@@ -18,5 +19,7 @@ $(document).ready(function () {
                 snapToZoom: true
             }
         });
+
+        view.ui.move("zoom", "top-right");
     });
 });
