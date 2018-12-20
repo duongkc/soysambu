@@ -166,8 +166,7 @@ $(document).ready(function () {
             // add input element's value to sum of all elements of its type.
             $('input[data-type="' + elementDataType + '"').each( function () {
                     sum += $(this).val();
-                }
-            );
+            });
 
             return (sum > 0);
         }

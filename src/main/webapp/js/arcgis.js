@@ -4,7 +4,7 @@ $(document).ready(function () {
         "esri/views/MapView"
     ], function (Map, MapView) {
         var map = new Map({
-            basemap: "dark-gray"
+            basemap: "topo"
         });
 
         var view = new MapView({

@@ -1,7 +1,30 @@
 $(document).ready( function() {
+    /* Make carousel header responsive to screen size */
+    // Initial slide up of carousel header by default when on a small screen.
+    if (window.innerWidth < 750) {
+        $("#carousel-header").slideUp();
+    }
+    // Remove bootstrap's hidden on small screen styling on the GIS-header.
+    // From here on this is handled by JS through the checkwidth function.
+    $('#gis-header').removeClass('d-none d-sm-block');
+
+    // Makes the GIS carousel header slide up when on a small screen and on the GIS page.
+    function checkWidth() {
+        if (window.innerWidth < 750 && $('#gis-header').hasClass('active')) {
+            $("#carousel-header").slideUp();
+        } else {
+            $("#carousel-header").slideDown();
+        }
+    }
+    // Throttle the amount of times checkWidth is called when resize is thrown.
+    var throttled = _.throttle(checkWidth, 100);
+    $(window).resize(throttled);
+
     // Function to fade in content div and footer and enable tooltips.
     function showContent() {
-        $('#content, #footer').fadeIn(175);
+        $('#carousel-header').slideDown(function() {
+            $('#content, #footer').fadeIn(175);
+        })
         $('[data-toggle="tooltip"]').tooltip();
     }
 
@@ -20,7 +43,9 @@ $(document).ready( function() {
         // If already on the GIS page, don't continue.
         if($('#nav-gis').hasClass('active')) return false;
         // Fadeout current content page.
-        $('#content, #footer').fadeOut(175).promise().done(function () {
+        $('#content, #footer').fadeOut(175, function () {
+            // Slide up carousel header when on small screen.
+            if (window.innerWidth < 750) { $('#carousel-header').slideUp() }
             $('#map').fadeIn(175)
         });
     });

@@ -19,6 +19,8 @@ body {
     padding: 0px;
 }
 
+/* --- Map --- */
+
 /* --- Header carousel ---*/
 .carousel-item {
     height: 140px;
@@ -29,8 +31,8 @@ body {
 }
 /* GIS */
 .carousel-item:nth-child(1) {
-    background: url(../assets/img/gis_header.jpg);
-    background-position:50% 60%;
+    background: url(../assets/img/gis_header.png);
+    background-position:50% 70%;
     background-size:cover;
 }
 /* Add Record */
@@ -52,6 +54,7 @@ body {
     border: none;
     padding: 0px;
     background: #2d3436;
+
 
 }
 .nav-item a{
