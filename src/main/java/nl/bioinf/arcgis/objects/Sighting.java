@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Sighting {
     private int id;
+    private int group_id;
     private Date date;
     private String time;
     private float xcoord;
@@ -12,6 +13,7 @@ public class Sighting {
     private HabitatType habitatType;
 
     public int getId() { return id; }
+    public int getGroup_id() { return group_id; }
     public Date getDate() { return date; }
     public String getTime() { return time; }
     public float getXcoord() { return xcoord; }
@@ -27,8 +29,9 @@ public class Sighting {
         this.ycoord = ycoord;
     }
 
-    public Sighting(int id, Date date, String time, float xcoord, float ycoord, Weather weather, HabitatType habitatType) {
+    public Sighting(int id, int group_id, Date date, String time, float xcoord, float ycoord, Weather weather, HabitatType habitatType) {
         this.id = id;
+        this.group_id = group_id;
         this.date = date;
         this.time = time;
         this.xcoord = xcoord;
@@ -41,6 +44,7 @@ public class Sighting {
     public String toString() {
         return "Sighting {" +
                 "id= " + id + ", " +
+                "group_id= " + group_id + ", " +
                 "date= " + date + ", " +
                 "time= " + time + ", " +
                 "xcoord= " + xcoord + ", " +

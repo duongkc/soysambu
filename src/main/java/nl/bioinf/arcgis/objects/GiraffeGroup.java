@@ -24,9 +24,9 @@ public class GiraffeGroup {
 
     public GiraffeGroup() {}
 
-    public GiraffeGroup(int id, int count) {
+    public GiraffeGroup(int id, Activity activity) {
         this.id = id;
-        this.count = count;
+        this.activity = activity;
     }
 
     public GiraffeGroup(int id, int count, Activity activity, int male_adult, int male_subadult, int female_adult, int female_subadult, int juvenile, int unidentified) {
@@ -53,5 +53,11 @@ public class GiraffeGroup {
                 "female_subadult= " + female_subadult + ", " +
                 "juvenile= " + juvenile + ", " +
                 "unidentified= " + unidentified + "}";
+    }
+
+    public String toStringActivity() {
+        return "Giraffe Group {" +
+                "id= " + id + ", " +
+                "activitity= " +  activity + "}";
     }
 }
