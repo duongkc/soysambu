@@ -18,7 +18,10 @@ body {
 .container-fluid {
     padding: 0px;
 }
-
+/* Limit the navbar overlapping elements */
+.sticky-top {
+    z-index: 5;
+}
 /* --- Map --- */
 
 /* --- Header carousel ---*/
@@ -54,8 +57,6 @@ body {
     border: none;
     padding: 0px;
     background: #2d3436;
-
-
 }
 .nav-item a{
     text-align: center;
@@ -101,6 +102,10 @@ form {
 .label-tip {
     font-size: 12px;
     color: #808080;
+}
+/* Make datepicker module overlap navbar */
+.datepicker {
+    z-index: 10 !important;
 }
 /* Add Record Form */
 /* Change input field focus color to match color scheme */

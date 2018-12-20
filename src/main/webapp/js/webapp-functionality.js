@@ -1,30 +1,38 @@
 $(document).ready( function() {
-    /* Make carousel header responsive to screen size */
-    // Initial slide up of carousel header by default when on a small screen.
-    if (window.innerWidth < 750) {
-        $("#carousel-header").slideUp();
-    }
-    // Remove bootstrap's hidden on small screen styling on the GIS-header.
-    // From here on this is handled by JS through the checkwidth function.
-    $('#gis-header').removeClass('d-none d-sm-block');
+    /* Header responsiveness to screen size */
+    // Initial header set depending on screen size.
+    window.innerWidth < 750 ? $("#carousel-header").hide() : $("#mobile-header").hide();
 
-    // Makes the GIS carousel header slide up when on a small screen and on the GIS page.
+    // Remove bootstrap's hidden styling on the headers.
+    // From here on this is handled by JS through the checkWidth function.
+    $('#gis-header').removeClass('d-none d-sm-block');
+    $('#mobile-header').removeClass('d-block d-sm-none');
+
+    // Shows the appropriate header for screen size.
     function checkWidth() {
         if (window.innerWidth < 750 && $('#gis-header').hasClass('active')) {
-            $("#carousel-header").slideUp();
+            $("#carousel-header").slideUp(function () {
+                    $("#mobile-header").slideDown()
+                }
+            );
         } else {
-            $("#carousel-header").slideDown();
+            $("#mobile-header").slideUp(function() {
+                $("#carousel-header").slideDown()
+            });
         }
     }
+
     // Throttle the amount of times checkWidth is called when resize is thrown.
-    var throttled = _.throttle(checkWidth, 100);
+    var throttled = _.throttle(checkWidth, 100, {leading: false});
     $(window).resize(throttled);
 
     // Function to fade in content div and footer and enable tooltips.
     function showContent() {
-        $('#carousel-header').slideDown(function() {
-            $('#content, #footer').fadeIn(175);
-        })
+        $("#mobile-header").slideUp(function() {
+            $('#carousel-header').slideDown(function() {
+                $('#content, #footer').fadeIn(175, queu = false);
+            })
+        });
         $('[data-toggle="tooltip"]').tooltip();
     }
 
@@ -45,8 +53,8 @@ $(document).ready( function() {
         // Fadeout current content page.
         $('#content, #footer').fadeOut(175, function () {
             // Slide up carousel header when on small screen.
-            if (window.innerWidth < 750) { $('#carousel-header').slideUp() }
-            $('#map').fadeIn(175)
+            $('#map').fadeIn(175);
+            checkWidth()
         });
     });
 

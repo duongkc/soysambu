@@ -144,7 +144,7 @@ $(document).ready(function () {
     $.validator.addMethod('dateFormat',
         function(value) {
             // yyyy-mm-dd or yyyy-m-d
-            const re = /^\d{4}[-\/]\d{1,2}[-\/]\d{1,2}$/;
+            var re = /^\d{4}[-\/]\d{1,2}[-\/]\d{1,2}$/;
             return re.test(value);
         },'Please enter a valid date in year-month-day format, e.g. 2018-06-17'
     );
@@ -152,7 +152,7 @@ $(document).ready(function () {
     $.validator.addMethod('timeFormat',
         function(value) {
             // hh:mm or hhmm
-            const re = /^([01]\d|2[0-3]):?([0-5]\d)$/;
+            var re = /^([01]\d|2[0-3]):?([0-5]\d)$/;
             return re.test(value);
         },'Time must be given in military time (24h), e.g. 15:20'
     );
@@ -248,8 +248,9 @@ $(document).ready(function () {
     $('#datepicker').datepicker('setDate', 'now');
     // Hide tooltip when calendar is opened.
     $('#calendar').click( function () {
-        $(this).tooltip('hide')
+        $(this).tooltip('hide');
     });
+
     /* Time input */
     // Set current time as default value for time field.
     setTime();
