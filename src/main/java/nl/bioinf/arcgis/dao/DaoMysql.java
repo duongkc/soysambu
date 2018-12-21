@@ -55,7 +55,6 @@ public class DaoMysql implements ArcGISDao {
     private DaoMysql() {}
 
     public static DaoMysql getInstance() {
-        System.out.println("TEST");
         if (uniqueInstance == null) {
             uniqueInstance = new DaoMysql();
         }
@@ -90,7 +89,7 @@ public class DaoMysql implements ArcGISDao {
             * */
             System.out.println("Connecting to db");
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://mysql.bin:3306/Idvansanten", "idvansanten", "OzrEhjrL");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/arcgis", "root", "");
             System.out.println("Connecting...");
             prepareStatements();
         } catch (SQLException | ClassNotFoundException e) {
@@ -206,13 +205,11 @@ public class DaoMysql implements ArcGISDao {
      * @throws SQLException
      */
     public List<Sighting> fetchSightings() throws SQLException {
-        System.out.println("1");
         PreparedStatement ps = this.preparedStatements.get(GET_SIGHTINGS);
         ResultSet rs = ps.executeQuery();
         Weather weather = null;
         HabitatType habitatType = null;
         while (rs.next()) {
-            System.out.println("2");
             int id = Integer.parseInt(rs.getString("sighting_id"));
             int group_id = Integer.parseInt(rs.getString("group_id"));
             Date date = Date.valueOf(rs.getString("date"));
@@ -221,7 +218,6 @@ public class DaoMysql implements ArcGISDao {
             float ycoord = Float.valueOf(rs.getString("ycoord"));
 
             try {
-                System.out.println("1.1");
                 if (rs.getString("weather") != null && !rs.getString("weather").isEmpty()) {
                     weather = Weather.valueOf(rs.getString("weather"));
                 } else {
@@ -232,7 +228,6 @@ public class DaoMysql implements ArcGISDao {
             }
 
             try {
-                System.out.println("1.2");
                 if (rs.getString("habitat_type") != null && !rs.getString("habitat_type").isEmpty()) {
                     habitatType = HabitatType.valueOf(rs.getString("habitat_type"));
                 } else {
@@ -242,13 +237,10 @@ public class DaoMysql implements ArcGISDao {
                 System.out.println("Illegal input");
             }
 
-            System.out.println("3.5");
             Sighting sighting = new Sighting(id, group_id, date, time, xcoord, ycoord, weather, habitatType);
 //            System.out.println(sighting.toString());
-            System.out.println("4");
             sightingList.add(sighting);
         }
-        System.out.println("3");
         return sightingList;
     }
 

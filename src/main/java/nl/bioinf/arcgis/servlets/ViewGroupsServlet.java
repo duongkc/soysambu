@@ -3,6 +3,7 @@ package nl.bioinf.arcgis.servlets;
 import com.google.gson.Gson;
 import nl.bioinf.arcgis.dao.DaoMysql;
 import nl.bioinf.arcgis.dao.DatabaseException;
+import nl.bioinf.arcgis.objects.GiraffeGroup;
 import nl.bioinf.arcgis.objects.Sighting;
 
 import javax.servlet.RequestDispatcher;
@@ -19,8 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "ViewSightingsServlet.java", urlPatterns = "/sightings")
-public class ViewSightingsServlet extends HttpServlet {
+@WebServlet(name = "ViewGroupsServlet.java", urlPatterns = "/groups")
+public class ViewGroupsServlet extends HttpServlet {
     private DaoMysql dao;
 
     @Override
@@ -43,20 +44,21 @@ public class ViewSightingsServlet extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Sighting> sightings = new ArrayList<>();
+        List<GiraffeGroup> giraffe_groups = new ArrayList<>();
         String json;
 
         try {
-            sightings = dao.fetchSightings();
+            giraffe_groups = dao.fetchGiraffeGroups();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        System.out.println(sightings);
-        json = new Gson().toJson(sightings);
+        System.out.println(giraffe_groups);
+        json = new Gson().toJson(giraffe_groups);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
     }
 }
+
