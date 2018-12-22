@@ -48,7 +48,7 @@ public class ViewGroupsServlet extends HttpServlet {
         String json;
 
         try {
-            giraffe_groups = dao.fetchGiraffeGroups();
+            giraffe_groups = dao.fetchGiraffeGroups(DaoMysql.GET_GIRAFFE_GROUPS);
         } catch (SQLException e) {
             e.printStackTrace();
         }

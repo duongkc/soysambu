@@ -36,7 +36,7 @@ public class Sighting {
         this.time = time;
         this.xcoord = xcoord;
         this.ycoord = ycoord;
-        this. weather = weather;
+        this.weather = weather;
         this.habitatType = habitatType;
     }
 

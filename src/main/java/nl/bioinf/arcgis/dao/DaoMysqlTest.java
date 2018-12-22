@@ -17,8 +17,8 @@ public class DaoMysqlTest {
         this.dao = DaoMysql.getInstance();
         try {
             dao.connect();
-            dao.fetchGiraffeGroups();
-            dao.fetchSightings();
+            dao.fetchGiraffeGroups(DaoMysql.GET_GIRAFFE_GROUPS);
+            dao.fetchSightings(DaoMysql.GET_SIGHTINGS);
         } catch (DatabaseException e) {
             e.printStackTrace();
         } catch (SQLException e) {

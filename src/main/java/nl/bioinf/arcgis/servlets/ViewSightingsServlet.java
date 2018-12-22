@@ -47,12 +47,11 @@ public class ViewSightingsServlet extends HttpServlet {
         String json;
 
         try {
-            sightings = dao.fetchSightings();
+            sightings = dao.fetchSightings(DaoMysql.GET_SIGHTINGS);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        System.out.println(sightings);
         json = new Gson().toJson(sightings);
 
         response.setContentType("application/json");
