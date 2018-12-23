@@ -32,16 +32,6 @@ public class DaoMysql implements ArcGISDao {
     //Creation of dao object
     private static DaoMysql dao;
 
-    private static String testSubmit = "\"count\":31,\"activity\":\"RESTING\",\"male_adult\":1,\"male_subadult\":0," +
-            "\"female_adult\":15,\"female_subadult\":0,\"juvenile\":15,\"unidentified\":0," +
-            "\"date\":\"2018/10/02\",\"time\":\"14:30:00\",\"xcoord\":-0.47558,\"ycoord\":36.1693," +
-            "\"weather\":\"CLOUDY\",\"habitatType\":\"GRASSLAND\"";
-
-    private static String testSubmit2 = "\"count\":43,\"activity\":\"WALKING\",\"male_adult\":1,\"male_subadult\":0," +
-            "\"female_adult\":20,\"female_subadult\":2,\"juvenile\":20,\"unidentified\":0," +
-            "\"date\":\"2018/12/04\",\"time\":\"14:31:00\",\"xcoord\":-0.48558,\"ycoord\":35.1693," +
-            "\"weather\":\"SUNNY\",\"habitatType\":\"ACACIA_MIX\"";
-
     Connection connection;
 
     //List of obtained data objects from queries
@@ -55,9 +45,6 @@ public class DaoMysql implements ArcGISDao {
      * @throws SQLException
      */
     public static void main(String[] args) throws DatabaseException, SQLException {
-        runAddRecords(testSubmit);
-        runAddRecords(testSubmit2);
-        runFunctions();
     }
 
     private static DaoMysql uniqueInstance;
@@ -115,7 +102,7 @@ public class DaoMysql implements ArcGISDao {
      * @throws DatabaseException
      * @throws SQLException
      */
-    public static void runAddRecords(String data) throws DatabaseException, SQLException {
+    public static void runAddRecords(String[] data) throws DatabaseException, SQLException {
         dao = DaoMysql.getInstance();
         dao.connect();
         dao.addRecords(data);
@@ -298,15 +285,13 @@ public class DaoMysql implements ArcGISDao {
 
     /**
      * Adds new records to the database
-     * @param submit the submitted record
+     * @param data the submitted record data
      * @throws SQLException
      */
-    public void addRecords(String submit) throws SQLException {
-        List<String[]> values;
-        values = parseSubmit(submit);
+    public void addRecords(String[] data) throws SQLException {
         //Find fix for continuously appending this list here below, it's not nice.
-        List<GiraffeGroup> newly_added_group = addGiraffeGroup(values.get(1));
-        addSighting(values.get(0), newly_added_group.get(newly_added_group.size()-1).getId());
+        List<GiraffeGroup> newly_added_group = addGiraffeGroup(data);
+        addSighting(data, newly_added_group.get(newly_added_group.size()-1).getId());
     }
 
     /**
@@ -357,21 +342,25 @@ public class DaoMysql implements ArcGISDao {
 
     /**
      * Adds a giraffe group to the database, based on the submitted input
-     * @param giraffeGroup
+     * @param data list containing data
      * @return a list of the newly added giraffe group
      * @throws SQLException
      */
-    public List<GiraffeGroup> addGiraffeGroup(String[] giraffeGroup) throws SQLException {
+    public List<GiraffeGroup> addGiraffeGroup(String[] data) throws SQLException {
         try {
+            //int count = male_a + male_sa + female_a + female_sa + unid;
             PreparedStatement ps = this.preparedStatements.get(ADD_GIRAFFE_GROUP);
-            ps.setInt(1, Integer.parseInt(giraffeGroup[0]));
-            ps.setString(2,giraffeGroup[1]);
-            ps.setInt(3, Integer.parseInt(giraffeGroup[2]));
-            ps.setInt(4, Integer.parseInt(giraffeGroup[3]));
-            ps.setInt(5, Integer.parseInt(giraffeGroup[4]));
-            ps.setInt(6, Integer.parseInt(giraffeGroup[5]));
-            ps.setInt(7, Integer.parseInt(giraffeGroup[6]));
-            ps.setInt(8, Integer.parseInt(giraffeGroup[7]));
+            int total_count = Integer.parseInt(data[7]) + Integer.parseInt(data[8]) + Integer.parseInt(data[9])
+                    + Integer.parseInt(data[10]) + Integer.parseInt(data[11]) + Integer.parseInt(data[12]);
+            ps.setInt(1, Integer.parseInt(String.valueOf(total_count)));
+            System.out.println(data[6]);
+            ps.setString(2,data[6]);
+            ps.setInt(3, Integer.parseInt(data[7]));
+            ps.setInt(4, Integer.parseInt(data[8]));
+            ps.setInt(5, Integer.parseInt(data[9]));
+            ps.setInt(6, Integer.parseInt(data[10]));
+            ps.setInt(7, Integer.parseInt(data[11]));
+            ps.setInt(8, Integer.parseInt(data[12]));
             ps.executeUpdate();
             return fetchGiraffeGroups(GET_NEW_GIRAFFE_GROUP);
         } catch (SQLException e) {
@@ -383,20 +372,20 @@ public class DaoMysql implements ArcGISDao {
     /**
      * Adds a sighting to the database, linked to the giraffe group that has been seen,
      * based on submitted input
-     * @param sighting the sighting
+     * @param data the sighting submission
      * @param giraffeGroupId the id of the group that has been spotted
      * @return a list of the newly added sighting
      */
-    public List<Sighting> addSighting(String[] sighting, Integer giraffeGroupId) {
+    public List<Sighting> addSighting(String[] data, Integer giraffeGroupId) {
         try {
             PreparedStatement ps = this.preparedStatements.get(ADD_SIGHTING);
             ps.setInt(1, giraffeGroupId);
-            ps.setString(2, sighting[0]);
-            ps.setString(3, sighting[1]);
-            ps.setFloat(4, Float.parseFloat(sighting[2]));
-            ps.setFloat(5, Float.parseFloat(sighting[3]));
-            ps.setString(6, sighting[4]);
-            ps.setString(7, sighting[5]);
+            ps.setString(2, data[0]);
+            ps.setString(3, data[1]);
+            ps.setFloat(4, Float.parseFloat(data[2]));
+            ps.setFloat(5, Float.parseFloat(data[3]));
+            ps.setString(6, data[4]);
+            ps.setString(7, data[5]);
             ps.executeUpdate();
             return fetchSightings(GET_NEW_SIGHTING);
         } catch (SQLException e) {

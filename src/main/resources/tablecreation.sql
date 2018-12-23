@@ -55,7 +55,7 @@ create table Sighting (
   time time,
   xcoord float not null,
   ycoord float not null,
-  weather enum ('CLOUDY', 'PARTLY CLOUDY', 'SUNNY', 'RAINY'),
+  weather enum ('CLOUDY', 'PARTLY_CLOUDY', 'SUNNY', 'RAINY'),
   habitat_type enum ('ACACIA_MIX', 'ACACIA_WOODLAND', 'GRASSLAND', 'LAKESHORE'),
   primary key (sighting_id),
   foreign key (group_id) references Giraffe_Group(group_id)
