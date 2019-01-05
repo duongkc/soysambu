@@ -3,6 +3,7 @@ package nl.bioinf.arcgis.servlets;
 import com.google.gson.Gson;
 import nl.bioinf.arcgis.dao.DaoMysql;
 import nl.bioinf.arcgis.dao.DatabaseException;
+import nl.bioinf.arcgis.objects.GiraffeGroup;
 import nl.bioinf.arcgis.objects.Sighting;
 
 import javax.servlet.RequestDispatcher;
@@ -19,8 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "ViewSightingsServlet.java", urlPatterns = "/sightings")
-public class ViewSightingsServlet extends HttpServlet {
+@WebServlet(name = "RecordsServlet.java", urlPatterns = "/records")
+public class RecordsServlet extends HttpServlet {
     private DaoMysql dao;
 
     @Override
@@ -36,27 +37,35 @@ public class ViewSightingsServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("DO NOTHING...");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Sighting> sightings = new ArrayList<>();
-        String json;
+        List<GiraffeGroup> giraffe_groups = new ArrayList<>();
+       // List<Sighting> sightings = new ArrayList<>();
+        String groups_json = null;
+        List<String> groups = new ArrayList<>();
+        System.out.println("doGet()");
 
         try {
-            sightings = dao.fetchSightings(DaoMysql.GET_SIGHTINGS);
+            groups.add(new Gson().toJson(dao.fetchGiraffeGroups(DaoMysql.GET_GIRAFFE_GROUPS)));
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        json = new Gson().toJson(sightings);
-        System.out.println(json);
+        try {
+            System.out.println(dao.fetchGiraffeGroups(DaoMysql.GET_GIRAFFE_GROUPS).size());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(groups.get(groups.size()-1));
+
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+        response.getWriter().write(groups.get(groups.size()-1));
     }
+
 }
+

@@ -38,14 +38,14 @@ public class DaoMysql implements ArcGISDao {
     private List<GiraffeGroup> giraffeGroupList = new ArrayList<>();
     private List<Sighting> sightingList = new ArrayList<>();
 
-    /**
-     * Main running the connection and fetching of data
-     * @param args
-     * @throws DatabaseException
-     * @throws SQLException
-     */
-    public static void main(String[] args) throws DatabaseException, SQLException {
-    }
+//    /**
+//     * Main running the connection and fetching of data
+//     * @param args
+//     * @throws DatabaseException
+//     * @throws SQLException
+//     */
+//    public static void main(String[] args) throws DatabaseException, SQLException {
+//    }
 
     private static DaoMysql uniqueInstance;
 
@@ -167,6 +167,7 @@ public class DaoMysql implements ArcGISDao {
         iterate through the results of the query while putting the obtained data into
         GiraffeGroup objects, which are then put in a list.
         * */
+        giraffeGroupList.clear();
         PreparedStatement ps = this.preparedStatements.get(GET_ACTIVITY);
         ResultSet rs = ps.executeQuery();
         Activity activity = null;
@@ -207,7 +208,10 @@ public class DaoMysql implements ArcGISDao {
         PreparedStatement ps = this.preparedStatements.get(preparedStatementName);
         ResultSet rs = ps.executeQuery();
         Activity activity = null;
+        giraffeGroupList.clear();
+        int test = 0;
         while (rs.next()) {
+            test += 1;
             int group_id = Integer.parseInt(rs.getString("group_id"));
             int count = Integer.parseInt(rs.getString("count"));
             try {
@@ -229,10 +233,11 @@ public class DaoMysql implements ArcGISDao {
 
             GiraffeGroup giraffeGroup = new GiraffeGroup(group_id, count, activity, male_adult, male_subadult,
                     female_adult, female_subadult, juvenile, unidentified);
-            System.out.println(giraffeGroup.toString());
+            //System.out.println(giraffeGroup.toString());
             giraffeGroupList.add(giraffeGroup);
         }
         rs.close();
+        System.out.println(test);
 
         return giraffeGroupList;
     }
@@ -276,7 +281,7 @@ public class DaoMysql implements ArcGISDao {
             }
 
             Sighting sighting = new Sighting(id, group_id, date, time, xcoord, ycoord, weather, habitatType);
-            System.out.println(sighting.toString());
+            //System.out.println(sighting.toString());
             sightingList.add(sighting);
         }
         rs.close();
