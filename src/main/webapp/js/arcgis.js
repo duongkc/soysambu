@@ -50,13 +50,27 @@ $(document).ready(function () {
             $.each(records, function(i, record) {
                 var point = {
                     type: "point",
-                    longitude: 36.155,
-                    latitude: -0.448
+                    longitude: record.ycoord,
+                    latitude: record.xcoord
                 };
 
                 var pointGraphic = new Graphic({
                     geometry: point,
-                    symbol: markerSymbol
+                    symbol: markerSymbol,
+                    attributes: record,
+
+                    popupTemplate: {
+                        title: "Giraffe Sighting: {id}",
+                        content: [{
+                            type: "fields",
+                            fieldInfos: [{
+                                fieldName: "xcoord"
+                            }, {
+                                fieldName: "ycoord"
+                            },  {
+                                fieldName: "count"}]
+                        }]
+                    }
                 });
 
                 view.graphics.add(pointGraphic)
