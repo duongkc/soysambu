@@ -3,12 +3,13 @@ package nl.bioinf.arcgis.dao;
 //import com.jcraft.jsch.JSch;
 //import com.jcraft.jsch.JSchException;
 //import com.jcraft.jsch.Session;
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import nl.bioinf.arcgis.objects.*;
 
 import java.sql.*;
-import java.sql.Date;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Class implementing data acess object for Arc GIS.
@@ -143,7 +144,7 @@ public class DaoMysql implements ArcGISDao {
         PreparedStatement ps_add_giraffe_group = connection.prepareStatement(addGiraffeGroup);
         this.preparedStatements.put(ADD_GIRAFFE_GROUP, ps_add_giraffe_group);
 
-        String fetchNewGiraffeGroup = "SELECT * from giraffe_group where group_id =(SELECT max(group_id) FROM giraffe_group)";
+        String fetchNewGiraffeGroup = "SELECT * from Giraffe_Group where group_id =(SELECT max(group_id) FROM Giraffe_Group)";
         PreparedStatement ps_new_group = connection.prepareStatement(fetchNewGiraffeGroup);
         this.preparedStatements.put(GET_NEW_GIRAFFE_GROUP, ps_new_group);
 
@@ -152,7 +153,7 @@ public class DaoMysql implements ArcGISDao {
         PreparedStatement ps_add_sighting = connection.prepareStatement(addSighting);
         this.preparedStatements.put(ADD_SIGHTING, ps_add_sighting);
 
-        String fetchNewSighting = "SELECT * from sighting where sighting_id = (SELECT max(sighting_id) FROM sighting)";
+        String fetchNewSighting = "SELECT * from Sighting where sighting_id = (SELECT max(sighting_id) FROM Sighting)";
         PreparedStatement ps_new_sighting = connection.prepareStatement(fetchNewSighting);
         this.preparedStatements.put(GET_NEW_SIGHTING, ps_new_sighting);
     }
@@ -248,6 +249,7 @@ public class DaoMysql implements ArcGISDao {
      * @throws SQLException
      */
     public List<Sighting> fetchSightings(String preparedStatementName) throws SQLException {
+        sightingList.clear();
         PreparedStatement ps = this.preparedStatements.get(preparedStatementName);
         ResultSet rs = ps.executeQuery();
         Weather weather = null;

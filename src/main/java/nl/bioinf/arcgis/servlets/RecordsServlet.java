@@ -41,17 +41,14 @@ public class RecordsServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //List<GiraffeGroup> giraffe_groups = new ArrayList<>();
-        //List<Sighting> sightings = new ArrayList<>();
+        List<GiraffeGroup> giraffe_groups = new ArrayList<>();
+       // List<Sighting> sightings = new ArrayList<>();
         String groups_json = null;
         List<String> groups = new ArrayList<>();
-        List<String> sightings = new ArrayList<>();
         System.out.println("doGet()");
 
         try {
             groups.add(new Gson().toJson(dao.fetchGiraffeGroups(DaoMysql.GET_GIRAFFE_GROUPS)));
-            sightings.add(new Gson().toJson(dao.fetchSightings(DaoMysql.GET_SIGHTINGS)));
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -67,7 +64,7 @@ public class RecordsServlet extends HttpServlet {
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(groups.get(sightings.size()-1));
+        response.getWriter().write(groups.get(groups.size()-1));
     }
 
 }
