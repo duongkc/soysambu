@@ -1,5 +1,5 @@
 <div class="row">
-    <form id="form-addrecord">
+    <form id="form-addrecord" method="POST" action="submitservlet">
         <!-- Sighting input -->
         <div class="addrecord-form col-lg-4 top-buffer">
             <!-- Single navigation tab for sighting, mostly for consistent aesthetics -->
@@ -34,11 +34,11 @@
                     <div class="form-row">
                         <div class="col-5 form-group">
                             <label for="x-coord">X-coordinate:</label>
-                            <input id="x-coord" type="text" autocomplete="off" class="form-control">
+                            <input id="x-coord" name="x-coord" type="text" autocomplete="off" class="form-control">
                         </div>
                         <div class="col-5 form-group">
                             <label for="y-coord">Y-coordinate:</label>
-                            <input id="y-coord" type="text" autocomplete="off" class="form-control">
+                            <input id="y-coord" name="y-coord" type="text" autocomplete="off" class="form-control">
                         </div>
                         <div class="col-2 form-group">
                             <button class="btn btn-coords" type="button" disabled
@@ -52,7 +52,7 @@
                     <div class="form-row">
                         <div class=" col-sm-6 form-group">
                             <label for="weather">Weather:</label>
-                            <select id="weather" class="custom-select">
+                            <select id="weather" name="weather" class="custom-select">
                                 <option value="Sunny" selected>Sunny</option>
                                 <option value="Cloudy">Cloudy</option>
                                 <option value="Partly Cloudy">Partly Cloudy</option>
@@ -65,7 +65,7 @@
                                     <i class="fas fa-question-circle"></i>
                                 </span>
                             </label>
-                            <select id="habitat" class="custom-select">
+                            <select id="habitat" name="habitat" class="custom-select">
                                 <option value="Acacia Mix" selected>Acacia Mix</option>
                                 <option value="Acacia Woodland">Acacia Woodland</option>
                                 <option value="Grassland">Grassland</option>
@@ -115,13 +115,14 @@
                                     <i class="fas fa-question-circle"></i>
                                 </span>
                             </label>
-                            <select id="activity" class="custom-select">
+                            <select id="activity" name="activity" class="custom-select">
                                 <option value="Feeding" selected>Feeding</option>
                                 <option value="Walking">Walking</option>
                                 <option value="Standing">Standing</option>
-                                <option value="Lying">Lying</option>
+                                <option value="Resting">Resting</option>
                                 <option value="Fighting">Fighting</option>
                                 <option value="Scratching">Scratching</option>
+                                <option value="Socializing">Socializing</option>
                             </select>
                         </div>
                     </div>
@@ -263,7 +264,7 @@
                             <p class="organism-counter"><i>Total no. organisms in group: </i><i id="count-total">0</i></p>
                         </div>
                         <div class="col-sm-4">
-                            <button id="submit" class="btn btn-addrecord float-right" type="button" disabled>
+                            <button id="submit" class="btn btn-addrecord float-right" type="submit">
                                 <i class="fas fa-angle-right"></i> Submit Record
                             </button>
                         </div>
