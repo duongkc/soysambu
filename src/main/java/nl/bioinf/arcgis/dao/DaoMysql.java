@@ -86,7 +86,7 @@ public class DaoMysql implements ArcGISDao {
             * */
             System.out.println("Connecting to db");
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/arcgis", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://mysql.bin:3306/Idvansanten", "idvansanten", "OzrEhjrL");
             System.out.println("Connecting...");
             prepareStatements();
         } catch (SQLException | ClassNotFoundException e) {
@@ -125,7 +125,7 @@ public class DaoMysql implements ArcGISDao {
         /* Create a query; link query to connection as prepared statement;
         add prepared statement to the hashmap of preparedstatements
         * */
-        String fetchGiraffeGroups = "SELECT * from giraffe_group";
+        String fetchGiraffeGroups = "SELECT * from Giraffe_Group";
         PreparedStatement ps_giraffe_groups = connection.prepareStatement(fetchGiraffeGroups);
         this.preparedStatements.put(GET_GIRAFFE_GROUPS, ps_giraffe_groups);
 

@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    /***
+      Functions
+     ***/
     /* Function to get the current time in HH:mm format. */
     function setTime() {
         var date = new Date($.now());
@@ -128,7 +131,9 @@ $(document).ready(function () {
     }
 
 
-    /* ----- VALIDATION ----- */
+    /***
+      Form validation
+     ***/
     // Validate change in giraffe count field, assists user when invalid values are given.
     $('.giraffe-count').change(validateGiraffeCount);
     // Convert manual date input, yyyy-m-d will be converted to yyyy-mm-dd.
@@ -233,7 +238,9 @@ $(document).ready(function () {
         }
     });
 
-    /* ----- INITIALIZATION ----- */
+    /***
+      Form initialization
+     ***/
     /* Datepicker */
     $('#datepicker').datepicker({
         format: 'yyyy-mm-dd',
