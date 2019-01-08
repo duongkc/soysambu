@@ -1,5 +1,10 @@
 package nl.bioinf.arcgis.objects;
 
+/**
+ * Class implementing giraffe groups. Contains all information on a giraffe group.
+ * Has multiple constructors for several situations.
+ * @author Ilse van Santen
+ */
 public class GiraffeGroup {
 
     private int id;

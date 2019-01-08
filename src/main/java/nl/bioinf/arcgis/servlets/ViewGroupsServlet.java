@@ -20,6 +20,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class of a webservlet creating a page to display all available groups in the database
+ * @author Ilse van Santen
+ */
 @WebServlet(name = "ViewGroupsServlet.java", urlPatterns = "/groups")
 public class ViewGroupsServlet extends HttpServlet {
     private DaoMysql dao;
@@ -43,13 +47,21 @@ public class ViewGroupsServlet extends HttpServlet {
         processRequest(request, response);
     }
 
+    /**
+     * Fetches the giraffe groups, sends it as JSON to webpage
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<GiraffeGroup> giraffe_groups = new ArrayList<>();
         String json;
 
         try {
             giraffe_groups = dao.fetchGiraffeGroups(DaoMysql.GET_GIRAFFE_GROUPS);
-        } catch (SQLException e) {
+            dao.disconnect();
+        } catch (SQLException | DatabaseException e) {
             e.printStackTrace();
         }
 

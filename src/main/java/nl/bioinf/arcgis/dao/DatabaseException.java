@@ -1,5 +1,9 @@
 package nl.bioinf.arcgis.dao;
 
+/**
+ * Database exception class
+ */
+
 public class DatabaseException extends Exception {
     public DatabaseException() {
         super();

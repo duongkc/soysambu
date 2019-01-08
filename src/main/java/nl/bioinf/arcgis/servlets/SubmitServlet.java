@@ -13,6 +13,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Servlet which handles the submitted data. Puts it in a list of strings.
+ * @author Ilse van Santen
+ */
 @WebServlet(name="SubmitServlet.java", urlPatterns = "/submitservlet")
 public class SubmitServlet extends HttpServlet {
 
@@ -53,6 +57,11 @@ public class SubmitServlet extends HttpServlet {
         try {
             dao.addRecords(data);
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            dao.disconnect();
+        } catch (DatabaseException e) {
             e.printStackTrace();
         }
         view = request.getRequestDispatcher("index.html");

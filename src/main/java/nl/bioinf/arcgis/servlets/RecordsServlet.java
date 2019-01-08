@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class of a webservlet returning a list of all available sightings and groups in the database
+ * @author Ilse van Santen
+ */
 @WebServlet(name = "RecordsServlet.java", urlPatterns = "/records")
 public class RecordsServlet extends HttpServlet {
     private DaoMysql dao;
@@ -24,7 +28,6 @@ public class RecordsServlet extends HttpServlet {
         super.init();
         dao = DaoMysql.getInstance();
         try {
-            System.out.println("Database is being initialized...");
             dao.connect();
         } catch (DatabaseException e) {
             e.printStackTrace();
@@ -32,21 +35,35 @@ public class RecordsServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("DO NOTHING...");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        /* Fetches groups and sightings from the database and turns them into JSON objects (Strings)
+        * */
         String groups = null;
         String sightings = null;
-        System.out.println("doGet()");
 
         try {
             groups = new Gson().toJson(dao.fetchGiraffeGroups(DaoMysql.GET_GIRAFFE_GROUPS));
             sightings = new Gson().toJson(dao.fetchSightings(DaoMysql.GET_SIGHTINGS));
-        } catch (SQLException e) {
+            dao.disconnect();
+        } catch (SQLException | DatabaseException e) {
             e.printStackTrace();
         }
+        List<String> records = combineRecords(sightings, groups);
 
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(String.valueOf(records));
+    }
+
+    /**
+     * Combines sighting and group records into one list by parsing the obtained data from the database.
+     * @param sightings
+     * @param groups
+     * @return recordList the list of records
+     */
+    private List<String> combineRecords(String sightings, String groups) {
         List<String> sightingsRecords = Arrays.asList(sightings.split("},\\{"));
         List<String> groupsRecords = Arrays.asList(groups.split("},\\{"));
         List<String> sightingGroupRecords = new ArrayList<>();
@@ -76,9 +93,7 @@ public class RecordsServlet extends HttpServlet {
             recordList.add(sb.toString());
         }
 
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(String.valueOf(recordList));
+        return recordList;
     }
 
 }

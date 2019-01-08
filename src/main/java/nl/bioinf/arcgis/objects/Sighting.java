@@ -2,6 +2,11 @@ package nl.bioinf.arcgis.objects;
 
 import java.util.Date;
 
+/**
+ * Class implementing sightings. Contains all necessary information for a sighting.
+ * Has multiple constructors for various situations.
+ * @author Ilse van Santen
+ */
 public class Sighting {
     private int id;
     private int group_id;

@@ -2,6 +2,7 @@ package nl.bioinf.arcgis.objects;
 
 /**
  * Weather Enum. Contains most common weather states.
+ * @author Ilse van Santen
  */
 public enum Weather {
     CLOUDY,

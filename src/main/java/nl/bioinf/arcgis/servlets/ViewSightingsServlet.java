@@ -19,6 +19,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class of a webservlet creating a page to display all available sightings in the database
+ * @author Ilse van Santen
+ */
 @WebServlet(name = "ViewSightingsServlet.java", urlPatterns = "/sightings")
 public class ViewSightingsServlet extends HttpServlet {
     private DaoMysql dao;
@@ -42,13 +46,21 @@ public class ViewSightingsServlet extends HttpServlet {
         processRequest(request, response);
     }
 
+    /**
+     * Fetches the giraffe sightings, sends it to webpage as JSON
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Sighting> sightings = new ArrayList<>();
         String json;
 
         try {
             sightings = dao.fetchSightings(DaoMysql.GET_SIGHTINGS);
-        } catch (SQLException e) {
+            dao.disconnect();
+        } catch (SQLException | DatabaseException e) {
             e.printStackTrace();
         }
 

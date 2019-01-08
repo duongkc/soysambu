@@ -1,10 +1,6 @@
 package nl.bioinf.arcgis.dao;
 
-//import com.jcraft.jsch.JSch;
-//import com.jcraft.jsch.JSchException;
-//import com.jcraft.jsch.Session;
 import nl.bioinf.arcgis.objects.*;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +11,7 @@ import java.util.Map;
  * Class implementing data acess object for Arc GIS.
  * It handles starting and querying the database, as
  * well as passing on the obtained data.
+ * @author Ilse van Santen
  */
 public class DaoMysql implements ArcGISDao {
     /* PreparedStatement definitions. Every query has its own.
@@ -34,19 +31,10 @@ public class DaoMysql implements ArcGISDao {
     private static DaoMysql dao;
 
     Connection connection;
-
     //List of obtained data objects from queries
     private List<GiraffeGroup> giraffeGroupList = new ArrayList<>();
     private List<Sighting> sightingList = new ArrayList<>();
 
-//    /**
-//     * Main running the connection and fetching of data
-//     * @param args
-//     * @throws DatabaseException
-//     * @throws SQLException
-//     */
-//    public static void main(String[] args) throws DatabaseException, SQLException {
-//    }
 
     private static DaoMysql uniqueInstance;
 
@@ -67,55 +55,18 @@ public class DaoMysql implements ArcGISDao {
      */
     @Override
     public void connect() throws DatabaseException {
-//        String user = "idvansanten";
-//        String host = "bioinf.nl";
-//        String pass = "7hOu2Eq~";
-//        int port = 4222;
-//        Session session = null;
         try {
-            /*SSH CONNECTION CODE
-//            JSch jsch = new JSch();
-//            session = jsch.getSession(user, host, port);
-//            rhost = "mysql.bin";
-//            session.setPassword(pass);
-//            session.setConfig("StrictHostKeyChecking", "no");
-//            session.connect();
-//            session.setPortForwardingL(port, host, 4222);
-//            System.out.println("Establishing connection...");*/
-
             /* Call the driver, create connection, and run prepareStatements()
             * */
-            System.out.println("Connecting to db");
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://mysql.bin:3306/Idvansanten", "idvansanten", "OzrEhjrL");
-            System.out.println("Connecting...");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/arcgis", "root", "");
+            System.out.println("Connecting to database");
             prepareStatements();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             throw new DatabaseException("Something is wrong with the database, see cause Exception",
                     e.getCause());
         }
-    }
-
-    /**
-     * Function to run the basic application (get instance of DAO, connect, preferred functions, disconnect)
-     * @param data input data
-     * @throws DatabaseException
-     * @throws SQLException
-     */
-    public static void runAddRecords(String[] data) throws DatabaseException, SQLException {
-        dao = DaoMysql.getInstance();
-        dao.connect();
-        dao.addRecords(data);
-        dao.disconnect();
-    }
-
-    public static void runFunctions() throws DatabaseException, SQLException {
-        dao = DaoMysql.getInstance();
-        dao.connect();
-        dao.fetchGiraffeGroups(GET_GIRAFFE_GROUPS);
-        dao.fetchSightings(GET_SIGHTINGS);
-        dao.disconnect();
     }
 
     /**
@@ -188,11 +139,9 @@ public class DaoMysql implements ArcGISDao {
             }
 
             GiraffeGroup giraffeGroup = new GiraffeGroup(group_id, activity);
-            System.out.println(giraffeGroup.toStringActivity());
             giraffeGroupList.add(giraffeGroup);
         }
         rs.close();
-
         return giraffeGroupList;
     }
 
@@ -210,12 +159,12 @@ public class DaoMysql implements ArcGISDao {
         ResultSet rs = ps.executeQuery();
         Activity activity = null;
         giraffeGroupList.clear();
-        int test = 0;
         while (rs.next()) {
-            test += 1;
             int group_id = Integer.parseInt(rs.getString("group_id"));
             int count = Integer.parseInt(rs.getString("count"));
             try {
+                /* Converts empty activity cells to 'Unknown' activity
+                * */
                 if (rs.getString("activity") != null && !rs.getString("activity").isEmpty()) {
                     activity = Activity.valueOf(rs.getString("activity"));
                 } else {
@@ -234,12 +183,9 @@ public class DaoMysql implements ArcGISDao {
 
             GiraffeGroup giraffeGroup = new GiraffeGroup(group_id, count, activity, male_adult, male_subadult,
                     female_adult, female_subadult, juvenile, unidentified);
-            //System.out.println(giraffeGroup.toString());
             giraffeGroupList.add(giraffeGroup);
         }
         rs.close();
-        System.out.println(test);
-
         return giraffeGroupList;
     }
 
@@ -262,6 +208,8 @@ public class DaoMysql implements ArcGISDao {
             float xcoord = Float.valueOf(rs.getString("xcoord"));
             float ycoord = Float.valueOf(rs.getString("ycoord"));
 
+            /* Converts empty weather cells to 'Unknown' weather
+            * */
             try {
                 if (rs.getString("weather") != null && !rs.getString("weather").isEmpty()) {
                     weather = Weather.valueOf(rs.getString("weather"));
@@ -271,7 +219,8 @@ public class DaoMysql implements ArcGISDao {
             } catch (IllegalArgumentException e) {
                 System.out.println("Illegal input");
             }
-
+            /* Converts empty habitat cells to 'Unknown' habitat
+             * */
             try {
                 if (rs.getString("habitat_type") != null && !rs.getString("habitat_type").isEmpty()) {
                     habitatType = HabitatType.valueOf(rs.getString("habitat_type"));
@@ -283,7 +232,6 @@ public class DaoMysql implements ArcGISDao {
             }
 
             Sighting sighting = new Sighting(id, group_id, date, time, xcoord, ycoord, weather, habitatType);
-            //System.out.println(sighting.toString());
             sightingList.add(sighting);
         }
         rs.close();
@@ -302,52 +250,6 @@ public class DaoMysql implements ArcGISDao {
     }
 
     /**
-     * Parses the inserted submit string to usable string lists
-     * @param submitString
-     * @return
-     */
-    public List<String[]> parseSubmit(String submitString) {
-        String[] parsed = submitString.split(",");
-        //System.out.println(Arrays.toString(parsed));
-        String[] giraffeGroupValues = new String[8];
-        String[] sightingValues = new String[6];
-        //count
-        giraffeGroupValues[0] = parsed[0].substring(parsed[0].indexOf(":") + 1);
-        //activity
-        giraffeGroupValues[1] = parsed[1].substring(parsed[1].indexOf(":") + 1).replace("\"", "");
-        //male_a count
-        giraffeGroupValues[2] = parsed[2].substring(parsed[2].indexOf(":") + 1);
-        //male_sa count
-        giraffeGroupValues[3] = parsed[3].substring(parsed[3].indexOf(":") + 1);
-        //female_a count
-        giraffeGroupValues[4] = parsed[4].substring(parsed[4].indexOf(":") + 1);
-        //female_sa count
-        giraffeGroupValues[5] = parsed[5].substring(parsed[5].indexOf(":") + 1);
-        //juvenile count
-        giraffeGroupValues[6] = parsed[6].substring(parsed[6].indexOf(":") + 1);
-        //unidentified count
-        giraffeGroupValues[7] = parsed[7].substring(parsed[7].indexOf(":") + 1);
-        //date
-        sightingValues[0] = parsed[8].substring(parsed[8].indexOf(":") + 1).replace("\"", "");
-        //time
-        sightingValues[1] = parsed[9].substring(parsed[9].indexOf(":") + 1).replace("\"", "");
-        //xcoord
-        sightingValues[2] = parsed[10].substring(parsed[10].indexOf(":") + 1);
-        //ycoord
-        sightingValues[3] = parsed[11].substring(parsed[11].indexOf(":") + 1);
-        //weather
-        sightingValues[4] = parsed[12].substring(parsed[12].indexOf(":") + 1).replace("\"", "");
-        //habitat type
-        sightingValues[5] = parsed[13].substring(parsed[13].indexOf(":") + 1).replace("\"", "");
-
-        List<String[]> values = new ArrayList<>();
-        values.add(sightingValues);
-        values.add(giraffeGroupValues);
-
-        return values;
-    }
-
-    /**
      * Adds a giraffe group to the database, based on the submitted input
      * @param data list containing data
      * @return a list of the newly added giraffe group
@@ -355,12 +257,10 @@ public class DaoMysql implements ArcGISDao {
      */
     public List<GiraffeGroup> addGiraffeGroup(String[] data) throws SQLException {
         try {
-            //int count = male_a + male_sa + female_a + female_sa + unid;
             PreparedStatement ps = this.preparedStatements.get(ADD_GIRAFFE_GROUP);
             int total_count = Integer.parseInt(data[7]) + Integer.parseInt(data[8]) + Integer.parseInt(data[9])
                     + Integer.parseInt(data[10]) + Integer.parseInt(data[11]) + Integer.parseInt(data[12]);
             ps.setInt(1, Integer.parseInt(String.valueOf(total_count)));
-            System.out.println(data[6]);
             ps.setString(2,data[6]);
             ps.setInt(3, Integer.parseInt(data[7]));
             ps.setInt(4, Integer.parseInt(data[8]));
@@ -412,7 +312,7 @@ public class DaoMysql implements ArcGISDao {
                 this.preparedStatements.get(key).close();
             }
             connection.close();
-            System.out.println("Connection closing...");
+            System.out.println("Database connection closing...");
         } catch(Exception e) {
             e.printStackTrace();
         }
