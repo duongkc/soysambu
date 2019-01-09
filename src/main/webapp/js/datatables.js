@@ -1,7 +1,6 @@
 $(document).ready(function () {
     $.getJSON('records', function(records) {
-        console.log(records);
-        var view_records = '';
+        var view_records = '<tbody class="table-scroll">';
         $.each(records, function(key, value){
             view_records += '<tr>';
             view_records += '<td>' + value.date + '</td>';
@@ -9,6 +8,7 @@ $(document).ready(function () {
             view_records += '<td>' + value.count + '</td>';
             view_records += '</tr>';
         });
+        view_records += '</tbody>';
         $('#records_table').append(view_records);
     });
 });

@@ -141,6 +141,13 @@ form {
     box-shadow: 0 0 4px 1px rgba(196, 69, 105, 1) !important;
 }
 
+/* Table scroll */
+.table-scroll {
+    display:block;
+    height: calc(100vh - 148px); /*add banner height*/
+    overflow-y:scroll;
+}
+
 /* --- Footer --- */
 footer {
     display:none;
@@ -151,3 +158,5 @@ footer {
     font-size: 12px;
     color: #969a9b;
 }
+
+
