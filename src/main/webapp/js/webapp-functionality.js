@@ -1,7 +1,30 @@
 $(document).ready( function() {
+    /* Header responsiveness to screen size */
+    // Initial header set depending on screen size.
+    if (window.innerWidth < 750) { $("#carousel-header").hide(); }
+
+    // Remove bootstrap's hidden styling on the headers.
+    // From here on this is handled by JS through the checkWidth function.
+    $('#gis-header').removeClass('d-none d-sm-block');
+
+    // Shows the appropriate header for screen size.
+    function checkWidth() {
+        if (window.innerWidth < 750 && $('#gis-header').hasClass('active')) {
+            $("#carousel-header").slideUp()
+        } else {
+            $("#carousel-header").slideDown()
+        }
+    }
+
+    // Throttle the amount of times checkWidth is called when resize is thrown.
+    var throttled = _.throttle(checkWidth, 100, {leading: false});
+    $(window).resize(throttled);
+
     // Function to fade in content div and footer and enable tooltips.
     function showContent() {
-        $('#content, #footer').fadeIn(175);
+        $('#carousel-header').slideDown(function() {
+            $('#content, #footer').fadeIn(175, queu = false);
+        });
         $('[data-toggle="tooltip"]').tooltip();
     }
 
@@ -22,7 +45,9 @@ $(document).ready( function() {
 
         // Fadeout current content page.
         $('#content, #footer').fadeOut(175, function () {
-
+            // Slide up carousel header when on small screen.
+            if (window.innerWidth < 750) { $("#carousel-header").slideUp() }
+            $('#map').fadeIn(175);
         });
     });
 
@@ -32,7 +57,7 @@ $(document).ready( function() {
         if($('#nav-addrecord').hasClass('active')) return false;
 
         // Fadeout current content page.
-        $('#content').fadeOut(175).promise().done(function () {
+        $('#content, #map').fadeOut(175).promise().done(function () {
             // Empty content div; Load addrecord.html and fade into content div.
             $('#content').empty().load("addrecord.html", showContent);
         });
@@ -44,7 +69,7 @@ $(document).ready( function() {
         if($('#nav-viewrecords').hasClass('active')) return false;
 
         // Fadeout current content page.
-        $('#content').fadeOut(175).promise().done(function () {
+        $('#content, #map').fadeOut(175).promise().done(function () {
             // Empty content div; Load viewrecords.html and fade into content div.
             $('#content').empty().load("viewrecords.html", showContent);
         });
