@@ -6,9 +6,7 @@ $(document).ready(function () {
     ], function(
         Map, MapView, Graphic
     ) {
-        /***
-         Define map and view
-         ***/
+        /*** Define map and view ***/
         var map = new Map({
             basemap: "topo"
         });
@@ -25,14 +23,10 @@ $(document).ready(function () {
             }
         });
 
-        /***
-         UI changes.
-         ***/
+        /*** UI changes ***/
         view.ui.move("zoom", "top-right");
 
-        /***
-         Create points for existing records
-         ***/
+        /*** Create points for existing records ***/
             // Point styling.
         var markerSymbol = {
             type: "simple-marker",
@@ -45,7 +39,7 @@ $(document).ready(function () {
         };
 
         // Get sightings from database.
-        $.getJSON('records', function(records) {
+        $.getJSON("records", function(records) {
             // Draw a point for each record in database.
             $.each(records, function(i, record) {
                 var point = {
