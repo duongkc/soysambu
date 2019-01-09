@@ -12,8 +12,8 @@ public class Sighting {
     private int group_id;
     private Date date;
     private String time;
-    private float xcoord;
-    private float ycoord;
+    private float longitude;
+    private float latitude;
     private Weather weather;
     private HabitatType habitatType;
 
@@ -21,26 +21,27 @@ public class Sighting {
     public int getGroup_id() { return group_id; }
     public Date getDate() { return date; }
     public String getTime() { return time; }
-    public float getXcoord() { return xcoord; }
-    public float getYcoord() { return ycoord; }
+    public float getLongitude() { return longitude; }
+    public float getLatitude() { return latitude; }
     public Weather getWeather() { return weather; }
     public HabitatType getHabitatType() { return habitatType; }
 
     public Sighting() {}
 
-    public Sighting(int id, float xcoord, float ycoord) {
+    public Sighting(int id, float latitude, float longitude) {
         this.id = id;
-        this.xcoord = xcoord;
-        this.ycoord = ycoord;
+        this.latitude = latitude;
+        this.longitude = longitude;
+
     }
 
-    public Sighting(int id, int group_id, Date date, String time, float xcoord, float ycoord, Weather weather, HabitatType habitatType) {
+    public Sighting(int id, int group_id, Date date, String time, float latitude, float longitude, Weather weather, HabitatType habitatType) {
         this.id = id;
         this.group_id = group_id;
         this.date = date;
         this.time = time;
-        this.xcoord = xcoord;
-        this.ycoord = ycoord;
+        this.latitude = latitude;//y
+        this.longitude = longitude; //x
         this.weather = weather;
         this.habitatType = habitatType;
     }
@@ -52,8 +53,8 @@ public class Sighting {
                 "group_id= " + group_id + ", " +
                 "date= " + date + ", " +
                 "time= " + time + ", " +
-                "xcoord= " + xcoord + ", " +
-                "ycoord= " + ycoord + ", " +
+                "longitude= " + longitude + ", " +
+                "latitude= " + latitude + ", " +
                 "weather= " + weather + ", " +
                 "habitat type= " + habitatType + "}";
     }

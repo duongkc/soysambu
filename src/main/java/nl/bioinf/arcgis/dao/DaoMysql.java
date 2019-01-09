@@ -60,7 +60,11 @@ public class DaoMysql implements ArcGISDao {
             /* Call the driver, create connection, and run prepareStatements()
             * */
             Class.forName("com.mysql.jdbc.Driver");
+<<<<<<< HEAD
             connection = DriverManager.getConnection("jdbc:mysql://mysql.bin:3306/", "root", "");
+=======
+            connection = DriverManager.getConnection("jdbc:mysql://mysql.bin:3306/Idvansanten", "idvansanten", "OzrEhjrL");
+>>>>>>> remotes/origin/feature/datatables
             System.out.println("Connecting to database");
             prepareStatements();
         } catch (SQLException | ClassNotFoundException e) {
@@ -100,7 +104,7 @@ public class DaoMysql implements ArcGISDao {
         PreparedStatement ps_new_group = connection.prepareStatement(fetchNewGiraffeGroup);
         this.preparedStatements.put(GET_NEW_GIRAFFE_GROUP, ps_new_group);
 
-        String addSighting = "INSERT INTO Sighting(group_id, date, time, xcoord, ycoord, weather, habitat_type) " +
+        String addSighting = "INSERT INTO Sighting(group_id, date, time, latitude, longitude, weather, habitat_type) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps_add_sighting = connection.prepareStatement(addSighting);
         this.preparedStatements.put(ADD_SIGHTING, ps_add_sighting);
@@ -206,8 +210,8 @@ public class DaoMysql implements ArcGISDao {
             int group_id = Integer.parseInt(rs.getString("group_id"));
             Date date = Date.valueOf(rs.getString("date"));
             String time = rs.getString("time");
-            float xcoord = Float.valueOf(rs.getString("xcoord"));
-            float ycoord = Float.valueOf(rs.getString("ycoord"));
+            float latitude = Float.valueOf(rs.getString("latitude"));
+            float longitude = Float.valueOf(rs.getString("longitude"));
 
             /* Converts empty weather cells to 'Unknown' weather
             * */
@@ -232,7 +236,7 @@ public class DaoMysql implements ArcGISDao {
                 System.out.println("Illegal input");
             }
 
-            Sighting sighting = new Sighting(id, group_id, date, time, xcoord, ycoord, weather, habitatType);
+            Sighting sighting = new Sighting(id, group_id, date, time, latitude, longitude, weather, habitatType);
             sightingList.add(sighting);
         }
         rs.close();
