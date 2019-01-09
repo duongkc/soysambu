@@ -60,11 +60,7 @@ public class DaoMysql implements ArcGISDao {
             /* Call the driver, create connection, and run prepareStatements()
             * */
             Class.forName("com.mysql.jdbc.Driver");
-<<<<<<< HEAD
-            connection = DriverManager.getConnection("jdbc:mysql://mysql.bin:3306/", "root", "");
-=======
             connection = DriverManager.getConnection("jdbc:mysql://mysql.bin:3306/Idvansanten", "idvansanten", "OzrEhjrL");
->>>>>>> remotes/origin/feature/datatables
             System.out.println("Connecting to database");
             prepareStatements();
         } catch (SQLException | ClassNotFoundException e) {

@@ -44,8 +44,8 @@ $(document).ready(function () {
             $.each(records, function(i, record) {
                 var point = {
                     type: "point",
-                    longitude: record.ycoord,
-                    latitude: record.xcoord
+                    longitude: record.longitude,
+                    latitude: record.latitude
                 };
 
                 var pointGraphic = new Graphic({
@@ -58,9 +58,9 @@ $(document).ready(function () {
                         content: [{
                             type: "fields",
                             fieldInfos: [{
-                                fieldName: "xcoord"
+                                fieldName: "latitude"
                             }, {
-                                fieldName: "ycoord"
+                                fieldName: "longitude"
                             },  {
                                 fieldName: "count"}]
                         }]

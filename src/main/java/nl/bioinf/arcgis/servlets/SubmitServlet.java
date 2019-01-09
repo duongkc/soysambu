@@ -42,8 +42,8 @@ public class SubmitServlet extends HttpServlet {
         String[] data = new String[13];
         data[0] = request.getParameter("date");
         data[1] = request.getParameter("time");
-        data[2] = request.getParameter("x-coord");
-        data[3] = request.getParameter("y-coord");
+        data[2] = request.getParameter("latitude");
+        data[3] = request.getParameter("longitude");
         data[4] = request.getParameter("weather").replace(" ", "_").toUpperCase();
         data[5] = request.getParameter("habitat").replace(" ", "_").toUpperCase();
         data[6] = request.getParameter("activity").replace(" ", "_").toUpperCase();
