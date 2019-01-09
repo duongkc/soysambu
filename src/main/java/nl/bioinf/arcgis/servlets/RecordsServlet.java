@@ -46,8 +46,8 @@ public class RecordsServlet extends HttpServlet {
         try {
             groups = new Gson().toJson(dao.fetchGiraffeGroups(DaoMysql.GET_GIRAFFE_GROUPS));
             sightings = new Gson().toJson(dao.fetchSightings(DaoMysql.GET_SIGHTINGS));
-            dao.disconnect();
-        } catch (SQLException | DatabaseException e) {
+            //dao.disconnect();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         List<String> records = combineRecords(sightings, groups);

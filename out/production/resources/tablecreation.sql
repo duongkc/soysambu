@@ -7,8 +7,8 @@ drop table if exists Giraffe_Group;
 create table temp (
   id int auto_increment not null unique,
   date date,
-  xcoord float,
-  ycoord float,
+  latitude float,
+  longitude float,
   time time,
   weather enum ('CLOUDY', 'PARTLY CLOUDY', 'SUNNY', 'RAINY'),
   habitat_type enum ('ACACIA_MIX', 'ACACIA_WOODLAND', 'GRASSLAND', 'LAKESHORE'),
@@ -23,12 +23,12 @@ create table temp (
   primary key(id)
 );
 
-load data local infile 'C:/Users/Ilse/soysambu-conservancy-gis/data/Giraffe Survey Database October 2018 v2.txt'
+load data local infile '/homes/idvansanten/soysambu-conservancy-gis/data/Giraffe Survey Database October 2018 v2.txt'
 into table temp
 fields terminated by '\t'
 lines terminated by '\n'
 ignore 2 lines
-(date, xcoord, ycoord, time, weather, habitat_type, activity, total_group,
+(date, latitude, longitude, time, weather, habitat_type, activity, total_group,
  male_a, male_sa, female_a, female_sa, juvenile, unidentified);
 
 create table Giraffe_Group (
@@ -53,8 +53,8 @@ create table Sighting (
   group_id int,
   date date not null,
   time time,
-  xcoord float not null,
-  ycoord float not null,
+  latitude float not null,
+  longitude float not null,
   weather enum ('CLOUDY', 'PARTLY_CLOUDY', 'SUNNY', 'RAINY'),
   habitat_type enum ('ACACIA_MIX', 'ACACIA_WOODLAND', 'GRASSLAND', 'LAKESHORE'),
   primary key (sighting_id),
@@ -78,6 +78,6 @@ create table Giraffe_List (
   foreign key (giraffe_group_id) references Giraffe_Group(group_id)
 );
 
-insert into Sighting (date, group_id, time, xcoord, ycoord, weather, habitat_type)
-SELECT date, id, time, xcoord, ycoord, weather, habitat_type from temp;
+insert into Sighting (date, group_id, time, latitude, longitude, weather, habitat_type)
+SELECT date, id, time, latitude, longitude, weather, habitat_type from temp;
 
