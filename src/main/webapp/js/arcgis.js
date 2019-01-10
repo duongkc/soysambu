@@ -8,7 +8,7 @@ $(document).ready(function () {
     ) {
         /*** Define map and view ***/
         var map = new Map({
-            basemap: "topo"
+            basemap: "gray"
         });
 
         var view = new MapView({

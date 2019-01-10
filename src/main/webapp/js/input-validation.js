@@ -1,6 +1,6 @@
 $(document).ready(function () {
     /*** FUNCTIONS - DATE ***/
-    /** Function to convert [yyyy-m-d date formatting to yyyy-mm-dd | yyyy/mm/dd formatting to yyyy-mm-dd] */
+    /** Function to convert [yyyy-m-d date formatting to yyyy-mm-dd | yyyy/mm/dd formatting to yyyy-mm-dd]. */
     function convertDate() {
         // Regex will match either '-' or '/'.
         var d = $(this).val().split(/[-\/]/);
@@ -41,7 +41,7 @@ $(document).ready(function () {
         return time;
     }
 
-    /** Function that converts HHmm time formatting to HH:mm */
+    /** Function that converts HHmm time formatting to HH:mm. */
     function convertTime () {
         var time = $(this).val();
 
@@ -53,8 +53,24 @@ $(document).ready(function () {
         }
     }
 
+    /*** FUNCTIONS - COORDINATES ***/
+    /** Function that converts commas in coordinates to dots and removes prepended or appended zeros. */
+    function convertCoord () {
+        var coord = $(this).val();
+
+        if (!isNaN(parseFloat(coord))) {
+            // Replace any commas present with dots.
+            coord = coord.replace(/,\s+/g, '.');
+            // Remove any prepended or appended zeros.
+            coord = parseFloat(coord);
+
+            $(this).val(parseFloat(coord).toFixed(4));
+            $(this).valid()
+        }
+    }
+
     /*** FUNCTIONS - GIRAFFE COUNTS ***/
-    /** Function to change giraffe counter after input from corresponding - and + buttons. */
+    /** Function to change a giraffe counter after input from corresponding - and + buttons. */
     function updateGiraffeCount(){
         // Get button's corresponding input field and button type (-+).
         var dataField = $(this).attr('data-field');
@@ -75,22 +91,14 @@ $(document).ready(function () {
         }
     }
 
-    /** Function to update total number of giraffes, by summing all giraffe count fields. */
-    function updateOrganismTotal() {
-        var sum = 0;
-
-        $('.giraffe-count').each(function(){
-            sum += +$(this).val();
-        });
-        $('#count-total').empty().append(sum);
-    }
-
-    /** Function to validate giraffe counters. */
-    function validateGiraffeCount() {
+    /** Function to remove whitespace, prepended zeros.
+     *  Sets values to max or min value when input value out of range.
+     */
+    function convertGiraffeCount() {
         var name = $(this).attr('name');
         // Converts counter's value to a number, also removes whitespace.
         var currentVal = Number($(this).val().replace(/\s+/g, ''));
-        // Remove whitespace from input field.
+        // Set value with removed whitespace as current value.
         $(this).val(currentVal);
 
         // Check if previously parsed currentVal returns NaN, if so set input field value to 0.
@@ -132,11 +140,27 @@ $(document).ready(function () {
             $('.btn-plusmin[data-type="plus"][data-field="' + name + '"]').attr('disabled', true);
             $(this).val(maxValue);
         }
-
         // Update total giraffe count.
         updateOrganismTotal();
-        // Let updated count be validated by JQuery Validator
-        $('#form-addrecord').valid();
+    }
+
+    /** Function to update total number of organisms, by summing all organism count fields. */
+    function updateOrganismTotal() {
+        var sum = 0;
+
+        $('.giraffe-count').each(function(){
+            sum += +$(this).val();
+        });
+        $('#count-total').empty().append(sum);
+    }
+
+    /** Function to enable or disable the submit button based on form validity */
+    function toggleSubmit() {
+        if (validator.checkForm()) {
+            $('#submit').prop('disabled', false);
+        } else {
+            $('#submit').prop('disabled', true);
+        }
     }
 
 
@@ -160,6 +184,13 @@ $(document).ready(function () {
             return re.test(value);
         },'Time must be given in military time (24h), e.g. 15:20'
     );
+    $.validator.addMethod('coordFormat',
+        function(value) {
+            // [d] or [d].[d]
+            var re = /^\-?\d+(\.\d+)?$/;
+            return re.test(value);
+        },'Coordinates must be numeric, e.g. 35.11'
+    );
     // Add rule to only allow organism groups with more than 1 animal.
     $.validator.addMethod('minGroupSize',
         function(value, element) {
@@ -179,6 +210,9 @@ $(document).ready(function () {
     // Initiate validating form.
     validator = $('#form-addrecord').validate({
         onkeyup: false,
+        groups: {
+            coords: "longitude latitude"
+        },
         rules: {
             date: {
                 required: true,
@@ -188,6 +222,14 @@ $(document).ready(function () {
             time: {
                 required: true,
                 timeFormat: true
+            },
+            longitude: {
+                required: true,
+                coordFormat: true
+            },
+            latitude: {
+                required: true,
+                coordFormat: true
             }
         },
         // Highlight: add styling to input fields that contain errors.
@@ -208,6 +250,34 @@ $(document).ready(function () {
                 // Place error after form row containing input field.
                 error.insertAfter(element.parents('.form-row'));
             }
+        },
+        submitHandler: function(form) {
+            // Serialize all input values of the form.
+            var data = $(form).serialize();
+
+            // Lock content behind a absolute div covering the page body.
+            $('#page').append('<div id="submit-lock" style="display: none;"></div>');
+            $('#submit-lock').slideDown();
+
+            // Post a new record to the database using ajax.
+            $.ajax({
+                url: "submitservlet",
+                type: "POST",
+                data: data,
+                success: function(){
+                    // Clear form and disable submit button.
+                    $(form)[0].reset();
+                    toggleSubmit();
+                    // Set new default values.
+                    $('#datepicker').datepicker('setDate', 'now');
+                    setTime();
+                    // Update dynamic giraffe count properties.
+                    $('.giraffe-count').each(convertGiraffeCount);
+
+                    // Lift content lock after a short delay.
+                    $('#submit-lock').delay(1000).slideUp();
+                }
+            });
         }
     });
 
@@ -254,6 +324,10 @@ $(document).ready(function () {
     // Convert manual date input, yyyy-m-d will be converted to yyyy-mm-dd.
     $('#date').change(convertDate);
 
+    /*** EVENT LISTENERS - COORDINATES ***/
+    // Convert commas (36,55) to points (36.55) and remove prepended or appended zeros.
+    $('#longitude').focusout(convertCoord);
+    $('#latitude').focusout(convertCoord);
     /*** EVENT LISTENERS - TIME ***/
     // Set current time when settime button is pressed.
     $('#settime').click(setTime);
@@ -261,19 +335,18 @@ $(document).ready(function () {
     $('#time').focusout(convertTime);
 
     /*** EVENT LISTENERS - GIRAFFE COUNT ***/
-    // Validate change in giraffe count field, assists user when invalid values are given.
-    $('.giraffe-count').change(validateGiraffeCount);
-    // Update giraffe count field.
+    // Convert change in giraffe count field; assists user when invalid values are given.
+    $('.giraffe-count').change(convertGiraffeCount);
+    $('.giraffe-count').change(function (){
+        // Validate each giraffe count field.
+        $('.giraffe-count').each(function() {
+            $(this).valid() });
+    });
+    // Update giraffe count field when its + or - buttons are pressed.
     $('.btn-plusmin').click(updateGiraffeCount);
 
     /*** EVENT LISTENERS - JQUERY VALIDATOR ***/
     // On key-release, clicks and focus-out events check the entire form.
     // If valid enable the submit button, when invalid disable the submit button.
-    $('#form-addrecord').on('keyup click blur', function() {
-        if (validator.checkForm()) {
-            $('#submit').prop('disabled', false);
-        } else {
-            $('#submit').prop('disabled', true);
-        }
-    });
+    $('#form-addrecord').on('keyup click blur', toggleSubmit);
 });

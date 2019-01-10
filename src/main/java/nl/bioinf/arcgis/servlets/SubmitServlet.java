@@ -59,11 +59,6 @@ public class SubmitServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        try {
-            dao.disconnect();
-        } catch (DatabaseException e) {
-            e.printStackTrace();
-        }
         view = request.getRequestDispatcher("index.html");
 
         view.forward(request, response);

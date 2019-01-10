@@ -18,10 +18,18 @@ body {
 .container-fluid {
     padding: 0px;
 }
+#page {
+    position: relative;
+    flex-grow: 1;
+    padding: 0;
+    margin: 0;
+}
 /* Limit the navbar overlapping elements */
 .sticky-top {
     z-index: 5;
 }
+
+
 /* --- Map --- */
 
 /* --- Header carousel ---*/
@@ -107,6 +115,19 @@ form {
 .datepicker {
     z-index: 10 !important;
 }
+/* Lock screen when submitting form. */
+#submit-lock {
+    background-color: black;
+    opacity: 0.6;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
 /* Add Record Form */
 /* Change input field focus color to match color scheme */
 .addrecord-form .form-control:focus, .addrecord-form .custom-select:focus,
@@ -151,8 +172,7 @@ form {
 
 /* --- Footer --- */
 footer {
-    display:none;
-    margin-top: auto;
+    display:block;
     padding-top: 15px;
     background: #2d3436;
     text-align:center;
