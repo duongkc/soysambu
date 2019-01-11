@@ -257,7 +257,8 @@ $(document).ready(function () {
 
             // Lock content behind a absolute div covering the page body.
             $('#page').append('<div id="submit-lock" style="display: none;"></div>');
-            $('#submit-lock').slideDown();
+            $('#submit-lock').animate({height: "show"});
+            //$('#submit-lock').slideDown();
 
             // Post a new record to the database using ajax.
             $.ajax({
@@ -275,7 +276,12 @@ $(document).ready(function () {
                     $('.giraffe-count').each(convertGiraffeCount);
 
                     // Lift content lock after a short delay.
-                    $('#submit-lock').delay(1000).slideUp();
+                    $('#submit-lock').delay(1000).animate({
+                        top: "+=100%",
+                        height: "hide"
+                    }).promise().done(function(){
+                        $('#submit-lock').remove()
+                    });
                 }
             });
         }
@@ -328,6 +334,7 @@ $(document).ready(function () {
     // Convert commas (36,55) to points (36.55) and remove prepended or appended zeros.
     $('#longitude').focusout(convertCoord);
     $('#latitude').focusout(convertCoord);
+
     /*** EVENT LISTENERS - TIME ***/
     // Set current time when settime button is pressed.
     $('#settime').click(setTime);

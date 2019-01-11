@@ -50,7 +50,7 @@ body {
 .carousel-item:nth-child(2) {
     /* Header background image */
     background: url(../assets/img/add_record_header.jpg);
-    background-position:55% 57.5%;
+    background-position:55% 35%;
     background-size:cover;
     /* Text makeup */
     color: white;
