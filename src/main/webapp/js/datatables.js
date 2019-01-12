@@ -29,8 +29,21 @@ $(document).ready(function () {
                 {title: "Juvenile", field: "juvenile", sortable: true, responsive: 3},
                 {title: "Unidentified", field: "ungroup_identified", sortable: true, responsive: 3},
             ],
+
         });
         console.log(records);
         table.setData(records);
+
+        $(".tabulator-row").click(function() {
+            var display = $(this).find(".tabulator-responsive-collapse");
+            var toggleOpen = $(this).find(".tabulator-responsive-collapse-toggle-open");
+            if(display.css("display") === "none") {
+                toggleOpen.replaceWith("<span class=\"tabulator-responsive-collapse-toggle-open\">-</span>");
+                display.css({"display":"initial"});
+            } else {
+                toggleOpen.replaceWith("<span class=\"tabulator-responsive-collapse-toggle-open\">+</span>");
+                display.css({"display":"none"});
+            }
+        });
     });
 });
