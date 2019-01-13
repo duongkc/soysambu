@@ -6,6 +6,7 @@ $(document).ready(function () {
             layout: "fitDataFill",
             responsiveLayout: "collapse",
             responsiveLayoutCollapseStartOpen: false,
+            scrollToRowPosition: "center",
             columns: [
                 {
                     formatter: "responsiveCollapse",
@@ -27,8 +28,14 @@ $(document).ready(function () {
                 {title: "Male Subadult", field: "male_subadult", sortable: true, responsive: 3},
                 {title: "Female Adult", field: "female_subadult", sortable: true, responsive: 3},
                 {title: "Juvenile", field: "juvenile", sortable: true, responsive: 3},
-                {title: "Unidentified", field: "ungroup_identified", sortable: true, responsive: 3},
+                {title: "Unidentified", field: "unidentified", sortable: true, responsive: 3},
             ],
+
+            rowClick:function(e, row) {
+                console.log(row.getData());
+                table.scrollToRow(row.getIndex(), "center", true);
+            },
+
 
         });
         console.log(records);
@@ -40,10 +47,15 @@ $(document).ready(function () {
             if(display.css("display") === "none") {
                 toggleOpen.replaceWith("<span class=\"tabulator-responsive-collapse-toggle-open\">-</span>");
                 display.css({"display":"initial"});
+            } else if (display.css("display)") === "initial") {
+                toggleOpen.replaceWith("<span class=\"tabulator-responsive-collapse-toggle-open\">+</span>");
+                display.css({"display":"none"});
             } else {
                 toggleOpen.replaceWith("<span class=\"tabulator-responsive-collapse-toggle-open\">+</span>");
                 display.css({"display":"none"});
             }
         });
+
+
     });
 });
