@@ -16,7 +16,7 @@ $(document).ready(function () {
             container: "map",
             map: map,
             zoom: 13,
-            center: [36.155, -0.448],
+            center: [36.135, -0.45],
             constraints: {
                 minZoom: 12,
                 maxZoom: 16,
@@ -29,7 +29,7 @@ $(document).ready(function () {
                     buttonEnabled: false,
                     // Ignore the default sizes that trigger responsive docking.
                     breakpoint: false,
-                    position: "top-left"
+                    position: "bottom-left"
                 }
             }
         });
@@ -155,7 +155,7 @@ $(document).ready(function () {
                         }, {
                             label: 'Male - SA (' + record.male_subadult + ')',
                             data: [record.male_subadult],
-                            backgroundColor:  'rgba(207, 106, 135,0.5)'
+                            backgroundColor: pattern.draw('dash', 'rgba(207, 106, 135,0.5)')
                         }, {
                             label: 'Female - A (' + record.female_adult + ')',
                             data: [record.female_adult],
@@ -165,7 +165,7 @@ $(document).ready(function () {
                         }, {
                             label: 'Female - SA (' + record.female_subadult + ')',
                             data: [record.female_subadult],
-                            backgroundColor: 'rgba(247, 215, 148,0.5)'
+                            backgroundColor: pattern.draw('dash', 'rgba(247, 215, 148,0.5)')
                         }, {
                             label: 'Juvenile (' + record.juvenile + ')',
                             data: [record.juvenile],
