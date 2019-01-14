@@ -31,11 +31,17 @@ body {
 
 /* --- Map --- */
 /* Popup Template */
-.chart-container {
-    height: 150px;
+.popup-title-container {
+    justify-content: space-between;
+}
+.popup-chart-container {
+    height: 130px;
 }
 @media only screen and (max-width: 600px) {
-    .chart-container {
+    .popup-title-container {
+        justify-content: center;
+    }
+    .popup-chart-container {
         height: 200px;
     }
 }
@@ -50,7 +56,7 @@ body {
 }
 /* GIS */
 .carousel-item:nth-child(1) {
-    background: url(../assets/img/gis_header.png);
+    /*background: url(../assets/img/gis_header.png); */
     background-position:50% 70%;
     background-size:cover;
 }
