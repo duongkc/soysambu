@@ -259,14 +259,17 @@ $(document).ready(function () {
     function generateChart(attributes) {
         // Create row container for chart title and canvas.
         var row = document.createElement('div');
+        var col = document.createElement('div');
         row.className = "row justify-content-center";
+        col.className = "col-lg-12 chart-container";
+
         // Create and add title to row as span element.
         row.innerHTML = '<span><b>Group Composition</b> ('
             + attributes.count + ' Giraffes)<br>';
 
         // Create canvas for chart.
         var canvas = document.createElement('canvas');
-        canvas.setAttribute('height', '100px');
+        canvas.setAttribute('height', '500px');
 
         // Create chart using Chart.js and attributes values.
         var chart = new Chart(canvas, {
@@ -304,6 +307,7 @@ $(document).ready(function () {
                 }]
             },
             options: {
+                maintainAspectRatio: false,
                 scales: {
                     xAxes: [{
                         ticks: {
@@ -320,7 +324,8 @@ $(document).ready(function () {
             }
         });
 
-        row.appendChild(canvas);
+        col.appendChild(canvas);
+        row.appendChild(col);
 
         return row;
     }

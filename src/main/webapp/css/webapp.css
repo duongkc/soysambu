@@ -29,8 +29,16 @@ body {
     z-index: 5;
 }
 
-
 /* --- Map --- */
+/* Popup Template */
+.chart-container {
+    height: 150px;
+}
+@media only screen and (max-width: 600px) {
+    .chart-container {
+        height: 200px;
+    }
+}
 
 /* --- Header carousel ---*/
 .carousel-item {
