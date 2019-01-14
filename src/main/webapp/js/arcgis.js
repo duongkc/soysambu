@@ -32,6 +32,9 @@ $(document).ready(function () {
                     breakpoint: false,
                     position: "bottom-left"
                 }
+            },
+            highlightOptions: {
+                color: "rgba(119, 139, 235,0.8)"
             }
         });
 
@@ -177,19 +180,31 @@ $(document).ready(function () {
             objectIdField: "id",
             renderer: renderer,
             outFields: ["*"],
-            popupTemplate: {title: 'Giraffe Sighting',
-                content: generateContent}
+            popupTemplate: {title: generatePopupTitle,
+                content: generatePopupContent}
         });
 
         // Add FeatureLayer to map.
         map.add(giraffeLayer);
     }
 
+    /** Generates popup template title.
+     * @returns {string} title - HTML popup template title.
+     */
+    function generatePopupTitle(feature) {
+        var attributes = feature.graphic.attributes;
+        var title = 'Giraffe Sighting <small>(' + attributes.id + ')</small>' +
+            '<span class="float-right">' + attributes.date + ' at ' +
+            timeFormat(attributes.time) + '</span>';
+
+        return title;
+    }
+
 
     /** Generates popup template content.
-     * @returns {HTMLObjectElement} content - HTML popup template content
+     * @returns {HTMLObjectElement} content - HTML popup template content.
      */
-    function generateContent(feature) {
+    function generatePopupContent(feature) {
         var attributes = feature.graphic.attributes;
 
         // Content container.
@@ -223,7 +238,7 @@ $(document).ready(function () {
         col2.className = "col-6";
         // Fill columns with attributes.
         col1.innerHTML = "<spaattributesn><b>Activity: </b>" + capitalizeFirstLetter(attributes.activity) +
-            "</spaattributesn><br><span><b>Habitat: </b>" + capitalizeFirstLetter(attributes.habitat) +
+            "</spaattributesn><br><span><b>Habitat: </b>" + capitalizeFirstLetter(attributes.habitatType) +
             "</span><br><span><b>Weather: </b>" + capitalizeFirstLetter(attributes.weather) +
             "</span>";
 
@@ -316,9 +331,11 @@ $(document).ready(function () {
      */
     function capitalizeFirstLetter(string) {
         if (string) {
-            string = string.toLowerCase();
+            // Turn string to lower case and replace underscores with spaces.
+            string = string.replace('_',' ').toLowerCase();
             // Capitalize first character, then add rest of lowercase string.
             string = string.charAt(0).toUpperCase() + string.slice(1);
+
             return string
         } else {
             // When the given parameter is not a string, return "-".
