@@ -4,9 +4,10 @@ $(document).ready(function () {
         "esri/views/MapView",
         "esri/layers/FeatureLayer",
         "esri/geometry/Point",
+        "esri/widgets/LayerList",
         "js/lib/chart.bundle.min.js"
     ], function (
-        Map, MapView, FeatureLayer, Point, Chart
+        Map, MapView, FeatureLayer, Point, LayerList, Chart
     ) {
         /*** Define map and view ***/
         var map = new Map({
@@ -32,6 +33,9 @@ $(document).ready(function () {
                     position: "bottom-left"
                 }
             },
+            legend: {
+                style: "card"
+            },
             highlightOptions: {
                 color: "rgba(119, 139, 235,0.8)"
             }
@@ -43,7 +47,8 @@ $(document).ready(function () {
         /*** Generate Layers when view is resolved. ***/
         view.when(function() {
             createGiraffeFeatures()
-                .then(createGiraffeLayer);
+                .then(createGiraffeLayer)
+                .then(createLayerList);
         });
 
         /*** GIRAFFE FeatureLayer ***/
@@ -168,12 +173,14 @@ $(document).ready(function () {
                         field: "count",
                         stops: [
                             { value: 1, size: 4 },
+                            { value: 25, size: 23 },
                             { value: 50, size: 50 }
                         ]
                     }]
             };
 
             var giraffeLayer = new FeatureLayer({
+                title: "Giraffe Sightings",
                 source: giraffeFeatures.graphics,
                 fields: giraffeFeatures.fields,
                 objectIdField: "id",
@@ -187,6 +194,23 @@ $(document).ready(function () {
 
             // Add FeatureLayer to map.
             map.add(giraffeLayer);
+        }
+
+        function createLayerList() {
+            var layerList = new LayerList({
+                view: view,
+                // Add a list item for every layer in the Map.
+                listItemCreatedFunction: function (event) {
+                    var item = event.item;
+                    // Add a generated legend for every individual layer.
+                    item.panel = {
+                        content: "legend",
+                        open: false
+                    }
+                }
+            });
+
+            view.ui.add(layerList, "top-left");
         }
 
         /** Generates popup template title.
