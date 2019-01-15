@@ -55,12 +55,14 @@ public class DaoMysql implements ArcGISDao {
      * @throws DatabaseException
      */
     @Override
-    public void connect() throws DatabaseException {
+    public void connect(String user, String db, String password, String host) throws DatabaseException {
         try {
             /* Call the driver, create connection, and run prepareStatements()
             * */
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://mysql.bin:3306/Idvansanten", "idvansanten", "OzrEhjrL");
+
+            String dburl = "jdbc:mysql://" + host + "/" + db;
+            connection = DriverManager.getConnection(dburl, user, password);
             System.out.println("Connecting to database");
             prepareStatements();
         } catch (SQLException | ClassNotFoundException e) {
@@ -162,7 +164,13 @@ public class DaoMysql implements ArcGISDao {
         giraffeGroupList.clear();
         while (rs.next()) {
             int group_id = Integer.parseInt(rs.getString("group_id"));
-            int count = Integer.parseInt(rs.getString("count"));
+            int total_count = Integer.parseInt(rs.getString("male_a_count")) +
+                    Integer.parseInt(rs.getString("male_sa_count")) +
+                    Integer.parseInt(rs.getString("female_a_count")) +
+                    Integer.parseInt(rs.getString("female_sa_count")) +
+                    Integer.parseInt(rs.getString("juvenile_count")) +
+                    Integer.parseInt(rs.getString("unidentified_count"));
+            int count = Integer.parseInt(String.valueOf(total_count));
             try {
                 /* Converts empty activity cells to 'Unknown' activity
                 * */
@@ -204,7 +212,7 @@ public class DaoMysql implements ArcGISDao {
         while (rs.next()) {
             int id = Integer.parseInt(rs.getString("sighting_id"));
             int group_id = Integer.parseInt(rs.getString("group_id"));
-            Date date = Date.valueOf(rs.getString("date"));
+            String date = rs.getString("date");
             String time = rs.getString("time");
             float latitude = Float.valueOf(rs.getString("latitude"));
             float longitude = Float.valueOf(rs.getString("longitude"));

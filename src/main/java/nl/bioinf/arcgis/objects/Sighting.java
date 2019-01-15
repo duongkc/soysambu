@@ -1,7 +1,5 @@
 package nl.bioinf.arcgis.objects;
 
-import java.util.Date;
-
 /**
  * Class implementing sightings. Contains all necessary information for a sighting.
  * Has multiple constructors for various situations.
@@ -10,7 +8,7 @@ import java.util.Date;
 public class Sighting {
     private int id;
     private int group_id;
-    private Date date;
+    private String date;
     private String time;
     private float longitude;
     private float latitude;
@@ -19,7 +17,7 @@ public class Sighting {
 
     public int getId() { return id; }
     public int getGroup_id() { return group_id; }
-    public Date getDate() { return date; }
+    public String getDate() { return date; }
     public String getTime() { return time; }
     public float getLongitude() { return longitude; }
     public float getLatitude() { return latitude; }
@@ -35,7 +33,7 @@ public class Sighting {
 
     }
 
-    public Sighting(int id, int group_id, Date date, String time, float latitude, float longitude, Weather weather, HabitatType habitatType) {
+    public Sighting(int id, int group_id, String date, String time, float latitude, float longitude, Weather weather, HabitatType habitatType) {
         this.id = id;
         this.group_id = group_id;
         this.date = date;
