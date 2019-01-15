@@ -1,7 +1,31 @@
 <div class="row">
-    <div class="col-lg-4">.</div>
-    <div class="col-lg-4 top-buffer w-100">
-        <div id="datatable" class="table-sm"></div>
+    <div class="col-lg-4">
+        <!--<label for="date-filter">Date: <span class="label-tip">(yyyy-mm-dd)</span></label>-->
+        <!--&lt;!&ndash; Date input field &ndash;&gt;-->
+        <!--<div id="datepicker" class="input-group date" data-provide="datepicker">-->
+            <!--<input id="date-filter" name="date-filter" type="text" class="form-control" autocomplete="off">-->
+            <!--&lt;!&ndash; Calender button to view datepicker &ndash;&gt;-->
+            <!--<div class="input-group-addon input-group-append">-->
+                <!--<button id = "calendar" class="btn btn-addrecord" type="button"-->
+                        <!--data-toggle="tooltip" title="Open calendar">-->
+                    <!--<i class="fa fa-calendar" aria-hidden="true"></i>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+    <div class="col-lg-5 top-buffer w-100">
+        <div id="datatable">
+            <table id="datatable1" class="display nowrap" width="100%">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Count</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
     </div>
 </div>
 

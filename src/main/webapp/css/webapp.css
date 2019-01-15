@@ -147,6 +147,20 @@ form {
     overflow-y:scroll;
 }
 
+/* TR and TD details (currently disabled) */
+td.details-control {
+    background: url('https://datatables.net/examples/resources/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
+}
+/* Table row pointer for clicking */
+tr {
+    cursor: pointer;
+}
+
+
 /* --- Footer --- */
 footer {
     display:none;
