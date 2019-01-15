@@ -2,7 +2,9 @@ drop table if exists temp;
 drop table if exists Giraffe_List;
 drop table if exists Giraffe;
 drop table if exists Sighting;
+drop table if exists Sighting_AnimalGroup;
 drop table if exists Giraffe_Group;
+
 
 create table temp (
   id int auto_increment not null unique,
@@ -62,11 +64,17 @@ create table Sighting (
 );
 
 create table Giraffe (
-    giraffe_id int auto_increment not null unique,
+    giraffe_id char(4) not null unique,
     name char(100) not null unique,
     gender enum ('MALE', 'FEMALE'),
     deceased bit not null,
-    primary key (giraffe_id)
+    notes text,
+    age int,
+    mother char(4),
+    father char(4),
+    primary key (giraffe_id),
+    foreign key (father) references Giraffe(giraffe_id),
+    foreign key (mother) references Giraffe(giraffe_id)
 );
 
 create table Giraffe_List (
@@ -78,6 +86,17 @@ create table Giraffe_List (
   foreign key (giraffe_group_id) references Giraffe_Group(group_id)
 );
 
-insert into Sighting (date, group_id, time, latitude, longitude, weather, habitat_type)
-SELECT date, id, time, latitude, longitude, weather, habitat_type from temp;
 
+create table Sighting_AnimalGroup (
+  id int auto_increment not null unique,
+  giraffe_group_id int,
+  primary key (id),
+  foreign key (giraffe_group_id) references Giraffe_Group(group_id)
+);
+
+insert into Sighting_AnimalGroup (giraffe_group_id) SELECT group_id from Giraffe_Group;
+
+insert into Sighting (date, group_id, time, latitude, longitude, weather, habitat_type)
+SELECT temp.date, Sighting_AnimalGroup.id, temp.time, temp.latitude, temp.longitude, temp.weather,
+       temp.habitat_type from temp, Sighting_AnimalGroup
+where Sighting_AnimalGroup.id = temp.id;

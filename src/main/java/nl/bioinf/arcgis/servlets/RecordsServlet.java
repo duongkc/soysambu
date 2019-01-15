@@ -69,7 +69,7 @@ public class RecordsServlet extends HttpServlet {
         List<String> sightingGroupRecords = new ArrayList<>();
         int n = 0;
         for(String sighting : sightingsRecords) {
-            String group = groupsRecords.get(n).replaceAll("id", "group_id");
+            String group = groupsRecords.get(n).replaceAll("^id", "group_id");
             if(n == 0) {
                 sighting = sighting.replaceAll("\\[\\{", "");
                 group = group.replaceAll("\\[\\{", "");
