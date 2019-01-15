@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  * Servlet which handles the submitted data. Puts it in a list of strings.
@@ -26,9 +25,13 @@ public class SubmitServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         dao = DaoMysql.getInstance();
+        String username = getServletContext().getInitParameter("database.user");
+        String database = getServletContext().getInitParameter("database");
+        String password = getServletContext().getInitParameter("database.password");
+        String host = getServletContext().getInitParameter("database.host");
         try {
-            System.out.println("Database is being initialized...");
-            dao.connect();
+            System.out.println("Connecting to database...");
+            dao.connect(username, database, password, host);
         } catch (DatabaseException e) {
             e.printStackTrace();
         }

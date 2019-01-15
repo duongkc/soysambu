@@ -27,8 +27,12 @@ public class RecordsServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         dao = DaoMysql.getInstance();
+        String username = getServletContext().getInitParameter("database.user");
+        String database = getServletContext().getInitParameter("database");
+        String password = getServletContext().getInitParameter("database.password");
+        String host = getServletContext().getInitParameter("database.host");
         try {
-            dao.connect();
+            dao.connect(username, database, password, host);
         } catch (DatabaseException e) {
             e.printStackTrace();
         }

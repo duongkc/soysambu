@@ -55,12 +55,14 @@ public class DaoMysql implements ArcGISDao {
      * @throws DatabaseException
      */
     @Override
-    public void connect() throws DatabaseException {
+    public void connect(String user, String db, String password, String host) throws DatabaseException {
         try {
             /* Call the driver, create connection, and run prepareStatements()
             * */
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://mysql.bin:3306/Idvansanten", "idvansanten", "OzrEhjrL");
+
+            String dburl = "jdbc:mysql://" + host + "/" + db;
+            connection = DriverManager.getConnection(dburl, user, password);
             System.out.println("Connecting to database");
             prepareStatements();
         } catch (SQLException | ClassNotFoundException e) {

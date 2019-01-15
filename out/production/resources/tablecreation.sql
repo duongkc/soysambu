@@ -89,7 +89,7 @@ create table Giraffe_List (
 
 create table Sighting_AnimalGroup (
   id int auto_increment not null unique,
-  giraffe_group_id int,
+  giraffe_group_id int unique,
   primary key (id),
   foreign key (giraffe_group_id) references Giraffe_Group(group_id)
 );
