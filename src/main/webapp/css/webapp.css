@@ -159,7 +159,8 @@ tr.shown td.details-control {
 tr {
     cursor: pointer;
 }
-
+/* Hide search input field */
+.dataTables_filter { display: none;}
 
 /* --- Footer --- */
 footer {

@@ -52,68 +52,91 @@
                             <option value="Fighting">Fighting</option>
                             <option value="Scratching">Scratching</option>
                             <option value="Socializing">Socializing</option>
+                            <option value="Unknown">Unknown</option>
                         </select>
                     </div>
                 </div>
                 <!--<div class="form-row">-->
-                    <!--<div class="col-12 form-group">-->
-                        <!--<label for="latitude-filter">Latitude</label>-->
-                        <!--<input type="text" class="js-range-slider" id="latitude-filter" name="latitude-filter" value="" />-->
-                    <!--</div>-->
+                <!--<div class="col-12 form-group">-->
+                <!--<label for="latitude-filter">Latitude</label>-->
+                <!--<input type="text" class="js-range-slider" id="latitude-filter" name="latitude-filter" value="" />-->
+                <!--</div>-->
                 <!--</div>-->
 
                 <!--<div class="form-row">-->
-                    <!--<div class="col-12 form-group">-->
-                        <!--<label for="longitude-filter">Longitude</label>-->
-                        <!--<input type="text" class="js-range-slider" id="longitude-filter" name="longitude-filter" value="" />-->
-                    <!--</div>-->
+                <!--<div class="col-12 form-group">-->
+                <!--<label for="longitude-filter">Longitude</label>-->
+                <!--<input type="text" class="js-range-slider" id="longitude-filter" name="longitude-filter" value="" />-->
+                <!--</div>-->
                 <!--</div>-->
 
                 <div class="form-row">
                     <div class="col-12 form-group">
                         <label for="total-count">Total Group Size</label>
-                        <input type="text" class="js-range-slider" id="total-count" name="total-count" value="" />
+                        <input type="text" class="js-range-slider" id="total-count" name="total-count" value=""/>
                     </div>
+                </div>
+                <div class="form-row">
+                    <button class="btn btn-addrecord" type="button" data-toggle="collapse"
+                            data-target="#collapseCountSliders"
+                            aria-expanded="false" aria-controls="collapseCountSliders">
+                        Advanced
+                    </button>
+                    <span data-toggle="tooltip" title="Click to show/hide sliders for individual group counts">
+                                    <i class="fas fa-question-circle"></i>
+                    </span>
                 </div>
 
                 <div class="form-row">
-                    <div class="col-12 form-group">
-                        <label for="male-a-count">Male Adult Count</label>
-                        <input type="text" class="js-range-slider" id="male-a-count" name="male-a-count" value="" />
-                    </div>
-                </div>
+                    <div class="collapse" id="collapseCountSliders">
+                        <div class="card card-body">
+                            <div class="form-row">
+                                <div class="col-12 form-group">
+                                    <label for="male-a-count">Male Adult Count</label>
+                                    <input type="text" class="js-range-slider" id="male-a-count" name="male-a-count"
+                                           value=""/>
+                                </div>
+                            </div>
 
-                <div class="form-row">
-                    <div class="col-12 form-group">
-                        <label for="male-sa-count">Male Adolescent Count</label>
-                        <input type="text" class="js-range-slider" id="male-sa-count" name="male-sa-count" value="" />
-                    </div>
-                </div>
+                            <div class="form-row">
+                                <div class="col-12 form-group">
+                                    <label for="male-sa-count">Male Adolescent Count</label>
+                                    <input type="text" class="js-range-slider" id="male-sa-count" name="male-sa-count"
+                                           value=""/>
+                                </div>
+                            </div>
 
-                <div class="form-row">
-                    <div class="col-12 form-group">
-                        <label for="female-a-count">Female Adult Count</label>
-                        <input type="text" class="js-range-slider" id="female-a-count" name="female-a-count" value="" />
-                    </div>
-                </div>
+                            <div class="form-row">
+                                <div class="col-12 form-group">
+                                    <label for="female-a-count">Female Adult Count</label>
+                                    <input type="text" class="js-range-slider" id="female-a-count" name="female-a-count"
+                                           value=""/>
+                                </div>
+                            </div>
 
-                <div class="form-row">
-                    <div class="col-12 form-group">
-                        <label for="female-sa-count">Female Adolescent Count</label>
-                        <input type="text" class="js-range-slider" id="female-sa-count" name="female-sa-count" value="" />
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-12 form-group">
-                        <label for="juv-count">Juvenile Count</label>
-                        <input type="text" class="js-range-slider" id="juv-count" name="juv-count" value="" />
-                    </div>
-                </div>
+                            <div class="form-row">
+                                <div class="col-12 form-group">
+                                    <label for="female-sa-count">Female Adolescent Count</label>
+                                    <input type="text" class="js-range-slider" id="female-sa-count"
+                                           name="female-sa-count" value=""/>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-12 form-group">
+                                    <label for="juv-count">Juvenile Count</label>
+                                    <input type="text" class="js-range-slider" id="juv-count" name="juv-count"
+                                           value=""/>
+                                </div>
+                            </div>
 
-                <div class="form-row">
-                    <div class="col-12 form-group">
-                        <label for="unidentified-count">Unidentified Count</label>
-                        <input type="text" class="js-range-slider" id="unidentified-count" name="unidentified-count" value="" />
+                            <div class="form-row">
+                                <div class="col-12 form-group">
+                                    <label for="unidentified-count">Unidentified Count</label>
+                                    <input type="text" class="js-range-slider" id="unidentified-count"
+                                           name="unidentified-count" value=""/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -134,7 +157,6 @@
         </div>
     </div>
 </div>
-
 
 
 <!-- Custom Datatable -->

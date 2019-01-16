@@ -1,5 +1,5 @@
 // $.fn.dataTable.ext.search.push(
-//     function( settings, records, dataIndex ) {
+//     function(settings, records) {
 //         var min = $("#latitude-filter").data().from;
 //         var max = $("#latitude-filter").data().to;
 //         var count = records[8] || 0; //
@@ -16,7 +16,7 @@
 // );
 //
 // $.fn.dataTable.ext.search.push(
-//     function( settings, records, dataIndex ) {
+//     function(settings, records) {
 //         var min = $("#longitude-filter").data().from;
 //         var max = $("#longitude-filter").data().to;
 //         var count = records[7] || 0; //
@@ -33,7 +33,7 @@
 // );
 
 $.fn.dataTable.ext.search.push(
-    function( settings, records, dataIndex ) {
+    function(settings, records) {
         var min = parseInt( $("#total-count").data().from, 10 );
         var max = parseInt( $("#total-count").data().to, 10 );
         var count = parseFloat( records[3] ) || 0; //
@@ -50,7 +50,7 @@ $.fn.dataTable.ext.search.push(
 );
 
 $.fn.dataTable.ext.search.push(
-    function( settings, records, dataIndex ) {
+    function(settings, records) {
         var min = parseInt( $("#male-a-count").data().from, 10 );
         var max = parseInt( $("#male-a-count").data().to, 10 );
         var count = parseFloat( records[9] ) || 0; //
@@ -67,7 +67,7 @@ $.fn.dataTable.ext.search.push(
 );
 
 $.fn.dataTable.ext.search.push(
-    function( settings, records, dataIndex ) {
+    function(settings, records) {
         var min = parseInt( $("#male-sa-count").data().from, 10 );
         var max = parseInt( $("#male-sa-count").data().to, 10 );
         var count = parseFloat( records[10] ) || 0; //
@@ -84,7 +84,7 @@ $.fn.dataTable.ext.search.push(
 );
 
 $.fn.dataTable.ext.search.push(
-    function( settings, records, dataIndex ) {
+    function(settings, records) {
         var min = parseInt( $("#female-a-count").data().from, 10 );
         var max = parseInt( $("#female-a-count").data().to, 10 );
         var count = parseFloat( records[11] ) || 0; //
@@ -101,7 +101,7 @@ $.fn.dataTable.ext.search.push(
 );
 
 $.fn.dataTable.ext.search.push(
-    function( settings, records, dataIndex ) {
+    function(settings, records) {
         var min = parseInt( $("#female-sa-count").data().from, 10 );
         var max = parseInt( $("#female-sa-count").data().to, 10 );
         var count = parseFloat( records[12] ) || 0; //
@@ -118,7 +118,7 @@ $.fn.dataTable.ext.search.push(
 );
 
 $.fn.dataTable.ext.search.push(
-    function( settings, records, dataIndex ) {
+    function(settings, records) {
         var min = parseInt( $("#juv-count").data().from, 10 );
         var max = parseInt( $("#juv-count").data().to, 10 );
         var count = parseFloat( records[13] ) || 0; //
@@ -135,7 +135,7 @@ $.fn.dataTable.ext.search.push(
 );
 
 $.fn.dataTable.ext.search.push(
-    function( settings, records, dataIndex ) {
+    function(settings, records) {
         var min = parseInt( $("#unidentified-count").data().from, 10 );
         var max = parseInt( $("#unidentified-count").data().to, 10 );
         var count = parseFloat( records[14] ) || 0; //
@@ -152,7 +152,7 @@ $.fn.dataTable.ext.search.push(
 );
 
 $.fn.dataTable.ext.search.push(
-    function( settings, records, dataIndex ) {
+    function(settings, records) {
         var weatherOption = $('#weather-filter').val().toUpperCase().replace(" ", "_");
         var weather = records[6];
 
@@ -167,7 +167,7 @@ $.fn.dataTable.ext.search.push(
 );
 
 $.fn.dataTable.ext.search.push(
-    function( settings, records, dataIndex ) {
+    function(settings, records) {
         var habitatOption = $('#habitat-filter').val().toUpperCase().replace(" ", "_");
         var habitat = records[4];
 
@@ -182,7 +182,7 @@ $.fn.dataTable.ext.search.push(
 );
 
 $.fn.dataTable.ext.search.push(
-    function( settings, records, dataIndex ) {
+    function(settings, records) {
         var activityOption = $('#activity-filter').val().toUpperCase().replace(" ", "_");
         var activity = records[5];
 
@@ -196,9 +196,17 @@ $.fn.dataTable.ext.search.push(
     }
 );
 
+function getMax(dataList, attribute) {
+    var max;
+    for (var i=0 ; i<dataList.length ; i++) {
+        if (!max || parseInt(dataList[i][attribute]) > parseInt(max[attribute]))
+            max = dataList[i];
+    }
+    return max;
+}
+
 $(document).ready(function () {
     $.getJSON('records', function (records) {
-
         function upperCaseStringParse(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
@@ -375,9 +383,9 @@ $(document).ready(function () {
         $("#juv-count").ionRangeSlider({
             type: "double",
             min: 0,
-            max: 20,
+            max: getMax(records, "juvenile").juvenile,
             from: 0,
-            to: 20,
+            to: getMax(records, "juvenile").juvenile,
             grid: true,
             onChange: function (data) {
                 table.draw();
@@ -387,9 +395,9 @@ $(document).ready(function () {
         $("#male-a-count").ionRangeSlider({
             type: "double",
             min: 0,
-            max: 20,
+            max: getMax(records, "male_adult").male_adult,
             from: 0,
-            to: 20,
+            to: getMax(records, "male_adult").male_adult,
             grid: true,
             onChange: function (data) {
                 table.draw();
@@ -399,9 +407,9 @@ $(document).ready(function () {
         $("#male-sa-count").ionRangeSlider({
             type: "double",
             min: 0,
-            max: 20,
+            max: getMax(records, "male_subadult").male_subadult,
             from: 0,
-            to: 20,
+            to: getMax(records, "male_subadult").male_subadult,
             grid: true,
             onChange: function (data) {
                 table.draw();
@@ -411,9 +419,9 @@ $(document).ready(function () {
         $("#female-a-count").ionRangeSlider({
             type: "double",
             min: 0,
-            max: 20,
+            max: getMax(records, "female_adult").female_adult,
             from: 0,
-            to: 20,
+            to: getMax(records, "female_adult").female_adult,
             grid: true,
             onChange: function (data) {
                 table.draw();
@@ -423,9 +431,9 @@ $(document).ready(function () {
         $("#female-sa-count").ionRangeSlider({
             type: "double",
             min: 0,
-            max: 20,
+            max: getMax(records, "female_subadult").female_subadult,
             from: 0,
-            to: 20,
+            to: getMax(records, "female_subadult").female_subadult,
             grid: true,
             onChange: function (data) {
                 table.draw();
@@ -435,9 +443,9 @@ $(document).ready(function () {
         $("#total-count").ionRangeSlider({
             type: "double",
             min: 0,
-            max: 50,
+            max: getMax(records, "count").count,
             from: 0,
-            to: 50,
+            to: getMax(records, "count").count,
             grid: true,
             onChange: function (data) {
                 table.draw();
@@ -447,20 +455,13 @@ $(document).ready(function () {
         $("#unidentified-count").ionRangeSlider({
             type: "double",
             min: 0,
-            max: 50,
+            max: getMax(records, "unidentified").unidentified,
             from: 0,
-            to: 50,
+            to: getMax(records, "unidentified").unidentified,
             grid: true,
             onChange: function (data) {
                 table.draw();
             }
         });
-
-        $('#latitude-filter').keyup( function() {
-            table.draw();
-        } );
-
     });
-
-
 });
