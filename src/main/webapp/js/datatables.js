@@ -1,3 +1,201 @@
+// $.fn.dataTable.ext.search.push(
+//     function( settings, records, dataIndex ) {
+//         var min = $("#latitude-filter").data().from;
+//         var max = $("#latitude-filter").data().to;
+//         var count = records[8] || 0; //
+//
+//         if ( ( isNaN( min ) && isNaN( max ) ) ||
+//             ( isNaN( min ) && count <= max ) ||
+//             ( min <= count   && isNaN( max ) ) ||
+//             ( min <= count   && count <= max ) )
+//         {
+//             return true;
+//         }
+//         return false;
+//     }
+// );
+//
+// $.fn.dataTable.ext.search.push(
+//     function( settings, records, dataIndex ) {
+//         var min = $("#longitude-filter").data().from;
+//         var max = $("#longitude-filter").data().to;
+//         var count = records[7] || 0; //
+//
+//         if ( ( isNaN( min ) && isNaN( max ) ) ||
+//             ( isNaN( min ) && count <= max ) ||
+//             ( min <= count   && isNaN( max ) ) ||
+//             ( min <= count   && count <= max ) )
+//         {
+//             return true;
+//         }
+//         return false;
+//     }
+// );
+
+$.fn.dataTable.ext.search.push(
+    function( settings, records, dataIndex ) {
+        var min = parseInt( $("#total-count").data().from, 10 );
+        var max = parseInt( $("#total-count").data().to, 10 );
+        var count = parseFloat( records[3] ) || 0; //
+
+        if ( ( isNaN( min ) && isNaN( max ) ) ||
+            ( isNaN( min ) && count <= max ) ||
+            ( min <= count   && isNaN( max ) ) ||
+            ( min <= count   && count <= max ) )
+        {
+            return true;
+        }
+        return false;
+    }
+);
+
+$.fn.dataTable.ext.search.push(
+    function( settings, records, dataIndex ) {
+        var min = parseInt( $("#male-a-count").data().from, 10 );
+        var max = parseInt( $("#male-a-count").data().to, 10 );
+        var count = parseFloat( records[9] ) || 0; //
+
+        if ( ( isNaN( min ) && isNaN( max ) ) ||
+            ( isNaN( min ) && count <= max ) ||
+            ( min <= count   && isNaN( max ) ) ||
+            ( min <= count   && count <= max ) )
+        {
+            return true;
+        }
+        return false;
+    }
+);
+
+$.fn.dataTable.ext.search.push(
+    function( settings, records, dataIndex ) {
+        var min = parseInt( $("#male-sa-count").data().from, 10 );
+        var max = parseInt( $("#male-sa-count").data().to, 10 );
+        var count = parseFloat( records[10] ) || 0; //
+
+        if ( ( isNaN( min ) && isNaN( max ) ) ||
+            ( isNaN( min ) && count <= max ) ||
+            ( min <= count   && isNaN( max ) ) ||
+            ( min <= count   && count <= max ) )
+        {
+            return true;
+        }
+        return false;
+    }
+);
+
+$.fn.dataTable.ext.search.push(
+    function( settings, records, dataIndex ) {
+        var min = parseInt( $("#female-a-count").data().from, 10 );
+        var max = parseInt( $("#female-a-count").data().to, 10 );
+        var count = parseFloat( records[11] ) || 0; //
+
+        if ( ( isNaN( min ) && isNaN( max ) ) ||
+            ( isNaN( min ) && count <= max ) ||
+            ( min <= count   && isNaN( max ) ) ||
+            ( min <= count   && count <= max ) )
+        {
+            return true;
+        }
+        return false;
+    }
+);
+
+$.fn.dataTable.ext.search.push(
+    function( settings, records, dataIndex ) {
+        var min = parseInt( $("#female-sa-count").data().from, 10 );
+        var max = parseInt( $("#female-sa-count").data().to, 10 );
+        var count = parseFloat( records[12] ) || 0; //
+
+        if ( ( isNaN( min ) && isNaN( max ) ) ||
+            ( isNaN( min ) && count <= max ) ||
+            ( min <= count   && isNaN( max ) ) ||
+            ( min <= count   && count <= max ) )
+        {
+            return true;
+        }
+        return false;
+    }
+);
+
+$.fn.dataTable.ext.search.push(
+    function( settings, records, dataIndex ) {
+        var min = parseInt( $("#juv-count").data().from, 10 );
+        var max = parseInt( $("#juv-count").data().to, 10 );
+        var count = parseFloat( records[13] ) || 0; //
+
+        if ( ( isNaN( min ) && isNaN( max ) ) ||
+            ( isNaN( min ) && count <= max ) ||
+            ( min <= count   && isNaN( max ) ) ||
+            ( min <= count   && count <= max ) )
+        {
+            return true;
+        }
+        return false;
+    }
+);
+
+$.fn.dataTable.ext.search.push(
+    function( settings, records, dataIndex ) {
+        var min = parseInt( $("#unidentified-count").data().from, 10 );
+        var max = parseInt( $("#unidentified-count").data().to, 10 );
+        var count = parseFloat( records[14] ) || 0; //
+
+        if ( ( isNaN( min ) && isNaN( max ) ) ||
+            ( isNaN( min ) && count <= max ) ||
+            ( min <= count   && isNaN( max ) ) ||
+            ( min <= count   && count <= max ) )
+        {
+            return true;
+        }
+        return false;
+    }
+);
+
+$.fn.dataTable.ext.search.push(
+    function( settings, records, dataIndex ) {
+        var weatherOption = $('#weather-filter').val().toUpperCase().replace(" ", "_");
+        var weather = records[6];
+
+        if(weatherOption === weather) {
+            return true;
+        }
+        else if(weatherOption === "_") {
+            return true;
+        }
+        return false;
+    }
+);
+
+$.fn.dataTable.ext.search.push(
+    function( settings, records, dataIndex ) {
+        var habitatOption = $('#habitat-filter').val().toUpperCase().replace(" ", "_");
+        var habitat = records[4];
+
+        if(habitatOption === habitat) {
+            return true;
+        }
+        else if(habitatOption === "_") {
+            return true;
+        }
+        return false;
+    }
+);
+
+$.fn.dataTable.ext.search.push(
+    function( settings, records, dataIndex ) {
+        var activityOption = $('#activity-filter').val().toUpperCase().replace(" ", "_");
+        var activity = records[5];
+
+        if(activityOption === activity) {
+            return true;
+        }
+        else if(activityOption === "_") {
+            return true;
+        }
+        return false;
+    }
+);
+
 $(document).ready(function () {
     $.getJSON('records', function (records) {
 
@@ -34,23 +232,88 @@ $(document).ready(function () {
             scrollY: "calc(100vh - 350px)",
             scrollCollapse: true,
             paging: false,
-            searching: false,
-            columns: [
+            columns: [ //Number indicates column index
                 {
                     "className": 'details-control',
                     "orderable": false,
                     "data": null,
                     "defaultContent": ''
-                },
-                {data: "date"},
-                {data: "time"},
-                {data: "count"}
+                }, //0
+                {data: "date"}, //1
+                {data: "time"}, //2
+                {data: "count"}, //3
+                {data: "habitatType"}, //4
+                {data: "activity"}, //5
+                {data: "weather"}, //6
+                {data: "longitude"}, //7
+                {data: "latitude"}, //8
+                {data: "male_adult"}, //9
+                {data: "male_subadult"}, //10
+                {data: "female_adult"}, //11
+                {data: "female_subadult"}, //12
+                {data: "juvenile"}, //13
+                {data: "unidentified"} //14
             ],
             "columnDefs": [
                 {
                     "targets": [ 0 ],
                     "visible": false,
                     "searchable": false
+                },
+                {
+                    "targets": [ 4 ],
+                    "visible": false,
+                    "searchable": true
+                },
+                {
+                    "targets": [ 5 ],
+                    "visible": false,
+                    "searchable": true
+                },
+                {
+                    "targets": [ 6 ],
+                    "visible": false,
+                    "searchable": true
+                },
+                {
+                    "targets": [ 7 ],
+                    "visible": false,
+                    "searchable": true
+                },
+                {
+                    "targets": [ 8 ],
+                    "visible": false,
+                    "searchable": true
+                },
+                {
+                    "targets": [ 9 ],
+                    "visible": false,
+                    "searchable": true
+                },
+                {
+                    "targets": [ 10 ],
+                    "visible": false,
+                    "searchable": true
+                },
+                {
+                    "targets": [ 11 ],
+                    "visible": false,
+                    "searchable": true
+                },
+                {
+                    "targets": [ 12 ],
+                    "visible": false,
+                    "searchable": true
+                },
+                {
+                    "targets": [ 13 ],
+                    "visible": false,
+                    "searchable": true
+                },
+                {
+                    "targets": [ 14 ],
+                    "visible": false,
+                    "searchable": true
                 }
             ]
 
@@ -62,86 +325,142 @@ $(document).ready(function () {
             var row = table.row(tr);
 
             if (row.child.isShown()) {
-                // This row is already open - close it
                 row.child.hide();
                 tr.removeClass('shown');
             }
             else {
-                // Open this row
                 row.child(format(row.data())).show();
                 tr.addClass('shown');
             }
         });
+
+        $('#weather-filter').change( function() {
+            table.draw();
+        });
+
+        $('#habitat-filter').change( function() {
+            table.draw();
+        });
+
+        $('#activity-filter').change( function() {
+            table.draw();
+        });
+
+        // $("#latitude-filter").ionRangeSlider({
+        //     type: "double",
+        //     min: -0.5119,
+        //     max: -0.22335,
+        //     from: -0.5119,
+        //     to: -0.22335,
+        //     step: 0.015,
+        //     grid: true,
+        //     onChange: function (data) {
+        //         table.draw();
+        //     }
+        // });
+        //
+        // $("#longitude-filter").ionRangeSlider({
+        //     type: "double",
+        //     min: 35.8,
+        //     max: 36.9,
+        //     from: 36.0917,
+        //     to: 36.7257,
+        //     step: 0.0317,
+        //     grid: true,
+        //     onChange: function (data) {
+        //         table.draw();
+        //     }
+        // });
+
+        $("#juv-count").ionRangeSlider({
+            type: "double",
+            min: 0,
+            max: 20,
+            from: 0,
+            to: 20,
+            grid: true,
+            onChange: function (data) {
+                table.draw();
+            }
+        });
+
+        $("#male-a-count").ionRangeSlider({
+            type: "double",
+            min: 0,
+            max: 20,
+            from: 0,
+            to: 20,
+            grid: true,
+            onChange: function (data) {
+                table.draw();
+            }
+        });
+
+        $("#male-sa-count").ionRangeSlider({
+            type: "double",
+            min: 0,
+            max: 20,
+            from: 0,
+            to: 20,
+            grid: true,
+            onChange: function (data) {
+                table.draw();
+            }
+        });
+
+        $("#female-a-count").ionRangeSlider({
+            type: "double",
+            min: 0,
+            max: 20,
+            from: 0,
+            to: 20,
+            grid: true,
+            onChange: function (data) {
+                table.draw();
+            }
+        });
+
+        $("#female-sa-count").ionRangeSlider({
+            type: "double",
+            min: 0,
+            max: 20,
+            from: 0,
+            to: 20,
+            grid: true,
+            onChange: function (data) {
+                table.draw();
+            }
+        });
+
+        $("#total-count").ionRangeSlider({
+            type: "double",
+            min: 0,
+            max: 50,
+            from: 0,
+            to: 50,
+            grid: true,
+            onChange: function (data) {
+                table.draw();
+            }
+        });
+
+        $("#unidentified-count").ionRangeSlider({
+            type: "double",
+            min: 0,
+            max: 50,
+            from: 0,
+            to: 50,
+            grid: true,
+            onChange: function (data) {
+                table.draw();
+            }
+        });
+
+        $('#latitude-filter').keyup( function() {
+            table.draw();
+        } );
+
     });
 
+
 });
-
-
-// /**
-//  * Old Datatable (Tabulator) functionality.
-//  * Commented for reference, currently unused.
-//  * Replaced by Datatables.net library
-//  */
-// $(document).ready(function () {
-//     $.getJSON('records', function (records) {
-//         var table = new Tabulator("#datatable", {
-//             height: "calc(100vh - 275px)",
-//             width: "250px",
-//             layout: "fitDataFill",
-//             responsiveLayout: "collapse",
-//             responsiveLayoutCollapseStartOpen: false,
-//             columns: [
-//                 {title: "Date", field: "date", sortable: true, responsive: 0, width: 120},
-//                 {title: "Time", field: "time", sortable: true, responsive: 0, width: 110},
-//                 {title: "Count", field: "count", sortable: true, responsive: 0, width: 100},
-//                 {title: "Activity", field: "activity", sortable: true, responsive: 3},
-//                 {title: "Habitat Type", field: "habitatType", sortable: true, responsive: 3},
-//                 {title: "Weather", field: "weather", sortable: true, responsive: 3},
-//                 {title: "Latitude", field: "latitude", sortable: true, responsive: 3},
-//                 {title: "Longitude", field: "longitude", sortable: true, responsive: 3},
-//                 {title: "Male Adult", field: "male_adult", sortable: true, responsive: 3},
-//                 {title: "Male Subadult", field: "male_subadult", sortable: true, responsive: 3},
-//                 {title: "Female Adult", field: "female_adult", sortable: true, responsive: 3},
-//                 {title: "Female Subadult", field: "female_subadult", sortable: true, responsive: 3},
-//                 {title: "Juvenile", field: "juvenile", sortable: true, responsive: 3},
-//                 {title: "Unidentified", field: "unidentified", sortable: true, responsive: 3},
-//             ],
-//
-//             rowClick:function(e, row) {
-//                 var display = $(row.getElement()).find(".tabulator-responsive-collapse");
-//                 console.log(display);
-//                 //console.log(row.getData());
-//                 var data = row.getData();
-//
-//                 if(display.css("display") === "none") {
-//                     display.css({"display":"initial"});
-//                 } else if (display.css("display)") === "initial") {
-//                     display.css({"display":"none"});
-//                 } else {
-//                     display.css({"display":"none"});
-//                 }
-//                 display[0].innerHTML = "<div class='row'><div class='col-lg-12'><table class=\"table table-responsive table-striped table-hover table-sm\" " +
-//                     "style='font-size:13.5px;'><tbody>" +
-//                     "<tr><td><strong>Activity</strong></td><td>" + data.activity + "</td>" +
-//                     "<td><strong>Male adult</strong></td><td>" + data.male_adult + "</td></tr>" +
-//                     "<tr><td><strong>Habitat</strong></td><td> " + data.habitatType + "</td>" +
-//                     "<td><strong>Male subadult</strong></td><td>" + data.male_subadult + "</td></tr>" +
-//                     "<tr><td><strong>Weather</strong></td><td> " + data.weather + "</td>" +
-//                     "<td><strong>Female adult</strong></td><td>" + data.female_adult + "</td></tr>" +
-//                     "<tr><td></td><td></td>" +
-//                     "<td><strong>Female subadult</strong></td><td>" + data.female_subadult + "</td></tr>" +
-//                     "<tr><td><strong>Latitude</strong></td><td> " + data.latitude + "</td>" +
-//                     "<td><strong>Juvenile</strong></td><td>" + data.juvenile + "</td></tr>" +
-//                     "<tr><td><strong>Longitude</strong></td><td> " + data.longitude + "</td>" +
-//                     "<td><strong>Unidentified</strong></td><td>" + data.unidentified + "</td></tr>" +
-//                     "</tbody></table></div></div>";
-//                 table.scrollToRow(row.getIndex(), "nearest", true);
-//             },
-//
-//
-//         });
-//         console.log(records);
-//         table.setData(records);
-//
-//     });
-// });

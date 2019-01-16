@@ -23,7 +23,7 @@ create table temp (
   primary key(id)
 );
 
-load data local infile '/homes/idvansanten/soysambu-conservancy-gis/data/Giraffe Survey Database October 2018 v2.txt'
+load data local infile 'C:/Users/Ilse/soysambu-conservancy-gis/data/Giraffe Survey Database October 2018 v2.txt'
 into table temp
 fields terminated by '\t'
 lines terminated by '\n'

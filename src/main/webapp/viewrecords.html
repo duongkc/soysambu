@@ -1,17 +1,123 @@
 <div class="row">
-    <div class="col-lg-4">
-        <!--<label for="date-filter">Date: <span class="label-tip">(yyyy-mm-dd)</span></label>-->
-        <!--&lt;!&ndash; Date input field &ndash;&gt;-->
-        <!--<div id="datepicker" class="input-group date" data-provide="datepicker">-->
-            <!--<input id="date-filter" name="date-filter" type="text" class="form-control" autocomplete="off">-->
-            <!--&lt;!&ndash; Calender button to view datepicker &ndash;&gt;-->
-            <!--<div class="input-group-addon input-group-append">-->
-                <!--<button id = "calendar" class="btn btn-addrecord" type="button"-->
-                        <!--data-toggle="tooltip" title="Open calendar">-->
-                    <!--<i class="fa fa-calendar" aria-hidden="true"></i>-->
-                <!--</button>-->
-            <!--</div>-->
-        <!--</div>-->
+    <div class="addrecord-form col-lg-4 top-buffer">
+        <ul class="nav nav-tabs nav-justified ">
+            <li class="nav-item active">
+                <a class="nav-link active" data-toggle="tab">Filter</a>
+            </li>
+        </ul>
+        <div class="tab-content shadow bg-white">
+            <div class="tab-pane container active">
+                <div class="form-row">
+                    <div class=" col-sm-6 form-group">
+                        <label for="weather-filter">Weather:</label>
+                        <select id="weather-filter" name="weather-filter" class="custom-select">
+                            <option value=" " selected></option>
+                            <option value="Sunny">Sunny</option>
+                            <option value="Cloudy">Cloudy</option>
+                            <option value="Partly Cloudy">Partly Cloudy</option>
+                            <option value="Rainy">Rainy</option>
+                            <option value="Unknown">Unknown</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label for="habitat-filter">Habitat:
+                            <span data-toggle="tooltip" title="Environment of the organism group's location">
+                                    <i class="fas fa-question-circle"></i>
+                                </span>
+                        </label>
+                        <select id="habitat-filter" name="habitat-filter" class="custom-select">
+                            <option value=" " selected></option>
+                            <option value="Acacia Mix">Acacia Mix</option>
+                            <option value="Acacia Woodland">Acacia Woodland</option>
+                            <option value="Grassland">Grassland</option>
+                            <option value="Lakeshore">Lakeshore</option>
+                            <option value="Unknown">Unknown</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-sm-6 form-group">
+                        <label for="activity-filter">Activity:
+                            <span data-toggle="tooltip" title="Average activity of the giraffe group
+                                (i.e. what most of the giraffes in the group are doing)">
+                                    <i class="fas fa-question-circle"></i>
+                                </span>
+                        </label>
+                        <select id="activity-filter" name="activity-filter" class="custom-select">
+                            <option value=" " selected></option>
+                            <option value="Feeding">Feeding</option>
+                            <option value="Walking">Walking</option>
+                            <option value="Standing">Standing</option>
+                            <option value="Resting">Resting</option>
+                            <option value="Fighting">Fighting</option>
+                            <option value="Scratching">Scratching</option>
+                            <option value="Socializing">Socializing</option>
+                        </select>
+                    </div>
+                </div>
+                <!--<div class="form-row">-->
+                    <!--<div class="col-12 form-group">-->
+                        <!--<label for="latitude-filter">Latitude</label>-->
+                        <!--<input type="text" class="js-range-slider" id="latitude-filter" name="latitude-filter" value="" />-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="form-row">-->
+                    <!--<div class="col-12 form-group">-->
+                        <!--<label for="longitude-filter">Longitude</label>-->
+                        <!--<input type="text" class="js-range-slider" id="longitude-filter" name="longitude-filter" value="" />-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <div class="form-row">
+                    <div class="col-12 form-group">
+                        <label for="total-count">Total Group Size</label>
+                        <input type="text" class="js-range-slider" id="total-count" name="total-count" value="" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-12 form-group">
+                        <label for="male-a-count">Male Adult Count</label>
+                        <input type="text" class="js-range-slider" id="male-a-count" name="male-a-count" value="" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-12 form-group">
+                        <label for="male-sa-count">Male Adolescent Count</label>
+                        <input type="text" class="js-range-slider" id="male-sa-count" name="male-sa-count" value="" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-12 form-group">
+                        <label for="female-a-count">Female Adult Count</label>
+                        <input type="text" class="js-range-slider" id="female-a-count" name="female-a-count" value="" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-12 form-group">
+                        <label for="female-sa-count">Female Adolescent Count</label>
+                        <input type="text" class="js-range-slider" id="female-sa-count" name="female-sa-count" value="" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-12 form-group">
+                        <label for="juv-count">Juvenile Count</label>
+                        <input type="text" class="js-range-slider" id="juv-count" name="juv-count" value="" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-12 form-group">
+                        <label for="unidentified-count">Unidentified Count</label>
+                        <input type="text" class="js-range-slider" id="unidentified-count" name="unidentified-count" value="" />
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-lg-5 top-buffer w-100">
         <div id="datatable">
