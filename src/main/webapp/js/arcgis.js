@@ -96,7 +96,7 @@ $(document).ready(function () {
                 alias: "Amount of juvenile giraffes in group.",
                 type: "integer"
             }, {
-                name: "ungroup_identified",
+                name: "unidentified",
                 alias: "Amount of unidentified giraffes in group.",
                 type: "integer"
             }, {
@@ -324,8 +324,8 @@ $(document).ready(function () {
                         data: [attributes.juvenile],
                         backgroundColor: 'rgba(119, 139, 235,0.5)'
                     }, {
-                        label: 'Unidentified (' + attributes.ungroup_identified + ')',
-                        data: [attributes.ungroup_identified],
+                        label: 'Unidentified (' + attributes.unidentified + ')',
+                        data: [attributes.unidentified],
                         backgroundColor: 'rgba(89, 98, 117,0.5)'
                     }]
                 },

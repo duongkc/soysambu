@@ -16,3 +16,6 @@ gradlew.bat
 
 #Tomcat
 *.iml
+
+#Web XML
+web.xml

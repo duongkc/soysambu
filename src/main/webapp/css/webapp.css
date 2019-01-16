@@ -186,7 +186,7 @@ form {
 
 /* --- Footer --- */
 footer {
-    display:block;
+    display:none;
     padding-top: 15px;
     background: #2d3436;
     text-align:center;

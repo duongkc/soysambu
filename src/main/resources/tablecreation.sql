@@ -1,9 +1,9 @@
 drop table if exists temp;
 drop table if exists Giraffe_List;
-drop table if exists Giraffe;
 drop table if exists Sighting;
 drop table if exists Sighting_AnimalGroup;
 drop table if exists Giraffe_Group;
+drop table if exists Giraffe;
 
 
 create table temp (
@@ -25,13 +25,36 @@ create table temp (
   primary key(id)
 );
 
-load data local infile '/homes/idvansanten/soysambu-conservancy-gis/data/Giraffe Survey Database October 2018 v2.txt'
+load data local infile 'data/Giraffe Survey Database October 2018 v2.txt'
 into table temp
 fields terminated by '\t'
 lines terminated by '\n'
 ignore 2 lines
 (date, latitude, longitude, time, weather, habitat_type, activity, total_group,
  male_a, male_sa, female_a, female_sa, juvenile, unidentified);
+
+create table Giraffe (
+    giraffe_id char(4) not null unique,
+    name varchar(50) unique,
+    gender enum ('MALE', 'FEMALE'),
+    age_class enum ('ADULT', 'SUB_ADULT', 'JUVENILE'),
+    mother char(4),
+    father char(4),
+    notes text,
+    deceased bit not null,
+    primary key (giraffe_id),
+    foreign key (mother) references Giraffe(giraffe_id),
+    foreign key (father) references Giraffe(giraffe_id)
+);
+
+create table Giraffe_List (
+  id int auto_increment not null unique,
+  giraffe_id char(4) not null,
+  giraffe_group_id int not null,
+  primary key (id),
+  foreign key (giraffe_id) references Giraffe(giraffe_id),
+  foreign key (giraffe_group_id) references Giraffe_Group(group_id)
+);
 
 create table Giraffe_Group (
   group_id int auto_increment not null unique,
@@ -46,9 +69,12 @@ create table Giraffe_Group (
   primary key (group_id)
 );
 
-insert into Giraffe_Group (count, activity, male_a_count, male_sa_count,
-                           female_a_count, female_sa_count, juvenile_count, unidentified_count)
-SELECT total_group, activity, male_a, male_sa, female_a, female_sa, juvenile, unidentified from temp;
+create table Sighting_AnimalGroup (
+  id int auto_increment not null unique,
+  giraffe_group_id int unique,
+  primary key (id),
+  foreign key (giraffe_group_id) references Giraffe_Group(group_id)
+);
 
 create table Sighting (
   sighting_id int auto_increment not null unique,
@@ -63,36 +89,9 @@ create table Sighting (
   foreign key (group_id) references Giraffe_Group(group_id)
 );
 
-create table Giraffe (
-    giraffe_id char(4) not null unique,
-    name char(100) not null unique,
-    gender enum ('MALE', 'FEMALE'),
-    deceased bit not null,
-    notes text,
-    age int,
-    mother char(4),
-    father char(4),
-    primary key (giraffe_id),
-    foreign key (father) references Giraffe(giraffe_id),
-    foreign key (mother) references Giraffe(giraffe_id)
-);
-
-create table Giraffe_List (
-  id int auto_increment not null unique,
-  giraffe_id int not null,
-  giraffe_group_id int not null,
-  primary key (id),
-  foreign key (giraffe_id) references Giraffe(giraffe_id),
-  foreign key (giraffe_group_id) references Giraffe_Group(group_id)
-);
-
-
-create table Sighting_AnimalGroup (
-  id int auto_increment not null unique,
-  giraffe_group_id int unique,
-  primary key (id),
-  foreign key (giraffe_group_id) references Giraffe_Group(group_id)
-);
+insert into Giraffe_Group (count, activity, male_a_count, male_sa_count,
+                           female_a_count, female_sa_count, juvenile_count, unidentified_count)
+SELECT total_group, activity, male_a, male_sa, female_a, female_sa, juvenile, unidentified from temp;
 
 insert into Sighting_AnimalGroup (giraffe_group_id) SELECT group_id from Giraffe_Group;
 
