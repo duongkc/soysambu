@@ -1,4 +1,6 @@
-/* --- Global Webpage Styling --- */
+/* ---
+   Global Webapp Styles
+   --- */
 html, body, #map{
     height: 100%;
     width: 100%;
@@ -29,24 +31,10 @@ body {
     z-index: 5;
 }
 
-/* --- Map --- */
-/* Popup Template */
-.popup-title-container {
-    justify-content: space-between;
-}
-.popup-chart-container {
-    height: 130px;
-}
-@media only screen and (max-width: 600px) {
-    .popup-title-container {
-        justify-content: center;
-    }
-    .popup-chart-container {
-        height: 200px;
-    }
-}
 
-/* --- Header carousel ---*/
+/* ---
+   Header Carousel
+   --- */
 .carousel-item {
     height: 140px;
     text-align: center;
@@ -54,13 +42,11 @@ body {
 .carousel-item h1 {
     padding-top: 30px;
 }
-/* GIS */
 .carousel-item:nth-child(1) {
-    /*background: url(../assets/img/gis_header.png); */
+    /*background: url(../assets/img/gis_header.png);*/
     background-position:50% 70%;
     background-size:cover;
 }
-/* Add Record */
 .carousel-item:nth-child(2) {
     /* Header background image */
     background: url(../assets/img/add_record_header.jpg);
@@ -70,11 +56,72 @@ body {
     color: white;
     text-shadow: 0px 0px 5px grey;
 }
-/* View Records */
 .carousel-item:nth-child(3) {
 }
 
-/* --- Navigation Bars --- */
+
+/* ---
+   GIS Page - (Giraffe) Popup
+   --- */
+.popup-title-container {
+    justify-content: space-between;
+}
+.popup-chart-container {
+    min-height: 100px;
+    height: 130px;
+}
+@media only screen and (max-width: 580px) {
+    .popup-title-container {
+        justify-content: center;
+    }
+    .popup-chart-container {
+        height: 200px;
+    }
+}
+/* Giraffe avatars */
+.avatar {
+    width: 20%;
+    margin-bottom: 8px;
+    text-align: center;
+}
+.avatar img{
+    border: 4px solid #c7b89e;
+    border-radius:50%;
+    width: 60px;
+    height: 60px;
+}
+@media only screen and (max-width: 1200px) {
+    /* 4 Avatars when screens <= 1200px */
+    .avatar {
+        width: 25%;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    /* 3 Avatars when screens <= 1000px */
+    .avatar {
+        width: 33%;
+    }
+}
+/* Flickity carousel defaults */
+.flickity-prev-next-button {
+    width: 30px;
+    height: 30px;
+    background: transparent;
+}
+.flickity-prev-next-button:hover {
+    background: transparent;
+}
+.flickity-prev-next-button.previous {
+    left: -10px;
+}
+.flickity-prev-next-button.next {
+    right: -10px;
+}
+
+
+/* ---
+   Navigation bars
+   --- */
 .navbar {
     border: none;
     padding: 0px;
@@ -99,7 +146,7 @@ body {
 }
 /* Header navigation bar */
 .navbar-nav .nav-item:nth-child(1):after {
-    background: #ffb8b8;
+    background: #ea8685;
 }
 .navbar-nav .nav-item:nth-child(2):after {
     background: #f7d794;
@@ -116,7 +163,10 @@ body {
     padding-bottom: 10px;
 }
 
-/* --- Forms --- */
+
+/* ---
+   Forms - Default
+   --- */
 form {
     display: flex;
     flex-wrap: wrap;
@@ -142,7 +192,10 @@ form {
     z-index: 9999;
 }
 
-/* Add Record Form */
+
+/* ---
+   Forms - Add Record
+   --- */
 /* Change input field focus color to match color scheme */
 .addrecord-form .form-control:focus, .addrecord-form .custom-select:focus,
 .addrecord-form .btn:focus {
@@ -184,7 +237,10 @@ form {
     box-shadow: 0 0 4px 1px rgba(196, 69, 105, 1) !important;
 }
 
-/* --- Footer --- */
+
+/* ---
+   Footer
+   --- */
 footer {
     display:none;
     padding-top: 15px;
