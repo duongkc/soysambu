@@ -44,7 +44,7 @@ $(document).ready(function () {
            have been added. _.debounce makes sure the resizeGiraffeListCarousel function is only called once.
            The Flickity carousel will not or incorrectly display if this code is omitted or applied to a
            parent div. */
-        var lazyFlickityResize = _.debounce(resizeGiraffeListCarousel, 50);
+        var lazyFlickityResize = _.debounce(reinstateGiraffeListCarousel, 50);
         $(document).arrive(".avatar", lazyFlickityResize);
 
         /*** LAYERS ***/
@@ -54,6 +54,29 @@ $(document).ready(function () {
                 .then(createGiraffeFeatureLayer)
                 .then(createLayerList);
         });
+
+        /** Constructs a widget listing all layers currently loaded on the map.
+         *      Each layer gets its own panel which can be accessed through a button.
+         *  listItemCreatedFunction executes for every layer in the LayerList, in this case it
+         *  dynamically adds a legend to every layer's panel.
+         */
+        function createLayerList() {
+            var layerList = new LayerList({
+                view: view,
+                listItemCreatedFunction: function (event) {
+                    var item = event.item;
+                    /* Add a generated legend for every individual layer. */
+                    item.panel = {
+                        content: "legend",
+                        open: false
+                    }
+                }
+            });
+
+            /* Add LayerList to the view. */
+            view.ui.add(layerList, "top-left");
+        }
+
 
         /*** GIRAFFE FEATURELAYER ***/
         /** Creates graphics and fields to be used within a FeatureLayer for giraffe sightings.
@@ -207,28 +230,6 @@ $(document).ready(function () {
 
             /* Add FeatureLayer to map. */
             map.add(giraffeFeatureLayer);
-        }
-
-        /** Constructs a widget listing all layers currently loaded on the map.
-         *      Each layer gets its own panel which can be accessed through a button.
-         *  listItemCreatedFunction executes for every layer in the LayerList, in this case it
-         *  dynamically adds a legend to every layer's panel.
-         */
-        function createLayerList() {
-            var layerList = new LayerList({
-                view: view,
-                listItemCreatedFunction: function (event) {
-                    var item = event.item;
-                    /* Add a generated legend for every individual layer. */
-                    item.panel = {
-                        content: "legend",
-                        open: false
-                    }
-                }
-            });
-
-            /* Add LayerList to the view. */
-            view.ui.add(layerList, "top-left");
         }
 
         /** Generates the giraffeFeatureLayer's popup title.
@@ -498,11 +499,21 @@ $(document).ready(function () {
          *      Fixes the flickity carousel improperly displaying after appearing from a hidden state
          *  in the DOM.
          */
-        function resizeGiraffeListCarousel() {
-            console.log(1);
+        function reinstateGiraffeListCarousel() {
             /* Get flickity carousel instance for the current giraffe list */
             var flickityInstance = $('#giraffe-list').data('flickity');
+
             flickityInstance.resize();
+
+            flickityInstance.on('staticClick',
+                function(event, pointer, cellElement, cellIndex) {
+                    var overlay = document.createElement('div');
+                    overlay.className="popup-overlay";
+
+                    $(overlay).hide();
+                    $(".esri-popup__content").append(overlay);
+                    $(overlay).slideDown();
+                });
         }
     });
 });
