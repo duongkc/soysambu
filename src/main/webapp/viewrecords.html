@@ -7,6 +7,38 @@
         </ul>
         <div class="tab-content shadow bg-white">
             <div class="tab-pane container active">
+
+                <div class="form-row">
+                    <div class="col-6 form-group">
+                        <label for="date-filter-from">Date from:
+                            <span class="label-tip">(yyyy-mm-dd)</span></label>
+                        <!-- Date input field -->
+                        <div id="datepicker-from" class="input-group date" data-provide="datepicker">
+                            <input id="date-filter-from" name="date-filter-from" type="text" class="form-control" autocomplete="off">
+                            <!-- Calender button to view datepicker -->
+                            <div class="input-group-addon input-group-append">
+                                <button id="calendar-from" class="btn btn-addrecord" type="button" data-toggle="tooltip" title="Open Calendar">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 form-group">
+                        <label for="date-filter-from">Date to:
+                            <span class="label-tip">(yyyy-mm-dd)</span></label>
+                        <!-- Date input field -->
+                        <div id="datepicker-to" class="input-group date" data-provide="datepicker">
+                            <input id="date-filter-to" name="date-filter-from" type="text" class="form-control" autocomplete="off">
+                            <!-- Calender button to view datepicker -->
+                            <div class="input-group-addon input-group-append">
+                                <button id="calendar-to" class="btn btn-addrecord" type="button" data-toggle="tooltip" title="Open Calendar">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-row">
                     <div class=" col-sm-6 form-group">
                         <label for="weather-filter">Weather:</label>
@@ -56,19 +88,6 @@
                         </select>
                     </div>
                 </div>
-                <!--<div class="form-row">-->
-                <!--<div class="col-12 form-group">-->
-                <!--<label for="latitude-filter">Latitude</label>-->
-                <!--<input type="text" class="js-range-slider" id="latitude-filter" name="latitude-filter" value="" />-->
-                <!--</div>-->
-                <!--</div>-->
-
-                <!--<div class="form-row">-->
-                <!--<div class="col-12 form-group">-->
-                <!--<label for="longitude-filter">Longitude</label>-->
-                <!--<input type="text" class="js-range-slider" id="longitude-filter" name="longitude-filter" value="" />-->
-                <!--</div>-->
-                <!--</div>-->
 
                 <div class="form-row">
                     <div class="col-12 form-group">
@@ -85,6 +104,9 @@
                     <span data-toggle="tooltip" title="Click to show/hide sliders for individual group counts">
                                     <i class="fas fa-question-circle"></i>
                     </span>
+                </div>
+                <div class="form-row">
+                    <button class="btn btn-addrecord" type="button" id="reset-btn">Reset</button>
                 </div>
 
                 <div class="form-row">

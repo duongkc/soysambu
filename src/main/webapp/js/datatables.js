@@ -1,36 +1,44 @@
-// $.fn.dataTable.ext.search.push(
-//     function(settings, records) {
-//         var min = $("#latitude-filter").data().from;
-//         var max = $("#latitude-filter").data().to;
-//         var count = records[8] || 0; //
-//
-//         if ( ( isNaN( min ) && isNaN( max ) ) ||
-//             ( isNaN( min ) && count <= max ) ||
-//             ( min <= count   && isNaN( max ) ) ||
-//             ( min <= count   && count <= max ) )
-//         {
-//             return true;
-//         }
-//         return false;
-//     }
-// );
-//
-// $.fn.dataTable.ext.search.push(
-//     function(settings, records) {
-//         var min = $("#longitude-filter").data().from;
-//         var max = $("#longitude-filter").data().to;
-//         var count = records[7] || 0; //
-//
-//         if ( ( isNaN( min ) && isNaN( max ) ) ||
-//             ( isNaN( min ) && count <= max ) ||
-//             ( min <= count   && isNaN( max ) ) ||
-//             ( min <= count   && count <= max ) )
-//         {
-//             return true;
-//         }
-//         return false;
-//     }
-// );
+function convertDate() {
+    // Regex will match either '-' or '/'.
+    var d = $(this).val().split(/[-\/]/);
+
+    if (d.length == 3 && !d.some(isNaN)) {
+        var year = d[0];
+        var month = d[1];
+        var day = d[2];
+
+        // Add zero if month or day is in the single digits.
+        if (month.length < 2 && month != 0) month = '0' + month;
+        if (day.length < 2 && day != 0) day = '0' + day;
+
+        d = year + '-' + month +  '-' + day;
+        $(this).val(d);
+    }
+
+    // Check validation with JQuery validator after date is converted.
+    //$('#date').valid();
+}
+
+
+$.fn.dataTable.ext.search.push(
+    function(settings, records) {
+        var minDate = Date.parse($('#date-filter-from').val());
+        var maxDate = Date.parse($('#date-filter-to').val());
+        var date = Date.parse(records[1]);
+
+        if(minDate && !isNaN(minDate)) {
+            if(date < minDate) {
+                return false;
+            }
+        }
+        if(maxDate && !isNaN(maxDate)) {
+            if(date > maxDate) {
+                return false;
+            }
+        }
+        return true;
+    }
+);
 
 $.fn.dataTable.ext.search.push(
     function(settings, records) {
@@ -354,32 +362,6 @@ $(document).ready(function () {
             table.draw();
         });
 
-        // $("#latitude-filter").ionRangeSlider({
-        //     type: "double",
-        //     min: -0.5119,
-        //     max: -0.22335,
-        //     from: -0.5119,
-        //     to: -0.22335,
-        //     step: 0.015,
-        //     grid: true,
-        //     onChange: function (data) {
-        //         table.draw();
-        //     }
-        // });
-        //
-        // $("#longitude-filter").ionRangeSlider({
-        //     type: "double",
-        //     min: 35.8,
-        //     max: 36.9,
-        //     from: 36.0917,
-        //     to: 36.7257,
-        //     step: 0.0317,
-        //     grid: true,
-        //     onChange: function (data) {
-        //         table.draw();
-        //     }
-        // });
-
         $("#juv-count").ionRangeSlider({
             type: "double",
             min: 0,
@@ -463,5 +445,47 @@ $(document).ready(function () {
                 table.draw();
             }
         });
+
+        $("#datepicker-from").datepicker({
+            format: 'yyyy-mm-dd',
+            endDate: '0d',
+            forceparse: true,
+            todayHighlight: true,
+            autoclose: true,
+            showOnFocus: false,
+            todayBtn: "linked"
+        }).on("change", function() {
+            console.log("datepicker-from test");
+            table.draw();
+        });
+        $('#datepicker-from').datepicker('setDate', '2017-10-02');
+        $('#datepicker-from').change(convertDate);
+        $('#calendar-from').click( function () {
+            $(this).tooltip('hide')
+        });
+
+
+        $("#datepicker-to").datepicker({
+            format: 'yyyy-mm-dd',
+            endDate: '0d',
+            forceparse: true,
+            todayHighlight: true,
+            autoclose: true,
+            showOnFocus: false,
+            todayBtn: "linked"
+        }).on("change", function() {
+            console.log("datepicker-to test");
+            table.draw();
+        });
+        $('#datepicker-to').change(convertDate);
+        $('#datepicker-to').datepicker('setDate', 'now');
+        $('#calendar-to').click( function () {
+            $(this).tooltip('hide')
+        });
+
+        $('#reset-btn').click(function(){
+            console.log("Reset");
+        });
+
     });
 });
