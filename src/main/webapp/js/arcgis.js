@@ -44,8 +44,9 @@ $(document).ready(function () {
            have been added. _.debounce makes sure the resizeGiraffeListCarousel function is only called once.
            The Flickity carousel will not or incorrectly display if this code is omitted or applied to a
            parent div. */
-        var lazyFlickityResize = _.debounce(reinstateGiraffeListCarousel, 50);
+        var lazyFlickityResize = _.debounce(activateGiraffeListCarousel, 50);
         $(document).arrive(".avatar", lazyFlickityResize);
+
 
         /*** LAYERS ***/
         /* Generate layers when view is resolved. */
@@ -401,10 +402,10 @@ $(document).ready(function () {
         /** Generates a list of all identified giraffes within the sighting.
          *      The list is displayed as a carousel managed by Flickity, this allows for multiple avatars
          *  to be grouped and enables swiping for easier navigation on mobile phones.
-         *      Note: the Flickity carousel is successfully initialized after this function is called but
+         *      Important: the Flickity carousel is successfully initialized after this function is called but
          *  due to the carousel being hidden during initialization it will not display properly. Because of
          *  this a solution was made involving calling a re-size of the carousel after it is displayed. This
-         *  solution is found under the UI section of this file.
+         *  solution is found under the UI section of this script.
          *
          * @param {object} attributes - the feature's giraffe sighting attributes.
          * @returns {HTMLObjectElement} row - HTML containing a carousel of giraffe avatars.
@@ -414,6 +415,9 @@ $(document).ready(function () {
             var col = document.createElement('div');
 
             row.className = "row justify-content-center";
+            row.innerHTML = '<span><b>Identified Giraffes</b> (' +
+                attributes.count + ' Giraffes)<br>';
+
             col.className = 'col-lg-11';
             col.id = "giraffe-list";
 
@@ -428,7 +432,7 @@ $(document).ready(function () {
                     avatar.className = "avatar";
                     /* Set avatar's inner HTML to the avatar image,
                        webapp.css contains all the avatar styling (.avatar) */
-                    avatar.innerHTML = '<img data-flickity-lazyload="assets/img/avatars/avatar.png"><br>Ben';
+                    avatar.innerHTML = '<img data-flickity-lazyload="assets/img/avatars/avatar.png"><br>M021';
 
                     col.appendChild(avatar);
                 }
@@ -495,16 +499,18 @@ $(document).ready(function () {
             }
         }
 
-        /** Calls the resize function for the flickity carousel associated with the giraffe-list.
-         *      Fixes the flickity carousel improperly displaying after appearing from a hidden state
-         *  in the DOM.
+        /** Activates any event listeners associated with the giraffe popup's giraffe-list carousel.
+         *  Event listeners will only work after the element is placed within the DOM; this function
+         *  is called as a response to a giraffe list entering the DOM.
+         *      Important: Calls the resize function for the flickity carousel which fixes the flickity
+         *  carousel improperly displaying after appearing from a hidden state.
          */
-        function reinstateGiraffeListCarousel() {
+        function activateGiraffeListCarousel() {
             /* Get flickity carousel instance for the current giraffe list */
             var flickityInstance = $('#giraffe-list').data('flickity');
-
             flickityInstance.resize();
 
+            /* Event listener for open popup overlay on giraffe list avatar click */
             flickityInstance.on('staticClick',
                 function(event, pointer, cellElement, cellIndex) {
                     var overlay = document.createElement('div');

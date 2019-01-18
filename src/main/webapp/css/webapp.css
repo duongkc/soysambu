@@ -80,7 +80,7 @@ body {
 }
 .popup-overlay {
     position:absolute;
-    background-color: white;
+    background-color: #f7f1e3;
     box-sizing: border-box;
     top: 42px;
     bottom: 40px;
@@ -91,6 +91,7 @@ body {
 /* Giraffe avatars */
 .avatar {
     width: 20%;
+    margin-top: 8px;
     margin-bottom: 8px;
     text-align: center;
 }
@@ -99,6 +100,11 @@ body {
     border-radius:50%;
     width: 60px;
     height: 60px;
+
+    transition: box-shadow .3s;
+}
+.avatar img:hover{
+    box-shadow: 0px 0px 15px rgba(33,33,33,.5);
 }
 @media only screen and (max-width: 1200px) {
     /* 4 Avatars when screens <= 1200px */
