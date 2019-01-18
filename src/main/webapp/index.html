@@ -30,6 +30,9 @@
     <div class="carousel-inner">
         <!-- Hide GIS carousel item if initially loaded on mobile. -->
         <div id="gis-header" class="carousel-item active d-none d-sm-block"></div>
+        <div id="Statistics" class="carousel-item">
+            <h1>Statistics</h1>
+        </div>
         <div id="add-record-header" class="carousel-item">
             <h1>Add Sighting</h1>
             <p class="d-none d-sm-block">Add a new organism sighting to the Soysambu database</p>
@@ -46,13 +49,16 @@
     <nav class="navbar navbar-expand navbar-dark justify-content-center">
         <ul class="navbar-nav">
             <li class="nav-item active" id="nav-gis" data-target="#carousel-header" data-slide-to="0">
-                <a class="nav-link">GIS</a>
+                <a class="nav-link"><i class="fas fa-globe-africa"></i> GIS</a>
             </li>
-            <li class="nav-item" id="nav-addrecord" data-page="addsighting.html" data-target="#carousel-header" data-slide-to="1">
-                <a class="nav-link">Add Sighting</a>
+            <li class="nav-item" id="nav-statistics" data-page="statistics.html" data-target="#carousel-header" data-slide-to="1">
+                <a class="nav-link"><i class="fas fa-chart-pie"></i> Statistics</a>
             </li>
-            <li class="nav-item" id="nav-viewrecords" data-page="viewsightings.html"  data-target="#carousel-header" data-slide-to="2">
-                <a class="nav-link">View Sightings</a>
+            <li class="nav-item" id="nav-addrecord" data-page="addsighting.html" data-target="#carousel-header" data-slide-to="2">
+                <a class="nav-link"><i class="fas fa-edit"></i> Add Sighting</a>
+            </li>
+            <li class="nav-item" id="nav-viewrecords" data-page="viewsightings.html"  data-target="#carousel-header" data-slide-to="3">
+                <a class="nav-link"><i class="fas fa-database"></i> View Sightings</a>
             </li>
         </ul>
     </nav>
@@ -70,14 +76,20 @@
 </footer>
 
 <!-- SCRIPTS -->
-<!-- JQuery validator plugin -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 <!-- Underscore utility library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
-<!-- Fontawesome library -->
+<!-- JQuery validator plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<!-- FontAwesome library -->
 <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1" crossorigin="anonymous"></script>
 <!-- Bootstrap datepicker library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+
+<!-- Chart.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+<!-- Chart.js - Patternomaly library -->
+<script src="https://cdn.jsdelivr.net/npm/patternomaly@1.3.2/dist/patternomaly.min.js"></script>
+
 <!-- ArcGIS JavaScript API -->
 <script src="https://js.arcgis.com/4.10/"></script>
 <script src="js/arcgis.js"></script>
