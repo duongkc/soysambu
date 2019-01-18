@@ -191,6 +191,33 @@ tr {
 /* Hide search input field */
 .dataTables_filter { display: none;}
 
+/* Reset button */
+.btn-reset {
+    float:right;
+    border:2px solid #f7d794;
+    background-color: #ffffff;
+}
+
+.adv-filter {
+    /*display: block;*/
+    /*text-align: center;*/
+    font-size: 1rem;
+}
+
+.adv-box {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+}
+
+.adv-box-border {
+    border-top: 4px solid #f7d794;
+}
+
+.btn-addrecord.collapsed:before {
+    border-color: #f5cd79;
+    background-color: #fff1ae;
+    box-shadow: 0 0 4px 1px rgba(245, 205, 121, 1);
+}
+
 /* --- Footer --- */
 footer {
     display:block;

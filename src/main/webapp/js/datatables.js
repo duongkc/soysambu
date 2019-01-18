@@ -422,7 +422,7 @@ $(document).ready(function () {
             }
         });
 
-        $("#total-count").ionRangeSlider({
+        var a = $("#total-count").ionRangeSlider({
             type: "double",
             min: 0,
             max: getMax(records, "count").count,
@@ -455,7 +455,6 @@ $(document).ready(function () {
             showOnFocus: false,
             todayBtn: "linked"
         }).on("change", function() {
-            console.log("datepicker-from test");
             table.draw();
         });
         $('#datepicker-from').datepicker('setDate', '2017-10-02');
@@ -474,7 +473,6 @@ $(document).ready(function () {
             showOnFocus: false,
             todayBtn: "linked"
         }).on("change", function() {
-            console.log("datepicker-to test");
             table.draw();
         });
         $('#datepicker-to').change(convertDate);
@@ -484,8 +482,42 @@ $(document).ready(function () {
         });
 
         $('#reset-btn').click(function(){
-            console.log("Reset");
-        });
 
+            $('#weather-filter').val(" ");
+            $('#habitat-filter').val(" ");
+            $('#activity-filter').val(" ");
+            $('#datepicker-from').datepicker('setDate', '2017-10-02');
+            $('#datepicker-to').datepicker('setDate', 'now');
+            $('#total-count').data("ionRangeSlider").update({
+                from: 0,
+                to: getMax(records, "count").count
+            });
+            $('#female-a-count').data("ionRangeSlider").update({
+                from: 0,
+                to: getMax(records, "female_adult").female_adult
+            });
+            $('#female-sa-count').data("ionRangeSlider").update({
+                from: 0,
+                to: getMax(records, "female_subadult").female_subadult
+            });
+            $('#male-a-count').data("ionRangeSlider").update({
+                from: 0,
+                to: getMax(records, "male_adult").male_adult
+            });
+            $('#male-sa-count').data("ionRangeSlider").update({
+                from: 0,
+                to: getMax(records, "male_subadult").male_subadult
+            });
+            $('#juv-count').data("ionRangeSlider").update({
+                from: 0,
+                to: getMax(records, "juvenile").juvenile
+            });
+            $('#unidentified-count').data("ionRangeSlider").update({
+                from: 0,
+                to: getMax(records, "unidentified").unidentified
+            });
+            table.draw();
+            window.scrollTo(0,0);
+        });
     });
 });

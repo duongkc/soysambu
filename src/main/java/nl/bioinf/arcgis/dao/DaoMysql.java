@@ -60,7 +60,6 @@ public class DaoMysql implements ArcGISDao {
             /* Call the driver, create connection, and run prepareStatements()
             * */
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/arcgis", "root", "");
             String dburl = "jdbc:mysql://" + host + "/" + db;
             connection = DriverManager.getConnection(dburl, user, password);
             System.out.println("Connecting to database");

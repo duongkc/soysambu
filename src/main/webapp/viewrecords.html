@@ -14,10 +14,12 @@
                             <span class="label-tip">(yyyy-mm-dd)</span></label>
                         <!-- Date input field -->
                         <div id="datepicker-from" class="input-group date" data-provide="datepicker">
-                            <input id="date-filter-from" name="date-filter-from" type="text" class="form-control" autocomplete="off">
+                            <input id="date-filter-from" name="date-filter-from" type="text" class="form-control"
+                                   autocomplete="off">
                             <!-- Calender button to view datepicker -->
                             <div class="input-group-addon input-group-append">
-                                <button id="calendar-from" class="btn btn-addrecord" type="button" data-toggle="tooltip" title="Open Calendar">
+                                <button id="calendar-from" class="btn btn-addrecord" type="button" data-toggle="tooltip"
+                                        title="Open Calendar">
                                     <i class="fa fa-calendar" aria-hidden="true"></i>
                                 </button>
                             </div>
@@ -29,10 +31,12 @@
                             <span class="label-tip">(yyyy-mm-dd)</span></label>
                         <!-- Date input field -->
                         <div id="datepicker-to" class="input-group date" data-provide="datepicker">
-                            <input id="date-filter-to" name="date-filter-from" type="text" class="form-control" autocomplete="off">
+                            <input id="date-filter-to" name="date-filter-from" type="text" class="form-control"
+                                   autocomplete="off">
                             <!-- Calender button to view datepicker -->
                             <div class="input-group-addon input-group-append">
-                                <button id="calendar-to" class="btn btn-addrecord" type="button" data-toggle="tooltip" title="Open Calendar">
+                                <button id="calendar-to" class="btn btn-addrecord btn-adv" type="button" data-toggle="tooltip"
+                                        title="Open Calendar">
                                     <i class="fa fa-calendar" aria-hidden="true"></i>
                                 </button>
                             </div>
@@ -96,69 +100,58 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <button class="btn btn-addrecord" type="button" data-toggle="collapse"
-                            data-target="#collapseCountSliders"
-                            aria-expanded="false" aria-controls="collapseCountSliders">
-                        Advanced
-                    </button>
-                    <span data-toggle="tooltip" title="Click to show/hide sliders for individual group counts">
-                                    <i class="fas fa-question-circle"></i>
-                    </span>
+                    <div class="col-4">
+                        <button id="advanced-btn" class="btn btn-addrecord collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseCountSliders"
+                                aria-expanded="false" aria-controls="collapseCountSliders">
+                            Advanced
+                        </button>
+                    </div>
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <button class="btn btn-reset" type="button" id="reset-btn">Reset</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div style="margin-top: 20px; box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)">
+            <div class="collapse adv-box-border col-12" id="collapseCountSliders">
+                <div class="form-row">
+                    <div class="col-6 form-group">
+                        <label for="male-a-count" class="adv-filter">Male Adult</label>
+                        <input type="text" class="js-range-slider" id="male-a-count" name="male-a-count"
+                               value=""/>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label for="male-sa-count" class="adv-filter">Male Subadult</label>
+                        <input type="text" class="js-range-slider" id="male-sa-count" name="male-sa-count"
+                               value=""/>
+                    </div>
                 </div>
                 <div class="form-row">
-                    <button class="btn btn-addrecord" type="button" id="reset-btn">Reset</button>
+                    <div class="col-6 form-group">
+                        <label for="female-a-count" class="adv-filter">Female Adult</label>
+                        <input type="text" class="js-range-slider" id="female-a-count" name="female-a-count"
+                               value=""/>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label for="female-sa-count" class="adv-filter">Female Subadult</label>
+                        <input type="text" class="js-range-slider" id="female-sa-count"
+                               name="female-sa-count" value=""/>
+                    </div>
                 </div>
 
                 <div class="form-row">
-                    <div class="collapse" id="collapseCountSliders">
-                        <div class="card card-body">
-                            <div class="form-row">
-                                <div class="col-12 form-group">
-                                    <label for="male-a-count">Male Adult Count</label>
-                                    <input type="text" class="js-range-slider" id="male-a-count" name="male-a-count"
-                                           value=""/>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="col-12 form-group">
-                                    <label for="male-sa-count">Male Adolescent Count</label>
-                                    <input type="text" class="js-range-slider" id="male-sa-count" name="male-sa-count"
-                                           value=""/>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="col-12 form-group">
-                                    <label for="female-a-count">Female Adult Count</label>
-                                    <input type="text" class="js-range-slider" id="female-a-count" name="female-a-count"
-                                           value=""/>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="col-12 form-group">
-                                    <label for="female-sa-count">Female Adolescent Count</label>
-                                    <input type="text" class="js-range-slider" id="female-sa-count"
-                                           name="female-sa-count" value=""/>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-12 form-group">
-                                    <label for="juv-count">Juvenile Count</label>
-                                    <input type="text" class="js-range-slider" id="juv-count" name="juv-count"
-                                           value=""/>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="col-12 form-group">
-                                    <label for="unidentified-count">Unidentified Count</label>
-                                    <input type="text" class="js-range-slider" id="unidentified-count"
-                                           name="unidentified-count" value=""/>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-6 form-group">
+                        <label for="juv-count" class="adv-filter">Juvenile</label>
+                        <input type="text" class="js-range-slider" id="juv-count" name="juv-count"
+                               value=""/>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label for="unidentified-count" class="adv-filter">Unidentified</label>
+                        <input type="text" class="js-range-slider" id="unidentified-count"
+                               name="unidentified-count" value=""/>
                     </div>
                 </div>
             </div>
