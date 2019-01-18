@@ -48,12 +48,12 @@ $(document).ready( function() {
         $('[data-toggle="tooltip"]').tooltip();
     }
 
+    /*** DYNAMIC PAGE CONTENTS - EVENT LISTENERS***/
     /* Dynamically load GIS page when navigated to using AJAX. */
     $('#nav-gis').click(function() {
         /* If already on the GIS page, don't continue. */
         if($('#nav-gis').hasClass('active')) return false;
 
-        /* Fadeout current content. */
         $('#content, #footer').fadeOut(175, function () {
             /* Slide up header carousel when on small screen. */
             if (window.innerWidth < 750) {
@@ -65,12 +65,11 @@ $(document).ready( function() {
 
     /* Dynamically load other pages when navigated to using AJAX. */
     $('#nav-addrecord, #nav-viewrecords').click(function() {
-        /* If already on the current page, don't continue. */
+        /* If already on the clicked page, don't continue. */
         if($(this).hasClass('active')) return false;
         /* Get target page from <li>'s data-page attribute */
         const page = $(this).attr("data-page");
 
-        /* Fadeout current content. */
         $('#content, #map').fadeOut(175).promise().done(function () {
             /* Empty content div.
                Load appropriate page and fade into content div. */

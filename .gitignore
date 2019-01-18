@@ -14,5 +14,11 @@ gradlew.bat
 # Compiled Classes
 *.class
 
-#Tomcat
+# Tomcat
 *.iml
+
+# Web XML
+web.xml
+
+# Out
+/out/
