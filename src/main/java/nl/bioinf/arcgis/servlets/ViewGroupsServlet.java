@@ -4,21 +4,16 @@ import com.google.gson.Gson;
 import nl.bioinf.arcgis.dao.DaoMysql;
 import nl.bioinf.arcgis.dao.DatabaseException;
 import nl.bioinf.arcgis.objects.GiraffeGroup;
-import nl.bioinf.arcgis.objects.Sighting;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Class of a webservlet creating a page to display all available groups in the database
@@ -32,9 +27,13 @@ public class ViewGroupsServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         dao = DaoMysql.getInstance();
+        String username = getServletContext().getInitParameter("database.user");
+        String database = getServletContext().getInitParameter("database");
+        String password = getServletContext().getInitParameter("database.password");
+        String host = getServletContext().getInitParameter("database.host");
         try {
-            System.out.println("Database is being initialized...");
-            dao.connect();
+            System.out.println("[ViewGroupsServlet] connecting to database ");
+            dao.connect(username, database, password, host);
         } catch (DatabaseException e) {
             e.printStackTrace();
         }

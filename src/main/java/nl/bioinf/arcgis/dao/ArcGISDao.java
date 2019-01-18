@@ -7,7 +7,7 @@ public interface ArcGISDao {
      *
      * @throws DatabaseException
      */
-    void connect() throws DatabaseException;
+    void connect(String user, String db, String password, String host) throws DatabaseException;
 
     /**
      * closes the connection to the data layer and frees resources.
