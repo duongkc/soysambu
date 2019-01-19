@@ -64,28 +64,27 @@ create table Sighting (
 );
 
 create table Giraffe (
-    giraffe_id char(4) not null unique,
-    name char(100) not null unique,
-    gender enum ('MALE', 'FEMALE'),
-    deceased bit not null,
-    notes text,
-    age int,
-    mother char(4),
-    father char(4),
-    primary key (giraffe_id),
-    foreign key (father) references Giraffe(giraffe_id),
-    foreign key (mother) references Giraffe(giraffe_id)
+  giraffe_id char(4) not null unique,
+  name varchar(50) unique,
+  gender enum ('MALE', 'FEMALE', 'UNKNOWN'),
+  age_class enum ('ADULT', 'SUB_ADULT', 'JUVENILE'),
+  mother char(4),
+  father char(4),
+  notes text,
+  deceased bit not null,
+  primary key (giraffe_id),
+  foreign key (mother) references Giraffe(giraffe_id),
+  foreign key (father) references Giraffe(giraffe_id)
 );
 
 create table Giraffe_List (
   id int auto_increment not null unique,
-  giraffe_id int not null,
+  giraffe_id char(4) not null,
   giraffe_group_id int not null,
   primary key (id),
   foreign key (giraffe_id) references Giraffe(giraffe_id),
   foreign key (giraffe_group_id) references Giraffe_Group(group_id)
 );
-
 
 create table Sighting_AnimalGroup (
   id int auto_increment not null unique,
