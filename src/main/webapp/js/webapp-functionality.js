@@ -1,4 +1,4 @@
-$(document).ready( function() {
+$(document).ready(function() {
     /*** RESPONSIVE HEADER ***/
     /* Initial header set depending on screen size. */
     if (window.innerWidth < 750) {

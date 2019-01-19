@@ -96,7 +96,7 @@ body {
     background: #ea8685;
 }
 .navbar-nav .nav-item:nth-child(2):after {
-    background: #f3a683;
+    background: #badc58;
 }
 .navbar-nav .nav-item:nth-child(3):after {
     background: #f7d794;
@@ -115,6 +115,11 @@ body {
 .tab-pane {
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+/* Statistics navigation pills */
+#statistics-scrollspy .nav-item .active{
+    background-color: #badc58;
 }
 
 /* --- Forms --- */
