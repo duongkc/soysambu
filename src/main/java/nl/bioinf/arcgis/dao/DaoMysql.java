@@ -25,6 +25,7 @@ public class DaoMysql implements ArcGISDao {
     public static final String ADD_SIGHTING = "add_sighting";
     public static final String GET_NEW_GIRAFFE_GROUP = "get_new_giraffe_group";
     public static final String GET_NEW_SIGHTING = "get_new_sighting";
+    public static final String GET_GIRAFFES = "get_giraffes";
 
     private Map<String, PreparedStatement> preparedStatements = new HashMap<>();
 
@@ -35,7 +36,7 @@ public class DaoMysql implements ArcGISDao {
     //List of obtained data objects from queries
     private List<GiraffeGroup> giraffeGroupList = new ArrayList<>();
     private List<Sighting> sightingList = new ArrayList<>();
-
+    private List<Giraffe> giraffeList = new ArrayList<>();
 
     private static DaoMysql uniqueInstance;
 
@@ -109,6 +110,10 @@ public class DaoMysql implements ArcGISDao {
         String fetchNewSighting = "SELECT * from Sighting where sighting_id = (SELECT max(sighting_id) FROM Sighting)";
         PreparedStatement ps_new_sighting = connection.prepareStatement(fetchNewSighting);
         this.preparedStatements.put(GET_NEW_SIGHTING, ps_new_sighting);
+
+        String fetchGiraffes = "SELECT * from Giraffe";
+        PreparedStatement ps_giraffes = connection.prepareStatement(fetchGiraffes);
+        this.preparedStatements.put(GET_GIRAFFES, ps_giraffes);
     }
 
     /**
@@ -149,6 +154,7 @@ public class DaoMysql implements ArcGISDao {
 
     /**
      * Fetches ALL data from Giraffe_Group table.
+     * @param preparedStatementName Giraffe group fetch statement
      * @return List of Giraffe Groups
      * @throws SQLException
      */
@@ -199,6 +205,7 @@ public class DaoMysql implements ArcGISDao {
 
     /**
      * Fetches ALL data in Sighting table from database, puts it into objects
+     * @param preparedStatementName Sightings fetch statement
      * @return List of Sighting objects
      * @throws SQLException
      */
@@ -244,6 +251,54 @@ public class DaoMysql implements ArcGISDao {
         }
         rs.close();
         return sightingList;
+    }
+
+    /**
+     * Fetches all data in Giraffe table from database, puts it in objects
+     * @param preparedStatementName Giraffe fetch statement
+     * @return List of Giraffe objects
+     * @throws SQLException
+     */
+    public List<Giraffe> fetchGiraffes(String preparedStatementName) throws SQLException {
+        giraffeList.clear();
+        PreparedStatement ps = this.preparedStatements.get(preparedStatementName);
+        ResultSet rs = ps.executeQuery();
+        Gender gender;
+        Age age;
+        String first_seen;
+
+        while (rs.next()) {
+            String id = rs.getString("giraffe_id");
+            String name = rs.getString("name");
+            /* Convert unknown genders to unknown enum */
+            if(rs.getString("gender") != null && !rs.getString("gender").isEmpty()) {
+                gender = Gender.valueOf(rs.getString("gender"));
+            } else {
+                gender = Gender.UNKNOWN;
+            }
+            /* Convert unknown ages to unknown enum */
+            if (rs.getString("age") != null && !rs.getString("age").isEmpty()) {
+                age = Age.valueOf(rs.getString("age"));
+            } else {
+                age = Age.UNKNOWN;
+            }
+            String mother = rs.getString("mother");
+            String father = rs.getString("father");
+            String description = rs.getString("description");
+            boolean deceased = Boolean.valueOf(rs.getString("deceased"));
+            String notes = rs.getString("notes");
+
+            /* Set first seen date to unknown if it's not known */
+            if (rs.getString("first_seen") != null && !rs.getString("first_seen").isEmpty()) {
+                first_seen = rs.getString("first_seen");
+            } else {
+                first_seen = "Unknown";
+            }
+            Giraffe giraffe = new Giraffe(id, name, gender, age, mother, father, description, deceased, notes, first_seen);
+            giraffeList.add(giraffe);
+        }
+        rs.close();
+        return giraffeList;
     }
 
     /**

@@ -97,6 +97,9 @@ body {
 .nav-tabs .nav-item:after {
     background: #f7d794;
 }
+.tab-content {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important
+}
 .tab-pane {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -224,7 +227,7 @@ tr {
 
 /* --- Footer --- */
 footer {
-    display:block;
+    display: none;
     padding-top: 15px;
     background: #2d3436;
     text-align:center;
