@@ -74,7 +74,7 @@ public class RecordsServlet extends HttpServlet {
         List<String> sightingGroupRecords = new ArrayList<>();
         int n = 0;
         for(String sighting : sightingsRecords) {
-            String group = groupsRecords.get(n).replaceAll("^id", "group_id");
+            String group = groupsRecords.get(n).replaceAll("\"id\"", "\"group_id\"");
             if(n == 0) {
                 sighting = sighting.replaceAll("\\[\\{", "");
                 group = group.replaceAll("\\[\\{", "");
@@ -113,7 +113,7 @@ public class RecordsServlet extends HttpServlet {
             String end = "}";
             sb.append(start);
             sb.append(record);
-            sb.append(", ");
+            sb.append(", \"giraffes\":");
             sb.append(randomGiraffes.toString());
             sb.append(end);
             recordList.add(sb.toString());
@@ -131,9 +131,6 @@ public class RecordsServlet extends HttpServlet {
      */
     private List<String> getRandomGiraffes(String giraffes, int count, Integer[] numbers) {
         List<String> giraffeRecords = Arrays.asList(giraffes.split("},\\{"));
-        /* Parse first and last string in the list, removal of old syntax */
-        giraffeRecords.get(0).replaceAll("\\[\\{", "");
-        giraffeRecords.get(giraffeRecords.size()-1).replaceAll("}]", "");
         List<String> selectedGiraffes = new ArrayList<>();
 
         /* Get the necessary amount of giraffes */
@@ -143,9 +140,13 @@ public class RecordsServlet extends HttpServlet {
         /* Add the chosen giraffes to a list, and build a List of strings */
         List<String> parsedGiraffes = new ArrayList<>();
         for(String giraffe : selectedGiraffes) {
+            giraffe = giraffe.replaceAll("\\[\\{", "");
+            giraffe = giraffe.replaceAll("}]", "");
             StringBuilder sb = new StringBuilder();
             String start = "{";
             String end = "}";
+
+            giraffe = giraffe.replaceAll("\"id\"", "\"giraffe_id\"");
             sb.append(start);
             sb.append(giraffe);
             sb.append(end);

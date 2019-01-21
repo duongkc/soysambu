@@ -19,7 +19,6 @@ function convertDate() {
     //$('#date').valid();
 }
 
-
 $.fn.dataTable.ext.search.push(
     function(settings, records) {
         var minDate = Date.parse($('#date-filter-from').val());
@@ -272,62 +271,62 @@ $(document).ready(function () {
             ],
             "columnDefs": [
                 {
-                    "targets": [ 0 ],
+                    "targets": [0],
                     "visible": false,
                     "searchable": false
                 },
                 {
-                    "targets": [ 4 ],
+                    "targets": [4],
                     "visible": false,
                     "searchable": true
                 },
                 {
-                    "targets": [ 5 ],
+                    "targets": [5],
                     "visible": false,
                     "searchable": true
                 },
                 {
-                    "targets": [ 6 ],
+                    "targets": [6],
                     "visible": false,
                     "searchable": true
                 },
                 {
-                    "targets": [ 7 ],
+                    "targets": [7],
                     "visible": false,
                     "searchable": true
                 },
                 {
-                    "targets": [ 8 ],
+                    "targets": [8],
                     "visible": false,
                     "searchable": true
                 },
                 {
-                    "targets": [ 9 ],
+                    "targets": [9],
                     "visible": false,
                     "searchable": true
                 },
                 {
-                    "targets": [ 10 ],
+                    "targets": [10],
                     "visible": false,
                     "searchable": true
                 },
                 {
-                    "targets": [ 11 ],
+                    "targets": [11],
                     "visible": false,
                     "searchable": true
                 },
                 {
-                    "targets": [ 12 ],
+                    "targets": [12],
                     "visible": false,
                     "searchable": true
                 },
                 {
-                    "targets": [ 13 ],
+                    "targets": [13],
                     "visible": false,
                     "searchable": true
                 },
                 {
-                    "targets": [ 14 ],
+                    "targets": [14],
                     "visible": false,
                     "searchable": true
                 }
@@ -350,15 +349,15 @@ $(document).ready(function () {
             }
         });
 
-        $('#weather-filter').change( function() {
+        $('#weather-filter').change(function () {
             table.draw();
         });
 
-        $('#habitat-filter').change( function() {
+        $('#habitat-filter').change(function () {
             table.draw();
         });
 
-        $('#activity-filter').change( function() {
+        $('#activity-filter').change(function () {
             table.draw();
         });
 
@@ -454,12 +453,12 @@ $(document).ready(function () {
             autoclose: true,
             showOnFocus: false,
             todayBtn: "linked"
-        }).on("change", function() {
+        }).on("change", function () {
             table.draw();
         });
         $('#datepicker-from').datepicker('setDate', '2017-10-02');
         $('#datepicker-from').change(convertDate);
-        $('#calendar-from').click( function () {
+        $('#calendar-from').click(function () {
             $(this).tooltip('hide')
         });
 
@@ -472,16 +471,16 @@ $(document).ready(function () {
             autoclose: true,
             showOnFocus: false,
             todayBtn: "linked"
-        }).on("change", function() {
+        }).on("change", function () {
             table.draw();
         });
         $('#datepicker-to').change(convertDate);
         $('#datepicker-to').datepicker('setDate', 'now');
-        $('#calendar-to').click( function () {
+        $('#calendar-to').click(function () {
             $(this).tooltip('hide')
         });
 
-        $('#reset-btn').click(function(){
+        $('#reset-btn').click(function () {
 
             $('#weather-filter').val(" ");
             $('#habitat-filter').val(" ");
@@ -517,7 +516,7 @@ $(document).ready(function () {
                 to: getMax(records, "unidentified").unidentified
             });
             table.draw();
-            window.scrollTo(0,0);
+            window.scrollTo(0, 0);
         });
     });
 });

@@ -66,24 +66,15 @@ create table Sighting (
 create table Giraffe (
   giraffe_id char(4) not null unique,
   name varchar(50) unique,
-  gender enum ('MALE', 'FEMALE', 'UNKNOWN'),
-  age_class enum ('ADULT', 'SUB_ADULT', 'JUVENILE'),
+  gender enum ('MALE', 'FEMALE'),
+  age enum ('JUVENILE', 'SUBADULT','ADULT'),
   mother char(4),
   father char(4),
+  description text,
+  deceased boolean not null,
   notes text,
-  deceased bit not null,
-  primary key (giraffe_id),
-  foreign key (mother) references Giraffe(giraffe_id),
-  foreign key (father) references Giraffe(giraffe_id)
-    gender enum ('MALE', 'FEMALE'),
-    age enum ('JUVENILE', 'SUBADULT','ADULT'),
-    mother char(4),
-    father char(4),
-    description text,
-    deceased boolean not null,
-    notes text,
-    first_seen date,
-    primary key (giraffe_id)
+  first_seen date,
+  primary key (giraffe_id)
 #     foreign key (father) references Giraffe(giraffe_id),
 #     foreign key (mother) references Giraffe(giraffe_id)
 );
@@ -95,6 +86,7 @@ lines terminated by '\n'
 ignore 1 lines
 (giraffe_id, name, gender, age, mother, father, description, deceased, notes, first_seen);
 
+# Enable NULL to avoid Java SQL errors (0000-00-00 is not a valid date)
 update Giraffe set first_seen = NULL where first_seen = '0000-00-00';
 
 create table Giraffe_List (

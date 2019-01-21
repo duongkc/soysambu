@@ -66,24 +66,15 @@ create table Sighting (
 create table Giraffe (
   giraffe_id char(4) not null unique,
   name varchar(50) unique,
-  gender enum ('MALE', 'FEMALE', 'UNKNOWN'),
-  age_class enum ('ADULT', 'SUB_ADULT', 'JUVENILE'),
+  gender enum ('MALE', 'FEMALE'),
+  age enum ('JUVENILE', 'SUBADULT','ADULT'),
   mother char(4),
   father char(4),
+  description text,
+  deceased boolean not null,
   notes text,
-  deceased bit not null,
-  primary key (giraffe_id),
-  foreign key (mother) references Giraffe(giraffe_id),
-  foreign key (father) references Giraffe(giraffe_id)
-    gender enum ('MALE', 'FEMALE'),
-    age enum ('JUVENILE', 'SUBADULT','ADULT'),
-    mother char(4),
-    father char(4),
-    description text,
-    deceased boolean not null,
-    notes text,
-    first_seen date,
-    primary key (giraffe_id)
+  first_seen date,
+  primary key (giraffe_id)
 #     foreign key (father) references Giraffe(giraffe_id),
 #     foreign key (mother) references Giraffe(giraffe_id)
 );
