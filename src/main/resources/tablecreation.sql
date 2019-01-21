@@ -25,7 +25,7 @@ create table temp (
   primary key(id)
 );
 
-load data local infile '/homes/idvansanten/soysambu-conservancy-gis/data/Giraffe Survey Database October 2018 v2.txt'
+load data local infile 'C:/Users/Ilse/soysambu-conservancy-gis/data/Giraffe Survey Database October 2018 v2.txt'
 into table temp
 fields terminated by '\t'
 lines terminated by '\n'
@@ -65,21 +65,33 @@ create table Sighting (
 
 create table Giraffe (
     giraffe_id char(4) not null unique,
-    name char(100) not null unique,
+    name char(100),
     gender enum ('MALE', 'FEMALE'),
-    deceased bit not null,
-    notes text,
-    age int,
+    age enum ('JUVENILE', 'SUBADULT','ADULT'),
     mother char(4),
     father char(4),
-    primary key (giraffe_id),
-    foreign key (father) references Giraffe(giraffe_id),
-    foreign key (mother) references Giraffe(giraffe_id)
+    description text,
+    deceased boolean not null,
+    notes text,
+    first_seen date,
+    primary key (giraffe_id)
+#     foreign key (father) references Giraffe(giraffe_id),
+#     foreign key (mother) references Giraffe(giraffe_id)
 );
+
+load data local infile 'C:/Users/Ilse/soysambu-conservancy-gis/data/giraffe_data.txt'
+into table Giraffe
+fields terminated by '\t'
+lines terminated by '\n'
+ignore 1 lines
+(giraffe_id, name, gender, age, mother, father, description, deceased, notes, first_seen);
+
+# Enable NULL to avoid Java SQL errors (0000-00-00 is not a valid date)
+update Giraffe set first_seen = NULL where first_seen = '0000-00-00';
 
 create table Giraffe_List (
   id int auto_increment not null unique,
-  giraffe_id int not null,
+  giraffe_id char(4) not null,
   giraffe_group_id int not null,
   primary key (id),
   foreign key (giraffe_id) references Giraffe(giraffe_id),
