@@ -5,9 +5,7 @@ Welcome to the repository for the Soysambu Conservancy GIS web application. This
 Sightings of giraffe groups can be added to the online database, and detailed information can be viewed per sighting.   
 
 ## Table of Contents  
-- [Prerequisites](#prerequisites)  
-- [How to run](#how to run)  
-- [Features](#features)  
+[TOC]
 
 ## Prerequisites  
 - Local or remote MySQL Database (MySQL version 5.5 or higher)  
@@ -77,7 +75,7 @@ The following section contains information on the features of the web applicatio
 ### Map  
 The homepage of the web application contains a map with points denoting giraffe sightings. Clicking on them will show information based on the group. Group composition and individual giraffes will also be shown.  
 ### Add Sighting  
-The second feature is the adding of new sightings. Entering all relevant information will result in the sighting being added to the database, and can be seen on the [Map](#map). The added sighting may also be viewed in the table of [View Sightings](#view sightings).  
+The second feature is the adding of new sightings. Entering all relevant information will result in the sighting being added to the database, and can be seen on the map. The added sighting may also be viewed in the table of the View Sightings page.  
 ### View Sightings  
 The view sightings feature is one that shows a table containing all sightings available in the database. Clicking on a row will result in a second table showing relevant information of that sighting.
 The table may also be filtered based on date, weather, habitat, activity, and group size. Clicking on the 'advanced' button will provide more filters for group composition.
