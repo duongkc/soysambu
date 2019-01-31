@@ -266,6 +266,59 @@ form {
 /* ---
    Footer
    --- */
+/* Table scroll */
+.table-scroll {
+    height: calc(100vh - 400px); /*add banner height*/
+    overflow-y:scroll;
+}
+
+/* TR and TD details (currently disabled) */
+td.details-control {
+    background: url('https://datatables.net/examples/resources/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
+}
+/* Table row pointer for clicking */
+tr {
+    cursor: pointer;
+}
+/* Hide search input field */
+.dataTables_filter { display: none;}
+
+/* Reset button */
+.btn-reset {
+    float:right;
+    border:2px solid #f7d794;
+    background-color: #ffffff;
+}
+
+.adv-filter {
+    /*display: block;*/
+    /*text-align: center;*/
+    font-size: 1rem;
+}
+
+.adv-box {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+}
+
+.adv-box-border {
+    border-top: 4px solid #f7d794;
+}
+
+.btn-advanced.collapsed {
+    background-color: #f7d794;
+}
+
+.btn-advanced {
+    background-color: #fff1ae;
+    border-color: #f5cd79;
+    box-shadow: 0 0 4px 1px rgba(245, 205, 121, 1);
+}
+
+/* --- Footer --- */
 footer {
     display: none;
     padding-top: 15px;
