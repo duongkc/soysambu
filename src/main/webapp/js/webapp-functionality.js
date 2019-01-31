@@ -64,7 +64,7 @@ $(document).ready( function() {
     });
 
     /* Dynamically load other pages when navigated to using AJAX. */
-    $('#nav-addrecord, #nav-viewrecords').click(function() {
+    $('#nav-addsighting, #nav-viewsightings').click(function() {
         /* If already on the clicked page, don't continue. */
         if($(this).hasClass('active')) return false;
         /* Get target page from <li>'s data-page attribute */
