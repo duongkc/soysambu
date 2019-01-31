@@ -1,3 +1,6 @@
+/**
+ * Function implementing convert date to the correct format
+ */
 function convertDate() {
     // Regex will match either '-' or '/'.
     var d = $(this).val().split(/[-\/]/);
@@ -14,11 +17,14 @@ function convertDate() {
         d = year + '-' + month +  '-' + day;
         $(this).val(d);
     }
-
-    // Check validation with JQuery validator after date is converted.
-    //$('#date').valid();
 }
 
+/**
+ * Adding custom date filter to datatable
+ * Checks if the date is between the entered values
+ * from the DatePicker
+ * Returns rows where this is true
+ */
 $.fn.dataTable.ext.search.push(
     function(settings, records) {
         var minDate = Date.parse($('#date-filter-from').val());
@@ -39,6 +45,12 @@ $.fn.dataTable.ext.search.push(
     }
 );
 
+/**
+ * Adding custom total count filter to datatable
+ * Checks if the count is between the given values from
+ * the custom RangeSlider
+ * Returns rows where this is true
+ */
 $.fn.dataTable.ext.search.push(
     function(settings, records) {
         var min = parseInt( $("#total-count").data().from, 10 );
@@ -56,6 +68,12 @@ $.fn.dataTable.ext.search.push(
     }
 );
 
+/**
+ * Adding custom male adult count filter to datatable
+ * Checks if the count is between the given values from
+ * the custom RangeSlider
+ * Returns rows where this is true
+ */
 $.fn.dataTable.ext.search.push(
     function(settings, records) {
         var min = parseInt( $("#male-a-count").data().from, 10 );
@@ -72,7 +90,12 @@ $.fn.dataTable.ext.search.push(
         return false;
     }
 );
-
+/**
+ * Adding custom male subadult count filter to datatable
+ * Checks if the count is between the given values from
+ * the custom RangeSlider
+ * Returns rows where this is true
+ */
 $.fn.dataTable.ext.search.push(
     function(settings, records) {
         var min = parseInt( $("#male-sa-count").data().from, 10 );
@@ -90,6 +113,12 @@ $.fn.dataTable.ext.search.push(
     }
 );
 
+/**
+ * Adding custom female adult count filter to datatable
+ * Checks if the count is between the given values from
+ * the custom RangeSlider
+ * Returns rows where this is true
+ */
 $.fn.dataTable.ext.search.push(
     function(settings, records) {
         var min = parseInt( $("#female-a-count").data().from, 10 );
@@ -107,6 +136,12 @@ $.fn.dataTable.ext.search.push(
     }
 );
 
+/**
+ * Adding custom female subadult count filter to datatable
+ * Checks if the count is between the given values from
+ * the custom RangeSlider
+ * Returns rows where this is true
+ */
 $.fn.dataTable.ext.search.push(
     function(settings, records) {
         var min = parseInt( $("#female-sa-count").data().from, 10 );
@@ -124,6 +159,12 @@ $.fn.dataTable.ext.search.push(
     }
 );
 
+/**
+ * Adding custom juvenile count filter to datatable
+ * Checks if the count is between the given values from
+ * the custom RangeSlider
+ * Returns rows where this is true
+ */
 $.fn.dataTable.ext.search.push(
     function(settings, records) {
         var min = parseInt( $("#juv-count").data().from, 10 );
@@ -141,6 +182,12 @@ $.fn.dataTable.ext.search.push(
     }
 );
 
+/**
+ * Adding custom unidentified count filter to datatable
+ * Checks if the count is between the given values from
+ * the custom RangeSlider
+ * Returns rows where this is true
+ */
 $.fn.dataTable.ext.search.push(
     function(settings, records) {
         var min = parseInt( $("#unidentified-count").data().from, 10 );
@@ -158,6 +205,11 @@ $.fn.dataTable.ext.search.push(
     }
 );
 
+/**
+ * Adding custom weather filter to datatable
+ * Checks if the weather equals the chosen weather filter option
+ * Returns rows where this is true
+ */
 $.fn.dataTable.ext.search.push(
     function(settings, records) {
         var weatherOption = $('#weather-filter').val().toUpperCase().replace(" ", "_");
@@ -173,6 +225,11 @@ $.fn.dataTable.ext.search.push(
     }
 );
 
+/**
+ * Adding custom habitat type filter to datatable
+ * Checks if the habitat type equals the chosen habitat type filter option
+ * Returns rows where this is true
+ */
 $.fn.dataTable.ext.search.push(
     function(settings, records) {
         var habitatOption = $('#habitat-filter').val().toUpperCase().replace(" ", "_");
@@ -188,6 +245,11 @@ $.fn.dataTable.ext.search.push(
     }
 );
 
+/**
+ * Adding custom activity filter to datatable
+ * Checks if the activity equals the chosen activity filter option
+ * Returns rows where this is true
+ */
 $.fn.dataTable.ext.search.push(
     function(settings, records) {
         var activityOption = $('#activity-filter').val().toUpperCase().replace(" ", "_");
@@ -203,6 +265,13 @@ $.fn.dataTable.ext.search.push(
     }
 );
 
+/**
+ * getMax function to get dynamic maximum values for the
+ * custom RangeSliders and ensure users cannot go over the maximum
+ * @param dataList records
+ * @param attribute
+ * @returns {*} maximum value
+ */
 function getMax(dataList, attribute) {
     var max;
     for (var i=0 ; i<dataList.length ; i++) {
@@ -212,18 +281,37 @@ function getMax(dataList, attribute) {
     return max;
 }
 
+/**
+ * Start of page; gets the JSON
+ */
 $(document).ready(function () {
     $.getJSON('records', function (records) {
+        /**
+         * Parse string's first char to uppercase (for weather/activity/habitat)
+         * @param string
+         * @returns {string}
+         */
         function upperCaseStringParse(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
 
+        /**
+         * Parse strings to lower case and replaces _ with spaces
+         * For weather/activity/habitat enums
+         * @param string
+         * @returns string
+         */
         function parseString(string) {
             return string.replace("_", " ").replace(/\w\S*/g, function (word) {
                 return word.charAt(0) + word.slice(1).toLowerCase();
             });
         }
 
+        /**
+         * Formats the sub-table when clicking on rows in the table
+         * @param d
+         * @returns {string}
+         */
         function format(d) {
             return '<table cellpadding="1" cellspacing="0" border="1" style="padding-left:10px;font-size: 12px;">' +
                 "<tr><td><strong>Activity</strong></td><td>" + upperCaseStringParse(parseString(d.activity)) + "</td>" +
@@ -241,7 +329,10 @@ $(document).ready(function () {
                 '</table>';
         }
 
-        console.log(records);
+        /**
+         * Creates the datatable with all necessary settings
+         * @type {*|jQuery}
+         */
         var table = $('#datatable1').DataTable({
             data: records,
             scrollY: "calc(100vh - 350px)",
@@ -269,6 +360,7 @@ $(document).ready(function () {
                 {data: "juvenile"}, //13
                 {data: "unidentified"} //14
             ],
+            /* Define which columns are invisible in the main table, yet searchable through filters */
             "columnDefs": [
                 {
                     "targets": [0],
@@ -349,18 +441,24 @@ $(document).ready(function () {
             }
         });
 
+        //Redraw the table when the weather filter changes
         $('#weather-filter').change(function () {
             table.draw();
         });
 
+        //Redraw the table when the habitat filter changes
         $('#habitat-filter').change(function () {
             table.draw();
         });
 
+        //Redraw the table when the activity filter changes
         $('#activity-filter').change(function () {
             table.draw();
         });
 
+        /*RangeSlider settings for juvenile count filter
+        * Also handles onChange events (redraw table)
+        * */
         $("#juv-count").ionRangeSlider({
             type: "double",
             min: 0,
@@ -373,6 +471,9 @@ $(document).ready(function () {
             }
         });
 
+        /*RangeSlider settings for male adult count filter
+        * Also handles onChange events (redraw table)
+        * */
         $("#male-a-count").ionRangeSlider({
             type: "double",
             min: 0,
@@ -385,6 +486,9 @@ $(document).ready(function () {
             }
         });
 
+        /*RangeSlider settings for male subadult count filter
+        * Also handles onChange events (redraw table)
+        * */
         $("#male-sa-count").ionRangeSlider({
             type: "double",
             min: 0,
@@ -397,6 +501,9 @@ $(document).ready(function () {
             }
         });
 
+        /*RangeSlider settings for female adult count filter
+        * Also handles onChange events (redraw table)
+        * */
         $("#female-a-count").ionRangeSlider({
             type: "double",
             min: 0,
@@ -409,6 +516,9 @@ $(document).ready(function () {
             }
         });
 
+        /*RangeSlider settings for female subadult count filter
+        * Also handles onChange events (redraw table)
+        * */
         $("#female-sa-count").ionRangeSlider({
             type: "double",
             min: 0,
@@ -421,6 +531,9 @@ $(document).ready(function () {
             }
         });
 
+        /*RangeSlider settings for total group size count filter
+        * Also handles onChange events (redraw table)
+        * */
         var a = $("#total-count").ionRangeSlider({
             type: "double",
             min: 0,
@@ -433,6 +546,9 @@ $(document).ready(function () {
             }
         });
 
+        /*RangeSlider settings for unidentified count filter
+        * Also handles onChange events (redraw table)
+        * */
         $("#unidentified-count").ionRangeSlider({
             type: "double",
             min: 0,
@@ -445,6 +561,9 @@ $(document).ready(function () {
             }
         });
 
+        /* Datepicker for filter form settings (from-date)
+        * Also handles the onChange event (redraw table)
+        * */
         $("#datepicker-from").datepicker({
             format: 'yyyy-mm-dd',
             endDate: '0d',
@@ -456,13 +575,18 @@ $(document).ready(function () {
         }).on("change", function () {
             table.draw();
         });
+        //Set the date to the earliest known date in database (to be changed when necessary)
         $('#datepicker-from').datepicker('setDate', '2017-10-02');
         $('#datepicker-from').change(convertDate);
+        //Hide the pop-up calendar when a new date is selected
         $('#calendar-from').click(function () {
             $(this).tooltip('hide')
         });
 
 
+        /* Datepicker for filter form settings (to-date)
+        * Also handles the onChange event (redraw table)
+        * */
         $("#datepicker-to").datepicker({
             format: 'yyyy-mm-dd',
             endDate: '0d',
@@ -474,12 +598,16 @@ $(document).ready(function () {
         }).on("change", function () {
             table.draw();
         });
+        //Set the date to today
         $('#datepicker-to').change(convertDate);
         $('#datepicker-to').datepicker('setDate', 'now');
+        //Hide the pop-up calendar when a new date is selected
         $('#calendar-to').click(function () {
             $(this).tooltip('hide')
         });
 
+        /* Reset ALL filters when the Reset button is clicked
+        * */
         $('#reset-btn').click(function () {
 
             $('#weather-filter').val(" ");

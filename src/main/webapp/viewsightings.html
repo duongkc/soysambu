@@ -5,10 +5,12 @@
                 <a class="nav-link active" data-toggle="tab">Filter</a>
             </li>
         </ul>
+        <!--Filter form-->
         <div class="tab-content shadow bg-white viewsightings-form">
             <div class="tab-pane container active">
-
+                <!--Datepickers (from-date and to-date)-->
                 <div class="form-row">
+                    <!--From-date datepicker-->
                     <div class="col-6 form-group">
                         <label for="date-filter-from">Date from:
                             <span class="label-tip">(yyyy-mm-dd)</span></label>
@@ -25,7 +27,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <!--To-date datepicker-->
                     <div class="col-6 form-group">
                         <label for="date-filter-from">Date to:
                             <span class="label-tip">(yyyy-mm-dd)</span></label>
@@ -43,7 +45,9 @@
                         </div>
                     </div>
                 </div>
+                <!--Weather and habitat filters-->
                 <div class="form-row">
+                    <!--Weather filter-->
                     <div class=" col-sm-6 form-group">
                         <label for="weather-filter">Weather:</label>
                         <select id="weather-filter" name="weather-filter" class="custom-select">
@@ -55,6 +59,7 @@
                             <option value="Unknown">Unknown</option>
                         </select>
                     </div>
+                    <!--Habitat filter-->
                     <div class="col-sm-6 form-group">
                         <label for="habitat-filter">Habitat:
                             <span data-toggle="tooltip" title="Environment of the organism group's location">
@@ -71,6 +76,7 @@
                         </select>
                     </div>
                 </div>
+                <!--Activity filter-->
                 <div class="form-row">
                     <div class="col-sm-6 form-group">
                         <label for="activity-filter">Activity:
@@ -92,14 +98,16 @@
                         </select>
                     </div>
                 </div>
-
+                <!--Total group size (total count) range slider filter -->
                 <div class="form-row">
                     <div class="col-12 form-group slidertheme-blue">
                         <label for="total-count">Total Group Size</label>
                         <input type="text" class="js-range-slider" id="total-count" name="total-count" value=""/>
                     </div>
                 </div>
+                <!--'Advanced' options button and 'Reset' button row -->
                 <div class="form-row">
+                    <!--Advanced button-->
                     <div class="col-4">
                         <button id="advanced-btn" class="btn btn-advanced collapsed" type="button" data-toggle="collapse"
                                 data-target="#collapseCountSliders"
@@ -107,7 +115,9 @@
                             Advanced
                         </button>
                     </div>
+                    <!--Empty space in between buttons -->
                     <div class="col-4"></div>
+                    <!--Reset button-->
                     <div class="col-4">
                         <button class="btn btn-reset" type="button" id="reset-btn">Reset</button>
                     </div>
@@ -115,39 +125,49 @@
             </div>
 
         </div>
+        <!--Advanced options box-->
         <div style="margin-top: 20px; box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)">
+            <!--Collapse/expand advanced options box-->
             <div class="collapse adv-box-border col-12 bottom-buffer" id="collapseCountSliders">
+                <!--Male adult and subadult range sliders-->
                 <div class="form-row">
+                    <!--Male adult range slider-->
                     <div class="col-6 form-group slidertheme-blue">
                         <label for="male-a-count" class="adv-filter">Male Adult</label>
                         <input type="text" class="js-range-slider" id="male-a-count" name="male-a-count"
                                value=""/>
                     </div>
+                    <!--Male subadult range slider-->
                     <div class="col-6 form-group slidertheme-blue">
                         <label for="male-sa-count" class="adv-filter">Male Subadult</label>
                         <input type="text" class="js-range-slider" id="male-sa-count" name="male-sa-count"
                                value=""/>
                     </div>
                 </div>
+                <!--Female adult and subadult range sliders-->
                 <div class="form-row">
+                    <!--Female adult range slider-->
                     <div class="col-6 form-group slidertheme-blue">
                         <label for="female-a-count" class="adv-filter">Female Adult</label>
                         <input type="text" class="js-range-slider" id="female-a-count" name="female-a-count"
                                value=""/>
                     </div>
+                    <!--Female subadult range slider-->
                     <div class="col-6 form-group slidertheme-blue">
                         <label for="female-sa-count" class="adv-filter">Female Subadult</label>
                         <input type="text" class="js-range-slider" id="female-sa-count"
                                name="female-sa-count" value=""/>
                     </div>
                 </div>
-
+                <!--Juvenile and unidentified range sliders-->
                 <div class="form-row">
+                    <!--Juvenile range slider-->
                     <div class="col-6 form-group slidertheme-blue">
                         <label for="juv-count" class="adv-filter">Juvenile</label>
                         <input type="text" class="js-range-slider" id="juv-count" name="juv-count"
                                value=""/>
                     </div>
+                    <!--Unidentified range slider-->
                     <div class="col-6 form-group slidertheme-blue">
                         <label for="unidentified-count" class="adv-filter">Unidentified</label>
                         <input type="text" class="js-range-slider" id="unidentified-count"
@@ -157,6 +177,8 @@
             </div>
         </div>
     </div>
+    <!--Section containing the datatable-->
+    <!--filled with datatables.js-->
     <div class="col-lg-5 top-buffer w-100">
         <div id="datatable ">
             <table id="datatable1" class="display nowrap" width="100%">

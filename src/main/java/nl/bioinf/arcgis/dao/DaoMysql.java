@@ -32,7 +32,7 @@ public class DaoMysql implements ArcGISDao {
     //Creation of dao object
     private static DaoMysql dao;
 
-    Connection connection;
+    private Connection connection;
     //List of obtained data objects from queries
     private List<GiraffeGroup> giraffeGroupList = new ArrayList<>();
     private List<Sighting> sightingList = new ArrayList<>();

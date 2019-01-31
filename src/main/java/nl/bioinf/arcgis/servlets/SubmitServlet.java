@@ -21,25 +21,9 @@ public class SubmitServlet extends HttpServlet {
 
     private DaoMysql dao;
 
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        dao = DaoMysql.getInstance();
-        String username = getServletContext().getInitParameter("database.user");
-        String database = getServletContext().getInitParameter("database");
-        String password = getServletContext().getInitParameter("database.password");
-        String host = getServletContext().getInitParameter("database.host");
-        try {
-            System.out.println("Connecting to database...");
-            dao.connect(username, database, password, host);
-        } catch (DatabaseException e) {
-            e.printStackTrace();
-        }
-    }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher view;
-
+        connect();
         /*Get all the data from the request and put it in a list named data
         * */
         String[] data = new String[13];
@@ -59,7 +43,8 @@ public class SubmitServlet extends HttpServlet {
 
         try {
             dao.addRecords(data);
-        } catch (SQLException e) {
+            dao.disconnect();
+        } catch (SQLException | DatabaseException e) {
             e.printStackTrace();
         }
         view = request.getRequestDispatcher("index.html");
@@ -68,5 +53,22 @@ public class SubmitServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
+
+    /**
+     * Connect method to be called to create connection for each submit
+     */
+    protected void connect() {
+        dao = DaoMysql.getInstance();
+        String username = getServletContext().getInitParameter("database.user");
+        String database = getServletContext().getInitParameter("database");
+        String password = getServletContext().getInitParameter("database.password");
+        String host = getServletContext().getInitParameter("database.host");
+        try {
+            System.out.println("Submit connect");
+            dao.connect(username, database, password, host);
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
     }
 }
