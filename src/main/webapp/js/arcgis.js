@@ -154,6 +154,10 @@ $(document).ready(function () {
                 name: "habitatType",
                 alias: "Environment of sighting location.",
                 type: "string"
+            }, {
+                name: "giraffes",
+                alias: "List of identified giraffes within the group.",
+                type: "xml"
             }];
 
             return new Promise(function (resolve) {
@@ -416,7 +420,6 @@ $(document).ready(function () {
             row.className = "row justify-content-center";
             row.innerHTML = '<span><b>Identified Giraffes</b> (' +
                 attributes.count + ' Giraffes)<br>';
-
             col.className = 'col-lg-11';
             col.id = "giraffe-list";
 
@@ -426,12 +429,24 @@ $(document).ready(function () {
              */
             var avatarsLoaded = new Promise(function(resolve) {
                 var avatars = [];
-                for (i = 0; i < attributes.count; i++) {
+                for (var i in attributes.giraffes) {
+                    var giraffe = attributes.giraffes[i];
                     var avatar = document.createElement('div');
-                    avatar.className = "avatar";
-                    /* Set avatar's inner HTML to the avatar image,
+
+                    /* Set custom avatar class depending on the giraffe's age and gender. */
+                    if (giraffe.age === "JUVENILE") {
+                        avatar.className = "avatar JUVENILE"
+                    } else {
+                        avatar.className = "avatar " + giraffe.gender + giraffe.age;
+                    }
+
+                    /* Set avatar's inner HTML to the giraffe's avatar image,
                        webapp.css contains all the avatar styling (.avatar) */
-                    avatar.innerHTML = '<img data-flickity-lazyload="assets/img/avatars/avatar.png"><br>M021';
+                    avatar.innerHTML = '<img data-flickity-lazyload="assets/img/avatars/avatar-' + giraffe.giraffe_id + '.png"><br>'
+                        +  '<span class="avatar-id">' + giraffe.giraffe_id + '</span><br>';
+
+                    /* Add giraffe name below avatar if named, else add "-". */
+                    avatar.innerHTML += giraffe.name ? giraffe.name : "-";
 
                     col.appendChild(avatar);
                 }
@@ -510,15 +525,15 @@ $(document).ready(function () {
             flickityInstance.resize();
 
             /* Event listener for open popup overlay on giraffe list avatar click */
-            flickityInstance.on('staticClick',
-                function(event, pointer, cellElement, cellIndex) {
-                    var overlay = document.createElement('div');
-                    overlay.className="popup-overlay";
-
-                    $(overlay).hide();
-                    $(".esri-popup__content").append(overlay);
-                    $(overlay).slideDown();
-                });
+            // flickityInstance.on('staticClick',
+            //     function(event, pointer, cellElement, cellIndex) {
+            //         var overlay = document.createElement('div');
+            //         overlay.className="popup-overlay";
+            //
+            //         $(overlay).hide();
+            //         $(".esri-popup__content").append(overlay);
+            //         $(overlay).slideDown();
+            //     });
         }
     });
 });
