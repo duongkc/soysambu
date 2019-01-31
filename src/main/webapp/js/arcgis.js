@@ -4,9 +4,8 @@ $(document).ready(function () {
         "esri/views/MapView",
         "esri/layers/FeatureLayer",
         "esri/geometry/Point",
-        "esri/widgets/LayerList",
-        "js/lib/chart.bundle.min.js"
-    ], function (Map, MapView, FeatureLayer, Point, LayerList, Chart) {
+        "esri/widgets/LayerList"
+    ], function (Map, MapView, FeatureLayer, Point, LayerList) {
         /*** MAP AND VIEW ***/
         var map = new Map({
             basemap: "topo"

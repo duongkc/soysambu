@@ -10,28 +10,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Bootstrap datepicker stylesheet -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker3.min.css">
-    <!-- ArcGIS API Stylesheet -->
-    <link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/themes/dark/main.css">
-    <!-- Webapp custom stylesheet -->
-    <link rel="stylesheet" href="css/webapp.css">
-
-    <!--Datatables stylesheet-->
-    <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">-->
+    <!-- Datatables stylesheet -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-
-    <!--Plugin CSS file with desired skin-->
+    <!-- Datatables skin stylesheet -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
-
-    <!-- PREREQUISITE SCRIPTS -->
-    <!--JQuery, Popper and Bootstrap libraries -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <!-- Webapp functionality script -->
-    <script src="js/webapp-functionality.js"></script>
-    <!-- Bootstrap core and Datepicker stylesheets -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-datepicker3.min.css">
     <!-- Flickity carousel stylesheet -->
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <!-- ArcGIS API stylesheet -->
@@ -39,25 +21,13 @@
     <!-- Webapp custom stylesheet -->
     <link rel="stylesheet" href="css/webapp.css">
 
-    <!-- Bootstrap, Datepicker, JQuery, Popper and FontAwesome libraries -->
-    <script src="js/lib/jquery-3.3.1.min.js"></script>
-    <script src="js/lib/popper.min.js"></script>
-    <script src="js/lib/bootstrap.min.js"></script>
-    <script src="js/lib/bootstrap-datepicker.min.js"></script>
-    <script src="js/lib/fontawesome.min.js"></script>
-    <!-- Arrive.js to watch for DOM element creation -->
-    <script src="js/lib/arrive.min.js"></script>
-    <!-- JQuery Input Validator and Underscore libraries -->
-    <script src="js/lib/jquery.validate.min.js"></script>
-    <script src="js/lib/underscore-min.js"></script>
-    <!-- Flickity carousel Library -->
-    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-    <!-- Include Chart.js and patternomaly (chart patterns) library -->
-    <script src="js/lib/chart.bundle.min.js"></script>
-    <script src="js/lib/patternomaly.min.js"></script>
-    <!-- ArcGIS JavaScript API -->
-    <script src="https://js.arcgis.com/4.10/"></script>
-    <script src="js/arcgis.js"></script>
+    <!-- PREREQUISITE SCRIPTS -->
+    <!-- JQuery, Popper and Bootstrap libraries -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Webapp functionality script -->
+    <script src="js/webapp-functionality.js"></script>
 </head>
 
 <body>
@@ -79,7 +49,7 @@
 
 <!-- NAVBAR -->
 <div class="container-fluid sticky-top">
-    <nav class="navbar navbar-expand navbar-dark justify-content-center">
+    <nav class="main-nav navbar navbar-expand navbar-dark justify-content-center">
         <ul class="navbar-nav">
             <li class="nav-item active" id="nav-gis" data-target="#carousel-header" data-slide-to="0">
                 <a class="nav-link"><i class="fas fa-globe-africa"></i> GIS</a>
@@ -105,21 +75,33 @@
     <p>Soysambu Conservancy GIS WebApp - <i>by Niels van der Vegt & Ilse van Santen</i></p>
 </footer>
 
-<!-- SCRIPTS -->
+<!-- SCRIPTS - JS UTILITIES -->
 <!-- Underscore utility library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+<!-- Arrive.js to watch for DOM element creation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js" integrity="sha256-WXHeZwrvHW+Qpj5u2NCVyiL5XEVf/AzrYL5i4w4aRHM=" crossorigin="anonymous"></script>
+<!-- JQuery validator plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+<!-- SCRIPTS - DOM ELEMENTS -->
 <!-- Fontawesome library -->
 <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1" crossorigin="anonymous"></script>
 <!-- Bootstrap datepicker library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
-<!-- JQuery validator plugin -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-<!--Range Slider-->
+<!-- Datatables.js library -->
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<!-- Range Slider -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
-<!--Datatables library-->
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<!-- Chart.js and patternomaly (chart patterns) library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js" integrity="sha256-MZo5XY1Ah7Z2Aui4/alkfeiq3CopMdV/bbkc/Sh41+s=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/patternomaly@1.3.2/dist/patternomaly.min.js"></script>
+<!-- Flickity carousel Library -->
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+<!-- SCRIPTS - GIS -->
 <!-- ArcGIS JavaScript API -->
 <script src="https://js.arcgis.com/4.10/"></script>
 <script src="js/arcgis.js"></script>
+
 </body>
 </html>

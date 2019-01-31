@@ -18,7 +18,7 @@ body {
     margin-bottom: 30px;
 }
 .container-fluid {
-    padding: 0px;
+    padding: 0;
 }
 #page {
     position: relative;
@@ -36,25 +36,22 @@ body {
    Header Carousel
    --- */
 .carousel-item {
-    height: 140px;
+    height: 125px;
     text-align: center;
 }
 .carousel-item h1 {
-    padding-top: 30px;
+    padding-top: 20px;
 }
+/* Individual carousel items (header images) */
 .carousel-item:nth-child(1) {
-    /*background: url(../assets/img/gis_header.png);*/
-    background-position:50% 70%;
-    background-size:cover;
 }
 .carousel-item:nth-child(2) {
     /* Header background image */
-    background: url(../assets/img/add_record_header.jpg);
-    background-position:55% 35%;
+    background: url(../assets/img/add_record_header.jpg) 55% 35%;
     background-size:cover;
     /* Text makeup */
     color: white;
-    text-shadow: 0px 0px 5px grey;
+    text-shadow: 0 0 5px grey;
 }
 .carousel-item:nth-child(3) {
 }
@@ -70,6 +67,7 @@ body {
     min-height: 100px;
     height: 130px;
 }
+/* Center popup title and increase height for chart on small screens */
 @media only screen and (max-width: 580px) {
     .popup-title-container {
         justify-content: center;
@@ -78,6 +76,7 @@ body {
         height: 200px;
     }
 }
+/* Create an overlay spanning the popup body */
 .popup-overlay {
     position:absolute;
     background-color: #f7f1e3;
@@ -88,37 +87,7 @@ body {
     right: 0;
     z-index: 50;
 }
-/* Giraffe avatars */
-.avatar {
-    width: 20%;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    text-align: center;
-}
-.avatar img{
-    border: 4px solid #c7b89e;
-    border-radius:50%;
-    width: 60px;
-    height: 60px;
-
-    transition: box-shadow .3s;
-}
-.avatar img:hover{
-    box-shadow: 0px 0px 15px rgba(33,33,33,.5);
-}
-@media only screen and (max-width: 1200px) {
-    /* 4 Avatars when screens <= 1200px */
-    .avatar {
-        width: 25%;
-    }
-}
-@media only screen and (max-width: 1000px) {
-    /* 3 Avatars when screens <= 1000px */
-    .avatar {
-        width: 33%;
-    }
-}
-/* Flickity carousel defaults */
+/* Flickity carousel - Navigation arrow styling */
 .flickity-prev-next-button {
     width: 30px;
     height: 30px;
@@ -133,10 +102,36 @@ body {
 .flickity-prev-next-button.next {
     right: -10px;
 }
+/* Giraffe avatars */
+.avatar {
+    width: 20%;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+.avatar img{
+    cursor: pointer;
+    border: 4px solid #c7b89e;
+    border-radius:50%;
+    width: 60px;
+    height: 60px;
+    transition: box-shadow .3s;
+}
+.avatar img:hover{
+    box-shadow: 0 0 10px rgba(33,33,33,.5);
+}
+/* Show 4 Avatars when screens <= 1200px */
+@media only screen and (max-width: 1200px) {
+    .avatar { width: 25%; }
+}
+/* Show 3 Avatars when screens <= 1000px */
+@media only screen and (max-width: 1000px) {
+    .avatar { width: 33%; }
+}
 
 
 /* ---
-   Navigation bars
+   Navigation bars - Default styling
    --- */
 .navbar {
     border: none;
@@ -144,12 +139,10 @@ body {
     background: #2d3436;
 }
 .nav-item {
+    cursor: pointer;
     position:relative;
-    padding-left: 5px;
-    padding-bottom: 4px;
-    padding-right: 5px;
 }
-
+/* Animated bar under nav items */
 .nav-item:after {
     overflow: visible;
     content: '';
@@ -161,31 +154,51 @@ body {
     height: 4px;
     transition: width .3s;
 }
-.nav-item:hover:after, nav-item.active:after {
+/* On hover, animate the colored bar */
+.nav-item:hover:after, .nav-item.active:after {
     width: 100%;
 }
 
-/* Header navigation bar */
-.navbar-nav .nav-item:nth-child(1):after {
+/* ---
+   Navigation bars - Main navigation bar
+   --- */
+.main-nav .nav-item {
+    padding: 0 5px 4px 5px;
+}
+/* Nav item bar colors */
+.main-nav .navbar-nav .nav-item:nth-child(1):after {
     background: #ea8685;
 }
-.navbar-nav .nav-item:nth-child(2):after {
+.main-nav .navbar-nav .nav-item:nth-child(2):after {
     background: #f7d794;
 }
-.navbar-nav .nav-item:nth-child(3):after {
+.main-nav .navbar-nav .nav-item:nth-child(3):after {
     background: #6a89cc;
 }
-/* Tab navigation bars */
-.nav-tabs .nav-item:after {
-    width: 100%;
-    background: #f7d794;
-}
+
+/* ---
+   Navigation bars - Tab navigation bars
+   --- */
 .tab-content {
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important
 }
 .tab-pane {
     padding-top: 10px;
     padding-bottom: 10px;
+}
+/* ---
+   Navigation bars - Tab navigation bars - Add sighting page
+   --- */
+.sighting-nav .nav-item:after, .organism-nav .nav-item:after{
+    width: 100%;
+    background: #f7d794;
+}
+/* ---
+   Navigation bars - Tab navigation bars - View sightings page
+   --- */
+.viewsightings-nav .nav-item:after {
+    width: 100%;
+    background: #6a89cc;
 }
 
 
@@ -216,7 +229,6 @@ form {
     right: 0;
     z-index: 9999;
 }
-
 
 /* ---
    Forms - Add Record
@@ -264,14 +276,8 @@ form {
 
 
 /* ---
-   Footer
+   View Sightings Page
    --- */
-/* Table scroll */
-.table-scroll {
-    height: calc(100vh - 400px); /*add banner height*/
-    overflow-y:scroll;
-}
-
 /* TR and TD details (currently disabled) */
 td.details-control {
     background: url('https://datatables.net/examples/resources/details_open.png') no-repeat center center;
@@ -287,38 +293,49 @@ tr {
 /* Hide search input field */
 .dataTables_filter { display: none;}
 
-/* Reset button */
-.btn-reset {
-    float:right;
-    border:2px solid #f7d794;
-    background-color: #ffffff;
-}
 
+/* Reset button */
+.viewsightings-form .btn {
+    background-color: #6a89cc;
+    color: white;
+}
+.btn-reset {
+    color: black !important;
+    float:right;
+    border:2px solid #6a89cc;
+    background-color: #ffffff !important;
+}
+.viewsightings-form .form-control:focus, .viewsightings-form .custom-select:focus,
+.viewsightings-form .btn:focus {
+    border-color: #6a89cc;
+    box-shadow: 0 0 4px 1px rgba(106, 137, 204,1.0);
+}
 .adv-filter {
-    /*display: block;*/
-    /*text-align: center;*/
     font-size: 1rem;
 }
-
 .adv-box {
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
 }
-
 .adv-box-border {
-    border-top: 4px solid #f7d794;
+    padding-top: 10px;
+    border-top: 4px solid #6a89cc;
+}
+/* Range slider theme */
+.slidertheme-blue .irs-to,
+.slidertheme-blue .irs-from,
+.slidertheme-blue .irs-bar,
+.slidertheme-blue .irs-handle i {
+    background:  #6a89cc !important;
+}
+.slidertheme-blue .irs-to:before,
+.slidertheme-blue .irs-from:before {
+    border-top-color: #6a89cc !important;
 }
 
-.btn-advanced.collapsed {
-    background-color: #f7d794;
-}
 
-.btn-advanced {
-    background-color: #fff1ae;
-    border-color: #f5cd79;
-    box-shadow: 0 0 4px 1px rgba(245, 205, 121, 1);
-}
-
-/* --- Footer --- */
+/* ---
+   Footer
+   --- */
 footer {
     display: none;
     padding-top: 15px;
