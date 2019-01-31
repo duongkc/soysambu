@@ -140,26 +140,31 @@ body {
    --- */
 .navbar {
     border: none;
-    padding: 0px;
+    padding: 0;
     background: #2d3436;
 }
-.nav-item a{
-    text-align: center;
+.nav-item {
+    position:relative;
+    padding-left: 5px;
+    padding-bottom: 4px;
+    padding-right: 5px;
 }
+
 .nav-item:after {
     overflow: visible;
     content: '';
     display: block;
+    position:absolute;
+    left: 0;
+    right: 0;
     width: 0;
     height: 4px;
     transition: width .3s;
 }
-.nav-item:hover:after {
+.nav-item:hover:after, nav-item.active:after {
     width: 100%;
 }
-.nav-item.active:after {
-    width: 100%;
-}
+
 /* Header navigation bar */
 .navbar-nav .nav-item:nth-child(1):after {
     background: #ea8685;
@@ -168,10 +173,11 @@ body {
     background: #f7d794;
 }
 .navbar-nav .nav-item:nth-child(3):after {
-    background: #778ca3;
+    background: #6a89cc;
 }
 /* Tab navigation bars */
 .nav-tabs .nav-item:after {
+    width: 100%;
     background: #f7d794;
 }
 .tab-content {

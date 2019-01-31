@@ -86,6 +86,7 @@ lines terminated by '\n'
 ignore 1 lines
 (giraffe_id, name, gender, age, mother, father, description, deceased, notes, first_seen);
 
+# Enable NULL to avoid Java SQL errors (0000-00-00 is not a valid date)
 update Giraffe set first_seen = NULL where first_seen = '0000-00-00';
 
 create table Giraffe_List (
