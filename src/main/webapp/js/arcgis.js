@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    /* dojo.require, used to load ArcGIS module dependencies */
     require([
         "esri/Map",
         "esri/views/MapView",
@@ -7,11 +8,11 @@ $(document).ready(function () {
         "esri/widgets/LayerList"
     ], function (Map, MapView, FeatureLayer, Point, LayerList) {
         /*** MAP AND VIEW ***/
-        var map = new Map({
+        let map = new Map({
             basemap: "topo"
         });
 
-        var view = new MapView({
+        let view = new MapView({
             container: "map",
             map: map,
             zoom: 13,
@@ -43,7 +44,7 @@ $(document).ready(function () {
            have been added. _.debounce makes sure the resizeGiraffeListCarousel function is only called once.
            The Flickity carousel will not or incorrectly display if this code is omitted or applied to a
            parent div. */
-        var lazyFlickityResize = _.debounce(activateGiraffeListCarousel, 50);
+        let lazyFlickityResize = _.debounce(activateGiraffeListCarousel, 50);
         $(document).arrive(".avatar", lazyFlickityResize);
 
 
@@ -61,10 +62,10 @@ $(document).ready(function () {
          *  dynamically adds a legend to every layer's panel.
          */
         function createLayerList() {
-            var layerList = new LayerList({
+            let layerList = new LayerList({
                 view: view,
                 listItemCreatedFunction: function (event) {
-                    var item = event.item;
+                    let item = event.item;
                     /* Add a generated legend for every individual layer. */
                     item.panel = {
                         content: "legend",
@@ -88,9 +89,9 @@ $(document).ready(function () {
          */
         function createGiraffeFeatures() {
             /* Create a container to store coordinate point graphics. */
-            var graphics = [];
+            let graphics = [];
             /* Declare fields for every sighting attribute, a requirement of FeatureLayers. */
-            var fields = [{
+            let fields = [{
                 name: "id",
                 alias: "Sighting ID",
                 type: "oid"
@@ -165,7 +166,7 @@ $(document).ready(function () {
                 $.getJSON("records", function (sightings) {
                     /* Generate a point feature for each sighting retrieved from the database. */
                     $.each(sightings, function (key, sighting) {
-                        var point = {
+                        let point = {
                             geometry: {
                                 type: "point",
                                 longitude: sighting.longitude,
@@ -192,7 +193,7 @@ $(document).ready(function () {
          */
         function createGiraffeFeatureLayer(giraffeFeatures) {
             /* Declare a renderer, defining every feature's style. */
-            var renderer = {
+            let renderer = {
                 type: "simple",
                 symbol: {
                     type: "simple-marker"
@@ -218,7 +219,7 @@ $(document).ready(function () {
                 }]
             };
 
-            var giraffeFeatureLayer = new FeatureLayer({
+            let giraffeFeatureLayer = new FeatureLayer({
                 title: "Giraffe Sightings",
                 source: giraffeFeatures.graphics,
                 fields: giraffeFeatures.fields,
@@ -242,18 +243,17 @@ $(document).ready(function () {
          *  libraries Chart.js and Flickity, title can get away with just being a string that
          *  will be processed by the arcGIS API.
          *
-         * @returns {string} title - HTML popup template title.
+         * @returns {string} HTML popup template title.
          */
         function getGiraffePopupTitle(feature) {
             /* Get attributes from selected feature. */
-            var attributes = feature.graphic.attributes;
+            let attributes = feature.graphic.attributes;
 
-            title = '<div class="d-flex flex-row flex-wrap popup-title-container">' +
-                '<div class="d-flex">Giraffe Sighting<small>(' + attributes.id + ')</small></div>' +
-                '<div class="d-flex">' + attributes.date + ' at ' +
-                timeFormat(attributes.time) + '</div></div>';
-
-            return title;
+            /* Return a string containing the HTML popup template title. */
+            return '<div class="d-flex flex-row flex-wrap popup-title-container">' +
+                   '<div class="d-flex">Giraffe Sighting<small>(' + attributes.id + ')</small></div>' +
+                   '<div class="d-flex">' + attributes.date + ' at ' +
+                   timeFormat(attributes.time) + '</div></div>';
         }
 
 
@@ -263,15 +263,15 @@ $(document).ready(function () {
          *  2. A horizontal stacked bar chart visualizing the giraffe group composition,
          *  3. A list of all the known giraffes to have appeared in the group.
          *
-         * @returns {HTMLObjectElement} content - the giraffeFeatureLayer's popup content.
+         * @returns {HTMLElement} content - the giraffeFeatureLayer's popup content.
          */
         function getGiraffePopupContent(feature) {
             /* Get attributes from selected feature. */
-            var attributes = feature.graphic.attributes;
-            var content = document.createElement('div');
+            const attributes = feature.graphic.attributes;
+            let content = document.createElement('div');
             /* Horizontal breaks. */
-            var hr = document.createElement('HR');
-            var hr2 = document.createElement('HR');
+            let hr = document.createElement('HR');
+            let hr2 = document.createElement('HR');
 
             /* Generate content rows and append them to content div. */
             content.append(getGiraffePopupSummary(attributes));
@@ -286,26 +286,26 @@ $(document).ready(function () {
         /** Generates a summary of the giraffe sighting's attributes.
          *
          * @param {object} attributes - the feature's giraffe sighting attributes.
-         * @returns {HTMLObjectElement} row - the sighting's attribute summary as an HTML element.
+         * @returns {HTMLElement} row - the sighting's attribute summary as an HTML element.
          */
         function getGiraffePopupSummary(attributes) {
             /* Create HTML Layout of the summary. */
-            var row = document.createElement('div');
-            var col1 = document.createElement('div');
-            var col2 = document.createElement('div');
+            let row = document.createElement('div');
+            let col1 = document.createElement('div');
+            let col2 = document.createElement('div');
 
             row.className = "row";
             col1.className = "col-6"; col2.className = "col-6";
 
             /* Fill columns with sighting attributes. */
             col1.innerHTML = "<span><b>Activity: </b>" + parseDatabaseString(attributes.activity) +
-                "</span><br><span><b>Habitat: </b>" + parseDatabaseString(attributes.habitatType) +
-                "</span><br><span><b>Weather: </b>" + parseDatabaseString(attributes.weather) +
-                "</span>";
+                  "</span><br><span><b>Habitat: </b>" + parseDatabaseString(attributes.habitatType) +
+                  "</span><br><span><b>Weather: </b>" + parseDatabaseString(attributes.weather) +
+                  "</span>";
 
             col2.innerHTML = "<span><b>Longitude: </b>" + attributes.longitude +
-                "</span><br><span><b>Latitude: </b>" + attributes.latitude +
-                "</span>";
+                  "</span><br><span><b>Latitude: </b>" + attributes.latitude +
+                  "</span>";
 
             /* Add columns to row. */
             row.appendChild(col1); row.appendChild(col2);
@@ -319,14 +319,14 @@ $(document).ready(function () {
          *  parent container has responsive height through css media queries (see webapp.css).
          *
          * @param {object} attributes - the feature's giraffe sighting attributes.
-         * @returns {HTMLObjectElement} row - HTML containing chart title and canvas.
+         * @returns {HTMLElement} row - HTML containing chart title and canvas.
          */
         function getGiraffePopupChart(attributes) {
             /* Create row container and column for chart title and canvas. */
-            var row = document.createElement('div');
-            var col = document.createElement('div');
+            let row = document.createElement('div');
+            let col = document.createElement('div');
             /* Create canvas for chart */
-            var canvas = document.createElement('canvas');
+            let canvas = document.createElement('canvas');
 
             row.className = "row justify-content-center";
             col.className = "col-lg-12 popup-chart-container";
@@ -336,11 +336,11 @@ $(document).ready(function () {
                 attributes.count + ' Giraffes)<br>';
 
             /* Create chart using Chart.js and attributes values. */
-            var chart = new Chart(canvas, {
+            let chart = new Chart(canvas, {
                 type: 'horizontalBar',
                 data: {
                     labels: [""],
-                    /* Add each giraffe type as an element of the stacked chart */
+                    /* Add each giraffe type as an element of the stacked chart. */
                     datasets: [{
                         label: 'Male - A (' + attributes.male_adult + ')' ,
                         data: [attributes.male_adult],
@@ -350,7 +350,7 @@ $(document).ready(function () {
                     }, {
                         label: 'Male - SA (' + attributes.male_subadult + ')',
                         data: [attributes.male_subadult],
-                        /* Use the patternomaly library to create patterned elements */
+                        /* Use the patternomaly library to create patterned elements. */
                         backgroundColor: pattern.draw('dash', 'rgba(207, 106, 135,0.5)')
                     }, {
                         label: 'Female - A (' + attributes.female_adult + ')',
@@ -378,7 +378,7 @@ $(document).ready(function () {
                     scales: {
                         xAxes: [{
                             ticks: {
-                                /* Set min and max value of xaxis to min and max value of giraffe count */
+                                /* Set min and max value of xAxis to min and max value of giraffe count. */
                                 Min: 0,
                                 Max: attributes.count,
                                 stepSize: 1,
@@ -390,7 +390,7 @@ $(document).ready(function () {
                         }]
                     },
                     tooltips: {
-                        /* Sets tooltip for every stack element instead of the entire stack */
+                        /* Sets tooltip for every stack element instead of the entire stack. */
                         mode: 'point'
                     }
                 }
@@ -411,15 +411,15 @@ $(document).ready(function () {
          *  solution is found under the UI section of this script.
          *
          * @param {object} attributes - the feature's giraffe sighting attributes.
-         * @returns {HTMLObjectElement} row - HTML containing a carousel of giraffe avatars.
+         * @returns {HTMLElement} row - HTML containing a carousel of giraffe avatars.
          */
         function getGiraffePopupList(attributes) {
-            var row = document.createElement('div');
-            var col = document.createElement('div');
+            let row = document.createElement('div');
+            let col = document.createElement('div');
 
             row.className = "row justify-content-center";
-            row.innerHTML = '<span><b>Identified Giraffes</b> (' +
-                attributes.count + ' Giraffes)<br>';
+            row.innerHTML = '<span><b>Identified Giraffes</b> (' + attributes.count + ' Giraffes)<br>';
+
             col.className = 'col-lg-11';
             col.id = "giraffe-list";
 
@@ -427,11 +427,11 @@ $(document).ready(function () {
                a promise so that all avatars are known and linked before the Flickity carousel is
                initiated.
              */
-            var avatarsLoaded = new Promise(function(resolve) {
-                var avatars = [];
-                for (var i in attributes.giraffes) {
-                    var giraffe = attributes.giraffes[i];
-                    var avatar = document.createElement('div');
+            let avatarsLoaded = new Promise(function(resolve) {
+                let avatars = [];
+                for (let i in attributes.giraffes) {
+                    let giraffe = attributes.giraffes[i];
+                    let avatar = document.createElement('div');
 
                     /* Set custom avatar class depending on the giraffe's age and gender. */
                     if (giraffe.age === "JUVENILE") {
@@ -521,19 +521,8 @@ $(document).ready(function () {
          */
         function activateGiraffeListCarousel() {
             /* Get flickity carousel instance for the current giraffe list */
-            var flickityInstance = $('#giraffe-list').data('flickity');
+            let flickityInstance = $('#giraffe-list').data('flickity');
             flickityInstance.resize();
-
-            /* Event listener for open popup overlay on giraffe list avatar click */
-            // flickityInstance.on('staticClick',
-            //     function(event, pointer, cellElement, cellIndex) {
-            //         var overlay = document.createElement('div');
-            //         overlay.className="popup-overlay";
-            //
-            //         $(overlay).hide();
-            //         $(".esri-popup__content").append(overlay);
-            //         $(overlay).slideDown();
-            //     });
         }
     });
 });
