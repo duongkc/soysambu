@@ -1,7 +1,5 @@
 drop table if exists temp;
-
 drop table if exists Giraffe_List;
-
 drop table if exists Sighting;
 drop table if exists Sighting_AnimalGroup;
 drop table if exists Giraffe_Group;
@@ -27,7 +25,7 @@ create table temp (
   primary key(id)
 );
 
-load data local infile '/homes/idvansanten/soysambu-conservancy-gis/data/Giraffe Survey Database October 2018.txt'
+load data local infile 'data/Giraffe Survey Database October 2018.txt'
 into table temp
 fields terminated by '\t'
 lines terminated by '\n'
@@ -75,7 +73,7 @@ create table Giraffe (
   primary key (giraffe_id)
 );
 
-load data local infile '/homes/idvansanten/soysambu-conservancy-gis/data/giraffe_data.txt'
+load data local infile 'data/giraffe_data.txt'
 into table Giraffe
 fields terminated by '\t'
 lines terminated by '\n'
