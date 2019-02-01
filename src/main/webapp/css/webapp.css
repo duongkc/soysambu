@@ -136,6 +136,9 @@ body {
 .avatar img:hover{
     box-shadow: 0 0 15px rgba(33,33,33,.4);
 }
+.flickity-is-clicked img {
+    box-shadow: 0 0 20px rgba(245, 205, 121,1.0);
+}
 .avatar-id {
     color: #969a9b;
     font-family: "Courier", monospace;
@@ -147,6 +150,35 @@ body {
 /* Show 3 Avatars when screens <= 1000px */
 @media only screen and (max-width: 1000px) {
     .avatar { width: 33%; }
+}
+
+/* GIS Giraffe list styling, mostly taken from arcgis layer list */
+.giraffe-list {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.giraffe-list ul {
+    display: flex;
+    width: 300px;
+    color: #323232;
+    background-color: #f5f5f5;
+    padding: 6px 7px;
+    margin-bottom: 0;
+}
+.giraffe-list li{
+    display: flex;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(50,50,50,0.25);
+    list-style: none;
+    margin: 3px 0;
+    padding: 0;
+}
+.giraffe-list-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 12px 7px 12px 20px;
 }
 
 

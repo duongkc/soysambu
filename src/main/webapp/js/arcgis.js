@@ -4,8 +4,13 @@ $(document).ready(function () {
         "esri/views/MapView",
         "esri/layers/FeatureLayer",
         "esri/geometry/Point",
-        "esri/widgets/LayerList"
-    ], function (Map, MapView, FeatureLayer, Point, LayerList) {
+        "esri/widgets/Popup",
+        "esri/widgets/LayerList",
+        "esri/widgets/Expand",
+        "esri/Graphic"
+    ], function (Map, MapView, FeatureLayer, Point, Popup, LayerList, Expand, Graphic) {
+        let SIGHTINGS;
+
         /*** MAP AND VIEW ***/
         var map = new Map({
             basemap: "topo"
@@ -46,13 +51,13 @@ $(document).ready(function () {
         var lazyFlickityResize = _.debounce(activateGiraffeListCarousel, 50);
         $(document).arrive(".avatar", lazyFlickityResize);
 
-
         /*** LAYERS ***/
         /* Generate layers when view is resolved. */
         view.when(function() {
             createGiraffeFeatures()
                 .then(createGiraffeFeatureLayer)
                 .then(createLayerList);
+                //.then(createGiraffeListWidget);
         });
 
         /** Constructs a widget listing all layers currently loaded on the map.
@@ -67,15 +72,36 @@ $(document).ready(function () {
                     var item = event.item;
                     /* Add a generated legend for every individual layer. */
                     item.panel = {
+                        className: "esri-icon-question",
                         content: "legend",
                         open: false
                     }
                 }
             });
 
-            /* Add LayerList to the view. */
-            view.ui.add(layerList, "top-left");
+            var expandLayerList = new Expand({
+                expandIconClass: "esri-icon-collection",
+                view: view,
+                content: layerList
+            });
+
+            view.ui.add(expandLayerList, "top-left");
         }
+
+        // /** */
+        // function createGiraffeListWidget() {
+        //     var content = document.createElement('div');
+        //     content.className = "giraffe-summary";
+        //     content.innerHTML = '<ul id="giraffe-list" class="giraffe-list"></ul>';
+        //
+        //     var giraffeListWidget = new Expand({
+        //         expandIconClass: "esri-icon-documentation",
+        //         view: view,
+        //         content: content
+        //     });
+        //
+        //     view.ui.add(giraffeListWidget, "top-left");
+        // }
 
 
         /*** GIRAFFE FEATURELAYER ***/
@@ -163,8 +189,9 @@ $(document).ready(function () {
             return new Promise(function (resolve) {
                 /* Get sightings from database through records servlet. */
                 $.getJSON("records", function (sightings) {
-                    /* Generate a point feature for each sighting retrieved from the database. */
+                    SIGHTINGS = sightings;
                     $.each(sightings, function (key, sighting) {
+                        /* Generate a point feature for each sighting retrieved from the database. */
                         var point = {
                             geometry: {
                                 type: "point",
@@ -432,6 +459,7 @@ $(document).ready(function () {
                 for (var i in attributes.giraffes) {
                     var giraffe = attributes.giraffes[i];
                     var avatar = document.createElement('div');
+                    avatar.id = giraffe.giraffe_id;
 
                     /* Set custom avatar class depending on the giraffe's age and gender. */
                     if (giraffe.age === "JUVENILE") {
@@ -465,7 +493,6 @@ $(document).ready(function () {
                     pageDots: false
                 });
             }
-
             /* Execute initiateCarousel after avatarsLoaded promise resolves */
             avatarsLoaded.then(initiateCarousel);
             row.appendChild(col);
@@ -473,6 +500,101 @@ $(document).ready(function () {
             return row
         }
 
+
+        /*** TRACKING LAYER ***/
+        /** */
+        function getFeaturesByGiraffeID(giraffe_id) {
+            /* Retrieve all sightings ids that contain the giraffe id */
+            let observations = [];
+            for (let i in SIGHTINGS) {
+                for (let j in SIGHTINGS[i].giraffes) {
+                    if (SIGHTINGS[i].giraffes[j].giraffe_id === giraffe_id) {
+                        observations.push(SIGHTINGS[i].id);
+                    }
+                }
+            }
+
+            /* Retrieve the giraffe feature layer */
+            let giraffeLayer = map.allLayers.find(function(layer) {
+                return layer.title === "Giraffe Sightings";
+            });
+
+            /* Query all features that have a sighting id within observation */
+            let query = giraffeLayer.createQuery();
+            query.where = 'id IN (' + observations + ')';
+            query.returnGeometry = true;
+            query.outFields = ["*"];
+
+            giraffeLayer.queryFeatures(query)
+                .then(function(response) {
+                    createTrackingLayer(response.features, giraffe_id)
+                });
+        }
+
+        function createTrackingLayer(features, giraffe_id) {
+            let attributes = [];
+            for (let i in features) {
+                attributes.push(features[i].attributes);
+            }
+            attributes = sortByDate(attributes);
+
+            let paths = [];
+            for (let i in attributes) {
+                const latitude = attributes[i].latitude;
+                const longitude = attributes[i].longitude;
+                paths.push([longitude, latitude])
+            }
+
+            /* CREATE GRAPHIC */
+            var polyLine = {
+                type: "polyline",
+                paths: paths
+            };
+
+            var polylineSymbol = {
+                type: "simple-line",
+                color: [226, 64, 172],
+                width: 3
+            };
+
+            var polylineAtt = {
+                id: giraffe_id
+            };
+
+            var polylineGraphic = new Graphic({
+                geometry: polyLine,
+                symbol: polylineSymbol,
+                attributes: polylineAtt
+            });
+
+            /* CREATE FIELDS */
+            var fields = [{
+                name: "id",
+                alias: "Sighting ID",
+                type: "oid"
+            }];
+
+            /* Declare a renderer, defining every feature's style. */
+            var renderer = {
+                type: "simple",
+                symbol: {
+                    color: "rgba(89, 98, 117,0.5)",
+                    type: "simple-line",
+                    style: "solid",
+                    width: 2
+                }
+            };
+
+            var giraffeTrackingLayer = new FeatureLayer({
+                title: "Giraffe Tracking - " + giraffe_id,
+                source: [polylineGraphic],
+                fields: fields,
+                objectIdField: "id",
+                renderer: renderer
+            });
+
+            map.add(giraffeTrackingLayer);
+        }
 
         /*** UTILITIES ***/
         /** String parsing for displaying database records.
@@ -513,6 +635,15 @@ $(document).ready(function () {
             }
         }
 
+        /** */
+        function sortByDate(array) {
+            array.sort(function(a,b){
+                return new Date(b.date) - new Date(a.date);
+            });
+
+            return array;
+        }
+
         /** Activates any event listeners associated with the giraffe popup's giraffe-list carousel.
          *  Event listeners will only work after the element is placed within the DOM; this function
          *  is called as a response to a giraffe list entering the DOM.
@@ -532,8 +663,16 @@ $(document).ready(function () {
             //
             //         $(overlay).hide();
             //         $(".esri-popup__content").append(overlay);
-            //         $(overlay).slideDown();
+            //         $(overlay).animate({width:'toggle'},350);
             //     });
+
+            flickityInstance.on('staticClick',
+                function(event, pointer, cellElement, cellIndex) {
+                    // dismiss if cell was not clicked
+                    if ( !cellElement ) { return; }
+                    $(cellElement).toggleClass('flickity-is-clicked');
+                    getFeaturesByGiraffeID($(cellElement).attr('id'));
+                });
         }
-    });
+})
 });
