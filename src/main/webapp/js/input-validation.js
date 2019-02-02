@@ -1,28 +1,4 @@
 $(document).ready(function () {
-    /*** FUNCTIONS - DATE ***/
-    /** Function to convert [yyyy-m-d date formatting to yyyy-mm-dd | yyyy/mm/dd formatting to yyyy-mm-dd]. */
-    function convertDate() {
-        /* Regex will match either '-' or '/'. */
-        let d = $(this).val().split(/[-\/]/);
-
-        if (d.length === 3 && !d.some(isNaN)) {
-            let year = d[0];
-            let month = d[1];
-            let day = d[2];
-
-            /* Add zero if month or day is in the single digits. */
-            if (month.length < 2 && month !== 0) month = '0' + month;
-            if (day.length < 2 && day !== 0) day = '0' + day;
-
-            d = year + '-' + month +  '-' + day;
-            /* Set newly parsed date as input value. */
-            $(this).val(d);
-        }
-
-        /* Check validation with JQuery validator after date is converted. */
-        $('#date').valid();
-    }
-
     /*** FUNCTIONS - TIME ***/
     /** Function to get the current time in HH:mm format and set it as the default value. */
     function setTime() {
@@ -42,42 +18,14 @@ $(document).ready(function () {
         return time;
     }
 
-    /** Function that converts HHmm time formatting to HH:mm. */
-    function convertTime () {
-        let time = $(this).val();
-
-        if (time.length === 4 && !isNaN(time)) {
-            let hours = time.slice(0,2);
-            let mins = time.slice(2,4);
-
-            $(this).val(hours + ':' + mins);
-        }
-    }
-
-    /*** FUNCTIONS - COORDINATES ***/
-    /** Function that converts commas in coordinates to dots and removes prepended or appended zeros. */
-    function convertCoord () {
-        let coord = $(this).val();
-
-        if (!isNaN(parseFloat(coord))) {
-            /* Replace any commas present with dots. */
-            coord = coord.replace(/,\s+/g, '.');
-            /* Remove any prepended or appended zeros. */
-            coord = parseFloat(coord);
-
-            $(this).val(parseFloat(coord).toFixed(4));
-            $(this).valid()
-        }
-    }
-
-    /*** FUNCTIONS - GIRAFFE COUNTS ***/
-    /** Function to change a giraffe counter after input from corresponding - and + buttons. */
-    function updateGiraffeCount(){
+    /*** FUNCTIONS - COUNTS ***/
+    /** Function to change an organism counter after input from corresponding - and + buttons. */
+    function updateCounter(){
         /* Get button's corresponding input field and button type (-+). */
         let dataField = $(this).attr('data-field');
         let type = $(this).attr('data-type');
         let input = $('input[name="'+dataField+'"]');
-        /* Get current val of inout field. */
+        /* Get current value of input field. */
         let currentVal = parseInt(input.val());
 
         /* Add or subtract 1 for min or max buttons respectively. */
@@ -92,19 +40,17 @@ $(document).ready(function () {
         }
     }
 
-    /** Function to remove whitespace, prepended zeros.
+    /** Function to remove whitespace and prepended zeros in organism counters.
      *  Sets values to max or min value when input value out of range.
      */
-    function convertGiraffeCount() {
+    function standardizeOrganismCounter() {
         const name = $(this).attr('name');
         /* Converts counter's value to a number, also removes whitespace. */
         let currentVal = Number($(this).val().replace(/\s+/g, ''));
-        /* Set value with removed whitespace as current value. */
-        $(this).val(currentVal);
 
         /* Check if previously parsed currentVal returns NaN, if so set input field value to 0. */
         if (isNaN(currentVal) || !isFinite(currentVal)) {
-            // Enable plus button and disable min button for input field.
+            /* Enable plus button and disable min button for input field and set counter value to 0. */
             $('.btn-plusmin[data-type="plus"][data-field="' + name + '"]').attr('disabled', false);
             $('.btn-plusmin[data-type="minus"][data-field="' + name + '"]').attr('disabled', true);
             $(this).val(0);
@@ -112,9 +58,9 @@ $(document).ready(function () {
             /* Update total giraffe count. */
             updateOrganismTotal();
             /* Let updated count be validated by JQuery Validator */
-            $('#form-addrecord').valid();
+            $('#form-addsighting').valid();
 
-            return
+            return;
         }
 
         /* Check if current value is a float, if so round down to an integer. */
@@ -133,14 +79,18 @@ $(document).ready(function () {
             $('.btn-plusmin[data-type="minus"][data-field="' + name + '"]').attr('disabled', true);
             $(this).val(minValue);
         }
-
         /* Check if max value rule is followed, if not set value to max value,  disable max button. */
-        if (currentVal < maxValue) {
+        else if (currentVal < maxValue) {
             $('.btn-plusmin[data-type="plus"][data-field="' + name + '"]').attr('disabled', false);
         } else if (currentVal >= maxValue) {
             $('.btn-plusmin[data-type="plus"][data-field="' + name + '"]').attr('disabled', true);
             $(this).val(maxValue);
         }
+        else {
+            /* Set value with removed whitespace as current value. */
+            $(this).val(currentVal);
+        }
+
         /* Update total giraffe count. */
         updateOrganismTotal();
     }
@@ -148,8 +98,7 @@ $(document).ready(function () {
     /** Function to update total number of organisms, by summing all organism count fields. */
     function updateOrganismTotal() {
         let sum = 0;
-
-        $('.giraffe-count').each(function(){
+        $('.organism-counter').each(function(){
             sum += +$(this).val();
         });
         $('#count-total').empty().append(sum);
@@ -158,9 +107,9 @@ $(document).ready(function () {
     /** Function to enable or disable the submit button based on form validity */
     function toggleSubmit() {
         if (validator.checkForm()) {
-            $('#submit').prop('disabled', false);
+            $('#form-addsighting-submit').prop('disabled', false);
         } else {
-            $('#submit').prop('disabled', true);
+            $('#form-addsighting-submit').prop('disabled', true);
         }
     }
 
@@ -209,12 +158,10 @@ $(document).ready(function () {
         }
     );
 
-    /* Initiate validating form. */
-    validator = $('#form-addrecord').validate({
+    /* Initiate validating add sighting form. */
+    let validator = $('#form-addsighting').validate({
         onkeyup: false,
-        groups: {
-            coords: "longitude latitude"
-        },
+        groups: { coords: "longitude latitude" },
         rules: {
             date: {
                 required: true,
@@ -247,7 +194,7 @@ $(document).ready(function () {
         errorPlacement: function(error, element) {
             if (element.attr('data-type') === 'count') {
                 /* Place errors before total organism counter. */
-                error.insertBefore($('.organism-counter').parents('.form-row'));
+                $('#tab-giraffes').append(error);
             } else {
                 /* Place error after form row containing input field. */
                 error.insertAfter(element.parents('.form-row'));
@@ -257,8 +204,8 @@ $(document).ready(function () {
             /* Serialize all input values of the form. */
             let data = $(form).serialize();
 
-            /* Lock content behind a absolute div covering the page body. */
-            $('#page').append('<div id="submit-lock" style="display: none;"></div>');
+            /* Lock content behind an absolute submit-lock div covering the content div. */
+            $('#content').append('<div id="submit-lock" style="display: none;"></div>');
             $('#submit-lock').animate({height: "show"});
 
             /* Post a new record to the database using ajax. */
@@ -274,7 +221,7 @@ $(document).ready(function () {
                     $('#datepicker').datepicker('setDate', 'now');
                     setTime();
                     /* Update dynamic giraffe count properties. */
-                    $('.giraffe-count').each(convertGiraffeCount);
+                    $('.organism-counter').each(standardizeOrganismCounter);
 
                     /* Lift content lock after a short delay. */
                     $('#submit-lock').delay(1000).animate({
@@ -288,10 +235,11 @@ $(document).ready(function () {
         }
     });
 
+    /*** JQUERY VALIDATOR - ORGANISM TAB VALIDATIONS ***/
     /* Add rules for giraffe tab validation. */
-    if ($('#giraffes').hasClass('active')) {
+    if ($('#tab-giraffes').hasClass('active')) {
         /* For every counter add them to the giraffes group and add minGroupSize validation rule. */
-        $('.giraffe-count').each(function () {
+        $('.organism-counter').each(function () {
             const name = $(this).attr('name');
             validator.groups[name] = 'giraffes';
 
@@ -303,7 +251,6 @@ $(document).ready(function () {
             });
         });
     }
-
 
     /*** INPUT VALUE INITIALIZATION - DATEPICKER ***/
     $('#datepicker').datepicker({
@@ -322,39 +269,22 @@ $(document).ready(function () {
     /* Set current time as default value for time field. */
     setTime();
 
-
-    /*** EVENT LISTENERS - DATE ***/
-    /* Hide tooltip when calendar is opened. */
-    $('#calendar').click( function () {
-        $(this).tooltip('hide');
-    });
-    /* Convert manual date input, yyyy-m-d will be converted to yyyy-mm-dd. */
-    $('#date').change(convertDate);
-
-    /*** EVENT LISTENERS - COORDINATES ***/
-    /* Convert commas (36,55) to points (36.55) and remove prepended or appended zeros. */
-    $('#longitude').focusout(convertCoord);
-    $('#latitude').focusout(convertCoord);
-
     /*** EVENT LISTENERS - TIME ***/
     /* Set current time when settime button is pressed. */
     $('#settime').click(setTime);
-    /* Convert manual time input, Hhmm will be converted to HH:mm. */
-    $('#time').focusout(convertTime);
 
-    /*** EVENT LISTENERS - GIRAFFE COUNT ***/
+    /*** EVENT LISTENERS - COUNTERS ***/
     /* Convert change in giraffe count field; assists user when invalid values are given. */
-    $('.giraffe-count').change(convertGiraffeCount);
-    $('.giraffe-count').change(function (){
-        /* Validate each giraffe count field. */
-        $('.giraffe-count').each(function() {
-            $(this).valid() });
+    $('.organism-counter').change(function() {
+        /* Validate each counter */
+        $('.organism-counter').each(function() {$(this).valid();});
     });
+    $('.organism-counter').change(standardizeOrganismCounter);
     /* Update giraffe count field when its + or - buttons are pressed. */
-    $('.btn-plusmin').click(updateGiraffeCount);
+    $('.btn-plusmin').click(updateCounter);
 
     /*** EVENT LISTENERS - JQUERY VALIDATOR ***/
     /* On key-release, clicks and focus-out events check the entire form.
        If valid enable the submit button, when invalid disable the submit button. */
-    $('#form-addrecord').on('keyup click blur', toggleSubmit);
+    $('#form-addsighting').on('keyup click blur', toggleSubmit);
 });

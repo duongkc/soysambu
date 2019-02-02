@@ -20,7 +20,7 @@ body {
 .container-fluid {
     padding: 0;
 }
-#page {
+#content {
     position: relative;
     flex-grow: 1;
     padding: 0;
@@ -206,8 +206,11 @@ body {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+#nav-addsighting-sighting .nav-item {
+    cursor: default;
+}
 /* Add sighting page */
-.sighting-nav .nav-item:after, .organism-nav .nav-item:after{
+#nav-addsighting-sighting .nav-item:after, #nav-addsighting-organisms .nav-item.active:after{
     width: 100%;
     background: #f7d794;
 }
@@ -250,26 +253,25 @@ form {
    Forms - Add Record
    --- */
 /* Change input field focus color to match color scheme */
-.addrecord-form .form-control:focus, .addrecord-form .custom-select:focus,
-.addrecord-form .btn:focus {
+.form-addsighting .form-control:focus, .form-addsighting .custom-select:focus,
+.form-addsighting .btn:focus {
     border-color: #f5cd79;
     box-shadow: 0 0 4px 1px rgba(245, 205, 121, 1);
 }
-.organism-counter {
-    padding-top: 10px;
+.total-organism-count {
+    padding-top: 8px;
     text-align: left;
     color: #808080;
 }
 /* Sighting Tab */
-.btn-addrecord {
+.btn-addsighting {
     background-color: #f7d794;
 }
 .btn-coords {
     margin-top: 32px;
-    background-color: #f7d794;
 }
 /* Giraffe Tab */
-.giraffe-count {
+.organism-counter {
     text-align: right;
 }
 .btn-plusmin {
@@ -307,7 +309,9 @@ tr {
     cursor: pointer;
 }
 /* Hide search input field */
-.dataTables_filter { display: none;}
+.dataTables_filter {
+    display: none;
+}
 
 
 /* Reset button */
