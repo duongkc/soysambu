@@ -1,10 +1,10 @@
-package nl.bioinf.arcgis.servlets;
+package arcgis.servlets;
 
 import com.google.gson.Gson;
-import nl.bioinf.arcgis.dao.DaoMysql;
-import nl.bioinf.arcgis.dao.DatabaseException;
-import nl.bioinf.arcgis.objects.Age;
-import nl.bioinf.arcgis.objects.Giraffe;
+import arcgis.dao.DaoMysql;
+import arcgis.dao.DatabaseException;
+import arcgis.objects.Age;
+import arcgis.objects.Giraffe;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

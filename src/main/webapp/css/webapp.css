@@ -47,7 +47,7 @@ body {
 }
 .carousel-item:nth-child(2) {
     /* Header background image */
-    background: url(../assets/img/add_record_header.jpg) 55% 35%;
+    background: url(../assets/img/headers/add_record_header.jpg) 55% 35%;
     background-size:cover;
     /* Text makeup */
     color: white;
@@ -206,16 +206,12 @@ body {
     padding-top: 10px;
     padding-bottom: 10px;
 }
-/* ---
-   Navigation bars - Tab navigation bars - Add sighting page
-   --- */
+/* Add sighting page */
 .sighting-nav .nav-item:after, .organism-nav .nav-item:after{
     width: 100%;
     background: #f7d794;
 }
-/* ---
-   Navigation bars - Tab navigation bars - View sightings page
-   --- */
+/* View sightings page */
 .viewsightings-nav .nav-item:after {
     width: 100%;
     background: #6a89cc;

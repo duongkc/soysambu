@@ -1,4 +1,4 @@
-package nl.bioinf.arcgis.objects;
+package arcgis.objects;
 
 /**
  * Class implementing Giraffe object. Contains all data per Giraffe.

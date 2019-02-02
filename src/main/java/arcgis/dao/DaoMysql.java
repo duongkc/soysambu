@@ -1,6 +1,6 @@
-package nl.bioinf.arcgis.dao;
+package arcgis.dao;
 
-import nl.bioinf.arcgis.objects.*;
+import arcgis.objects.*;
 
 import java.sql.*;
 import java.util.ArrayList;

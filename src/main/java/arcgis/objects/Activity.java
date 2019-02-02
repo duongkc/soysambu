@@ -1,4 +1,4 @@
-package nl.bioinf.arcgis.objects;
+package arcgis.objects;
 
 /**
  * Activity Enum. Contains most common Giraffe Activities.

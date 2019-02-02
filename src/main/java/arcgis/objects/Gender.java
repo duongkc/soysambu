@@ -1,4 +1,4 @@
-package nl.bioinf.arcgis.objects;
+package arcgis.objects;
 
 /**
  * Gender enum. Contains all gender options for giraffes.

@@ -1,3 +1,4 @@
+/* Drop existing database tables. */
 drop table if exists temp;
 drop table if exists Giraffe_List;
 drop table if exists Sighting;
@@ -6,6 +7,7 @@ drop table if exists Giraffe_Group;
 drop table if exists Giraffe;
 
 
+/* Create temporary table for importing data. */
 create table temp (
   id int auto_increment not null unique,
   date date,
@@ -25,14 +27,7 @@ create table temp (
   primary key(id)
 );
 
-load data local infile 'data/Giraffe Survey Database October 2018.txt'
-into table temp
-fields terminated by '\t'
-lines terminated by '\n'
-ignore 2 lines
-(date, latitude, longitude, time, weather, habitat_type, activity, total_group,
- male_a, male_sa, female_a, female_sa, juvenile, unidentified);
-
+/* Create database tables. */
 create table Giraffe_Group (
   group_id int auto_increment not null unique,
   count int not null,
@@ -61,7 +56,7 @@ create table Sighting (
 
 create table Giraffe (
   giraffe_id char(4) not null unique,
-  name varchar(50) unique,
+  name varchar(50),
   gender enum ('MALE', 'FEMALE'),
   age enum ('JUVENILE', 'SUBADULT','ADULT'),
   mother char(4),
@@ -72,16 +67,6 @@ create table Giraffe (
   first_seen date,
   primary key (giraffe_id)
 );
-
-load data local infile 'data/giraffe_data.txt'
-into table Giraffe
-fields terminated by '\t'
-lines terminated by '\n'
-ignore 1 lines
-(giraffe_id, name, gender, age, mother, father, description, deceased, notes, first_seen);
-
-# Enable NULL to avoid Java SQL errors (0000-00-00 is not a valid date)
-update Giraffe set first_seen = NULL where first_seen = '0000-00-00';
 
 create table Giraffe_List (
   id int auto_increment not null unique,
@@ -98,6 +83,30 @@ create table Sighting_AnimalGroup (
   primary key (id),
   foreign key (giraffe_group_id) references Giraffe_Group(group_id)
 );
+
+
+/* Import sample data into temporary table. */
+load data local infile 'data/Giraffe Survey Database October 2018.txt'
+into table temp
+fields terminated by '\t'
+lines terminated by '\n'
+ignore 2 lines
+(date, latitude, longitude, time, weather, habitat_type, activity, total_group,
+ male_a, male_sa, female_a, female_sa, juvenile, unidentified);
+
+/* Import giraffe identification data into Giraffe table. */
+load data local infile 'data/giraffe_data.txt'
+into table Giraffe
+fields terminated by '\t'
+lines terminated by '\n'
+ignore 1 lines
+(giraffe_id, name, gender, age, mother, father, description, deceased, notes, first_seen);
+
+# Enable NULL to avoid Java SQL errors (0000-00-00 is not a valid date)
+update Giraffe set first_seen = NULL where first_seen = '0000-00-00';
+
+
+/* Insert data from temp table into appropriate database tables */
 insert into Giraffe_Group (count, activity, male_a_count, male_sa_count,
                            female_a_count, female_sa_count, juvenile_count, unidentified_count)
 SELECT total_group, activity, male_a, male_sa, female_a, female_sa, juvenile, unidentified from temp;

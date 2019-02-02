@@ -1,4 +1,4 @@
-package nl.bioinf.arcgis.objects;
+package arcgis.objects;
 
 /**
  * Class implementing sightings. Contains all necessary information for a sighting.

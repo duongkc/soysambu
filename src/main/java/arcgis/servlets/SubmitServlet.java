@@ -1,7 +1,7 @@
-package nl.bioinf.arcgis.servlets;
+package arcgis.servlets;
 
-import nl.bioinf.arcgis.dao.DaoMysql;
-import nl.bioinf.arcgis.dao.DatabaseException;
+import arcgis.dao.DaoMysql;
+import arcgis.dao.DatabaseException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

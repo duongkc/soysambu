@@ -1,4 +1,4 @@
-package nl.bioinf.arcgis.objects;
+package arcgis.objects;
 
 /**
  * Class implementing giraffe groups. Contains all information on a giraffe group.

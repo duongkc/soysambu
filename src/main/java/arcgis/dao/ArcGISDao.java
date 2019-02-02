@@ -1,7 +1,6 @@
-package nl.bioinf.arcgis.dao;
+package arcgis.dao;
 
 public interface ArcGISDao {
-
     /**
      * connects to the data layer.
      *

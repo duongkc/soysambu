@@ -1,6 +1,4 @@
-package nl.bioinf.arcgis.objects;
-
-import java.util.Comparator;
+package arcgis.objects;
 
 /**
  * Age enum. Contains all age options for giraffes.

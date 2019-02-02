@@ -1,9 +1,9 @@
-package nl.bioinf.arcgis.servlets;
+package arcgis.servlets;
 
 import com.google.gson.Gson;
-import nl.bioinf.arcgis.dao.DaoMysql;
-import nl.bioinf.arcgis.dao.DatabaseException;
-import nl.bioinf.arcgis.objects.GiraffeGroup;
+import arcgis.dao.DaoMysql;
+import arcgis.dao.DatabaseException;
+import arcgis.objects.GiraffeGroup;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
