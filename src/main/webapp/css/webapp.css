@@ -267,6 +267,11 @@ form {
 .btn-addsighting {
     background-color: #f7d794;
 }
+@media only screen and (max-width: 600px) {
+    .btn-addsighting {
+        margin-bottom: 10px;
+    }
+}
 .btn-coords {
     margin-top: 32px;
 }
@@ -357,10 +362,26 @@ tr {
    Footer
    --- */
 footer {
-    display: none;
-    padding-top: 15px;
+    display: inline-block;
+    text-align: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
     background: #2d3436;
-    text-align:center;
     font-size: 12px;
+    color: #969a9b;
+}
+#footer-links {
+    padding-left: 10px;
+    margin-left: 10px;
+    border-left: 1px solid #969a9b;
+    display: inline;
+}
+@media only screen and (max-width: 576px) {
+    #footer-links {
+        display: inline-flex;
+        flex-direction: column;
+    }
+}
+footer a:link, a:visited{
     color: #969a9b;
 }
