@@ -1,25 +1,4 @@
 /**
- * Function implementing convert date to the correct format
- */
-function convertDate() {
-    // Regex will match either '-' or '/'.
-    var d = $(this).val().split(/[-\/]/);
-
-    if (d.length == 3 && !d.some(isNaN)) {
-        var year = d[0];
-        var month = d[1];
-        var day = d[2];
-
-        // Add zero if month or day is in the single digits.
-        if (month.length < 2 && month != 0) month = '0' + month;
-        if (day.length < 2 && day != 0) day = '0' + day;
-
-        d = year + '-' + month +  '-' + day;
-        $(this).val(d);
-    }
-}
-
-/**
  * Adding custom date filter to datatable
  * Checks if the date is between the entered values
  * from the DatePicker
@@ -281,9 +260,7 @@ function getMax(dataList, attribute) {
     return max;
 }
 
-/**
- * Start of page; gets the JSON
- */
+
 $(document).ready(function () {
     $.getJSON('records', function (records) {
         /**
@@ -577,7 +554,7 @@ $(document).ready(function () {
         });
         //Set the date to the earliest known date in database (to be changed when necessary)
         $('#datepicker-from').datepicker('setDate', '2017-10-02');
-        $('#datepicker-from').change(convertDate);
+        $('#datepicker-from').change(standardizeInputDate);
         //Hide the pop-up calendar when a new date is selected
         $('#calendar-from').click(function () {
             $(this).tooltip('hide')
@@ -599,7 +576,7 @@ $(document).ready(function () {
             table.draw();
         });
         //Set the date to today
-        $('#datepicker-to').change(convertDate);
+        $('#datepicker-to').change(standardizeInputDate);
         $('#datepicker-to').datepicker('setDate', 'now');
         //Hide the pop-up calendar when a new date is selected
         $('#calendar-to').click(function () {

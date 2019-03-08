@@ -1,30 +1,4 @@
 $(document).ready(function () {
-    /** Gets (and additionally sets) the sighting data in the session storage,
-     *  then returns the sightings as part of a promise resolve.
-     *      If no sightings data is present in the session storage it is requested
-     *  from the server and set in the session storage.
-     *
-     *  @returns {promise} - A promise that resolves after sighting data is retrieved
-     *                       from session storage.
-     */
-    function getSightingData() {
-        /* Return sightings from session storage if present. */
-        if (sessionStorage.getItem("sightings")) {
-            return new Promise(function (resolve) {
-                resolve(JSON.parse(sessionStorage.getItem("sightings")))
-            });
-        /* Request sighting records from server and set to session storage. */
-        } else {
-            return new Promise(function (resolve) {
-                $.get("records", function (sightings) {
-                    sessionStorage.setItem("sightings", sightings);
-                }, 'text').done(function () {
-                    resolve(JSON.parse(sessionStorage.getItem("sightings")));
-                })
-            })
-        }
-    }
-
     /* dojo.require, used to load ArcGIS module dependencies */
     require([
         "esri/Map",

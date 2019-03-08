@@ -1,3 +1,8 @@
+/**
+ * @file Manages Add Sighting page input validation and submit handling.
+ * @author Niels van der Vegt
+ */
+
 $(document).ready(function () {
     /*** FUNCTIONS - TIME ***/
     /** Function to get the current time in HH:mm format and set it as the default value. */
@@ -104,7 +109,7 @@ $(document).ready(function () {
         $('#count-total').empty().append(sum);
     }
 
-    /** Function to enable or disable the submit button based on form validity */
+    /** Function to enable or disable the submit button based on form validity. */
     function toggleSubmit() {
         if (validator.checkForm()) {
             $('#form-addsighting-submit').prop('disabled', false);
@@ -269,9 +274,20 @@ $(document).ready(function () {
     /* Set current time as default value for time field. */
     setTime();
 
+    /*** EVENT LISTENERS - DATE ***/
+    $('.input-date').change(standardizeInputDate);
+    /* Hide tooltip when datepickers are opened. */
+    $('.btn-datepicker').click( function () {
+        $(this).tooltip('hide');
+    });
+
     /*** EVENT LISTENERS - TIME ***/
     /* Set current time when settime button is pressed. */
+    $('.input-time').change(standardizeInputTime);
     $('#settime').click(setTime);
+
+    /*** EVENT LISTENERS - COORDINATES ***/
+    $('.input-coord').change(standardizeInputCoordinate);
 
     /*** EVENT LISTENERS - COUNTERS ***/
     /* Convert change in giraffe count field; assists user when invalid values are given. */

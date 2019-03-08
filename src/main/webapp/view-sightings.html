@@ -1,0 +1,151 @@
+<div class="row">
+    <!-- Filter tab. -->
+    <div id="filters" class="col-lg-4 top-buffer">
+        <!-- Sighting filters. -->
+        <div class="card">
+            <!-- Card header. -->
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#sighting-filters">Sighting Filters</a>
+            </div>
+            <!-- Card body. -->
+            <div id="sighting-filters" class="collapse show">
+                <div class="card-body">
+
+                    <!-- Datepickers (from-date and to-date). -->
+                    <div class="d-flex justify-content-center">Dates <span class="ml-1 label-tip">(yyyy-mm-dd)</span></div>
+                    <div class="form-row">
+                        <!-- From-date datepicker. -->
+                        <div class="col-6 form-group">
+                            <label for="date-filter-from">From:</label>
+                            <!-- Date input field. -->
+                            <div id="datepicker-from" class="input-group date" data-provide="datepicker">
+                                <input id="date-filter-from" name="date-filter-from" type="text" class="form-control"
+                                       autocomplete="off">
+                                <!-- Calender button to view datepicker. -->
+                                <div class="input-group-addon input-group-append">
+                                    <button id="calendar-from" class="btn btn-addrecord" type="button" data-toggle="tooltip"
+                                            title="Open Calendar">
+                                        <i class="fa fa-calendar" aria-hidden="true" style="color: white"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- To-date datepicker. -->
+                        <div class="col-6 form-group">
+                            <label for="date-filter-to">To:</label>
+                            <!-- Date input field. -->
+                            <div id="datepicker-to" class="input-group date" data-provide="datepicker">
+                                <input id="date-filter-to" name="date-filter-from" type="text" class="form-control"
+                                       autocomplete="off">
+                                <!-- Calender button to view datepicker. -->
+                                <div class="input-group-addon input-group-append">
+                                    <button id="calendar-to" class="btn btn-addrecord btn-adv" type="button" data-toggle="tooltip"
+                                            title="Open Calendar">
+                                        <i class="fa fa-calendar" aria-hidden="true" style="color: white"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weather and habitat filters. -->
+                    <div class="form-row">
+                        <!-- Weather filter. -->
+                        <div class=" col-sm-6 form-group">
+                            <label for="weather-filter">Weather:</label>
+                            <select id="weather-filter" name="weather-filter" class="custom-select">
+                                <option value=" " selected>All</option>
+                                <option value="Sunny">Sunny</option>
+                                <option value="Cloudy">Cloudy</option>
+                                <option value="Partly Cloudy">Partly Cloudy</option>
+                                <option value="Rainy">Rainy</option>
+                                <option value="Unknown">Unknown</option>
+                            </select>
+                        </div>
+
+                        <!-- Habitat filter. -->
+                        <div class="col-sm-6 form-group">
+                            <label for="habitat-filter">Habitat:
+                                <span data-toggle="tooltip" title="Environment of the organism group's location">
+                                    <i class="fas fa-question-circle"></i>
+                                </span>
+                            </label>
+                            <select id="habitat-filter" name="habitat-filter" class="custom-select">
+                                <option value=" " selected>All</option>
+                                <option value="Acacia Mix">Acacia Mix</option>
+                                <option value="Acacia Woodland">Acacia Woodland</option>
+                                <option value="Grassland">Grassland</option>
+                                <option value="Lakeshore">Lakeshore</option>
+                                <option value="Unknown">Unknown</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Activity filter. -->
+                    <div class="form-row">
+                        <div class="col-sm-6 form-group">
+                            <label for="activity-filter">Activity:
+                                <span data-toggle="tooltip" title="Average activity of the giraffe group
+                                (i.e. what most of the giraffes in the group are doing)">
+                                    <i class="fas fa-question-circle"></i>
+                                </span>
+                            </label>
+                            <select id="activity-filter" name="activity-filter" class="custom-select">
+                                <option value=" " selected>All</option>
+                                <option value="Feeding">Feeding</option>
+                                <option value="Walking">Walking</option>
+                                <option value="Standing">Standing</option>
+                                <option value="Resting">Resting</option>
+                                <option value="Fighting">Fighting</option>
+                                <option value="Scratching">Scratching</option>
+                                <option value="Socializing">Socializing</option>
+                                <option value="Unknown">Unknown</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Giraffe count filters. -->
+        <div class="card">
+            <!-- Card header. -->
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" href="#advanced-filters">Giraffe Count Filters</a>
+            </div>
+            <!-- Card body. -->
+            <div id="advanced-filters" class="collapse">
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+
+        <!-- 'Advanced' options 'Reset' buttons. -->
+        <div class="form-row justify-content-center">
+            <!--Reset button. -->
+            <div class="col-4 top-buffer">
+                <button class="btn btn-reset" type="button" id="reset-btn">Reset Filters</button>
+            </div>
+        </div>
+    </div>
+
+<!-- Section containing the datatable filled with view-sightings.js -->
+<div class="col-lg-6 top-buffer">
+    <div id="datatable-container">
+        <table id="datatable" class="display nowrap" width="100%">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Count</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+</div>
+
+<!-- Custom Datatable -->
+<script src="js/view-sightings.js"></script>
