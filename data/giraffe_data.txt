@@ -4,12 +4,12 @@ M025	Tom	MALE	SUBADULT			White line on the right side of his back and flower on 
 M026	Marco	MALE	SUBADULT			Right: one A on his right stomach (very white). Left: a horse shoe between 2 points at the base of the neck and a flower with 4 petals. White points inside some spots of the neck.	0		
 M027	Santa	MALE	SUBADULT			Left: a slanting Christmas tree on the left shoulder. Right: an inversed heart and a goose track on the neck.	0		
 M004	Moses	MALE	ADULT			White neck.	0		
-M015	Max	MALE	ADULT			Very dark. Left: an “X” on the stomach, a star and a lung on the base of the neck. Right: 2 points.	0		
+M015	Max	MALE	ADULT			Very dark. Left: an ï¿½Xï¿½ on the stomach, a star and a lung on the base of the neck. Right: 2 points.	0		
 M013	Daf	MALE	ADULT			Pointed ossicone. Left: a big peace symbol on his shoulder, two particular spots on the neck and a yellow cross under the hump.	0		
-M030	Scorpio	MALE	ADULT			Yellow neck and dark spots on the stomach. Left: a mushroom, a slanting M and a slanting V (like a scorpion) on the shoulder. Front: 2 symmetric symbols on the chest (like a “7”). Right: a thin slanting brown T at the base of the neck and a triangle with a white T inside upper the shoulder.	0		
-M031	Argos	MALE	SUBADULT			Left: A flower with 4 diamonds at the base of the neck and a “2” on the shoulder. Front: 2 symmetric symbols and a cross on the chest. Right: an eye at the top of the shoulder and a spot with a X at the base of the neck.	0		
+M030	Scorpio	MALE	ADULT			Yellow neck and dark spots on the stomach. Left: a mushroom, a slanting M and a slanting V (like a scorpion) on the shoulder. Front: 2 symmetric symbols on the chest (like a ï¿½7ï¿½). Right: a thin slanting brown T at the base of the neck and a triangle with a white T inside upper the shoulder.	0		
+M031	Argos	MALE	SUBADULT			Left: A flower with 4 diamonds at the base of the neck and a ï¿½2ï¿½ on the shoulder. Front: 2 symmetric symbols and a cross on the chest. Right: an eye at the top of the shoulder and a spot with a X at the base of the neck.	0		
 M032	Mbugua	MALE	ADULT			Black ossicone and very small space between the spots of his back. Left: a serrate spot at the middle of his neck and a lying boot under his head. Right: a triangle at the middle of the neck.	0	Same as M039 Brownie. Identified in August 2013.	
-M033	Omega	MALE	SUBADULT			Yellow neck. Left: inverted omega at the middle of the neck and an “angel wing” just under the head.	0		
+M033	Omega	MALE	SUBADULT			Yellow neck. Left: inverted omega at the middle of the neck and an ï¿½angel wingï¿½ just under the head.	0		
 M035	Arrow	MALE	ADULT			Right: one spot very light and peace symbol at the base of the neck. Left: arrow at the middle of the neck and many small spots on the back.	0	"Same as M023 from backup binder; reclassified here."	
 M005	Tobiko	MALE	ADULT			Left: Africa on the stomach and 2 fingers on his neck. Right: 3 H on the neck.	0		
 M036	Njogu	MALE	SUBADULT			Left: white cross perfectly perpendicular on the hump and an elephant at the boundary between the front leg and the stomach. Right: large flower covering most of stomach.	0	Same as M044. Identified in August 2013.	
@@ -19,7 +19,7 @@ M018	Paris	MALE	ADULT			Eiffel tower on the spot at the base of the neck, a diam
 M006	Hector	MALE	ADULT			Right: peace symbol on the hump. Left: 2 horse shoes directed to the sky on the neck.	0	Be careful: looks like Omega but is older.	
 M010	Rambo	MALE	ADULT			Yellow with dark smooth spots. Pointed 3rd ossicone. Left: a military head at the base of the neck and half flower on the hump. Right: a flower with 4 petals and a light grey point at the centre of the neck.	0		
 M034	Sam	MALE	SUBADULT			Left: many small spots on the neck and at the base of the neck and a white star.	0	Formerly J019 Fara from 2013.	
-M020	Mickey	MALE	ADULT			Very white with brown smooth spots. Left: Brown X on his shoulder. Right: 2 symmetric triangles at the base of the neck and a slanting “Mickey head” on the back.	0		
+M020	Mickey	MALE	ADULT			Very white with brown smooth spots. Left: Brown X on his shoulder. Right: 2 symmetric triangles at the base of the neck and a slanting ï¿½Mickey headï¿½ on the back.	0		
 M007	Mario	MALE	ADULT			Yellow with dark smooth spots. Right: a yellow cross on the humpand a pie slice under the humpand a 7 on the stomach. Left: a 7 on the shoulder and a point on the neck.	0		
 M024	Jomo	MALE	ADULT			Very dark male. Yellow with dark spots. Left: A big dark spot at the base of the neck and a yellow Y in a spot at the top of the front leg and another one on the stomach. Right: 2 ribs at the top of the leg.	0		
 M028	Emilio	MALE	ADULT			White giraffe. Right: a white cross at the base of the neck and a chest upper his shoulderand a U on the hump. Left: an inverted U at the base of the neck and a spot at the middle of the neck.	0		
@@ -32,7 +32,7 @@ M037	Nemo	MALE	SUBADULT			Left: a fish on his shoulder and some features of know
 M019	Amos	MALE	ADULT			Yellow male with dark serrate spots. Right: an eagle flying on his neck and a flash light above it and 2 points on the neck. Left: a big lung on his shoulder.	0	Same as M029 Raptor. Identified in August 2013.	
 M041	Nathaneal	MALE	ADULT			Left: faded spots along neck. Right: V spot at upper neck near mane.	0		
 M048	Nugget	MALE	SUBADULT			Right: Has many spots that look like nuggets with cracks. A lion foot at the neck.	0	Formerly J018 Corsica and J016 from 2013 (same giraffe, identified twice).	
-M038	Moto	MALE	SUBADULT			Left: two smaller spots on mid-neck near mane. “Eye” on upper neck, flame on shoulder, two specks at low neck.	0		
+M038	Moto	MALE	SUBADULT			Left: two smaller spots on mid-neck near mane. ï¿½Eyeï¿½ on upper neck, flame on shoulder, two specks at low neck.	0		
 M047	Boundary	MALE	SUBADULT			Left: straight horizontal boundary line across belly at lower part. left-facing Pacman face on upper belly.	0		
 M043	Yogurt	MALE	ADULT			Left: S-shaped spot in middle of side. Clover or skull & cross-bones shape on lower belly behind front leg.	0		
 M046	Marin	MALE	SUBADULT			Right: dot mid-neck, squiggly blob on shoulder.	0	Formerly J010 from 2013.	
@@ -54,7 +54,7 @@ F002	Sophie	FEMALE	ADULT			Limping. Very long tail. Right: dark slanting bow tie
 F008	Joy	FEMALE	ADULT			Very white and a very long tail. Right: 2 horse shoes at the base of the neck. Left: an elephant at the base of the back leg and an hammer on the hump.	0		
 F004	Delta	FEMALE	ADULT			One delta drawing with points on the neck.	0		
 F022	Anna	FEMALE	SUBADULT			Right: slanting T on the hip and 2 horse shoes on the shoulder separated by a large white strip and sort of H on the middle of the neck.	0	Same as F023 identified in August 2013, combined to here.	
-F014	Beaty	FEMALE	ADULT			Left: a flower with 4 triangles on the neck. Right: a cut horse shoe at the base of the neck.	0	Mother of J014.	
+F014	Beauty	FEMALE	ADULT			Left: a flower with 4 triangles on the neck. Right: a cut horse shoe at the base of the neck.	0	Mother of J014.
 F025	Saa	FEMALE	SUBADULT			Very short tail. Right: a hammer and a watch on the shoulder.	0		
 F019	Mary	FEMALE	SUBADULT			Very young Sub Adult. Left: Straight line on the shoulder. Right: X and V on the neck.	0		
 F016	Angela	FEMALE	ADULT			Right: an angel flying on her neck.	0		
@@ -62,8 +62,8 @@ F018	Beauty	FEMALE	ADULT			White with large spaces between her brown spots. Left
 F013	Berta	FEMALE	ADULT			Yellow with brown smooth spots, short tail. Left: thin long spots on the back leg and a spot upper a point on the neck and a yellow X on the back. Right: spots all along her mane.	0	Juvenile J065, seen 22/1 2018, approx. 1 week old. Possible new baby july 2019. 	2018-12-01
 F026	Papillon	FEMALE	SUBADULT			Short tail. Left: a point on her neck and a heart just below her head and a shade of butterfly under her shoulder.	0	Formerly J015 Hope from 2013.	
 F027	Queen	FEMALE	ADULT			Right: 2 crowns on the neck and and her patterns below on the neck are separated by large spaces and a X at the middle of the stomach and a boot shade upper.	0		
-F028	Helen	FEMALE	ADULT			Dark yellow back. Right: separate “Y”and “A” on the stomach.	0	"Same as F030 Naomi; they were combined into this ID."	
-F010	Juliet	FEMALE	ADULT			Right: two “7”s, one on her neck and one on her stomach.	0		
+F028	Helen	FEMALE	ADULT			Dark yellow back. Right: separate ï¿½Yï¿½and ï¿½Aï¿½ on the stomach.	0	"Same as F030 Naomi; they were combined into this ID."	
+F010	Juliet	FEMALE	ADULT			Right: two ï¿½7ï¿½s, one on her neck and one on her stomach.	0		
 F029	Daisy	FEMALE	SUBADULT			Left: long vertical patch at back of belly.	0		
 F015	Elisa	FEMALE	ADULT			Left: a U on her neck. Right: A crown on her neck.	0		
 F034	Step	FEMALE	SUBADULT			Horse step on left side above front leg.	0	Previously J017 from 2013.	
@@ -73,7 +73,7 @@ F017	Sandwich	FEMALE	ADULT			Two big spots that look like a sandwich or burger o
 F031	Sarah	FEMALE	SUBADULT			Right: One circular dot in middle of many jagged ones.	0	Formerly J014 from 2013.	
 F009	Buttercup	FEMALE	ADULT			Left: 4-petal flower on stomach. Right: very large spot on shoulder.	0		
 F032	Prism	FEMALE	ADULT			Right: large rectangular patch on upper shoulder. Left: four large odd-shaped patches in a square on shoulder, to the left of an up-pointing triangle.	0		
-F001	Snakebite	FEMALE	ADULT			Right: flower at mid-neck, long vertical rectangular spot, opposing vertical triangles on shoulder. Left: two small “snakebite” dots next to lower mane.	0		
+F001	Snakebite	FEMALE	ADULT			Right: flower at mid-neck, long vertical rectangular spot, opposing vertical triangles on shoulder. Left: two small ï¿½snakebiteï¿½ dots next to lower mane.	0		
 F035	Sharkfin	FEMALE	ADULT			"Right: hollow elongated spot on neck above small dot. Left: dot at mid-neck and smaller dot at upper neck; sharkfin patch on lower belly."	0		
 F036	Louisa	FEMALE	SUBADULT			"Right: large patch mid-belly; Left: 4-petal flower mid-neck."	0	Juvenile J064, seen 22/1 2018, approx. 1 week old. Possible new baby july 2019. 	
 F037	Vermont	FEMALE	SUBADULT			Right: shape of Vermont on right shoulder, small spot mid-neck, unfilled spot lower neck.	0		

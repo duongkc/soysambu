@@ -1,4 +1,30 @@
 $(document).ready(function () {
+    /** Gets (and additionally sets) the sighting data in the session storage,
+     *  then returns the sightings as part of a promise resolve.
+     *      If no sightings data is present in the session storage it is requested
+     *  from the server and set in the session storage.
+     *
+     *  @returns {promise} - A promise that resolves after sighting data is retrieved
+     *                       from session storage.
+     */
+    function getSightingData() {
+        /* Return sightings from session storage if present. */
+        if (sessionStorage.getItem("sightings")) {
+            return new Promise(function (resolve) {
+                resolve(JSON.parse(sessionStorage.getItem("sightings")))
+            });
+        /* Request sighting records from server and set to session storage. */
+        } else {
+            return new Promise(function (resolve) {
+                $.get("records", function (sightings) {
+                    sessionStorage.setItem("sightings", sightings);
+                }, 'text').done(function () {
+                    resolve(JSON.parse(sessionStorage.getItem("sightings")));
+                })
+            })
+        }
+    }
+
     /* dojo.require, used to load ArcGIS module dependencies */
     require([
         "esri/Map",
@@ -51,7 +77,8 @@ $(document).ready(function () {
         /*** LAYERS ***/
         /* Generate layers when view is resolved. */
         view.when(function() {
-            createGiraffeFeatures()
+            getSightingData()
+                .then(createGiraffeFeatures)
                 .then(createGiraffeFeatureLayer)
                 .then(createLayerList);
         });
@@ -81,13 +108,12 @@ $(document).ready(function () {
 
         /*** GIRAFFE FEATURELAYER ***/
         /** Creates graphics and fields to be used within a FeatureLayer for giraffe sightings.
-         *      Returns a promise so that the database connection can close and all sightings
-         * can be retrieved and turned into point graphics, without already rendering
-         * layers asynchronously.
+         *      Returns a promise so that all sightings can be turned into point graphics, without
+         *  already rendering layers asynchronously.
          *
          * @returns {promise} - a promise that waits for all sightings to be processed before resolving.
          */
-        function createGiraffeFeatures() {
+        function createGiraffeFeatures(sightings) {
             /* Create a container to store coordinate point graphics. */
             let graphics = [];
             /* Declare fields for every sighting attribute, a requirement of FeatureLayers. */
@@ -162,24 +188,23 @@ $(document).ready(function () {
             }];
 
             return new Promise(function (resolve) {
-                /* Get sightings from database through records servlet. */
-                $.getJSON("records", function (sightings) {
-                    /* Generate a point feature for each sighting retrieved from the database. */
-                    $.each(sightings, function (key, sighting) {
-                        let point = {
-                            geometry: {
-                                type: "point",
-                                longitude: sighting.longitude,
-                                latitude: sighting.latitude
-                            },
-                            attributes: sighting
-                        };
+                /* Get sightings from session storage.
+                   Generate a point feature for each sighting retrieved from the database. */
+                $(sightings).each(function (key, sighting) {
+                    let point = {
+                        geometry: {
+                            type: "point",
+                            longitude: sighting.longitude,
+                            latitude: sighting.latitude
+                        },
+                        attributes: sighting
+                    };
 
-                        graphics.push(point);
-                    });
-                    /* Resolve promise when all sightings have been processed. */
-                }).done(function() {resolve({graphics: graphics, fields: fields})})
-            });
+                    graphics.push(point);
+                });
+
+                resolve({graphics: graphics, fields: fields})
+            })
         }
 
         /** Creates a new FeatureLayer based on sighting features.
