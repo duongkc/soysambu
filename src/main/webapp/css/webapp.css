@@ -41,20 +41,21 @@ body {
 .banner-description {
     display:block;
     height: 120px;
+    width: 45%;
     margin-right: -5%;
     padding-top:28px;
     background-color: #f19066;
     transition: background-color .4s;
 }
 .banner-description p, .banner-description h2{
-    width: 85%;
+    width: 80%;
     padding-left:25px;
     font-family: 'Poppins', sans-serif;
 }
 .banner-image {
     height: 120px;
-    padding-right: 10%;
-    z-index: 4;
+    width: 60%;
+    z-index: 2;
     background: floralwhite;
     border-radius: 4% 100% 0% 77% / 100% 0% 33% 0%;
     box-shadow: 0 0 0 25px #f3a683;

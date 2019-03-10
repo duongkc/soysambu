@@ -84,7 +84,7 @@ $(document).ready( function() {
     /* Banner description constants. */
     const descriptions = [['GIS', 'Geographic information system of Soysambu.'],
         ['Add Sighting', 'Add an organism sighting to the Soysambu database.'],
-        ['View Sightings', 'View past organism sightings in Soysambu.']];
+        ['View Sightings', 'View past organism sightings in Soysambu conservancy.']];
     const descriptionBackgrounds = ['#f19066', '#f5cd79', '#778beb'];
     const borderColors = ['#f3a683', '#f7d794', '#546de5'];
 
