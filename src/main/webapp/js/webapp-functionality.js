@@ -19,7 +19,7 @@ function getSightingData() {
         return new Promise(function (resolve) {
             resolve(JSON.parse(sessionStorage.getItem("sightings")))
         });
-        /* Request sighting records from server and set to session storage. */
+    /* Request sighting records from server and set to session storage. */
     } else {
         return new Promise(function (resolve) {
             $.get("records", function (sightings) {
@@ -79,8 +79,56 @@ function standardizeInputCoordinate () {
 }
 
 
-/*** SITE NAVIGATION ***/
 $(document).ready( function() {
+    /*** SITE NAVIGATION - BANNER ***/
+    /* Banner description constants. */
+    const descriptions = [['GIS', 'Geographic information system of Soysambu.'],
+        ['Add Sighting', 'Add an organism sighting to the Soysambu database.'],
+        ['View Sightings', 'View past organism sightings in Soysambu.']];
+    const descriptionBackgrounds = ['#f19066', '#f5cd79', '#778beb'];
+    const borderColors = ['#f3a683', '#f7d794', '#546de5'];
+
+    /** Hides the current banner description and adds the banner description with the given index.
+        Nav-items and banners share the same indexes for the web pages they represent. */
+    function showBannerDescription(bannerIndex) {
+        /* If target description is identical to current description, don't continue. */
+        if ($('.banner-description h2').text() === descriptions[bannerIndex][0]) return false;
+
+        /* Fade out the currently active banner description. */
+        $('.banner-description').children().fadeOut('fast').promise().done(function () {
+            /* Set new description values correlating to the hovered nav item. */
+            $('.banner-description h2').text(descriptions[bannerIndex][0]);
+            $('.banner-description p').text(descriptions[bannerIndex][1]);
+
+            /* Fade in description text and change css of banner description div.
+               CSS transitions are handled by CSS animations. */
+            $('.banner-description').children().fadeIn('fast');
+            $('.banner-description').css('background-color', descriptionBackgrounds[bannerIndex]);
+            $('.banner-image').css('box-shadow', '0 0 0 25px ' + borderColors[bannerIndex]);
+        })
+    }
+
+    /* On mouse enter of nav items, toggle the appropriate banner.
+       Using setTimeOut to only fire banner logic when mouse stays in nav-item for 'x' amount of ms. */
+    $('.header-nav-item').mouseenter(function() {
+        const hoveredNavItemIndex = $('.header-nav-item').index(this);
+        bannerTimer = setTimeout(function () {
+            showBannerDescription(hoveredNavItemIndex)
+        }, 200);
+    }).mouseleave(function () {
+        /* If mouse leaves early clear the bannerTimer. */
+        clearTimeout(bannerTimer);
+    });
+
+    /* On mouse leave of main navbar, toggle the banner of the active page.
+       Using debounce to limit the amount of times the banner change is fired. */
+    $('#header-nav-items').mouseleave(_.debounce(lazyNavBarMouseLeave, 220));
+    function lazyNavBarMouseLeave() {
+        const activeIndex = $('.header-nav-item.active').index();
+        showBannerDescription(activeIndex);
+    }
+
+    /*** SITE NAVIGATION - NAVBAR ***/
     /* Event listener for header nav item clicks; handles web app page navigation. */
     $('.header-nav-item').on('click', function() {
         /* If already on the clicked page, don't continue. */
@@ -89,8 +137,6 @@ $(document).ready( function() {
         /* Remove active class from previous nav item and make current nav item active. */
         $('.header-nav-item.active').removeClass('active');
         $(this).addClass('active');
-        /* Move header carousel to the slide associated with the page. */
-        $("#carousel-header").carousel($(this).index());
 
         /* If navigated to GIS page hide content and show map.*/
         if ($(this).attr("id") === "nav-gis") {

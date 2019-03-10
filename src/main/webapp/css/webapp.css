@@ -31,31 +31,40 @@ body {
     z-index: 5;
 }
 
-
 /* ---
-   Header Carousel
+   Banner
    --- */
-.carousel-item {
-    height: 125px;
-    text-align: center;
+#banner {
+    display: flex;
+    min-height: 120px;
 }
-.carousel-item h1 {
-    padding-top: 20px;
+.banner-description {
+    display:block;
+    height: 120px;
+    margin-right: -5%;
+    padding-top:28px;
+    background-color: #f19066;
+    transition: background-color .4s;
 }
-/* Individual carousel items (header images) */
-.carousel-item:nth-child(1) {
+.banner-description p, .banner-description h2{
+    width: 85%;
+    padding-left:25px;
+    font-family: 'Poppins', sans-serif;
 }
-.carousel-item:nth-child(2) {
-    /* Header background image */
-    background: url(../assets/img/headers/add_record_header.jpg) 55% 35%;
-    background-size:cover;
-    /* Text makeup */
-    color: white;
-    text-shadow: 0 0 5px grey;
+.banner-image {
+    height: 120px;
+    padding-right: 10%;
+    z-index: 4;
+    background: floralwhite;
+    border-radius: 4% 100% 0% 77% / 100% 0% 33% 0%;
+    box-shadow: 0 0 0 25px #f3a683;
+    transition: box-shadow .4s;
 }
-.carousel-item:nth-child(3) {
+@media only screen and (max-width: 992px ) {
+    #banner {
+        display: none;
+    }
 }
-
 
 /* ---
    GIS Page - (Giraffe) Popup
@@ -184,6 +193,9 @@ body {
    --- */
 .main-nav .nav-item {
     padding: 0 5px 4px 5px;
+}
+.main-nav .navbar-nav .nav-item:nth-child(1) {
+    margin-left: 15px;
 }
 /* Nav item bar colors */
 .main-nav .navbar-nav .nav-item:nth-child(1):after {

@@ -20,28 +20,24 @@
     <link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/themes/light/main.css">
     <!-- Webapp custom stylesheet -->
     <link rel="stylesheet" href="css/webapp.css">
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300" rel="stylesheet">
 </head>
 
 <body>
-<!-- HEADER -->
-<div id="carousel-header" class="carousel slide d-none d-sm-block" data-interval="false">
-    <div class="carousel-inner">
-        <div id="header-gis" class="carousel-item active"></div>
-        <div id="header-add-sighting" class="carousel-item">
-            <h1>Add Sighting</h1>
-            <p>Add a new organism sighting to the Soysambu database</p>
-        </div>
-        <div id="header-view-sightings" class="carousel-item">
-            <h1>View Sightings</h1>
-            <p>View the latest organism sightings in Soysambu</p>
-        </div>
+<div id="banner">
+    <div class="col-5 banner-description">
+        <h2>GIS</h2>
+        <p>Geographic information system of Soysambu.</p>
     </div>
+    <div class="col-8 banner-image"></div>
 </div>
 
 <!-- NAVBAR -->
 <div class="container-fluid sticky-top">
-    <nav id="header-nav" class="main-nav navbar navbar-expand navbar-dark justify-content-center">
-        <ul class="navbar-nav">
+    <nav id="header-nav" class="main-nav navbar navbar-expand navbar-dark">
+        <ul id="header-nav-items" class="navbar-nav">
             <li id="nav-gis" class="nav-item header-nav-item active">
                 <a class="nav-link"><i class="fas fa-globe-africa"></i> GIS</a>
             </li>
