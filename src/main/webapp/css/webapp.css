@@ -44,21 +44,26 @@ body {
     width: 45%;
     margin-right: -5%;
     padding-top:28px;
-    background-color: #f19066;
+    background-color: #fab1a0;
     transition: background-color .4s;
 }
 .banner-description p, .banner-description h2{
-    width: 80%;
+    width: 83%;
     padding-left:25px;
+}
+.banner-description h2 {
     font-family: 'Poppins', sans-serif;
+}
+.banner-description p {
+    font-family: 'Rubik', sans-serif;
 }
 .banner-image {
     height: 120px;
     width: 60%;
     z-index: 2;
-    background: floralwhite;
+    background: whitesmoke;
     border-radius: 4% 100% 0% 77% / 100% 0% 33% 0%;
-    box-shadow: 0 0 0 25px #f3a683;
+    box-shadow: 0 0 0 25px #e08283;
     transition: box-shadow .4s;
 }
 @media only screen and (max-width: 992px ) {
@@ -166,7 +171,7 @@ body {
 .navbar {
     border: none;
     padding: 0;
-    background: #2d3436;
+    background: #455A64;
 }
 .nav-item {
     cursor: pointer;
@@ -200,13 +205,13 @@ body {
 }
 /* Nav item bar colors */
 .main-nav .navbar-nav .nav-item:nth-child(1):after {
-    background: #ea8685;
+    background: #e08283;
 }
 .main-nav .navbar-nav .nav-item:nth-child(2):after {
     background: #f7d794;
 }
 .main-nav .navbar-nav .nav-item:nth-child(3):after {
-    background: #6a89cc;
+    background: #90CAF9;
 }
 
 /* ---
@@ -379,7 +384,7 @@ footer {
     text-align: center;
     padding-top: 8px;
     padding-bottom: 8px;
-    background: #2d3436;
+    background: #455A64;
     font-size: 12px;
     color: #969a9b;
 }

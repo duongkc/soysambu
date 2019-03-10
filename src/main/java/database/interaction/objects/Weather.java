@@ -1,4 +1,4 @@
-package arcgis.objects;
+package database.interaction.objects;
 
 /**
  * Weather Enum. Contains most common weather states.

@@ -1,4 +1,4 @@
-package arcgis.objects;
+package database.interaction.objects;
 
 /**
  * Age enum. Contains all age options for giraffes.

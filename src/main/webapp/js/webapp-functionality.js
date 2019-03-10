@@ -85,8 +85,8 @@ $(document).ready( function() {
     const descriptions = [['GIS', 'Geographic information system of Soysambu.'],
         ['Add Sighting', 'Add an organism sighting to the Soysambu database.'],
         ['View Sightings', 'View past organism sightings in Soysambu conservancy.']];
-    const descriptionBackgrounds = ['#f19066', '#f5cd79', '#778beb'];
-    const borderColors = ['#f3a683', '#f7d794', '#546de5'];
+    const descriptionBackgrounds = ['#fab1a0', '#f7d794', '#BBDEFB', '#f8c291'];
+    const borderColors = ['#e08283', '#f5cd79', '#90CAF9', '#eea381'];
 
     /** Hides the current banner description and adds the banner description with the given index.
         Nav-items and banners share the same indexes for the web pages they represent. */

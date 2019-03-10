@@ -1,4 +1,4 @@
-package arcgis.objects;
+package database.interaction.objects;
 
 /**
  * Class implementing giraffe groups. Contains all information on a giraffe group.

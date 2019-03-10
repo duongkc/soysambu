@@ -1,7 +1,6 @@
-package arcgis.dao;
+package database.interaction.dao;
 
-import arcgis.objects.*;
-
+import database.interaction.objects.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;

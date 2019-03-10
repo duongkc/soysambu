@@ -1,7 +1,7 @@
-package arcgis.servlets;
+package database.interaction.servlets;
 
-import arcgis.dao.DaoMysql;
-import arcgis.dao.DatabaseException;
+import database.interaction.dao.DaoMysql;
+import database.interaction.dao.DatabaseException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

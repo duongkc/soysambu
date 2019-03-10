@@ -1,4 +1,4 @@
-package arcgis.objects;
+package database.interaction.objects;
 
 /**
  * Habitat Type Enum. Contains most common habitat types.

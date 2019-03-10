@@ -1,10 +1,10 @@
-package arcgis.servlets;
+package database.interaction.servlets;
 
 import com.google.gson.Gson;
-import arcgis.dao.DaoMysql;
-import arcgis.dao.DatabaseException;
-import arcgis.objects.Age;
-import arcgis.objects.Giraffe;
+import database.interaction.dao.DaoMysql;
+import database.interaction.dao.DatabaseException;
+import database.interaction.objects.Age;
+import database.interaction.objects.Giraffe;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

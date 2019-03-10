@@ -1,4 +1,4 @@
-package arcgis.objects;
+package database.interaction.objects;
 
 /**
  * Class implementing Giraffe object. Contains all data per Giraffe.

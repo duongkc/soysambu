@@ -1,4 +1,4 @@
-package arcgis.objects;
+package database.interaction.objects;
 
 /**
  * Activity Enum. Contains most common Giraffe Activities.

@@ -1,4 +1,4 @@
-package arcgis.dao;
+package database.interaction.dao;
 
 public interface ArcGISDao {
     /**

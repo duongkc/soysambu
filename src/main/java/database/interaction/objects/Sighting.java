@@ -1,4 +1,4 @@
-package arcgis.objects;
+package database.interaction.objects;
 
 /**
  * Class implementing sightings. Contains all necessary information for a sighting.

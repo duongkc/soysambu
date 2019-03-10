@@ -1,9 +1,9 @@
-package arcgis.servlets;
+package database.interaction.servlets;
 
 import com.google.gson.Gson;
-import arcgis.dao.DaoMysql;
-import arcgis.dao.DatabaseException;
-import arcgis.objects.Sighting;
+import database.interaction.dao.DaoMysql;
+import database.interaction.dao.DatabaseException;
+import database.interaction.objects.GiraffeGroup;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,11 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class of a webservlet creating a page to display all available sightings in the database
+ * Class of a webservlet creating a page to display all available groups in the database
  * @author Ilse van Santen
  */
-@WebServlet(name = "ViewSightingsServlet.java", urlPatterns = "/sightings")
-public class ViewSightingsServlet extends HttpServlet {
+@WebServlet(name = "ViewGroupsServlet.java", urlPatterns = "/groups")
+public class ViewGroupsServlet extends HttpServlet {
     private DaoMysql dao;
 
     @Override
@@ -32,7 +32,7 @@ public class ViewSightingsServlet extends HttpServlet {
         String password = getServletContext().getInitParameter("database.password");
         String host = getServletContext().getInitParameter("database.host");
         try {
-            System.out.println("[ViewSightingsServlet] connecting to database ");
+            System.out.println("[ViewGroupsServlet] connecting to database ");
             dao.connect(username, database, password, host);
         } catch (DatabaseException e) {
             e.printStackTrace();
@@ -47,28 +47,29 @@ public class ViewSightingsServlet extends HttpServlet {
     }
 
     /**
-     * Fetches the giraffe sightings, sends it to webpage as JSON
+     * Fetches the giraffe groups, sends it as JSON to webpage
      * @param request
      * @param response
      * @throws ServletException
      * @throws IOException
      */
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Sighting> sightings = new ArrayList<>();
+        List<GiraffeGroup> giraffe_groups = new ArrayList<>();
         String json;
 
         try {
-            sightings = dao.fetchSightings(DaoMysql.GET_SIGHTINGS);
+            giraffe_groups = dao.fetchGiraffeGroups(DaoMysql.GET_GIRAFFE_GROUPS);
             dao.disconnect();
         } catch (SQLException | DatabaseException e) {
             e.printStackTrace();
         }
 
-        json = new Gson().toJson(sightings);
-        System.out.println(json);
+        System.out.println(giraffe_groups);
+        json = new Gson().toJson(giraffe_groups);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
     }
 }
+
