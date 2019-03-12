@@ -1,12 +1,15 @@
 $(document).ready(function () {
-    /* dojo.require, used to load ArcGIS module dependencies */
+    /* dojo.require, used to load ArcGIS AMD module dependencies. */
     require([
         "esri/Map",
         "esri/views/MapView",
         "esri/layers/FeatureLayer",
         "esri/geometry/Point",
-        "esri/widgets/LayerList"
-    ], function (Map, MapView, FeatureLayer, Point, LayerList) {
+        "esri/widgets/LayerList",
+        "esri/layers/GroupLayer",
+        "esri/core/watchUtils",
+        "esri/widgets/Expand"
+    ], function (Map, MapView, FeatureLayer, Point, LayerList, GroupLayer, watchUtils, Expand) {
         /*** MAP AND VIEW ***/
         let map = new Map({
             basemap: "topo"
@@ -36,9 +39,43 @@ $(document).ready(function () {
             }
         });
 
+
         /*** UI ***/
+        /* Define Widgets. */
+        let layerList;
+        let expandLayerList = new Expand({
+            view: view,
+            expandIconClass: 'esri-icon-layers',
+            content: "Layers have not yet been initialized..."
+        });
+
         /* Move zoom widget to top right. */
         view.ui.move("zoom", "top-right");
+
+        /** Places or removes UI elements based on screen size reflected as break points.
+         *      When on a mobile device (breakpoint xsmall) the popup is docked to the
+         *  bottom of the screen and the LayerList widget is moved into an expandable
+         *  container Widget.
+         */
+        function setResponsiveUI() {
+            let onSmallScreen = view.widthBreakpoint === "xsmall";
+
+            /* Place popup on bottom of screen on mobile. */
+            view.popup.dockOptions = onSmallScreen ?
+                {position: "bottom-center"} :
+                {position: "bottom-left"};
+            /* Set popup as docked whether on a small screen or not. */
+            view.popup.dockEnabled = true;
+
+            /* Add or remove the Expand (LayerList) widget over the default LayerList widget. */
+            let toAdd = onSmallScreen ? expandLayerList : layerList;
+            let toRemove = onSmallScreen ? layerList : expandLayerList;
+            view.ui.remove(toRemove);
+            view.ui.add(toAdd, "top-left");
+        }
+
+        /* Watch for breakpoints of the web page being reached and adjust UI accordingly. */
+        view.watch("widthBreakpoint", setResponsiveUI);
 
         /* Watch for .avatar divs to arrive into the DOM, resize Flickity carousel after all .avatar divs
            have been added. _.debounce makes sure the resizeGiraffeListCarousel function is only called once.
@@ -49,12 +86,19 @@ $(document).ready(function () {
 
 
         /*** LAYERS ***/
+        /* Define GroupLayers to organize FeatureLayers. */
+        let sightingGroupLayer = new GroupLayer({
+            title: 'Organism Sightings'
+        });
+        map.add(sightingGroupLayer);
+
         /* Generate layers when view is resolved. */
         view.when(function() {
             getSightingData()
                 .then(createGiraffeFeatures)
                 .then(createGiraffeFeatureLayer)
-                .then(createLayerList);
+                .then(createLayerList)
+                .then(setResponsiveUI)
         });
 
         /** Constructs a widget listing all layers currently loaded on the map.
@@ -63,7 +107,7 @@ $(document).ready(function () {
          *  dynamically adds a legend to every layer's panel.
          */
         function createLayerList() {
-            let layerList = new LayerList({
+            layerList = new LayerList({
                 view: view,
                 listItemCreatedFunction: function (event) {
                     let item = event.item;
@@ -71,16 +115,27 @@ $(document).ready(function () {
                     item.panel = {
                         content: "legend",
                         open: false
+                    };
+
+                    if (item.title === "Organism Sightings") {
+                        /* Show children of Organism Sighting group layer by default. */
+                        item.open = true;
+                    }
+
+                    if (item.title === "Rothschild's Giraffes") {
+                        item.panel.className = 'esri-icon-question'
                     }
                 }
             });
 
             /* Add LayerList to the view. */
             view.ui.add(layerList, "top-left");
+            /* Set LayerList as Expand (LayerList) Widget's content for mobile screens. */
+            expandLayerList.content = layerList;
         }
 
 
-        /*** GIRAFFE FEATURELAYER ***/
+        /*** FEATURELAYER - GIRAFFES ***/
         /** Creates graphics and fields to be used within a FeatureLayer for giraffe sightings.
          *      Returns a promise so that all sightings can be turned into point graphics, without
          *  already rendering layers asynchronously.
@@ -88,8 +143,6 @@ $(document).ready(function () {
          * @returns {promise} - a promise that waits for all sightings to be processed before resolving.
          */
         function createGiraffeFeatures(sightings) {
-            /* Create a container to store coordinate point graphics. */
-            let graphics = [];
             /* Declare fields for every sighting attribute, a requirement of FeatureLayers. */
             let fields = [{
                 name: "id",
@@ -161,6 +214,9 @@ $(document).ready(function () {
                 type: "xml"
             }];
 
+            /* Create a container to store coordinate point graphics. */
+            let graphics = [];
+
             return new Promise(function (resolve) {
                 /* Get sightings from session storage.
                    Generate a point feature for each sighting retrieved from the database. */
@@ -219,7 +275,7 @@ $(document).ready(function () {
             };
 
             let giraffeFeatureLayer = new FeatureLayer({
-                title: "Giraffe Sightings",
+                title: "Rothschild's Giraffes",
                 source: giraffeFeatures.graphics,
                 fields: giraffeFeatures.fields,
                 objectIdField: "id",
@@ -232,8 +288,8 @@ $(document).ready(function () {
                 }
             });
 
-            /* Add FeatureLayer to map. */
-            map.add(giraffeFeatureLayer);
+            /* Add FeatureLayer to sightings GroupLayer. */
+            sightingGroupLayer.add(giraffeFeatureLayer);
         }
 
         /** Generates the giraffeFeatureLayer's popup title.
@@ -254,7 +310,6 @@ $(document).ready(function () {
                    '<div class="d-flex">' + attributes.date + ' at ' +
                    timeFormat(attributes.time) + '</div></div>';
         }
-
 
         /** Generates the giraffeFeatureLayer's popup content.
          *      The giraffeFeatureLayer's popup content is comprised of three sections:
@@ -458,6 +513,7 @@ $(document).ready(function () {
             function initiateCarousel() {
                 $(col).flickity({
                     lazyLoad: 1,
+                    draggable: true,
                     groupCells: true,
                     cellAlign: 'left',
                     contain: true,
@@ -496,7 +552,7 @@ $(document).ready(function () {
             }
         }
 
-        /** Removes the seconds from the records' time attribute.
+        /** Removes the seconds from the record's time attribute.
          *
          * @param {string} timeString - the sighting time attribute.
          * @returns {string} timeString - the records time attribute as a string with seconds removed.
