@@ -26,6 +26,10 @@ body {
     padding: 0;
     margin: 0;
 }
+#map {
+    height: 100%;
+    width: 100%;
+}
 /* Limit the navbar overlapping elements */
 .sticky-top {
     z-index: 5;
@@ -38,7 +42,7 @@ body {
     display: flex;
     min-height: 120px;
 }
-.banner-description {
+#banner-description {
     display:block;
     height: 120px;
     width: 45%;
@@ -47,27 +51,44 @@ body {
     background-color: #fab1a0;
     transition: background-color .4s;
 }
-.banner-description p, .banner-description h2{
+#banner-description p, #banner-description h2{
     width: 83%;
     padding-left:25px;
 }
-.banner-description h2 {
+#banner-description h2 {
     font-family: 'Poppins', sans-serif;
 }
-.banner-description p {
+#banner-description p {
     font-family: 'Rubik', sans-serif;
 }
-.banner-image {
+#banner-image {
     height: 120px;
     width: 60%;
     z-index: 2;
     background: whitesmoke;
-    border-radius: 4% 100% 0% 77% / 100% 0% 33% 0%;
-    box-shadow: 0 0 0 25px #e08283;
+    border-radius: 4% 100% 0 77% / 100% 0 33% 0;
+    box-shadow: -25px 0 0 0 #e08283;
     transition: box-shadow .4s;
 }
-@media only screen and (max-width: 992px ) {
+@media only screen and (max-width: 768px ) {
     #banner {
+        min-height: 80px;
+        box-shadow: 0 3px 10px 0 gray;
+    }
+    #banner-description {
+        width: 30%;
+        height: 80px;
+    }
+    #banner-description p, h2{
+        display: none;
+    }
+    #banner-image {
+        width: 75%;
+        border-radius: 0;
+        height: 80px;
+        background: #455A64;
+    }
+    .main-nav {
         display: none;
     }
 }
@@ -76,8 +97,24 @@ body {
    GIS Page
    --- */
 /* Hide zoom widget on mobile screens. */
-.esri-view-width-less-than-small .esri-zoom .esri-widget--button {
+.esri-view-width-less-than-medium .esri-zoom .esri-widget--button {
     display:none;
+}
+/* Hide zoom popup action on mobile screens. */
+@media only screen and (max-width: 545px ) {
+    .esri-popup__button.esri-popup__action {
+        display: none;
+    }
+    .esri-widget--button {
+        width: 50px;
+        height: 50px;
+    }
+    .esri-icon-layers {
+        font-size: 30px;
+    }
+    .esri-layer-list__item-toggle {
+        display: none;
+    }
 }
 
 /* ---
@@ -91,12 +128,12 @@ body {
     height: 130px;
 }
 /* Center popup title and increase height for chart on small screens */
-@media only screen and (max-width: 580px) {
+@media only screen and (max-width: 545px) {
     .popup-title-container {
-        justify-content: center;
+        display: block !important;
     }
     .popup-chart-container {
-        height: 200px;
+        height: 180px;
     }
 }
 /* Create an overlay spanning the popup body */
@@ -135,8 +172,10 @@ body {
 .avatar img{
     cursor: pointer;
     border-radius:50%;
-    width: 60px;
-    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    max-width: 60px;
+    max-height: 60px;
     transition: box-shadow .3s;
     border: 4px solid rgba(89, 98, 117,0.5);
     margin-bottom: 2px;
@@ -170,6 +209,10 @@ body {
 /* Show 3 Avatars when screens <= 1000px */
 @media only screen and (max-width: 1000px) {
     .avatar { width: 33%; }
+}
+/* Show 4 Avatars when screens <= 545px */
+@media only screen and (max-width: 545px) {
+    .avatar { width: 25%; }
 }
 
 
@@ -262,8 +305,8 @@ form {
 .datepicker {
     z-index: 10 !important;
 }
-/* Lock screen when submitting form. */
-#submit-lock {
+/* Lock the screen from user interaction. */
+#content-lock {
     background-color: black;
     opacity: 0.6;
     display: block;
@@ -370,17 +413,6 @@ tr {
 .adv-box-border {
     padding-top: 10px;
     border-top: 4px solid #6a89cc;
-}
-/* Range slider theme */
-.slidertheme-blue .irs-to,
-.slidertheme-blue .irs-from,
-.slidertheme-blue .irs-bar,
-.slidertheme-blue .irs-handle i {
-    background:  #6a89cc !important;
-}
-.slidertheme-blue .irs-to:before,
-.slidertheme-blue .irs-from:before {
-    border-top-color: #6a89cc !important;
 }
 
 

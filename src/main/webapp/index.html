@@ -27,18 +27,18 @@
 
 <body>
 <div id="banner">
-    <div class="banner-description">
+    <div id="banner-description">
         <h2>GIS</h2>
         <p>Geographic information system of Soysambu.</p>
     </div>
-    <div class="banner-image"></div>
+    <div id="banner-image"></div>
 </div>
 
 <!-- NAVBAR -->
 <div class="container-fluid sticky-top d-none d-sm-block">
     <nav id="header-nav" class="main-nav navbar navbar-expand navbar-dark">
-        <ul id="header-nav-items" class="navbar-nav">
-            <li id="nav-gis" class="nav-item header-nav-item active">
+        <ul id="header-nav-item-container" class="navbar-nav">
+            <li id="nav-gis" class="nav-item header-nav-item active" data-page="gis">
                 <a class="nav-link"><i class="fas fa-globe-africa"></i> GIS</a>
             </li>
             <li id="nav-add-sighting" class="nav-item header-nav-item" data-page="add-sighting">
@@ -52,13 +52,13 @@
 </div>
 
 <!-- PAGE CONTENT -->
-<div id="map"></div>
 <div id="content">
+    <div id="map"></div>
     <div id="content-container" class="container"></div>
 </div>
 
 <!-- FOOTER -->
-<footer id="footer" class="footer d-none d-sm-block">
+<footer id="footer" class="footer">
     Soysambu Conservancy GIS Web App
     <div id="footer-links">
         <a href="#">Legal</a>

@@ -210,8 +210,8 @@ $(document).ready(function () {
             let data = $(form).serialize();
 
             /* Lock content behind an absolute submit-lock div covering the content div. */
-            $('#content').append('<div id="submit-lock" style="display: none;"></div>');
-            $('#submit-lock').animate({height: "show"});
+            $('#content').append('<div id="content-lock" style="display: none;"></div>');
+            $('#content-lock').animate({height: "show"});
 
             /* Post a new record to the database using ajax. */
             $.ajax({
@@ -229,11 +229,11 @@ $(document).ready(function () {
                     $('.organism-counter').each(standardizeOrganismCounter);
 
                     /* Lift content lock after a short delay. */
-                    $('#submit-lock').delay(1000).animate({
+                    $('#content-lock').delay(1000).animate({
                         top: "+=100%",
                         height: "hide"
                     }).promise().done(function(){
-                        $('#submit-lock').remove()
+                        $('#content-lock').remove()
                     });
                 }
             });

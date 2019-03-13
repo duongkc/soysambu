@@ -62,8 +62,8 @@ $(document).ready(function () {
 
             /* Place popup on bottom of screen on mobile. */
             view.popup.dockOptions = onSmallScreen ?
-                {position: "bottom-center"} :
-                {position: "bottom-left"};
+                {position: "bottom-center", buttonEnabled: false,} :
+                {position: "bottom-left", buttonEnabled: false,};
             /* Set popup as docked whether on a small screen or not. */
             view.popup.dockEnabled = true;
 
@@ -517,7 +517,8 @@ $(document).ready(function () {
                     groupCells: true,
                     cellAlign: 'left',
                     contain: true,
-                    pageDots: false
+                    pageDots: false,
+                    accessibility: false
                 });
             }
 
