@@ -20,42 +20,104 @@ body {
 .container-fluid {
     padding: 0;
 }
-#page {
+#content {
     position: relative;
     flex-grow: 1;
     padding: 0;
     margin: 0;
+    height: 100%;
+    width: 100%;
+}
+#map {
+    height: 100%;
+    width: 100%;
 }
 /* Limit the navbar overlapping elements */
 .sticky-top {
     z-index: 5;
 }
 
+/* ---
+   Banner
+   --- */
+#banner {
+    display: flex;
+    min-height: 120px;
+}
+#banner-description {
+    display:block;
+    height: 120px;
+    width: 45%;
+    margin-right: -5%;
+    padding-top:28px;
+    background-color: rgba(252, 157, 154, 0.6);
+    transition: background-color .4s;
+}
+#banner-description p, #banner-description h2{
+    width: 83%;
+    padding-left:25px;
+}
+#banner-description h2 {
+    font-family: 'Poppins', sans-serif;
+}
+#banner-description p {
+    font-family: 'Rubik', sans-serif;
+}
+#banner-image {
+    height: 120px;
+    width: 60%;
+    z-index: 2;
+    background: whitesmoke;
+    border-radius: 4% 100% 0 77% / 100% 0 33% 0;
+    box-shadow: -25px 0 0 0 rgba(252, 157, 154, 0.6);
+    transition: box-shadow .4s;
+}
+@media only screen and (max-width: 768px ) {
+    #banner {
+        min-height: 80px;
+        box-shadow: 0 3px 10px 0 gray;
+    }
+    #banner-description {
+        width: 30%;
+        height: 80px;
+    }
+    #banner-description p, h2{
+        display: none;
+    }
+    #banner-image {
+        width: 75%;
+        border-radius: 0;
+        height: 80px;
+        background: #455A64;
+    }
+    .main-nav {
+        display: none;
+    }
+}
 
 /* ---
-   Header Carousel
+   GIS Page
    --- */
-.carousel-item {
-    height: 125px;
-    text-align: center;
+/* Hide zoom widget on mobile screens. */
+.esri-view-width-less-than-medium .esri-zoom .esri-widget--button {
+    display:none;
 }
-.carousel-item h1 {
-    padding-top: 20px;
+/* Hide zoom popup action on mobile screens. */
+@media only screen and (max-width: 545px ) {
+    .esri-popup__button.esri-popup__action {
+        display: none;
+    }
+    .esri-widget--button {
+        width: 50px;
+        height: 50px;
+    }
+    .esri-icon-layers {
+        font-size: 30px;
+    }
+    .esri-layer-list__item-toggle {
+        display: none;
+    }
 }
-/* Individual carousel items (header images) */
-.carousel-item:nth-child(1) {
-}
-.carousel-item:nth-child(2) {
-    /* Header background image */
-    background: url(../assets/img/add_record_header.jpg) 55% 35%;
-    background-size:cover;
-    /* Text makeup */
-    color: white;
-    text-shadow: 0 0 5px grey;
-}
-.carousel-item:nth-child(3) {
-}
-
 
 /* ---
    GIS Page - (Giraffe) Popup
@@ -68,12 +130,16 @@ body {
     height: 130px;
 }
 /* Center popup title and increase height for chart on small screens */
-@media only screen and (max-width: 580px) {
+@media only screen and (max-width: 545px) {
     .popup-title-container {
+        display: block !important;
+    }
+    .popup-title-container div{
         justify-content: center;
+        padding-left: 42px;
     }
     .popup-chart-container {
-        height: 200px;
+        height: 160px;
     }
 }
 /* Create an overlay spanning the popup body */
@@ -112,8 +178,10 @@ body {
 .avatar img{
     cursor: pointer;
     border-radius:50%;
-    width: 60px;
-    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    max-width: 60px;
+    max-height: 60px;
     transition: box-shadow .3s;
     border: 4px solid rgba(89, 98, 117,0.5);
     margin-bottom: 2px;
@@ -148,6 +216,10 @@ body {
 @media only screen and (max-width: 1000px) {
     .avatar { width: 33%; }
 }
+/* Show 4 Avatars when screens <= 545px */
+@media only screen and (max-width: 545px) {
+    .avatar { width: 25%; }
+}
 
 
 /* ---
@@ -156,7 +228,7 @@ body {
 .navbar {
     border: none;
     padding: 0;
-    background: #2d3436;
+    background: #455A64;
 }
 .nav-item {
     cursor: pointer;
@@ -185,15 +257,18 @@ body {
 .main-nav .nav-item {
     padding: 0 5px 4px 5px;
 }
+.main-nav .navbar-nav .nav-item:nth-child(1) {
+    margin-left: 15px;
+}
 /* Nav item bar colors */
 .main-nav .navbar-nav .nav-item:nth-child(1):after {
-    background: #ea8685;
+    background: #FFB3A7;
 }
 .main-nav .navbar-nav .nav-item:nth-child(2):after {
     background: #f7d794;
 }
 .main-nav .navbar-nav .nav-item:nth-child(3):after {
-    background: #6a89cc;
+    background: #90CAF9;
 }
 
 /* ---
@@ -206,16 +281,15 @@ body {
     padding-top: 10px;
     padding-bottom: 10px;
 }
-/* ---
-   Navigation bars - Tab navigation bars - Add sighting page
-   --- */
-.sighting-nav .nav-item:after, .organism-nav .nav-item:after{
+#nav-addsighting-sighting .nav-item {
+    cursor: default;
+}
+/* Add sighting page */
+#nav-addsighting-sighting .nav-item:after, #nav-addsighting-organisms .nav-item.active:after{
     width: 100%;
     background: #f7d794;
 }
-/* ---
-   Navigation bars - Tab navigation bars - View sightings page
-   --- */
+/* View sightings page */
 .viewsightings-nav .nav-item:after {
     width: 100%;
     background: #6a89cc;
@@ -237,8 +311,8 @@ form {
 .datepicker {
     z-index: 10 !important;
 }
-/* Lock screen when submitting form. */
-#submit-lock {
+/* Lock the screen from user interaction. */
+#content-lock {
     background-color: black;
     opacity: 0.6;
     display: block;
@@ -254,26 +328,30 @@ form {
    Forms - Add Record
    --- */
 /* Change input field focus color to match color scheme */
-.addrecord-form .form-control:focus, .addrecord-form .custom-select:focus,
-.addrecord-form .btn:focus {
+.form-addsighting .form-control:focus, .form-addsighting .custom-select:focus,
+.form-addsighting .btn:focus {
     border-color: #f5cd79;
     box-shadow: 0 0 4px 1px rgba(245, 205, 121, 1);
 }
-.organism-counter {
-    padding-top: 10px;
+.total-organism-count {
+    padding-top: 8px;
     text-align: left;
     color: #808080;
 }
 /* Sighting Tab */
-.btn-addrecord {
+.btn-addsighting {
     background-color: #f7d794;
+}
+@media only screen and (max-width: 600px) {
+    .btn-addsighting {
+        margin-bottom: 10px;
+    }
 }
 .btn-coords {
     margin-top: 32px;
-    background-color: #f7d794;
 }
 /* Giraffe Tab */
-.giraffe-count {
+.organism-counter {
     text-align: right;
 }
 .btn-plusmin {
@@ -311,7 +389,9 @@ tr {
     cursor: pointer;
 }
 /* Hide search input field */
-.dataTables_filter { display: none;}
+.dataTables_filter {
+    display: none;
+}
 
 
 /* Reset button */
@@ -340,27 +420,32 @@ tr {
     padding-top: 10px;
     border-top: 4px solid #6a89cc;
 }
-/* Range slider theme */
-.slidertheme-blue .irs-to,
-.slidertheme-blue .irs-from,
-.slidertheme-blue .irs-bar,
-.slidertheme-blue .irs-handle i {
-    background:  #6a89cc !important;
-}
-.slidertheme-blue .irs-to:before,
-.slidertheme-blue .irs-from:before {
-    border-top-color: #6a89cc !important;
-}
 
 
 /* ---
    Footer
    --- */
 footer {
-    display: none;
-    padding-top: 15px;
-    background: #2d3436;
-    text-align:center;
+    display: inline-block;
+    text-align: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: #455A64;
     font-size: 12px;
+    color: #969a9b;
+}
+#footer-links {
+    padding-left: 10px;
+    margin-left: 10px;
+    border-left: 1px solid #969a9b;
+    display: inline;
+}
+@media only screen and (max-width: 576px) {
+    #footer-links {
+        display: inline-flex;
+        flex-direction: column;
+    }
+}
+footer a:link, a:visited{
     color: #969a9b;
 }

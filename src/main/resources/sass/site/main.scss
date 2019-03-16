@@ -1,0 +1,22 @@
+// Modules and Variables
+@import "partials/base";
+
+// Partials
+@import "partials/banner";
+@import "partials/navbar";
+@import "partials/footer";
+
+// Global styles
+html, body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+body {
+  display: flex;
+  flex-flow: column;
+}
+#map {
+  height: 100%;
+  width: 100%;
+}
