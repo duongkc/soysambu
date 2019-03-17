@@ -27,7 +27,7 @@ create table temp (
   primary key(id)
 );
 
-load data local infile '/homes/idvansanten/soysambu-conservancy-gis/data/Giraffe Survey Database October 2018.txt'
+load data local infile 'C:/Users/idvan/soysambu-conservancy-gis/data/Giraffe Survey Database October 2018.txt'
 into table temp
 fields terminated by '\t'
 lines terminated by '\n'
@@ -75,7 +75,7 @@ create table Giraffe (
   primary key (giraffe_id)
 );
 
-load data local infile '/homes/idvansanten/soysambu-conservancy-gis/data/giraffe_data.txt'
+load data local infile 'C:/Users/idvan/soysambu-conservancy-gis/data/giraffe_data.txt'
 into table Giraffe
 fields terminated by '\t'
 lines terminated by '\n'
