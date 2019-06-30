@@ -156,7 +156,7 @@ $(document).ready(function () {
             /* For every input element with data-type of the same type of the given element,
                add input element's value to sum of all elements of its type. */
             $('input[data-type="' + elementDataType + '"').each( function () {
-                sum += $(this).val();
+                    sum += $(this).val();
             });
 
             return (sum > 0);
@@ -166,7 +166,7 @@ $(document).ready(function () {
     /* Initiate validating add sighting form. */
     let validator = $('#form-addsighting').validate({
         onkeyup: false,
-        groups: { coords: 'longitu de latitude' },
+        groups: { coords: "longitude latitude" },
         rules: {
             date: {
                 required: true,
@@ -211,12 +211,12 @@ $(document).ready(function () {
 
             /* Lock content behind an absolute submit-lock div covering the content div. */
             $('#content').append('<div id="content-lock" style="display: none;"></div>');
-            $('#content-lock').animate({height: 'show'});
+            $('#content-lock').animate({height: "show"});
 
             /* Post a new record to the database using ajax. */
             $.ajax({
-                url: 'submitservlet',
-                type: 'POST',
+                url: "submitservlet",
+                type: "POST",
                 data: data,
                 success: function(){
                     /* Clear form and disable submit button. */
@@ -230,10 +230,10 @@ $(document).ready(function () {
 
                     /* Lift content lock after a short delay. */
                     $('#content-lock').delay(1000).animate({
-                        top: '+=100%',
-                        height: 'hide'
+                        top: "+=100%",
+                        height: "hide"
                     }).promise().done(function(){
-                        $('#content-lock').remove();
+                        $('#content-lock').remove()
                     });
                 }
             });

@@ -19,10 +19,10 @@
     <!-- ArcGIS API stylesheet -->
     <link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/themes/light/main.css">
     <!-- Webapp custom stylesheet -->
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/webapp.css">
 
     <!-- FONTS -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins|Rubik:400i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300|Rubik:400i" rel="stylesheet">
 </head>
 
 <body>
@@ -35,34 +35,34 @@
 </div>
 
 <!-- NAVBAR -->
-<nav>
-    <div id="nav-bar">
-        <div id="nav-item-container">
-            <div id="nav-gis" class="nav-item active">
-                <span class="nav-link show-spaces"><i class="fas fa-globe-africa"></i> GIS</span>
-            </div>
-            <div id="nav-add-sighting" class="nav-item">
-                <span class="nav-link show-spaces"><i class="fas fa-edit"></i> Add Sighting</span>
-            </div>
-            <div id="nav-view-sightings" class="nav-item">
-                <span class="nav-link show-spaces"><i class="fas fa-database"></i> View Sightings</span>
-            </div>
-        </div>
-    </div>
-</nav>
+<div class="container-fluid sticky-top d-none d-sm-block">
+    <nav id="header-nav" class="main-nav navbar navbar-expand navbar-dark">
+        <ul id="header-nav-item-container" class="navbar-nav">
+            <li id="nav-gis" class="nav-item header-nav-item active" data-page="gis">
+                <a class="nav-link"><i class="fas fa-globe-africa"></i> GIS</a>
+            </li>
+            <li id="nav-add-sighting" class="nav-item header-nav-item" data-page="add-sighting">
+                <a class="nav-link"><i class="fas fa-edit"></i> Add Sighting</a>
+            </li>
+            <li id="nav-view-sightings" class="nav-item header-nav-item" data-page="view-sightings">
+                <a class="nav-link"><i class="fas fa-database"></i> View Sightings</a>
+            </li>
+        </ul>
+    </nav>
+</div>
 
 <!-- PAGE CONTENT -->
-<div id="map"></div>
 <div id="content">
+    <div id="map"></div>
     <div id="content-container" class="container"></div>
 </div>
 
 <!-- FOOTER -->
-<footer id="footer">
+<footer id="footer" class="footer">
     Soysambu Conservancy GIS Web App
     <div id="footer-links">
-        <a>Contact</a>
-        <span>-</span>
+        <a href="#">Legal</a>
+        <div class = "d-none d-sm-inline-block">-</div>
         <a href="https://bitbucket.org/Shmuppel/soysambu-conservancy-gis/src/master/" target="_blank">Source code</a>
     </div>
 </footer>

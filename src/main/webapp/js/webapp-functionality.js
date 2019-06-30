@@ -30,32 +30,10 @@ function getSightingData() {
                 })
                 .fail(function () {
                     /* Should the GET request fail cover the screen with a content lock. */
-                    jqueryCache.get('body').append('<div id="content-lock" style="display:none;"></div>');
-                    $('#content-lock').fadeIn();
+                    jqueryCache.get('#content').append('<div id="content-lock" style="display:none;"></div>');
+                    $('#submit-lock').fadeIn();
                 });
         });
-    }
-}
-
-/** String parsing for displaying database records.
- *      1. Takes a string, replaces underscores with spaces.
- *      2. Makes the entire string lowercase.
- *      3. Makes the first letter uppercase.
- *
- * @param {string} string - the string to be processed.
- * @returns {string} returns either a successfully processed string or "-".
- */
-function parseDatabaseString(string) {
-    if (string) {
-        /* Turn string to lower case and replace underscores with spaces. */
-        string = string.replace('_',' ').toLowerCase();
-        /* Capitalize first character, then add rest of lowercase string. */
-        string = string.charAt(0).toUpperCase() + string.slice(1);
-
-        return string;
-    } else {
-        /* When the given parameter is not a string, return "-". */
-        return '-';
     }
 }
 
@@ -135,8 +113,8 @@ $(document).ready( function() {
     const descriptions = [['GIS', 'Geographic information system of Soysambu.'],
         ['Add Sighting', 'Add an organism sighting to the Soysambu database.'],
         ['View Sightings', 'View past organism sightings in Soysambu conservancy.']];
-    const descriptionBackgrounds = ['rgba(252, 157, 154, 0.6)', '#f7d794', '#BBDEFB', '#f8c291'];
-    const borderColors = ['rgba(252, 157, 154, 0.6)', '#f5cd79', '#90CAF9', '#eea381'];
+    const descriptionBackgrounds = ['#fab1a0', '#f7d794', '#BBDEFB', '#f8c291'];
+    const borderColors = ['#e08283', '#f5cd79', '#90CAF9', '#eea381'];
 
 
     /** Hides the current banner description and adds the banner description with the given index.
@@ -164,7 +142,7 @@ $(document).ready( function() {
                CSS transitions are handled by CSS animations. */
             $bannerDescription.children().fadeIn('fast');
             $bannerDescription.css('background-color', descriptionBackgrounds[bannerIndex]);
-            $bannerImage.css('box-shadow', '-25px 0 0 0 ' + borderColors[bannerIndex]);
+            $bannerImage.css('box-shadow', '-25px 0 0 0' + borderColors[bannerIndex]);
         });
     }
 
@@ -206,8 +184,7 @@ $(document).ready( function() {
     }
     /* Throttle the amount of times responsiveGISBanner is called after a window.resize event. */
     let lazyResponsiveGISPage = _.throttle(responsiveGISPage, 75);
-    $(window).resize(lazyResponsiveGISPage);
-    responsiveGISPage();
+
 
     /*** SITE NAVIGATION - NAVBAR ***/
     /* Event listener for header nav item clicks; handles web app page navigation. */
@@ -231,7 +208,6 @@ $(document).ready( function() {
                     $.getScript('arcgis.js');
                 }
                 jqueryCache.get('#map').fadeIn(175);
-                responsiveGISPage();
             } else {
                 /* Load each page's respective HTML and JS based on the nav-item's data-page attribute. */
                 jqueryCache.get('#content-container').load('' + page + '.html', showContent);

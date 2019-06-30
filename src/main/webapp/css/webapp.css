@@ -25,8 +25,6 @@ body {
     flex-grow: 1;
     padding: 0;
     margin: 0;
-    height: 100%;
-    width: 100%;
 }
 #map {
     height: 100%;
@@ -50,7 +48,7 @@ body {
     width: 45%;
     margin-right: -5%;
     padding-top:28px;
-    background-color: rgba(252, 157, 154, 0.6);
+    background-color: #fab1a0;
     transition: background-color .4s;
 }
 #banner-description p, #banner-description h2{
@@ -69,7 +67,7 @@ body {
     z-index: 2;
     background: whitesmoke;
     border-radius: 4% 100% 0 77% / 100% 0 33% 0;
-    box-shadow: -25px 0 0 0 rgba(252, 157, 154, 0.6);
+    box-shadow: -25px 0 0 0 #e08283;
     transition: box-shadow .4s;
 }
 @media only screen and (max-width: 768px ) {
@@ -134,12 +132,8 @@ body {
     .popup-title-container {
         display: block !important;
     }
-    .popup-title-container div{
-        justify-content: center;
-        padding-left: 42px;
-    }
     .popup-chart-container {
-        height: 160px;
+        height: 180px;
     }
 }
 /* Create an overlay spanning the popup body */
@@ -262,7 +256,7 @@ body {
 }
 /* Nav item bar colors */
 .main-nav .navbar-nav .nav-item:nth-child(1):after {
-    background: #FFB3A7;
+    background: #e08283;
 }
 .main-nav .navbar-nav .nav-item:nth-child(2):after {
     background: #f7d794;
